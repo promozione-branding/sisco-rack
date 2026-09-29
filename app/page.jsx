@@ -6,6 +6,7 @@ import Faq from "@/components/Faq"
 import Industries from "@/components/Industries"
 import Categories from "@/components/Categories"
 import Testimonials from "@/components/Testimonials"
+import QueryForm from "@/components/QueryForm"
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <WhyChooseUs />
       <Testimonials/>
       <Faq />
+      <QueryForm/>
     </>
   )
 }
