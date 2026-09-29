@@ -5,6 +5,7 @@ import WhyChooseUs from "@/components/WhyChooseUs"
 import Faq from "@/components/Faq"
 import Industries from "@/components/Industries"
 import Categories from "@/components/Categories"
+import Testimonials from "@/components/Testimonials"
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Categories/>
       <Industries/>
       <WhyChooseUs />
+      <Testimonials/>
       <Faq />
     </>
   )
