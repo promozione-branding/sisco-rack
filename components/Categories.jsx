@@ -1,112 +1,207 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { industries } from "@/lib/industries"
-import RackArt from "./RackArt"
+import SplitButton from "./SplitButton"
 
-const drop = {
-  hidden: ({ col, row }) => ({
-    opacity: 0,
-    x: `${-(col * 108 + 70)}%`,
-    y: `${-(row * 108 + 140)}%`,
-    rotate: -16,
-    scale: 0.55
-  }),
-  show: ({ i }) => ({
-    opacity: [null, 1, 1, 1, 1],
-    x: [null, "0%", "0%", "0%", "0%"],
-    y: [null, "-14%", "0%", "-2.5%", "0%"],
-    rotate: [null, -3, 0, 0, 0],
-    scale: [null, 1, 1, 1.02, 1],
-    transition: { duration: 1.15, times: [0, 0.55, 0.75, 0.88, 1], ease: "easeInOut", delay: 0.55 + i * 0.17 }
+const paths = {
+  design: (
+    <>
+      <path d="M4 20l4-1 10-10-3-3L5 16l-1 4z" />
+      <path d="M13 7l3 3" />
+    </>
+  ),
+  install: <path d="M14.5 6.5a4 4 0 0 0-5 5L4 17l3 3 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z" />,
+  test: (
+    <>
+      <path d="M4 16a8 8 0 1 1 16 0" />
+      <path d="M12 16l4-5" />
+    </>
+  ),
+  fab: (
+    <>
+      <rect x="4" y="8" width="16" height="10" rx="2" />
+      <path d="M8 8V5h8v3" />
+    </>
+  ),
+  mezz: (
+    <>
+      <path d="M12 4l8 4-8 4-8-4 8-4z" />
+      <path d="M4 12l8 4 8-4" />
+      <path d="M4 16l8 4 8-4" />
+    </>
+  ),
+  maint: (
+    <>
+      <path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z" />
+      <path d="M9 12l2 2 4-4" />
+    </>
+  ),
+  move: <path d="M4 8h13l-3-3M20 16H7l3 3" />
+}
+
+const Icon = ({ name }) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    {paths[name]}
+  </svg>
+)
+
+const Arrow = ({ flip }) => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={flip ? { transform: "scaleX(-1)" } : undefined} aria-hidden="true">
+    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+const item = {
+  hidden: { opacity: 0, y: 44, scale: 0.96 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, delay: Math.min(i, 4) * 0.12, ease: [0.22, 1, 0.36, 1] }
   })
 }
 
-const flat = {
-  hidden: { opacity: 1 },
-  show: { opacity: 1 }
+const still = {
+  hidden: { opacity: 1, y: 0, scale: 1 },
+  show: { opacity: 1, y: 0, scale: 1 }
 }
 
 export default function Categories() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.2 })
+  const track = useRef(null)
+  const panel = useRef(null)
+  const drag = useRef({ down: false, x: 0, left: 0, moved: false })
+  const inView = useInView(panel, { once: true, amount: 0.25 })
   const reduce = useReducedMotion()
-  const [active, setActive] = useState("pallet")
-  const variants = reduce ? flat : drop
+  const [can, setCan] = useState({ prev: false, next: true })
   const state = inView || reduce ? "show" : "hidden"
-  const rows = [industries.slice(0, 4), industries.slice(4)]
+
+  const measure = () => {
+    const el = track.current
+    if (!el) return
+    setCan({
+      prev: el.scrollLeft > 4,
+      next: el.scrollLeft + el.clientWidth < el.scrollWidth - 4
+    })
+  }
+
+  useEffect(() => {
+    measure()
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [])
+
+  const step = (dir) => {
+    const el = track.current
+    const card = el.firstElementChild
+    const gap = 18
+    el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: "smooth" })
+  }
+
+  const onDown = (e) => {
+    if (e.pointerType !== "mouse") return
+    const el = track.current
+    drag.current = { down: true, x: e.clientX, left: el.scrollLeft, moved: false }
+    el.classList.add("dragging")
+  }
+
+  const onMove = (e) => {
+    const d = drag.current
+    if (!d.down) return
+    const dx = e.clientX - d.x
+    if (Math.abs(dx) > 5) d.moved = true
+    track.current.scrollLeft = d.left - dx
+  }
+
+  const end = () => {
+    if (!drag.current.down) return
+    drag.current.down = false
+    track.current.classList.remove("dragging")
+  }
+
+  const onClickCapture = (e) => {
+    if (drag.current.moved) {
+      e.preventDefault()
+      e.stopPropagation()
+      drag.current.moved = false
+    }
+  }
 
   return (
-    <section className="section cat">
-      <div className="wrap">
-        <div className="cat-head">
-          <span className="cat-eyebrow">Our categories</span>
-          <h2>
-            Steel Racks for <span>Every Industry</span>
-          </h2>
-          <p className="lead">
-            Explore our range of steel racks, designed for warehouses, factories, retail stores and more. Built for strength. Made for your space.
-          </p>
+    <section className="svc">
+      <div className="svc-bg" aria-hidden="true">
+ <img src="/leftslide2.jpg" alt="" />
+</div>
+      <div className="svc-body">
+        <motion.span
+          className="svc-tag"
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <i>✦</i> Our services <i>✦</i>
+        </motion.span>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          Complete rack solutions under one roof
+        </motion.h2>
+
+        <div className="svc-panel" ref={panel}>
+          <div
+            className="svc-track"
+            ref={track}
+            onScroll={measure}
+            onPointerDown={onDown}
+            onPointerMove={onMove}
+            onPointerUp={end}
+            onPointerLeave={end}
+            onClickCapture={onClickCapture}
+          >
+            {industries.map((s, i) => (
+              <motion.div
+                key={s.id}
+                className="svc-item"
+                variants={reduce ? still : item}
+                custom={i}
+                initial="hidden"
+                animate={state}
+              >
+                <Link href="/products" className="svc-card" draggable={false}>
+                  <div className="svc-img">
+                    <img src={s.image} alt={s.title} draggable={false} loading="lazy" />
+                  </div>
+                  <span className="svc-icon">
+                    <Icon name={s.icon} />
+                  </span>
+                  <h3>{s.title}</h3>
+                  <p>{s.text}</p>
+                  <span className="svc-go" aria-hidden="true">
+                    <Arrow />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <div className="cat-board" ref={ref}>
-          <motion.span
-            className="cat-up l"
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: state === "show" ? 1 : 0 }}
-            transition={{ duration: 0.6 }}
-          />
-          <motion.span
-            className="cat-up r"
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: state === "show" ? 1 : 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          />
-          {rows.map((row, r) => (
-            <div className="cat-row" key={r}>
-              <motion.i
-                className="cat-beam"
-                style={{ originX: 0 }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: state === "show" ? 1 : 0 }}
-                transition={{ duration: 0.7, delay: 0.15 + r * 0.1 }}
-              />
-              {row.map((c, k) => {
-                const i = r * 4 + k
-                return (
-                  <motion.article
-                    key={c.id}
-                    className={`cat-card ${active === c.id ? "on" : ""}`}
-                    variants={variants}
-                    custom={{ col: k, row: r, i }}
-                    initial="hidden"
-                    animate={state}
-                    whileHover={{ y: -6 }}
-                    onMouseEnter={() => setActive(c.id)}
-                    onFocus={() => setActive(c.id)}
-                  >
-                    <Link href="/products">
-                      <div className="cat-art">
-                        {c.image ? <img src={c.image} alt={c.name} /> : <RackArt type={c.art} />}
-                      </div>
-                      <div className="cat-info">
-                        <div>
-                          <h3>{c.name}</h3>
-                          <p>{c.text}</p>
-                        </div>
-                        <span className="cat-go" aria-hidden="true">
-                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                      </div>
-                    </Link>
-                  </motion.article>
-                )
-              })}
-            </div>
-          ))}
+
+        <div className="svc-foot">
+          <p>From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
+          <div className="svc-ctrl">
+            <button className="svc-nav" onClick={() => step(-1)} disabled={!can.prev} aria-label="Previous services">
+              <Arrow flip />
+            </button>
+            <button className="svc-nav" onClick={() => step(1)} disabled={!can.next} aria-label="Next services">
+              <Arrow />
+            </button>
+            <SplitButton href="/products" dark>View all services</SplitButton>
+          </div>
         </div>
       </div>
     </section>

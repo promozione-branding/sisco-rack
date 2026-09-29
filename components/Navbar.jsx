@@ -21,10 +21,7 @@ export default function Navbar() {
   return (
     <header className="nav">
       <div className="nav-bar">
-        <Link href="/" className="logo" onClick={closeAll}>
-          <LottieIcon className="logo-mark" colors={["#FFFFFF", "#E8A317"]} />
-          {brand}
-        </Link>
+        <img src="https://static.wixstatic.com/media/70a687_e0785cfd276744b6b939427b963b2746~mv2.png/v1/fill/w_810,h_224,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.png" alt="logo" width={100} />
         <ul className={`nav-links ${open ? "open" : ""}`}>
           {links.map((l) =>
             l.href === "/products" ? (
