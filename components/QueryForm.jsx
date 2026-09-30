@@ -42,7 +42,6 @@ export default function QueryForm({ className = "" }) {
   return (
     <section className={`query ${className}`}>
       <div className="query-inner">
-        {/* Left side – text */}
         <div className="query-copy">
           <span className="query-tag">
             <i>✦</i> Get in touch <i>✦</i>
@@ -59,7 +58,6 @@ export default function QueryForm({ className = "" }) {
           </ul>
         </div>
 
-        {/* Right side – form */}
         <motion.form
           className="query-form"
           onSubmit={handleSubmit}

@@ -130,77 +130,79 @@ export default function Categories() {
   }
 
   return (
-    <section className="svc">
-      <div className="svc-bg" aria-hidden="true">
- <img src="/leftslide2.jpg" alt="" />
-</div>
-      <div className="svc-body">
+    <section className="section">
+      <div className="cat-head">
         <motion.span
-          className="svc-tag"
+          className="cat-eyebrow"
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <i>✦</i> Our Categories <i>✦</i>
+          Our Categories
         </motion.span>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-        >
-          Complete rack solutions under one roof
-        </motion.h2>
+        <h2>
+            Explore our <span> Categories</span>
+          </h2>
+       <p className="lead">
+            Our wide range of categories built on trust and premium quality.
+          </p>
+      </div>
 
-        <div className="svc-panel" ref={panel}>
-          <div
-            className="svc-track"
-            ref={track}
-            onScroll={measure}
-            onPointerDown={onDown}
-            onPointerMove={onMove}
-            onPointerUp={end}
-            onPointerLeave={end}
-            onClickCapture={onClickCapture}
-          >
-            {industries.map((s, i) => (
-              <motion.div
-                key={s.id}
-                className="svc-item"
-                variants={reduce ? still : item}
-                custom={i}
-                initial="hidden"
-                animate={state}
-              >
-                <Link href="/products" className="svc-card" draggable={false}>
-                  <div className="svc-img">
-                    <img src={s.image} alt={s.title} draggable={false} loading="lazy" />
-                  </div>
-                  <span className="svc-icon">
-                    <Icon name={s.icon} />
-                  </span>
-                  <h3>{s.title}</h3>
-                  <p>{s.text}</p>
-                  <span className="svc-go" aria-hidden="true">
-                    <Arrow />
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+      <div className="svc">
+        <div className="svc-bg" aria-hidden="true">
+          <img src="/leftslide2.jpg" alt="" />
         </div>
+        <div className="svc-body">
+          <div className="svc-panel" ref={panel}>
+            <div
+              className="svc-track"
+              ref={track}
+              onScroll={measure}
+              onPointerDown={onDown}
+              onPointerMove={onMove}
+              onPointerUp={end}
+              onPointerLeave={end}
+              onClickCapture={onClickCapture}
+            >
+              {industries.map((s, i) => (
+                <motion.div
+                  key={s.id}
+                  className="svc-item"
+                  variants={reduce ? still : item}
+                  custom={i}
+                  initial="hidden"
+                  animate={state}
+                >
+                  <Link href="/products" className="svc-card" draggable={false}>
+                    <div className="svc-img">
+                      <img src={s.image} alt={s.title} draggable={false} loading="lazy" />
+                    </div>
+                    <span className="svc-icon">
+                      <Icon name={s.icon} />
+                    </span>
+                    <h3>{s.title}</h3>
+                    <p>{s.text}</p>
+                    <span className="svc-go" aria-hidden="true">
+                      <Arrow />
+                    </span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
-        <div className="svc-foot">
-          <p>From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
-          <div className="svc-ctrl">
-            <button className="svc-nav" onClick={() => step(-1)} disabled={!can.prev} aria-label="Previous category">
-              <Arrow flip />
-            </button>
-            <button className="svc-nav" onClick={() => step(1)} disabled={!can.next} aria-label="Next category">
-              <Arrow />
-            </button>
-            <SplitButton href="/products" dark>View all Categories</SplitButton>
+          <div className="svc-foot">
+            <p>From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
+            <div className="svc-ctrl">
+              <button className="svc-nav" onClick={() => step(-1)} disabled={!can.prev} aria-label="Previous category">
+                <Arrow flip />
+              </button>
+              <button className="svc-nav" onClick={() => step(1)} disabled={!can.next} aria-label="Next category">
+                <Arrow />
+              </button>
+              <SplitButton href="/products" dark>View all Categories</SplitButton>
+            </div>
           </div>
         </div>
       </div>

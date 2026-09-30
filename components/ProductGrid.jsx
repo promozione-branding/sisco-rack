@@ -50,12 +50,10 @@ export default function ProductGrid() {
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
                 >
               <Link href={`/products/${p.slug}`} className="card-link">
-  {/* IMAGE CONTAINER */}
   <div className="card-top">
     <img src={p.image} alt={p.name} loading="lazy" />
   </div>
 
-  {/* INFO CONTAINER */}
   <div className="card-body">
     <h3>{p.name}</h3>
     <p>{subtitle}</p>

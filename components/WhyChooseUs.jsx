@@ -12,9 +12,7 @@ import {
 } from "framer-motion"
 import { reasons } from "@/lib/data"
 
-/* ------------------------------------------------------------------ */
-/*  Shared bits                                                        */
-/* ------------------------------------------------------------------ */
+
 
 const cardVariants = {
   hidden: { opacity: 0, y: 56, scale: 0.96 },
@@ -46,7 +44,6 @@ function CountUp({ to, decimals = 0, suffix = "", className }) {
 }
 
 function Card({ className, title, text, children }) {
-  // cursor-follow spotlight, driven by CSS vars (no re-render)
   const onMove = (e) => {
     const r = e.currentTarget.getBoundingClientRect()
     e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`)
@@ -74,10 +71,6 @@ function Card({ className, title, text, children }) {
     </motion.article>
   )
 }
-
-/* ------------------------------------------------------------------ */
-/*  1. Load gauge – needle sweeps to 1.5x                              */
-/* ------------------------------------------------------------------ */
 
 function Gauge() {
   const ticks = Array.from({ length: 9 }, (_, i) => {
@@ -132,9 +125,6 @@ function Gauge() {
   )
 }
 
-/* ------------------------------------------------------------------ */
-/*  2. Blueprint – racks grow into your floor plan                     */
-/* ------------------------------------------------------------------ */
 
 const rackXs = [44, 80, 204, 240]
 
@@ -148,7 +138,6 @@ function Blueprint() {
       </defs>
       <rect width="340" height="200" fill="url(#wx-grid)" opacity="0.7" />
 
-      {/* floor outline */}
       <motion.path
         d="M20 20 H320 V172 H20 Z"
         className="wx-outline"
@@ -158,7 +147,6 @@ function Blueprint() {
         }}
       />
 
-      {/* racks grow from the floor up */}
       {rackXs.map((x, i) => (
         <motion.g
           key={x}
@@ -175,7 +163,6 @@ function Blueprint() {
         </motion.g>
       ))}
 
-      {/* forklift lane, dashes travel forever */}
       <motion.path
         d="M160 36 V156"
         className="wx-lane"
@@ -183,7 +170,6 @@ function Blueprint() {
         transition={{ duration: 1.4, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* aisle dimension */}
       <motion.g
         variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { delay: 1.5, duration: 0.5 } } }}
       >
@@ -194,7 +180,6 @@ function Blueprint() {
         <text x="160" y="169.5" textAnchor="middle" className="wx-dim-text">your aisle</text>
       </motion.g>
 
-      {/* anchor points pulse */}
       {[44, 80, 204, 240].map((x, i) => (
         <motion.circle
           key={x}
@@ -210,9 +195,6 @@ function Blueprint() {
   )
 }
 
-/* ------------------------------------------------------------------ */
-/*  3. Install – an annotated rack that assembles itself               */
-/* ------------------------------------------------------------------ */
 
 const drop = (delay) => ({
   hidden: { y: -28, opacity: 0 },
@@ -289,37 +271,30 @@ function Install() {
         </pattern>
       </defs>
 
-      {/* floor */}
       <motion.rect
         x="20" y="190" width="320" height="8" className="wx-floor"
         style={{ originX: 0 }}
         variants={{ hidden: { scaleX: 0 }, show: { scaleX: 1, transition: { duration: 0.6, delay: 0.15, ease: "easeOut" } } }}
       />
 
-      {/* uprights */}
       <Upright x={120} delay={0.4} />
       <Upright x={240} delay={0.55} />
 
-      {/* base plates */}
       <rect x="110" y="186" width="30" height="4" className="wx-anc-head" />
       <rect x="230" y="186" width="30" height="4" className="wx-anc-head" />
 
-      {/* beams drop in */}
       {[64, 110, 156].map((y, i) => (
         <motion.rect key={y} x="122" y={y} width="126" height="10" rx="2" className="wx-beam" variants={drop(0.9 + i * 0.15)} />
       ))}
 
-      {/* loads */}
       <Crate x={140} y={122} w={64} h={34} delay={2.9} />
       <Crate x={172} y={28} w={44} h={36} delay={3.05} />
 
-      {/* anchors */}
       <Anchor x={117} delay={1.6} />
       <Anchor x={133} delay={1.7} />
       <Anchor x={237} delay={1.8} />
       <Anchor x={253} delay={1.9} />
 
-      {/* spirit level with a bubble that settles */}
       <motion.g variants={fade(2.0)}>
         <rect x="182" y="98" width="50" height="12" rx="6" className="wx-level" />
         <line x1="200" y1="100" x2="200" y2="108" className="wx-level-mark" />
@@ -333,7 +308,6 @@ function Install() {
         />
       </motion.g>
 
-      {/* load plate on the upright */}
       <motion.g
         style={{ originX: 0.5, originY: 0.5 }}
         variants={{
@@ -346,7 +320,6 @@ function Install() {
         <line x1="114" y1="90" x2="128" y2="90" className="wx-plate-line" />
       </motion.g>
 
-      {/* callouts */}
       <Callout d="M245 40 H280" dot={[245, 40]} x={280} y={30} w={68} label="Assemble" delay={1.4} />
       <Callout d="M232 104 H280" dot={[232, 104]} x={280} y={94} w={48} label="Level" delay={2.4} />
       <Callout d="M78 87 H110" dot={[110, 87]} x={6} y={77} w={72} label="Load plate" delay={2.7} />
@@ -355,9 +328,6 @@ function Install() {
   )
 }
 
-/* ------------------------------------------------------------------ */
-/*  4. Warranty – a stamped seal above a ten-year timeline             */
-/* ------------------------------------------------------------------ */
 
 const sealPoints = (() => {
   const n = 32
@@ -449,9 +419,6 @@ function Warranty() {
   )
 }
 
-/* ------------------------------------------------------------------ */
-/*  Section                                                            */
-/* ------------------------------------------------------------------ */
 
 const layout = [
   { cls: "wx-a", visual: <Gauge /> },
@@ -460,7 +427,6 @@ const layout = [
   { cls: "wx-d", visual: <Warranty /> },
 ]
 
-const headWords = ["Why", "teams", "choose", "Rackwell"]
 
 export default function WhyChooseUs() {
   const ref = useRef(null)
@@ -471,7 +437,6 @@ export default function WhyChooseUs() {
   return (
     <MotionConfig reducedMotion="user">
       <section className="section why wx" ref={ref}>
-        {/* drifting rack silhouette */}
         <motion.svg
           className="wx-deco"
           viewBox="0 0 160 300"
@@ -489,27 +454,9 @@ export default function WhyChooseUs() {
 
         <div className="wrap">
           <div className="sec-head">
-            <motion.h2
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.6 }}
-              variants={{ show: { transition: { staggerChildren: 0.09 } } }}
-            >
-              {headWords.map((w) => (
-                <span className="wx-word" key={w}>
-                  <motion.span
-                    style={{ display: "inline-block" }}
-                    variants={{
-                      hidden: { y: "110%" },
-                      show: { y: "0%", transition: { type: "spring", stiffness: 140, damping: 18 } },
-                    }}
-                  >
-                    {w}
-                  </motion.span>
-                  {" "}
-                </span>
-              ))}
-            </motion.h2>
+             <h2>
+            Why Choose Sisco
+          </h2>
             <motion.p
               className="lead"
               initial={{ opacity: 0, x: 24 }}
