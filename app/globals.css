@@ -190,7 +190,7 @@ h3 { font-size: 1.6rem; }
 .badge i { color: var(--safety); font-style: normal; }
 .hero-frame h1 { font-size: clamp(3.4rem, 10vw, 8.4rem); line-height: 0.92; }
 .hero-frame h1 span { display: block; }
-.hero-frame h1 em { font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: #d08a0a; letter-spacing: 0; }
+.hero-frame h1 em { font-weight: 400; color: #d08a0a; letter-spacing: 0; }
 .hero-frame .lead { margin: 30px auto 34px; }
 .hero-frame .cta-row { justify-content: center; }
 .hero-frame .cta-row .btn { border-radius: 14px; }

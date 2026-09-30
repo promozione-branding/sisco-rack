@@ -4,18 +4,40 @@ import SmoothScroll from "@/components/SmoothScroll"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
-const display = Barlow_Condensed({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-display" })
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["italic"], variable: "--font-serif" })
-const body = Public_Sans({ subsets: ["latin"], variable: "--font-body" })
+const display = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-display",
+})
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["italic"],
+  variable: "--font-serif",
+})
+
+const body = Public_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+})
 
 export const metadata = {
   title: "Sisco Steel | Industrial storage racks",
-  description: "Pallet racks, slotted angle, boltless shelving, cantilever racks and mezzanine floors built to your floor plan."
+  description:
+    "Pallet racks, slotted angle, boltless shelving, cantilever racks and mezzanine floors built to your floor plan.",
+
+  icons: {
+    icon: "/favicon.png",
+  },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${serif.variable}`}>
+    <html
+      lang="en"
+      className={`${display.variable} ${body.variable} ${serif.variable}`}
+    >
       <body>
         <SmoothScroll>
           <Navbar />
