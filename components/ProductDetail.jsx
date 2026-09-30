@@ -7,6 +7,7 @@ import SplitButton from "./SplitButton"
 import LottieIcon from "./LottieIcon"
 import RackBlueprint from "./RackBlueprint"
 import { ShieldCheck, Truck, Award } from "lucide-react"
+import ShelfCrew from "./ShelfCrew"
 
 const WHITE = ["#FFFFFF", "#E8A317"]
 
@@ -114,7 +115,8 @@ export default function ProductDetail({ product: p, related }) {
   return (
     <MotionConfig reducedMotion="user">
       <section className="pd-head">
-        <div className="wrap">
+  <ShelfCrew />
+  <div className="wrap">
           <motion.nav className="pd-crumbs" aria-label="Breadcrumb" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
             <Link href="/">Home</Link>
             <span>/</span>
