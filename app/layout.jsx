@@ -9,7 +9,7 @@ const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["ita
 const body = Public_Sans({ subsets: ["latin"], variable: "--font-body" })
 
 export const metadata = {
-  title: "Rackwell Steel | Industrial storage racks",
+  title: "Sisco Steel | Industrial storage racks",
   description: "Pallet racks, slotted angle, boltless shelving, cantilever racks and mezzanine floors built to your floor plan."
 }
 
