@@ -22,6 +22,7 @@ export default function ProductGrid() {
           <AnimatePresence mode="popLayout">
             {shown.map((p) => {
               const c = categories.find((x) => x.id === p.cat)
+              const colors = c?.colors ?? ["#3E5C76", "#E8A317"]
               return (
                 <motion.article
                   className="card"
