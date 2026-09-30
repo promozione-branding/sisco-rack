@@ -101,7 +101,7 @@ export default function Industries() {
         >
           <div className="ind-media" ref={media}>
             <video autoPlay muted loop playsInline preload="auto">
-              <source src="/bg4k.mp4" type="video/mp4" />
+              <source src="/bg44.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
