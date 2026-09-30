@@ -5,6 +5,19 @@ import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { products } from "@/lib/products"
 
+const WORD_LIMIT = 10
+
+function truncateWords(text = "", limit = WORD_LIMIT) {
+  const words = text.trim().split(/\s+/).filter(Boolean)
+  if (words.length <= limit) {
+    return { short: text.trim(), needsMore: false }
+  }
+  return {
+    short: words.slice(0, limit).join(" ") + "…",
+    needsMore: true,
+  }
+}
+
 const drop = {
   hidden: ({ col, row }) => ({
     opacity: 0,
@@ -85,6 +98,9 @@ export default function FeaturedProducts() {
               />
               {row.map((p, k) => {
                 const i = r * 4 + k
+                const fullText = p.text || p.description || ""
+                const { short, needsMore } = truncateWords(fullText)
+
                 return (
                   <motion.article
                     key={p.id}
@@ -107,7 +123,12 @@ export default function FeaturedProducts() {
                         <div className="cat-info">
                           <div>
                             <h3>{p.name}</h3>
-                            <p>{p.text || p.description}</p>
+                            <p>
+                              {short}
+                              {needsMore && (
+                                <span className="cat-more"> Read more</span>
+                              )}
+                            </p>
                           </div>
                           <span className="cat-go" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
