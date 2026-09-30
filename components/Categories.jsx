@@ -142,7 +142,7 @@ export default function Categories() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <i>✦</i> Our services <i>✦</i>
+          <i>✦</i> Our Categories <i>✦</i>
         </motion.span>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -194,13 +194,13 @@ export default function Categories() {
         <div className="svc-foot">
           <p>From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
           <div className="svc-ctrl">
-            <button className="svc-nav" onClick={() => step(-1)} disabled={!can.prev} aria-label="Previous services">
+            <button className="svc-nav" onClick={() => step(-1)} disabled={!can.prev} aria-label="Previous category">
               <Arrow flip />
             </button>
-            <button className="svc-nav" onClick={() => step(1)} disabled={!can.next} aria-label="Next services">
+            <button className="svc-nav" onClick={() => step(1)} disabled={!can.next} aria-label="Next category">
               <Arrow />
             </button>
-            <SplitButton href="/products" dark>View all services</SplitButton>
+            <SplitButton href="/products" dark>View all Categories</SplitButton>
           </div>
         </div>
       </div>
