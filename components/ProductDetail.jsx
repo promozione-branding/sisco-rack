@@ -6,6 +6,7 @@ import { motion, AnimatePresence, MotionConfig, useInView, animate } from "frame
 import SplitButton from "./SplitButton"
 import LottieIcon from "./LottieIcon"
 import RackBlueprint from "./RackBlueprint"
+import { ShieldCheck, Truck, Award } from "lucide-react"
 
 const WHITE = ["#FFFFFF", "#E8A317"]
 
@@ -63,6 +64,20 @@ function Gallery({ images, name }) {
 
   return (
     <div className="pd-gallery">
+              <div className="pd-shelf">
+        {images.map((src, k) => (
+          <motion.div
+            key={src}
+            initial={{ y: -150, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 120, damping: 13, delay: 0.5 + k * 0.13 }}
+          >
+            <button className={k === i ? "pd-thumb on" : "pd-thumb"} onClick={() => go(k)} aria-label={`Show image ${k + 1}`}>
+              <img src={src} alt="" />
+            </button>
+          </motion.div>
+        ))}
+      </div>
       <div className="pd-stage">
         <span className="pd-up l" />
         <span className="pd-up r" />
@@ -85,21 +100,6 @@ function Gallery({ images, name }) {
             <button className="pd-arrow r" onClick={() => go(i + 1)} aria-label="Next image"><Arrow /></button>
           </>
         )}
-      </div>
-      <div className="pd-shelf">
-        {images.map((src, k) => (
-          <motion.div
-            key={src}
-            initial={{ y: -150, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 120, damping: 13, delay: 0.5 + k * 0.13 }}
-          >
-            <button className={k === i ? "pd-thumb on" : "pd-thumb"} onClick={() => go(k)} aria-label={`Show image ${k + 1}`}>
-              <img src={src} alt="" />
-            </button>
-          </motion.div>
-        ))}
-        <motion.i className="pd-beam" style={{ originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.7, delay: 0.3 }} />
       </div>
     </div>
   )
@@ -154,10 +154,40 @@ export default function ProductDetail({ product: p, related }) {
           <motion.p className="pd-desc" variants={rise} custom={2} initial="hidden" animate="show">
             {p.description}
           </motion.p>
-          <motion.div className="pd-cta" variants={rise} custom={3} initial="hidden" animate="show">
+              <motion.div className="pd-cta" variants={rise} custom={3} initial="hidden" animate="show">
             <SplitButton href="/contact" dark>Request a quote</SplitButton>
             {c.whatsapp && <a className="btn ghost" href={c.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>}
             {c.phone && <a className="btn ghost" href={`tel:${c.phone}`}>Call now</a>}
+          </motion.div>
+
+          <motion.div className="pd-trust" variants={rise} custom={4} initial="hidden" animate="show">
+            <div className="pd-trust-item">
+              <span className="pd-trust-icon" aria-hidden="true">
+                <ShieldCheck size={28} strokeWidth={2.5} />
+              </span>
+              <div>
+                <strong>Quality Assured</strong>
+                <span>Color-coated mild steel</span>
+              </div>
+            </div>
+            <div className="pd-trust-item">
+              <span className="pd-trust-icon" aria-hidden="true">
+                <Truck size={28} strokeWidth={2.5} />
+              </span>
+              <div>
+                <strong>Reliable Delivery</strong>
+                <span>Pan-India shipping</span>
+              </div>
+            </div>
+            <div className="pd-trust-item">
+              <span className="pd-trust-icon" aria-hidden="true">
+                <Award size={28} strokeWidth={2.5} />
+              </span>
+              <div>
+                <strong>Trusted Maker</strong>
+                <span>Arya Industry standard</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
