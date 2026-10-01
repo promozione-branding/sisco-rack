@@ -1302,3 +1302,83 @@ h3 { font-size: 1.6rem; }
     padding: 14px 16px;
   }
 }
+
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 100svh;
+  min-height: 560px;
+  max-height: 860px;
+  padding: 104px 24px 124px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;                 
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("/hero.jpg") center / cover no-repeat;
+  transform: scale(1.02);         
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+ background: linear-gradient(180deg, rgba(162, 174, 192, 0.55) 0%, rgba(56, 61, 67, 0.72) 45%, rgb(181 181 181 / 88%) 100% 70%);
+}
+
+.hero-frame h1 {
+  font-size: clamp(2.8rem, 7.2vw, 6rem);
+  line-height: 0.92;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.hero-frame h1 span {
+  display: block;
+}
+
+.hero-frame h1 em {
+  font-weight: 400;
+  color: #f0b429;                    /* safety yellow still pops */
+  letter-spacing: 0;
+}
+
+.hero-frame .cta-row {
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.hero-frame .cta-row .btn {
+  border-radius: 14px;
+}
+
+.hero-frame .btn.ghost {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.hero-frame .btn.ghost:hover {
+  background: #fff;
+  color: var(--ink);
+  border-color: #fff;
+}
+
+
+@media (max-width: 720px) {
+  .hero-frame {
+    height: auto;
+    min-height: 100svh;
+    max-height: none;
+    padding: 96px 18px 120px;
+  }
+}
