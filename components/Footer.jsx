@@ -29,7 +29,7 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
           <small>© 2026 {brand}. All rights reserved.</small>
-          <small>Designed by Inquiry Bazaar</small>
+          <small>Designed and developed by Inquiry Bazaar</small>
         </div>
       </div>
     </footer>
