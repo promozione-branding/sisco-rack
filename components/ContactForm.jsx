@@ -36,12 +36,12 @@ export default function ContactForm() {
         <motion.aside className="info" whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 260, damping: 22 }}>
           <div>
             <h3>Factory and showroom</h3>
-            <p>48 Foundry Road, Industrial Estate, Unit 6</p>
+            <p>New Delhi, Delhi</p>
           </div>
           <div>
             <h3>Sales</h3>
             <p>sales@rackwellsteel.com</p>
-            <p>+1 (555) 014 2290</p>
+            <p>+91 8043834499</p>
           </div>
           <div>
             <h3>Hours</h3>
