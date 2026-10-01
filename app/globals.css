@@ -706,7 +706,7 @@ h3 { font-size: 1.6rem; }
   .wx-copy { padding: 0 24px 20px; }
   .wx-copy h3 { margin-bottom: 4px; font-size: clamp(1.4rem, 2vw, 1.8rem); }
   .wx-copy p { font-size: 0.9rem; line-height: 1.45; }
-  .wx-svg { max-height: 20svh; }
+  .wx-svg { max-height: 28svh; }
   .wx-readout-num { font-size: 2rem; }
   .wx-seal { width: 130px; height: 130px; }
   .wx-seal-num { font-size: 2.6rem; }
@@ -857,7 +857,7 @@ h3 { font-size: 1.6rem; }
 .pd-rcard:hover .pd-rgo { background: var(--safety); border-color: var(--safety); }
 
 .pd-band { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; margin: 64px 44px; padding: 44px 48px; border: 2px solid var(--ink); border-radius: 36px; background: var(--ink); color: #fff; }
-.pd-band-l { display: flex; align-items: center; gap: 22px; }
+.pd-band-l { display: flex; align-items: center; gap: 22px; width: 65%;}
 .pd-band-lottie { width: 84px; height: 84px; flex-shrink: 0; }
 .pd-band h2 { max-width: 20ch; color: #fff; font-size: clamp(1.7rem, 3.2vw, 2.7rem); }
 .pd-band p { max-width: 46ch; margin-top: 8px; color: #c6d3dd; }
@@ -1155,4 +1155,150 @@ h3 { font-size: 1.6rem; }
 .ab-ms-wrap { will-change: transform, opacity; }
 @media (max-width: 720px) {
   .ab-ms.l .ab-ms-wrap, .ab-ms.r .ab-ms-wrap { grid-column: 2; grid-row: 2; }
+}
+
+
+.rack-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 80svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  background: #1a1f24;
+  margin-top: 50px;
+}
+
+.rack-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oPYm50EoWj4Ylb5T5IWTyCQd0pc-XQGN706Dp_YUxgjaOehFj1QJE4uB&s=10") center / cover no-repeat;
+  transform: scale(1.04);
+}
+
+.rack-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(18, 22, 28, 0.55) 0%, rgb(68 83 102 / 72%) 45%, rgb(68 89 123 / 88%) 100%
+100%
+)
+}
+
+.rack-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  padding: 0px 24px 0px;
+}
+
+.rack-hero h1 {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.rack-hero h1 span {
+  display: block;
+}
+
+.rack-hero-lead {
+  margin: 22px auto 36px;
+  max-width: 52ch;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.rack-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+
+.rack-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 6px;
+  background: rgba(25, 139, 25, 0.55);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.98rem;
+  backdrop-filter: blur(6px);
+  transition: background 0.22s, border-color 0.22s, transform 0.18s;
+}
+.rack-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+.rack-hero-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 18px;
+  padding: 18px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(12, 15, 20, 0.55);
+  backdrop-filter: blur(8px);
+}
+
+.rack-hero-bar a {
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.2s;
+}
+.rack-hero-bar a:hover {
+  color: var(--safety, #e8a317);
+}
+
+.rack-hero-bar .sep {
+  opacity: 0.45;
+  user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .rack-hero-inner {
+    padding: 100px 18px 90px;
+  }
+  .rack-hero h1 {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+  .rack-hero-lead {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+  .rack-btn {
+    width: 100%;
+    justify-content: center;
+    max-width: 280px;
+  }
+  .rack-hero-bar {
+    font-size: 0.82rem;
+    gap: 6px 12px;
+    padding: 14px 16px;
+  }
 }
