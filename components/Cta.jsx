@@ -79,7 +79,7 @@ export default function RackHero() {
           <span className="sep">|</span>
           <a href="mailto:hello@yourracks.com">hello@yourracks.com</a>
           <span className="sep">|</span>
-          <span>Industrial Racking Systems</span>
+          <span>Sisco Racks</span>
         </motion.div>
       </section>
     </MotionConfig>

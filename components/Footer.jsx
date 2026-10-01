@@ -22,12 +22,15 @@ export default function Footer() {
             <h3>Reach us</h3>
             <ul>
               <li>sales@rackwellsteel.com</li>
-              <li>+1 (555) 014 2290</li>
+              <li>+91 8043834499</li>
               <li>Mon to Sat, 8am to 6pm</li>
             </ul>
           </div>
         </div>
-        <small>© 2026 {brand}. All rights reserved.</small>
+        <div className="footer-bottom">
+          <small>© 2026 {brand}. All rights reserved.</small>
+          <small>Designed by Inquiry Bazaar</small>
+        </div>
       </div>
     </footer>
   )

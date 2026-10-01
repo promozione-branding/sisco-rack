@@ -1390,3 +1390,41 @@ h3 { font-size: 1.6rem; }
   }
 }
 
+
+
+.topbar { position: relative; z-index: 31; background: #cdcdcd; color: var(--ink); font-size: 0.82rem; font-weight: 600;  }
+.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 36px; padding: 6px 44px; }
+.topbar-links { display: flex; align-items: center; gap: 26px; min-width: 0; }
+.topbar a { display: inline-flex; align-items: center; gap: 8px; min-width: 0; transition: opacity 0.18s ease-out; }
+.topbar a:hover { opacity: 0.7; }
+.topbar a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-hours { white-space: nowrap; }
+
+.fc { position: fixed; right: 44px; bottom: 80px; z-index: 40; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
+.fc-link { position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.fc-label { padding: 8px 16px; border: 2px solid var(--ink); border-radius: 999px; background: #fff; font-size: 0.85rem; font-weight: 600; white-space: nowrap; opacity: 0; transform: translateX(14px); pointer-events: none; transition: opacity 0.18s ease-out, transform 0.18s ease-out; }
+.fc-link:hover .fc-label, .fc-link:focus-visible .fc-label { opacity: 1; transform: translateX(0); }
+.fc-btn { position: relative; width: 58px; height: 58px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50%; box-shadow: 0 10px 22px rgba(31, 42, 51, 0.28); transition: transform 0.18s ease-out, box-shadow 0.18s ease-out; }
+.fc-link:hover .fc-btn { transform: translateY(-4px) scale(1.06); box-shadow: 0 16px 28px rgba(31, 42, 51, 0.34); }
+.fc-btn.wa { background: #25d366; color: #fff; }
+.fc-btn.call { background: #5e5e5e; color: var(--safety); }
+.fc-btn.wa::before { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid #25d366; animation: fc-pulse 2.2s ease-out infinite; pointer-events: none; }
+@keyframes fc-pulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.6); opacity: 0; } }
+
+@media (max-width: 720px) {
+  .topbar { font-size: 0.74rem; border-radius: 0 0 14px 14px; }
+  .topbar-in { padding: 6px 12px; }
+  .topbar-links { width: 100%; justify-content: space-between; gap: 10px; }
+  .topbar-hours { display: none; }
+  .fc { right: 14px; bottom: 16px; gap: 12px; }
+  .fc-btn { width: 52px; height: 52px; }
+  .fc-label { display: none; }
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}

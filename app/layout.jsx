@@ -3,6 +3,8 @@ import "./globals.css"
 import SmoothScroll from "@/components/SmoothScroll"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import FloatingContact from "@/components/FloatingContact"
+import TopBar from "@/components/TopBar"
 
 const display = Barlow_Condensed({
   subsets: ["latin"],
@@ -40,10 +42,12 @@ export default function RootLayout({ children }) {
     >
       <body>
         <SmoothScroll>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
+  <TopBar/>
+  <Navbar />
+  <main>{children}</main>
+  <Footer />
+  <FloatingContact />
+</SmoothScroll>
       </body>
     </html>
   )

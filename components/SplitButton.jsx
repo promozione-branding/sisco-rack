@@ -31,7 +31,6 @@ export default function SplitButton({
     </>
   )
 
-  // Link mode
   if (href) {
     return (
       <Link href={href} className={classes} {...props}>
@@ -40,7 +39,6 @@ export default function SplitButton({
     )
   }
 
-  // Button mode (for forms / onClick)
   return (
     <button
       type={type}

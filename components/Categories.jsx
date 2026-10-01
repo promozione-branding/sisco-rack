@@ -6,6 +6,7 @@ import { motion, useInView, useReducedMotion } from "framer-motion"
 import { industries } from "@/lib/industries"
 import SplitButton from "./SplitButton"
 
+
 const paths = {
   design: (
     <>
@@ -48,6 +49,7 @@ const Icon = ({ name }) => (
   </svg>
 )
 
+
 const Arrow = ({ flip }) => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={flip ? { transform: "scaleX(-1)" } : undefined} aria-hidden="true">
     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -77,6 +79,9 @@ export default function Categories() {
   const reduce = useReducedMotion()
   const [can, setCan] = useState({ prev: false, next: true })
   const state = inView || reduce ? "show" : "hidden"
+const paused = useRef(false)
+const lastManual = useRef(0)
+const visible = useInView(panel, { amount: 0.3 })
 
   const measure = () => {
     const el = track.current
@@ -99,6 +104,20 @@ export default function Categories() {
     const gap = 18
     el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: "smooth" })
   }
+
+useEffect(() => {
+  if (reduce || !visible) return
+  const id = setInterval(() => {
+    const el = track.current
+    if (!el || paused.current || drag.current.down) return
+    if (Date.now() - lastManual.current < 5000) return
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4
+    if (atEnd) el.scrollTo({ left: 0, behavior: "smooth" })
+    else step(1)
+  }, 2200)
+  return () => clearInterval(id)
+}, [reduce, visible])
+
 
   const onDown = (e) => {
     if (e.pointerType !== "mouse") return
@@ -154,7 +173,16 @@ export default function Categories() {
           <img src="/leftslide2.jpg" alt="" />
         </div>
         <div className="svc-body">
-          <div className="svc-panel" ref={panel}>
+          <div
+  className="svc-panel"
+  ref={panel}
+  onMouseEnter={() => { paused.current = true }}
+  onMouseLeave={() => { paused.current = false }}
+  onFocusCapture={() => { paused.current = true }}
+  onBlurCapture={() => { paused.current = false }}
+  onTouchStart={() => { paused.current = true }}
+  onTouchEnd={() => { setTimeout(() => { paused.current = false }, 2500) }}
+>
             <div
               className="svc-track"
               ref={track}
@@ -195,12 +223,12 @@ export default function Categories() {
           <div className="svc-foot">
             <p>From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
             <div className="svc-ctrl">
-              <button className="svc-nav" onClick={() => step(-1)} disabled={!can.prev} aria-label="Previous category">
-                <Arrow flip />
-              </button>
-              <button className="svc-nav" onClick={() => step(1)} disabled={!can.next} aria-label="Next category">
-                <Arrow />
-              </button>
+            <button className="svc-nav" onClick={() => { lastManual.current = Date.now(); step(-1) }} disabled={!can.prev} aria-label="Previous category">
+  <Arrow flip />
+</button>
+<button className="svc-nav" onClick={() => { lastManual.current = Date.now(); step(1) }} disabled={!can.next} aria-label="Next category">
+  <Arrow />
+</button>
               <SplitButton href="/products" dark>View all Categories</SplitButton>
             </div>
           </div>

@@ -48,7 +48,6 @@ const Move = ({ pts }) => (
   />
 )
 
-// 1 inside the given [start, end] intervals, 0 outside
 const gate = (ints) => {
   const pts = ints[0][0] === 0 ? [] : [[0, 0]]
   ints.forEach(([a, b]) => {
@@ -77,14 +76,13 @@ const Gate = ({ ints, children }) => (
   </g>
 )
 
-/* ---------- the plan: every position and time, derived from the scene width ---------- */
 
 function plan(W) {
   const x0 = 56
-  const RL = Math.max(520, W - 330) // where the rack finally stops (its left edge)
-  const WP = RL - 45 // worker position when loading
-  const WF = RL - 140 // worker position when picking up a box
-  const SX = RL - 195 // where the box stack stands
+  const RL = Math.max(520, W - 330) 
+  const WP = RL - 45 
+  const WF = RL - 140 
+  const SX = RL - 195 
   const rackStart = x0 + 45
   const P0 = 0.6
   const P1 = 9.1
@@ -94,7 +92,6 @@ function plan(W) {
     return { s, pick: s + 0.8, place: s + 1.9, done: s + 2.4 }
   })
 
-  // the stack only appears once the rack has rolled past it
   const tA = Math.min(P1 - 0.5, Math.max(P0 + 0.3, P0 + (P1 - P0) * ((SX + 60 - rackStart) / (RL - rackStart))))
 
   const R_VIS = [[0, P1], ...cyc.map((c, i) => [c.pick, i === 2 ? T : c.done])]
@@ -394,9 +391,8 @@ function Rack({ p }) {
   )
 }
 
-/* ---------- the stack waiting on the floor ---------- */
 
-const STACK_Y = [-84, -58, -32] // top box is taken first
+const STACK_Y = [-84, -58, -32] 
 
 function Stack({ p }) {
   return (

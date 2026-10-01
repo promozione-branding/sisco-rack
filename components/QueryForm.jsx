@@ -24,7 +24,6 @@ export default function QueryForm({ className = "" }) {
     setStatus("loading")
 
     try {
-      // Replace with your actual API endpoint
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -52,9 +51,9 @@ export default function QueryForm({ className = "" }) {
           </p>
 
           <ul className="query-points">
-            <li>Free site assessment</li>
-            <li>Custom design & fabrication</li>
-            <li>Fast installation nationwide</li>
+            <li>Free Site Assessment</li>
+            <li>Custom Design & Fabrication</li>
+            <li>Fast Installation nationwide</li>
           </ul>
         </div>
 
