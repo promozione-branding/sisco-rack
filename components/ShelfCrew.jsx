@@ -2,16 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 
-/*
-  Full-width scene for .pd-head.
-  Everything is animated with SVG-native (SMIL) animation on one shared 18s clock,
-  so there is no JS animation loop and nothing can drift out of sync.
-
-    0 – 0.6s     worker appears at the left, next to the title
-    0.6 – 9.1s   worker pushes the rack all the way across to the right
-    9.1 – 16.3s  worker fetches a box from the stack and loads a shelf, three times
-    16.3 – 18s   hold, fade out, loop
-*/
 
 const T = 18
 const E = 0.02
@@ -39,7 +29,6 @@ const H = 190
 
 const f = (n) => Number(n.toFixed(4))
 
-// [[time, value], ...] -> keyTimes / values strings for a T second loop
 const track = (pts) => {
   const p = [...pts]
   if (p[0][0] > 0) p.unshift([0, p[0][1]])
