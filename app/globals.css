@@ -1428,3 +1428,65 @@ h3 { font-size: 1.6rem; }
   flex-wrap: wrap;
   gap: 8px;
 }
+
+
+
+.ph-header {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  color: #ffffff;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Dark overlay so text stays readable on any background image */
+.ph-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.35) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: 1;
+}
+
+.ph-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ph-header h1 {
+  margin: 0 0 16px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.ph-lead {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* Optional: slightly taller on larger screens */
+@media (min-width: 768px) {
+  .ph-header {
+    min-height: 520px;
+    padding: 120px 32px;
+  }
+}

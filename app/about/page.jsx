@@ -6,7 +6,11 @@ export const metadata = { title: "About | Rackwell Steel" }
 export default function About() {
   return (
     <>
-      <PageHead title="Built for Durability" text="Rackwell started as a two-person welding bay. Today we make racking for warehouses, workshops and shops across the country." />
+  <PageHead 
+  title="Built on the shop floor" 
+  text="Sisco started as a two-person welding bay. Today we make racking for warehouses, workshops and shops across the country."
+  backgroundImage="/about_bg.png"
+/>
       <section className="section">
         <div className="wrap">
           <div className="two">

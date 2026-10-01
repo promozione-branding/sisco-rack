@@ -6,7 +6,11 @@ export const metadata = { title: "Contact | Rackwell Steel" }
 export default function Contact() {
   return (
     <>
-      <PageHead title="Get a quote" text="Tell us what you store and how you load it. We reply with drawings and a fixed price." />
+      <PageHead 
+  title="Contact" 
+  text="Get in touch with us."
+  backgroundImage="/contact_bg.jpg"
+/>
       <ContactForm />
     </>
   )
