@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
-import { motion, MotionConfig, useScroll, useTransform, useSpring, useInView, animate } from "framer-motion"
+import { motion, MotionConfig, useScroll, useTransform, useSpring, useInView, useReducedMotion, animate } from "framer-motion"
 import SplitButton from "./SplitButton"
 import LottieIcon from "./LottieIcon"
 import { story, aboutStats, milestones, values } from "@/lib/about"
@@ -11,7 +11,37 @@ const rise = {
   hidden: { opacity: 0, y: 36 },
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] } })
 }
+function Milestone({ m, side }) {
+  const row = useRef(null)
+  const reduce = useReducedMotion()
+  const dir = side === "l" ? -1 : 1
+  const { scrollYProgress } = useScroll({ target: row, offset: ["start end", "end start"] })
+  const p = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.4 })
 
+  const x = useTransform(p, [0, 0.35, 0.65, 1], [dir * 110, 0, 0, dir * -30])
+  const y = useTransform(p, [0, 0.35, 0.65, 1], [60, 0, 0, -30])
+  const rotate = useTransform(p, [0, 0.35, 0.65, 1], [dir * 6, 0, 0, dir * -2])
+  const scale = useTransform(p, [0, 0.35, 0.65, 1], [0.88, 1, 1, 0.95])
+  const opacity = useTransform(p, [0, 0.25, 0.7, 1], [0, 1, 1, 0.3])
+  const yearX = useTransform(p, [0, 0.35, 0.65, 1], [dir * -70, 0, 0, dir * 30])
+  const yearOpacity = useTransform(p, [0, 0.3, 0.7, 1], [0, 1, 1, 0.2])
+  const nodeScale = useTransform(p, [0.1, 0.32, 0.68, 0.92], [0, 1, 1, 0])
+
+  return (
+    <div className={`ab-ms ${side}`} ref={row}>
+      <motion.span className="ab-year" style={reduce ? undefined : { x: yearX, opacity: yearOpacity }}>
+        {m.year}
+      </motion.span>
+      <motion.span className="ab-node" style={reduce ? undefined : { scale: nodeScale }} />
+      <motion.div className="ab-ms-wrap" style={reduce ? undefined : { x, y, rotate, scale, opacity }}>
+        <div className="ab-ms-card">
+          <h3>{m.title}</h3>
+          <p>{m.text}</p>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
 function Reveal({ children, className, i = 0 }) {
   return (
     <motion.div className={className} variants={rise} custom={i} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
@@ -104,7 +134,7 @@ export default function AboutUsSection() {
         </div>
       </div>
 
-      <div className="wrap pd-sec">
+      {/* <div className="wrap pd-sec">
         <div className="ab-stats" ref={stats}>
           {aboutStats.map((s, i) => (
             <motion.div
@@ -121,7 +151,7 @@ export default function AboutUsSection() {
           ))}
           <motion.i className="ab-stats-beam" style={{ originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: statsIn ? 1 : 0 }} transition={{ duration: 0.7, delay: 0.2 }} />
         </div>
-      </div>
+      </div> */}
 
       <section className="wrap pd-sec">
         <Reveal className="pd-title">
@@ -131,27 +161,9 @@ export default function AboutUsSection() {
           <div className="ab-rail" aria-hidden="true">
             <motion.i style={{ scaleY: fill }} />
           </div>
-          {milestones.map((m, i) => {
-            const side = i % 2 ? "r" : "l"
-            return (
-              <div className={`ab-ms ${side}`} key={m.year}>
-                <motion.span className="ab-year" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: 0.6 }}>
-                  {m.year}
-                </motion.span>
-                <motion.span className="ab-node" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true, amount: 0.6 }} transition={{ type: "spring", stiffness: 260, damping: 16 }} />
-                <motion.div
-                  className="ab-ms-card"
-                  initial={{ opacity: 0, x: side === "l" ? -70 : 70 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <h3>{m.title}</h3>
-                  <p>{m.text}</p>
-                </motion.div>
-              </div>
-            )
-          })}
+        {milestones.map((m, i) => (
+  <Milestone key={m.year} m={m} side={i % 2 ? "r" : "l"} />
+))}
         </div>
       </section>
 
@@ -172,20 +184,7 @@ export default function AboutUsSection() {
         </div>
       </section>
 
-      <Reveal>
-        <section className="pd-band">
-          <div className="pd-band-l">
-            <LottieIcon className="pd-band-lottie" colors={["#FFFFFF", "#E8A317"]} />
-            <div>
-              <h2>Let us rack your next floor</h2>
-              <p>Send us your bay sizes and loads. You get drawings in two working days and a fixed price.</p>
-            </div>
-          </div>
-          <div className="pd-band-r">
-            <SplitButton href="/contact">Get a quote</SplitButton>
-          </div>
-        </section>
-      </Reveal>
+
     </MotionConfig>
   )
 }

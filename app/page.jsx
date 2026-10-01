@@ -8,6 +8,7 @@ import Categories from "@/components/Categories"
 import Testimonials from "@/components/Testimonials"
 import QueryForm from "@/components/QueryForm"
 import AboutUsSection from "@/components/AboutUsSection"
+import Cta from "@/components/Cta"
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Categories/>
       <Industries/>
       <AboutUsSection/>
+      <Cta/>
       <WhyChooseUs />
       <Testimonials/>
       <Faq />

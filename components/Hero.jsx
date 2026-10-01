@@ -32,9 +32,6 @@ export default function Hero() {
           Load with <em>confidence</em>
         </motion.span>
       </h1>
-      <motion.p className="lead" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-        Pallet racks, shelving and mezzanines cut to your floor plan, load tested and installed by our own crews.
-      </motion.p>
       <motion.div className="cta-row" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
         <SplitButton href="/contact" dark>Get a quote</SplitButton>
         <Link href="/products" className="btn ghost">Browse products</Link>

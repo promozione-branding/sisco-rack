@@ -57,7 +57,7 @@ h3 { font-size: 1.6rem; }
 .btn:hover { background: var(--safety); color: var(--ink); border-color: var(--ink); }
 .btn.ghost { background: transparent; color: var(--ink); }
 .btn.ghost:hover { background: var(--ink); color: var(--bg); }
-.cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+.cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px;}
 .marquee { background: var(--ink); color: var(--bg); overflow: hidden; border-block: 2px solid var(--ink); padding: 18px 0; }
 .marquee-track { display: flex; width: max-content; }
 .marquee-item { font-family: var(--font-display), sans-serif; font-size: 1.9rem; font-weight: 600; padding: 0 28px; display: flex; align-items: center; gap: 56px; white-space: nowrap; }
@@ -1079,7 +1079,6 @@ h3 { font-size: 1.6rem; }
   height: auto;
   pointer-events: none;
   z-index: 0;
-  /* fades the left edge so the worker walks in instead of popping in */
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%);
   mask-image: linear-gradient(90deg, transparent 0, #000 16%);
 }
@@ -1148,4 +1147,12 @@ h3 { font-size: 1.6rem; }
   .ab-ms.l .ab-year, .ab-ms.r .ab-year { grid-column: 2; grid-row: 1; text-align: left; padding: 0; font-size: 2.4rem; }
   .ab-ms.l .ab-ms-card, .ab-ms.r .ab-ms-card { grid-column: 2; grid-row: 2; }
   .ab-plates { grid-template-columns: 1fr; }
+}
+
+
+.ab-ms.l .ab-ms-wrap { grid-column: 1; grid-row: 1; }
+.ab-ms.r .ab-ms-wrap { grid-column: 3; grid-row: 1; }
+.ab-ms-wrap { will-change: transform, opacity; }
+@media (max-width: 720px) {
+  .ab-ms.l .ab-ms-wrap, .ab-ms.r .ab-ms-wrap { grid-column: 2; grid-row: 2; }
 }
