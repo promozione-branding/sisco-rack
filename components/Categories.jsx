@@ -198,25 +198,47 @@ useEffect(() => {
               {industries.map((s, i) => (
                 <motion.div
                   key={s.id}
-                  className="flex-[0_0_min(290px,78%)] snap-start"
+                  className="flex-[0_0_min(320px,78%)] snap-start"
                   variants={reduce ? still : item}
                   custom={i}
                   initial="hidden"
                   animate={state}
                 >
-                  <Link href="/products" className="group/card block h-full select-none rounded-[20px] border border-solid border-line bg-[linear-gradient(to_bottom,#e3e8ec_0,#e3e8ec_178px,#e3e8ec_178px,#e3e8ec_100%)] px-2 pb-[18px] pt-2 text-center shadow-lift transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-1.5 hover:border-safety hover:shadow-lift-hover" draggable={false}>
-                    <div className="h-[170px] overflow-hidden rounded-[14px] border-b-[3px] border-solid border-safety bg-[linear-gradient(135deg,#c5ced5,#e9edf0)]">
-                      <img className="pointer-events-none block h-full w-full object-fill transition-transform duration-[250ms] ease-out group-hover/card:scale-[1.06]" src={s.image} alt={s.title} draggable={false} loading="lazy" />
-                    </div>
-                    <span className="relative z-[2] mx-auto mb-3 -mt-[27px] grid h-[54px] w-[54px] place-items-center rounded-circle border-4 border-solid border-white bg-safety text-ink">
-                      <Icon name={s.icon} />
-                    </span>
-                    <h3 className="px-2.5 font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{s.title}</h3>
-                    <p className="mt-1.5 line-clamp-2 px-3 text-[0.84rem] leading-[1.5] text-muted-2">{s.text}</p>
-                    <span className="mx-auto mt-3.5 grid h-8 w-8 place-items-center rounded-circle border border-solid border-line bg-white text-ink transition-[background] duration-[180ms] ease-out group-hover/card:border-safety group-hover/card:bg-safety" aria-hidden="true">
-                      <Arrow />
-                    </span>
-                  </Link>
+                 <Link
+  href="/products"
+  className="group/card block h-full select-none rounded-[20px] border border-solid border-line bg-[#e3e8ec] px-2 pb-[18px] pt-2 shadow-lift transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-1.5 hover:border-safety hover:shadow-lift-hover"
+  draggable={false}
+>
+  {/* Taller image */}
+  <div className="h-[260px] overflow-hidden rounded-[14px] border-b-[3px] border-solid border-safety bg-[linear-gradient(135deg,#c5ced5,#e9edf0)]">
+    <img
+      className="pointer-events-none block h-full w-full object-fill transition-transform duration-[250ms] ease-out group-hover/card:scale-[1.06]"
+      src={s.image}
+      alt={s.title}
+      draggable={false}
+      loading="lazy"
+    />
+  </div>
+
+  {/* Icon badge (left-aligned so it doesn't clash with the left text) */}
+  <span className="relative z-[2] -mt-[27px] mb-2 ml-4 grid h-[54px] w-[54px] place-items-center rounded-circle border-4 border-solid border-white bg-safety text-ink">
+    <Icon name={s.icon} />
+  </span>
+
+  {/* Text left, arrow right */}
+  <div className="flex items-end justify-between gap-3 px-3 text-left">
+    <div className="min-w-0 flex-1">
+      <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{s.title}</h3>
+      <p className="mt-1.5 line-clamp-2 text-[0.84rem] leading-[1.5] text-muted-2">{s.text}</p>
+    </div>
+    <span
+      className="grid h-8 w-8 shrink-0 place-items-center rounded-circle border border-solid border-line bg-white text-ink transition-[background] duration-[180ms] ease-out group-hover/card:border-safety group-hover/card:bg-safety"
+      aria-hidden="true"
+    >
+      <Arrow />
+    </span>
+  </div>
+</Link>
                 </motion.div>
               ))}
             </div>
