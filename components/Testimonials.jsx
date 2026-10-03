@@ -56,7 +56,7 @@ function Card({ data, i, progress }) {
 
   return (
     <motion.div className="absolute inset-0 will-change-transform" style={{ y: slotY, rotate: tilt, zIndex: i }}>
-      <motion.article className={`h-full flex flex-col justify-between gap-5 rounded-[28px] border-2 border-solid border-ink px-[34px] py-8 shadow-[0_18px_40px_rgba(31,42,51,0.14)] max-[960px]:p-[22px] ${data.tone === "dark" ? "bg-navy text-white" : "bg-white"}`} style={{ y, scale, opacity, transformOrigin: "50% 0%" }}>
+      <motion.article className={`h-full flex flex-col justify-between gap-5 rounded-[28px] border-2 border-solid border-ink px-[34px] py-8 shadow-[0_18px_40px_rgba(31,42,51,0.14)] max-[960px]:p-[22px] ${data.tone === "dark" ? "bg-[#253970] text-white" : "bg-white"}`} style={{ y, scale, opacity, transformOrigin: "50% 0%" }}>
         <Body data={data} />
       </motion.article>
     </motion.div>
@@ -79,7 +79,7 @@ export default function Testimonials() {
     return (
       <section className="py-12 max-[720px]:py-10">
         <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
-          <div className="mb-11 text-center min-[961px]:mb-[18px]">
+          <div className="mb-11 text-center min-[961px]:mb-[18px] text-[#253970]">
             <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">Client stories</span>
             <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">Trusted by teams that store heavy</h2>
           </div>

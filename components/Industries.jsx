@@ -101,7 +101,7 @@ export default function Industries() {
         >
           <div className="relative mt-10 h-full w-full origin-center overflow-hidden will-change-transform" ref={media}>
             <video className="absolute inset-0 h-full w-full object-cover object-center" autoPlay muted loop playsInline preload="auto">
-              <source src="/bg44.mp4" type="video/mp4" />
+              <source src="/bg_main.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

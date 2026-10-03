@@ -65,7 +65,7 @@ function Statement({ text }) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 50%"] })
   const words = text.split(" ")
   return (
-    <p className="mt-4 font-display text-[length:clamp(1.9rem,3.6vw,3.2rem)] font-bold leading-[1.12]" ref={ref}>
+    <p className="mt-4 font-display text-[length:clamp(1.9rem,3.6vw,3.2rem)] font-bold leading-[1.12] text-[#253970]" ref={ref}>
       {words.map((w, i) => (
         <Word key={i} word={w} i={i} n={words.length} progress={scrollYProgress} />
       ))}
@@ -154,7 +154,7 @@ export default function AboutUsSection() {
         <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[720px]:grid-cols-[1fr] max-[960px]:grid-cols-[1fr_1fr]">
           {values.map((v, i) => (
             <Reveal key={v.no} i={i} className="flex">
-              <div className="flex-1 rounded-[22px] border-2 border-solid border-ink bg-cool bg-[radial-gradient(circle_at_16px_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_16px_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px)] px-[30px] pb-[34px] pt-11 transition-[transform,box-shadow,background-color] duration-[180ms] ease-out hover:-translate-y-2 hover:-rotate-1 hover:bg-white hover:shadow-lift-hover">
+              <div className="flex-1 rounded-[22px] border-2 border-solid border-ink bg-[cool] bg-[radial-gradient(circle_at_16px_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_16px_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px)] px-[30px] pb-[34px] pt-11 transition-[transform,box-shadow,background-color] duration-[180ms] ease-out hover:-translate-y-2 hover:-rotate-1 hover:bg-white hover:shadow-lift-hover">
                 <em className="block font-display text-[2.6rem] font-bold not-italic leading-none text-safety">{v.no}</em>
                 <h3 className="mt-2.5 font-body text-[1.1rem] font-bold leading-[1.3] tracking-normal">{v.title}</h3>
                 <p className="mt-2 text-[0.92rem] text-muted">{v.text}</p>

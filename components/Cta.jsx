@@ -18,7 +18,7 @@ export default function CTA() {
   return (
     <MotionConfig reducedMotion="user">
       <section className="relative isolate mt-[50px] flex min-h-[80svh] flex-col items-center justify-center overflow-hidden bg-[#1a1f24] text-center text-white">
-        <div className="absolute inset-0 -z-[2] scale-[1.04] bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oPYm50EoWj4Ylb5T5IWTyCQd0pc-XQGN706Dp_YUxgjaOehFj1QJE4uB&s=10')] bg-cover bg-center bg-no-repeat" aria-hidden="true" />
+        <div className="absolute inset-0 -z-[2] scale-[1.04] bg-[url('/about_bg.png')] bg-cover bg-center bg-no-repeat" aria-hidden="true" />
         <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(18,22,28,0.55)_0%,rgb(68_83_102/72%)_45%,rgb(68_89_123/88%)_100%_100%)]" aria-hidden="true" />
 
         <div className="relative z-[1] max-w-[920px] px-6 max-[720px]:px-[18px] max-[720px]:pb-[90px] max-[720px]:pt-[100px]">
@@ -70,7 +70,7 @@ export default function CTA() {
         </div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 border-t border-solid border-white/[0.18] bg-[rgba(12,15,20,0.55)] px-5 py-[18px] text-[0.9rem] font-medium text-white/[0.78] backdrop-blur-[8px] max-[720px]:gap-x-3 max-[720px]:gap-y-1.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[0.82rem]"
+          className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 border-t border-solid border-white/[0.18] bg-[#253970] px-5 py-[18px] text-[0.9rem] font-medium text-white/[0.78] backdrop-blur-[8px] max-[720px]:gap-x-3 max-[720px]:gap-y-1.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[0.82rem]"
           variants={rise}
           initial="hidden"
           animate="show"

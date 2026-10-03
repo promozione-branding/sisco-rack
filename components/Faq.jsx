@@ -11,7 +11,7 @@ export default function Faq() {
     <section className="py-12 max-[720px]:py-10">
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5 grid grid-cols-[0.8fr_1.2fr] gap-10">
         <div>
-          <h2>Questions before you order</h2>
+          <h2 className="text-[#253970]">Questions before you order</h2>
           <p className="mt-5 max-w-[46ch] text-[1.15rem] text-muted">Cannot find your answer? Our team replies within one working day.</p>
         </div>
         <div>

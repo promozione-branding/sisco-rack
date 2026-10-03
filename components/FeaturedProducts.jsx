@@ -117,7 +117,7 @@ export default function FeaturedProducts() {
                       if (i === last && def === "show") setSettled(true)
                     }}
                   >
-                    <div className={`h-[360px] rounded-[20px] border border-solid px-2 pb-3.5 pt-2 shadow-lift transition-[transform,box-shadow,background,color,border-color] duration-[180ms] ease-out group-hover/card:-translate-y-1.5 group-hover/card:shadow-lift-hover ${active === p.id ? "border-navy bg-navy text-white" : "border-line bg-[linear-gradient(to_bottom,#e3e8ec_0,#e3e8ec_258px,#e3e8ec_258px,#e3e8ec_100%)]"}`}>
+                    <div className={`h-[360px] rounded-[20px] border border-solid px-2 pb-3.5 pt-2 shadow-lift transition-[transform,box-shadow,background,color,border-color] duration-[180ms] ease-out group-hover/card:-translate-y-1.5 group-hover/card:shadow-lift-hover ${active === p.id ? "border-[navy] bg-[#253970] text-white" : "border-line bg-[linear-gradient(to_bottom,#e3e8ec_0,#e3e8ec_258px,#e3e8ec_258px,#e3e8ec_100%)]"}`}>
                       <Link href={`/products/${p.slug || p.id}`} className="block" tabIndex={settled ? 0 : -1}>
                         <div className="h-[250px] overflow-hidden rounded-[14px] border-b-[3px] border-solid border-safety bg-bg">
                           <img className="block h-full w-full object-fill transition-transform duration-[250ms] ease-out group-hover/card:scale-[1.07]" src={p.image} alt={p.name} loading="lazy" />

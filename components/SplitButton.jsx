@@ -12,7 +12,7 @@ export default function SplitButton({
   className = "",
   ...props
 }) {
-  const classes = `group/split inline-flex items-stretch overflow-hidden rounded-[14px] font-semibold ${dark ? "bg-ink text-white" : "bg-white text-ink"} ${className}`
+  const classes = `group/split inline-flex items-stretch overflow-hidden rounded-[14px] font-semibold ${dark ? "bg-[#253970] text-white" : "bg-white text-ink"} ${className}`
 
   const content = (
     <>
