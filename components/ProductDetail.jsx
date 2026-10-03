@@ -73,21 +73,8 @@ function Gallery({ images, name }) {
   const go = (n) => setI((n + images.length) % images.length)
 
   return (
-    <div className="sticky top-[110px] flex max-[960px]:static">
-              <div className="relative flex flex-col items-center gap-3.5 py-[18px] pl-[18px] pr-6">
-        {images.map((src, k) => (
-          <motion.div
-            key={src}
-            initial={{ y: -150, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 120, damping: 13, delay: 0.5 + k * 0.13 }}
-          >
-            <button className={`${THUMB} ${k === i ? "border-safety shadow-[0_0_0_3px_var(--safety)]" : "border-ink"}`} onClick={() => go(k)} aria-label={`Show image ${k + 1}`}>
-              <img className="block h-full w-full object-contain" src={src} alt="" />
-            </button>
-          </motion.div>
-        ))}
-      </div>
+    <div className="sticky top-[110px] flex min-w-0 flex-col gap-4 max-[960px]:static">
+      {/* Main image */}
       <div className="relative grid place-items-center overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-white">
         <span className={`${UP} left-3.5`} />
         <span className={`${UP} right-3.5`} />
@@ -96,7 +83,7 @@ function Gallery({ images, name }) {
             key={i}
             src={images[i]}
             alt={name}
-            className="relative z-[1] h-[420px] w-[400px] object-cover"
+            className="relative z-[1] h-[620px] w-full object-cover max-[720px]:h-[320px]"
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -40, scale: 0.96 }}
@@ -106,10 +93,27 @@ function Gallery({ images, name }) {
         <span className="absolute bottom-3 left-1/2 z-[2] -translate-x-1/2 rounded-pill bg-ink px-3.5 py-1 text-[0.75rem] font-semibold text-white">{i + 1} / {images.length}</span>
         {images.length > 1 && (
           <>
-            <button className={`${ARROW} left-2 max-[720px]:left-[34px]`} onClick={() => go(i - 1)} aria-label="Previous image"><Arrow flip /></button>
-            <button className={`${ARROW} right-2 max-[720px]:right-[34px]`} onClick={() => go(i + 1)} aria-label="Next image"><Arrow /></button>
+            <button className={`${ARROW} left-3`} onClick={() => go(i - 1)} aria-label="Previous image"><Arrow flip /></button>
+            <button className={`${ARROW} right-3`} onClick={() => go(i + 1)} aria-label="Next image"><Arrow /></button>
           </>
         )}
+      </div>
+
+      {/* Thumbnails below */}
+      <div className="flex gap-3 overflow-x-auto px-1 pb-2 pt-3">
+        {images.map((src, k) => (
+          <motion.div
+            key={src}
+            className="shrink-0"
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 120, damping: 13, delay: 0.5 + k * 0.13 }}
+          >
+            <button className={`${THUMB} ${k === i ? "border-safety shadow-[0_0_0_3px_var(--safety)]" : "border-ink"}`} onClick={() => go(k)} aria-label={`Show image ${k + 1}`}>
+              <img className="block h-full w-full object-contain" src={src} alt="" />
+            </button>
+          </motion.div>
+        ))}
       </div>
     </div>
   )
@@ -144,7 +148,7 @@ export default function ProductDetail({ product: p, related }) {
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-full grid-cols-[0.05fr_1fr] items-start gap-12 px-14 pt-11 max-[960px]:grid-cols-[1fr] max-[960px]:gap-7 max-[960px]:px-10 max-[720px]:px-5">
+<div className="mx-auto grid max-w-full grid-cols-[minmax(0,0.8fr)_minmax(0,0.85fr)] items-start gap-12 px-14 pt-11 max-[960px]:grid-cols-[1fr] max-[960px]:gap-7 max-[960px]:px-10 max-[720px]:px-5">
         <Gallery images={images} name={p.name} />
         <div>
           <motion.div className="grid grid-cols-[repeat(3,1fr)] gap-3 max-[720px]:grid-cols-[1fr_1fr]" variants={rise} custom={1} initial="hidden" animate="show">
