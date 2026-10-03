@@ -12,7 +12,7 @@ const rise = {
   }),
 }
 
-export default function RackHero() {
+export default function CTA() {
   return (
     <MotionConfig reducedMotion="user">
       <section className="rack-hero">
