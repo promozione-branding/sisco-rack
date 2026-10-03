@@ -56,6 +56,8 @@ const Arrow = ({ flip }) => (
   </svg>
 )
 
+const NAV_BTN = "grid h-[46px] w-[46px] cursor-pointer place-items-center rounded-circle border-2 border-solid border-ink bg-transparent text-ink transition-[background,color,opacity] duration-[180ms] ease-out hover:enabled:bg-ink hover:enabled:text-white disabled:cursor-default disabled:opacity-30"
+
 const item = {
   hidden: { opacity: 0, y: 44, scale: 0.96 },
   show: (i) => ({
@@ -123,7 +125,7 @@ useEffect(() => {
     if (e.pointerType !== "mouse") return
     const el = track.current
     drag.current = { down: true, x: e.clientX, left: el.scrollLeft, moved: false }
-    el.classList.add("dragging")
+    el.dataset.dragging = "true"
   }
 
   const onMove = (e) => {
@@ -137,7 +139,7 @@ useEffect(() => {
   const end = () => {
     if (!drag.current.down) return
     drag.current.down = false
-    track.current.classList.remove("dragging")
+    delete track.current.dataset.dragging
   }
 
   const onClickCapture = (e) => {
@@ -149,10 +151,10 @@ useEffect(() => {
   }
 
   return (
-    <section className="section">
-      <div className="cat-head">
+    <section className="py-12 max-[720px]:py-10">
+      <div className="mb-11 text-center min-[961px]:mb-[18px]">
         <motion.span
-          className="cat-eyebrow"
+          className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']"
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -160,21 +162,21 @@ useEffect(() => {
         >
           Our Categories
         </motion.span>
-        <h2>
-            Explore our <span> Categories</span>
+        <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
+            Explore our <span className="text-blue"> Categories</span>
           </h2>
-       <p className="lead">
+       <p className="mx-auto mt-[18px] max-w-[60ch] text-[1rem] text-muted min-[961px]:mt-2 min-[961px]:text-[0.92rem]">
             Our wide range of categories built on trust and premium quality.
           </p>
       </div>
 
-      <div className="svc">
-        <div className="svc-bg" aria-hidden="true">
+      <div className="relative isolate mx-11 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-[linear-gradient(90deg,#434c54_10%,#e2e2e2_30%)] max-[960px]:mx-3 max-[960px]:rounded-[28px] max-[960px]:bg-none max-[960px]:bg-panel">
+        <div className="absolute bottom-0 left-0 top-0 -z-[1] flex w-[33%] items-center justify-center bg-[linear-gradient(90deg,#ca8a04_0%,#374151_100%)] [mask-image:linear-gradient(90deg,#000_55%,transparent_100%)] max-[960px]:h-[300px]" aria-hidden="true">
           <img src="/leftslide2.jpg" alt="" />
         </div>
-        <div className="svc-body">
+        <div className="min-w-0 pb-[30px] pl-[32%] pr-10 pt-9 max-[960px]:px-5 max-[960px]:pb-9 max-[960px]:pt-[190px]">
           <div
-  className="svc-panel"
+  className="mt-9 overflow-hidden rounded-[28px] border border-solid border-line bg-white/60 backdrop-blur-[10px] min-[961px]:mt-[18px]"
   ref={panel}
   onMouseEnter={() => { paused.current = true }}
   onMouseLeave={() => { paused.current = false }}
@@ -184,7 +186,7 @@ useEffect(() => {
   onTouchEnd={() => { setTimeout(() => { paused.current = false }, 2500) }}
 >
             <div
-              className="svc-track"
+              className="flex cursor-grab snap-x snap-mandatory gap-[18px] overflow-x-auto scroll-p-[22px] p-[22px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden data-[dragging]:cursor-grabbing data-[dragging]:snap-none"
               ref={track}
               onScroll={measure}
               onPointerDown={onDown}
@@ -196,22 +198,22 @@ useEffect(() => {
               {industries.map((s, i) => (
                 <motion.div
                   key={s.id}
-                  className="svc-item"
+                  className="flex-[0_0_min(290px,78%)] snap-start"
                   variants={reduce ? still : item}
                   custom={i}
                   initial="hidden"
                   animate={state}
                 >
-                  <Link href="/products" className="svc-card" draggable={false}>
-                    <div className="svc-img">
-                      <img src={s.image} alt={s.title} draggable={false} loading="lazy" />
+                  <Link href="/products" className="group/card block h-full select-none rounded-[20px] border border-solid border-line bg-[linear-gradient(to_bottom,#e3e8ec_0,#e3e8ec_178px,#e3e8ec_178px,#e3e8ec_100%)] px-2 pb-[18px] pt-2 text-center shadow-lift transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-1.5 hover:border-safety hover:shadow-lift-hover" draggable={false}>
+                    <div className="h-[170px] overflow-hidden rounded-[14px] border-b-[3px] border-solid border-safety bg-[linear-gradient(135deg,#c5ced5,#e9edf0)]">
+                      <img className="pointer-events-none block h-full w-full object-fill transition-transform duration-[250ms] ease-out group-hover/card:scale-[1.06]" src={s.image} alt={s.title} draggable={false} loading="lazy" />
                     </div>
-                    <span className="svc-icon">
+                    <span className="relative z-[2] mx-auto mb-3 -mt-[27px] grid h-[54px] w-[54px] place-items-center rounded-circle border-4 border-solid border-white bg-safety text-ink">
                       <Icon name={s.icon} />
                     </span>
-                    <h3>{s.title}</h3>
-                    <p>{s.text}</p>
-                    <span className="svc-go" aria-hidden="true">
+                    <h3 className="px-2.5 font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{s.title}</h3>
+                    <p className="mt-1.5 line-clamp-2 px-3 text-[0.84rem] leading-[1.5] text-muted-2">{s.text}</p>
+                    <span className="mx-auto mt-3.5 grid h-8 w-8 place-items-center rounded-circle border border-solid border-line bg-white text-ink transition-[background] duration-[180ms] ease-out group-hover/card:border-safety group-hover/card:bg-safety" aria-hidden="true">
                       <Arrow />
                     </span>
                   </Link>
@@ -220,16 +222,16 @@ useEffect(() => {
             </div>
           </div>
 
-          <div className="svc-foot">
-            <p>From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
-            <div className="svc-ctrl">
-            <button className="svc-nav" onClick={() => { lastManual.current = Date.now(); step(-1) }} disabled={!can.prev} aria-label="Previous category">
+          <div className="mt-[30px] flex flex-wrap items-center justify-between gap-6 min-[961px]:mt-4">
+            <p className="max-w-[44ch] text-[0.92rem] text-muted">From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
+            <div className="flex items-center gap-2.5">
+            <button className={NAV_BTN} onClick={() => { lastManual.current = Date.now(); step(-1) }} disabled={!can.prev} aria-label="Previous category">
   <Arrow flip />
 </button>
-<button className="svc-nav" onClick={() => { lastManual.current = Date.now(); step(1) }} disabled={!can.next} aria-label="Next category">
+<button className={NAV_BTN} onClick={() => { lastManual.current = Date.now(); step(1) }} disabled={!can.next} aria-label="Next category">
   <Arrow />
 </button>
-              <SplitButton href="/products" dark>View all Categories</SplitButton>
+              <SplitButton href="/products" dark className="ml-1.5">View all Categories</SplitButton>
             </div>
           </div>
         </div>

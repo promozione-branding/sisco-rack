@@ -25,7 +25,6 @@ const TAPE = "#A5773F"
 
 const H = 190
 
-/* ---------- timeline helpers ---------- */
 
 const f = (n) => Number(n.toFixed(4))
 
@@ -119,7 +118,6 @@ function plan(W) {
   }
 }
 
-/* ---------- boxes ---------- */
 
 const Box = () => (
   <g>
@@ -132,7 +130,6 @@ const Box = () => (
   </g>
 )
 
-/* ---------- the worker ---------- */
 
 const SPLINE = { calcMode: "spline", keySplines: ".45 0 .55 1;.45 0 .55 1", keyTimes: "0;.5;1" }
 
@@ -286,7 +283,6 @@ function Worker({ p }) {
       <Move pts={p.workerPts} />
       <ellipse cx="4" cy="0.5" rx="26" ry="3" fill={NAVY} opacity=".2" />
 
-      {/* facing right: pushes, carries, places */}
       <Gate ints={p.R_VIS}>
         <Gate ints={p.WALK}><Legs walking /></Gate>
         <Gate ints={p.STAND}><Legs /></Gate>
@@ -301,7 +297,6 @@ function Worker({ p }) {
         </Gate>
       </Gate>
 
-      {/* facing left: walking back to the stack */}
       <Gate ints={p.L_VIS}>
         <g transform="scale(-1 1)">
           <Legs walking />
@@ -312,7 +307,6 @@ function Worker({ p }) {
   )
 }
 
-/* ---------- the rack ---------- */
 
 const BEAMS = [-30, -63, -96, -129]
 
@@ -339,17 +333,14 @@ function Rack({ p }) {
       <Move pts={p.rackPts} />
       <ellipse cx="60" cy="0.5" rx="76" ry="3.4" fill={NAVY} opacity=".2" />
 
-      {/* back frame and cross bracing */}
       <rect x="7" y="-141" width="6" height="124" fill="#7C97AE" />
       <rect x="119" y="-141" width="6" height="124" fill="#7C97AE" />
       <path d="M10 -40L122 -73L10 -106L122 -139" stroke="#8CA0B0" strokeWidth="1.8" fill="none" />
 
-      {/* shelf decks in perspective */}
       {BEAMS.map((y) => (
         <polygon key={y} points={`0,${y - 3} 112,${y - 3} 122,${y - 10} 10,${y - 10}`} fill="#D5DDE3" stroke="#7A8B99" strokeWidth=".8" />
       ))}
 
-      {/* front uprights, slotted */}
       {[0, 112].map((x) => (
         <g key={x}>
           <rect x={x - 3.5} y="-134" width="7" height="121" fill={BLUE} stroke={NAVY} strokeWidth="1" />
@@ -358,7 +349,6 @@ function Rack({ p }) {
         </g>
       ))}
 
-      {/* front beams */}
       {BEAMS.map((y) => (
         <g key={y}>
           <rect x="-3.5" y={y - 3} width="119" height="6" fill={AMBER} stroke={NAVY} strokeWidth="1" />
@@ -367,15 +357,12 @@ function Rack({ p }) {
         </g>
       ))}
 
-      {/* casters */}
       <Wheel x={0} p={p} />
       <Wheel x={112} p={p} />
 
-      {/* push handle */}
       <path d="M-3.5 -88H-13V-58H-3.5" stroke={NAVY} strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
       <path d="M-13 -80V-64" stroke="#14181C" strokeWidth="5.4" strokeLinecap="round" />
 
-      {/* boxes the worker loads */}
       {p.cyc.map((c, k) => {
         const top = BEAMS[k] - 29
         const fromY = -84 - top
@@ -412,7 +399,6 @@ function Stack({ p }) {
   )
 }
 
-/* ---------- scene ---------- */
 
 export default function ShelfCrew() {
   const ref = useRef(null)
@@ -431,7 +417,7 @@ export default function ShelfCrew() {
   const p = plan(w)
 
   return (
-    <svg ref={ref} className="pd-crew" width={w} height={H} viewBox={`0 0 ${w} ${H}`} aria-hidden="true" focusable="false">
+    <svg ref={ref} className="pointer-events-none absolute bottom-0 right-[3vw] z-0 h-auto w-[min(2376px,100vw)] [mask-image:linear-gradient(90deg,transparent_0,#000_16%)] max-[900px]:hidden" width={w} height={H} viewBox={`0 0 ${w} ${H}`} aria-hidden="true" focusable="false">
       <g transform={`translate(0 ${H - 8})`}>
         <g opacity="0">
           <Fade pts={[[0, 0], [0.5, 1], [T - 1.7, 1], [T - 0.9, 0]]} />

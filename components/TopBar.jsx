@@ -13,21 +13,24 @@ const Mail = () => (
   </svg>
 )
 
+const linkCls = "inline-flex min-w-0 items-center gap-2 transition-opacity duration-[180ms] ease-out hover:opacity-70"
+const textCls = "overflow-hidden text-ellipsis whitespace-nowrap"
+
 export default function TopBar() {
   return (
-    <div className="topbar">
-      <div className="topbar-in">
-        <div className="topbar-links">
-          <a href={`tel:${contact.phoneHref}`}>
+    <div className="relative z-[31] bg-[#cdcdcd] text-[0.82rem] font-semibold text-ink max-[720px]:rounded-b-[14px] max-[720px]:text-[0.74rem]">
+      <div className="flex min-h-9 items-center justify-between gap-4 px-11 py-1.5 max-[720px]:px-3">
+        <div className="flex min-w-0 items-center gap-[26px] max-[720px]:w-full max-[720px]:justify-between max-[720px]:gap-2.5">
+          <a href={`tel:${contact.phoneHref}`} className={linkCls}>
             <Phone />
-            <span>{contact.phone}</span>
+            <span className={textCls}>{contact.phone}</span>
           </a>
-          <a href={`mailto:${contact.email}`}>
+          <a href={`mailto:${contact.email}`} className={linkCls}>
             <Mail />
-            <span>{contact.email}</span>
+            <span className={textCls}>{contact.email}</span>
           </a>
         </div>
-        <span className="topbar-hours">{contact.hours}</span>
+        <span className="whitespace-nowrap max-[720px]:hidden">{contact.hours}</span>
       </div>
     </div>
   )

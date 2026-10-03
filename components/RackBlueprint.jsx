@@ -33,7 +33,7 @@ export default function RackBlueprint({ height, layers, load }) {
   const levels = Array.from({ length: count }, (_, k) => k)
 
   return (
-    <svg ref={ref} viewBox="0 0 340 390" role="img" aria-label={`Rack drawing, ${height || "standard"} height, ${count} layers`}>
+    <svg ref={ref} className="h-auto max-h-[62svh] w-full max-w-[340px]" viewBox="0 0 340 390" role="img" aria-label={`Rack drawing, ${height || "standard"} height, ${count} layers`}>
       <rect x="34" y={floor} width="276" height="10" rx="5" fill="#c5ced5" />
 
       <motion.rect x="78" y={top} width="14" height={h} rx="3" fill="#3e5c76" stroke="#1f2a33" strokeWidth="2" style={{ originY: 1 }} variants={grow} custom={0} initial="hidden" animate={state} />

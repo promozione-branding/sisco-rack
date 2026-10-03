@@ -28,15 +28,15 @@ function Milestone({ m, side }) {
   const nodeScale = useTransform(p, [0.1, 0.32, 0.68, 0.92], [0, 1, 1, 0])
 
   return (
-    <div className={`ab-ms ${side}`} ref={row}>
-      <motion.span className="ab-year" style={reduce ? undefined : { x: yearX, opacity: yearOpacity }}>
+    <div className="relative mb-[30px] grid grid-cols-[1fr_64px_1fr] items-center max-[720px]:mb-6 max-[720px]:grid-cols-[44px_1fr] max-[720px]:grid-rows-[auto_auto]" ref={row}>
+      <motion.span className={`font-display text-[length:clamp(2.8rem,6vw,5rem)] font-bold leading-none text-steel-deep max-[720px]:col-start-2 max-[720px]:row-start-1 max-[720px]:p-0 max-[720px]:text-left max-[720px]:text-[2.4rem] ${side === "l" ? "col-start-3 row-start-1 pl-7 text-left" : "col-start-1 row-start-1 pr-7 text-right"}`} style={reduce ? undefined : { x: yearX, opacity: yearOpacity }}>
         {m.year}
       </motion.span>
-      <motion.span className="ab-node" style={reduce ? undefined : { scale: nodeScale }} />
-      <motion.div className="ab-ms-wrap" style={reduce ? undefined : { x, y, rotate, scale, opacity }}>
-        <div className="ab-ms-card">
-          <h3>{m.title}</h3>
-          <p>{m.text}</p>
+      <motion.span className="z-[2] col-start-2 row-start-1 h-[26px] w-[26px] justify-self-center rounded-circle border-[3px] border-solid border-ink bg-safety max-[720px]:col-start-1 max-[720px]:row-[1/span_2] max-[720px]:ml-px max-[720px]:justify-self-start" style={reduce ? undefined : { scale: nodeScale }} />
+      <motion.div className={`will-change-[transform,opacity] max-[720px]:col-start-2 max-[720px]:row-start-2 ${side === "l" ? "col-start-1 row-start-1" : "col-start-3 row-start-1"}`} style={reduce ? undefined : { x, y, rotate, scale, opacity }}>
+        <div className="rounded-[24px] border-2 border-solid border-ink bg-white px-[26px] py-[22px] transition-[transform,box-shadow,background] duration-[180ms] ease-out hover:-translate-y-[5px] hover:bg-panel hover:shadow-soft">
+          <h3 className="font-body text-[1.1rem] font-bold leading-[1.3] tracking-normal">{m.title}</h3>
+          <p className="mt-1.5 text-[0.95rem] text-muted">{m.text}</p>
         </div>
       </motion.div>
     </div>
@@ -65,7 +65,7 @@ function Statement({ text }) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 50%"] })
   const words = text.split(" ")
   return (
-    <p className="ab-statement" ref={ref}>
+    <p className="mt-4 font-display text-[length:clamp(1.9rem,3.6vw,3.2rem)] font-bold leading-[1.12]" ref={ref}>
       {words.map((w, i) => (
         <Word key={i} word={w} i={i} n={words.length} progress={scrollYProgress} />
       ))}
@@ -109,57 +109,37 @@ export default function AboutUsSection() {
     <MotionConfig reducedMotion="user">
      
 
-      <div className="wrap ab-intro">
+      <div className="mx-auto grid max-w-full grid-cols-[1.1fr_0.9fr] items-center gap-14 px-14 pt-14 max-[960px]:grid-cols-[1fr] max-[960px]:gap-9 max-[960px]:px-10 max-[720px]:px-5">
         <div>
-          <span className="cat-eyebrow">Our story</span>
+          <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">Our story</span>
           <Statement text={story} />
           <Reveal i={1}>
-            <div className="ab-sub-row">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <SplitButton href="/contact" dark>Talk to our team</SplitButton>
-              <Link href="/products" className="btn ghost">See our racks</Link>
+              <Link href="/products" className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg">See our racks</Link>
             </div>
           </Reveal>
         </div>
 
-        <div className="ab-collage" ref={collage}>
-          <motion.div className="ab-photo ab-p1" style={{ y: driftA }} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <img src="/slotted.jpeg" alt="Our plant floor" loading="lazy" />
+        <div className="relative h-[clamp(380px,60svh,560px)]" ref={collage}>
+          <motion.div className="absolute left-0 top-0 h-[78%] w-[72%] overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-[linear-gradient(135deg,#c5ced5,#e9edf0)]" style={{ y: driftA }} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+            <img className="block h-full w-full object-fill" src="/slotted.jpeg" alt="Our plant floor" loading="lazy" />
           </motion.div>
-          <motion.div className="ab-photo ab-p2" style={{ y: driftB }} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}>
-            <img src="/mezzanine.webp" alt="An installation crew at work" loading="lazy" />
+          <motion.div className="absolute bottom-0 right-0 h-1/2 w-[52%] overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-[linear-gradient(135deg,#c5ced5,#e9edf0)] shadow-[0_16px_32px_rgba(31,42,51,0.2)]" style={{ y: driftB }} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}>
+            <img className="block h-full w-full object-fill" src="/mezzanine.webp" alt="An installation crew at work" loading="lazy" />
           </motion.div>
-          {/* <motion.div className="ab-seal" animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-            <LottieIcon className="ab-seal-lottie" colors={["#1F2A33", "#FFFFFF"]} />
-          </motion.div> */}
+         
         </div>
       </div>
 
-      {/* <div className="wrap pd-sec">
-        <div className="ab-stats" ref={stats}>
-          {aboutStats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              className={s.dark ? "ab-crate dark" : "ab-crate"}
-              style={{ minHeight: s.h }}
-              initial={{ y: -360, opacity: 0 }}
-              animate={statsIn ? { y: 0, opacity: 1 } : { y: -360, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 110, damping: 13, delay: 0.5 + i * 0.15 }}
-            >
-              <b><Count to={s.to} suffix={s.suffix} /></b>
-              <span>{s.label}</span>
-            </motion.div>
-          ))}
-          <motion.i className="ab-stats-beam" style={{ originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: statsIn ? 1 : 0 }} transition={{ duration: 0.7, delay: 0.2 }} />
-        </div>
-      </div> */}
 
-      <section className="wrap pd-sec">
-        <Reveal className="pd-title">
-          <h2>Built level by level</h2>
+      <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
+        <Reveal className="mb-[26px] flex items-end justify-between gap-6">
+          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">Built level by level</h2>
         </Reveal>
-        <div className="ab-tl" ref={line}>
-          <div className="ab-rail" aria-hidden="true">
-            <motion.i style={{ scaleY: fill }} />
+        <div className="relative py-2" ref={line}>
+          <div className="absolute bottom-0 left-1/2 top-0 w-[18px] -translate-x-1/2 overflow-hidden rounded-[9px] bg-blue bg-[radial-gradient(circle,var(--panel)_2.5px,transparent_3.5px)] bg-[length:18px_26px] bg-[position:center_6px] max-[720px]:left-3.5" aria-hidden="true">
+            <motion.i className="absolute bottom-0 left-1/2 top-0 -ml-[3px] w-1.5 origin-top bg-safety" style={{ scaleY: fill }} />
           </div>
         {milestones.map((m, i) => (
   <Milestone key={m.year} m={m} side={i % 2 ? "r" : "l"} />
@@ -167,17 +147,17 @@ export default function AboutUsSection() {
         </div>
       </section>
 
-      <section className="wrap pd-sec">
-        <Reveal className="pd-title">
-          <h2>What is stamped on every job</h2>
+      <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
+        <Reveal className="mb-[26px] flex items-end justify-between gap-6">
+          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">What is stamped on every job</h2>
         </Reveal>
-        <div className="ab-plates">
+        <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[720px]:grid-cols-[1fr] max-[960px]:grid-cols-[1fr_1fr]">
           {values.map((v, i) => (
-            <Reveal key={v.no} i={i}>
-              <div className="ab-plate">
-                <em>{v.no}</em>
-                <h3>{v.title}</h3>
-                <p>{v.text}</p>
+            <Reveal key={v.no} i={i} className="flex">
+              <div className="flex-1 rounded-[22px] border-2 border-solid border-ink bg-cool bg-[radial-gradient(circle_at_16px_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_16px_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px)] px-[30px] pb-[34px] pt-11 transition-[transform,box-shadow,background-color] duration-[180ms] ease-out hover:-translate-y-2 hover:-rotate-1 hover:bg-white hover:shadow-lift-hover">
+                <em className="block font-display text-[2.6rem] font-bold not-italic leading-none text-safety">{v.no}</em>
+                <h3 className="mt-2.5 font-body text-[1.1rem] font-bold leading-[1.3] tracking-normal">{v.title}</h3>
+                <p className="mt-2 text-[0.92rem] text-muted">{v.text}</p>
               </div>
             </Reveal>
           ))}

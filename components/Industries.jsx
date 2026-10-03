@@ -84,11 +84,11 @@ export default function Industries() {
   }, [])
 
   return (
-    <section className="ind" ref={container}>
-      <div className="ind-stick">
-        <p className="ind-eyebrow" ref={eyebrow}>Storage solutions</p>
+    <section className="relative h-[200vh] max-[720px]:h-[180vh]" ref={container}>
+      <div className="sticky top-0 h-[100svh] min-h-[600px] w-full overflow-hidden bg-white">
+        <p className="pointer-events-none absolute inset-x-0 top-[27%] z-20 px-5 text-center text-[1rem] font-extrabold uppercase tracking-[0.18em] text-muted-3 min-[641px]:top-[30%] min-[641px]:text-[0.875rem] min-[641px]:tracking-[0.3em]" ref={eyebrow}>Storage solutions</p>
         <div
-          className="ind-mask"
+          className="absolute inset-0 overflow-hidden pb-[60px] [mask-repeat:no-repeat]"
           ref={mask}
           style={{
             maskImage: SVG_MASK,
@@ -99,8 +99,8 @@ export default function Industries() {
             WebkitMaskPosition: "center"
           }}
         >
-          <div className="ind-media" ref={media}>
-            <video autoPlay muted loop playsInline preload="auto">
+          <div className="relative mt-10 h-full w-full origin-center overflow-hidden will-change-transform" ref={media}>
+            <video className="absolute inset-0 h-full w-full object-cover object-center" autoPlay muted loop playsInline preload="auto">
               <source src="/bg44.mp4" type="video/mp4" />
             </video>
           </div>

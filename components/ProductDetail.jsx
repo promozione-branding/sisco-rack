@@ -9,6 +9,15 @@ import RackBlueprint from "./RackBlueprint"
 import { ShieldCheck, Truck, Award } from "lucide-react"
 import ShelfCrew from "./ShelfCrew"
 
+const UP = "absolute bottom-0 top-0 w-4 bg-blue bg-[radial-gradient(circle,var(--panel)_2.5px,transparent_3.5px)] bg-[length:16px_24px] bg-[position:center_6px]"
+const THUMB = "relative h-[84px] w-[84px] cursor-pointer rounded-[14px] border-2 border-solid bg-white p-1 transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-[5px] max-[720px]:h-16 max-[720px]:w-16"
+const ARROW = "absolute top-1/2 z-[2] -mt-[21px] grid h-[42px] w-[42px] cursor-pointer place-items-center rounded-circle border-2 border-solid border-ink bg-white text-ink transition-[background,color] duration-[180ms] hover:bg-ink hover:text-white"
+const TILE = "relative rounded-[20px] border-2 border-solid px-[18px] py-4 max-[720px]:first:col-[span_2]"
+const TSMALL = "block text-[0.7rem] font-semibold uppercase tracking-[0.12em]"
+const TB = "mt-1 block font-display text-[1.7rem] leading-[1.1]"
+const CHIP = "rounded-pill border-[1.5px] border-solid bg-white/[0.85] px-4 py-[7px] text-[0.82rem] font-semibold"
+const ICON = "mt-0.5 block h-9 w-9 shrink-0 place-items-center rounded-circle bg-safety pl-1 pt-[3px] text-[0.8rem] leading-[1.35] text-muted-2"
+
 const WHITE = ["#FFFFFF", "#E8A317"]
 
 const labels = {
@@ -64,8 +73,8 @@ function Gallery({ images, name }) {
   const go = (n) => setI((n + images.length) % images.length)
 
   return (
-    <div className="pd-gallery">
-              <div className="pd-shelf">
+    <div className="sticky top-[110px] flex max-[960px]:static">
+              <div className="relative flex flex-col items-center gap-3.5 py-[18px] pl-[18px] pr-6">
         {images.map((src, k) => (
           <motion.div
             key={src}
@@ -73,32 +82,32 @@ function Gallery({ images, name }) {
             animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 120, damping: 13, delay: 0.5 + k * 0.13 }}
           >
-            <button className={k === i ? "pd-thumb on" : "pd-thumb"} onClick={() => go(k)} aria-label={`Show image ${k + 1}`}>
-              <img src={src} alt="" />
+            <button className={`${THUMB} ${k === i ? "border-safety shadow-[0_0_0_3px_var(--safety)]" : "border-ink"}`} onClick={() => go(k)} aria-label={`Show image ${k + 1}`}>
+              <img className="block h-full w-full object-contain" src={src} alt="" />
             </button>
           </motion.div>
         ))}
       </div>
-      <div className="pd-stage">
-        <span className="pd-up l" />
-        <span className="pd-up r" />
+      <div className="relative grid place-items-center overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-white">
+        <span className={`${UP} left-3.5`} />
+        <span className={`${UP} right-3.5`} />
         <AnimatePresence mode="wait" initial={false}>
           <motion.img
             key={i}
             src={images[i]}
             alt={name}
-            className="pd-img"
+            className="relative z-[1] h-[420px] w-[400px] object-cover"
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -40, scale: 0.96 }}
             transition={{ duration: 0.28 }}
           />
         </AnimatePresence>
-        <span className="pd-count">{i + 1} / {images.length}</span>
+        <span className="absolute bottom-3 left-1/2 z-[2] -translate-x-1/2 rounded-pill bg-ink px-3.5 py-1 text-[0.75rem] font-semibold text-white">{i + 1} / {images.length}</span>
         {images.length > 1 && (
           <>
-            <button className="pd-arrow l" onClick={() => go(i - 1)} aria-label="Previous image"><Arrow flip /></button>
-            <button className="pd-arrow r" onClick={() => go(i + 1)} aria-label="Next image"><Arrow /></button>
+            <button className={`${ARROW} left-2 max-[720px]:left-[34px]`} onClick={() => go(i - 1)} aria-label="Previous image"><Arrow flip /></button>
+            <button className={`${ARROW} right-2 max-[720px]:right-[34px]`} onClick={() => go(i + 1)} aria-label="Next image"><Arrow /></button>
           </>
         )}
       </div>
@@ -114,103 +123,103 @@ export default function ProductDetail({ product: p, related }) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section className="pd-head">
+      <section className="relative isolate overflow-hidden border-2 border-solid border-ink bg-[linear-gradient(165deg,#c9eaf2_0%,#dbe3fa_40%,#f6f8f9_100%)] pb-10 pt-[124px] before:absolute before:inset-0 before:-z-[1] before:content-[''] before:bg-[repeating-linear-gradient(0deg,rgba(62,92,118,0.14)_0_1px,transparent_1px_4px),repeating-linear-gradient(90deg,rgba(62,92,118,0.1)_0_1px,transparent_1px_7px)] before:[mask-image:linear-gradient(170deg,#000_0%,transparent_70%)] max-[960px]:mx-3 max-[960px]:mt-2.5 max-[960px]:rounded-[28px] max-[960px]:pb-8 max-[960px]:pt-[104px]">
   <ShelfCrew />
-  <div className="wrap">
-          <motion.nav className="pd-crumbs" aria-label="Breadcrumb" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <Link href="/">Home</Link>
+  <div className="relative z-[1] mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
+          <motion.nav className="flex flex-wrap gap-2 text-[0.85rem] font-semibold text-muted-3" aria-label="Breadcrumb" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+            <Link href="/" className="hover:text-blue">Home</Link>
             <span>/</span>
-            <Link href="/products">Products</Link>
+            <Link href="/products" className="hover:text-blue">Products</Link>
             <span>/</span>
             <span>{p.category}</span>
           </motion.nav>
-          <motion.h1 initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
+          <motion.h1 className="mt-3.5 max-w-[16ch] text-[length:clamp(2.6rem,6vw,5rem)]" initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
             {p.name}
           </motion.h1>
-          <motion.div className="pd-chips" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-            <span className="pd-chip hot">{p.category}</span>
-            <span className="pd-chip">{p.brand}</span>
-            {s.height && <span className="pd-chip">{s.height} tall</span>}
+          <motion.div className="mt-[18px] flex flex-wrap gap-2.5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+            <span className={`${CHIP} border-safety`}>{p.category}</span>
+            <span className={`${CHIP} border-line`}>{p.brand}</span>
+            {s.height && <span className={`${CHIP} border-line`}>{s.height} tall</span>}
           </motion.div>
         </div>
       </section>
 
-      <div className="wrap pd-main">
+      <div className="mx-auto grid max-w-full grid-cols-[0.05fr_1fr] items-start gap-12 px-14 pt-11 max-[960px]:grid-cols-[1fr] max-[960px]:gap-7 max-[960px]:px-10 max-[720px]:px-5">
         <Gallery images={images} name={p.name} />
-        <div className="pd-info">
-          <motion.div className="pd-tiles" variants={rise} custom={1} initial="hidden" animate="show">
-            <div className="pd-tile">
-              <small>Price</small>
-              <b>{p.price}</b>
+        <div>
+          <motion.div className="grid grid-cols-[repeat(3,1fr)] gap-3 max-[720px]:grid-cols-[1fr_1fr]" variants={rise} custom={1} initial="hidden" animate="show">
+            <div className={`${TILE} border-ink bg-white`}>
+              <small className={`${TSMALL} text-muted-2`}>Price</small>
+              <b className={TB}>{p.price}</b>
             </div>
-            <div className="pd-tile">
-              <small>Minimum order</small>
-              <b>{p.moq}</b>
+            <div className={`${TILE} border-ink bg-white`}>
+              <small className={`${TSMALL} text-muted-2`}>Minimum order</small>
+              <b className={TB}>{p.moq}</b>
             </div>
-            <div className="pd-tile dark">
-              <small>Load per layer</small>
-              <b><CountUp value={s.loadPerLayer} /></b>
-              <LottieIcon className="pd-tile-lottie" colors={WHITE} />
+            <div className={`${TILE} border-navy bg-navy text-white`}>
+              <small className={`${TSMALL} text-mist`}>Load per layer</small>
+              <b className={TB}><CountUp value={s.loadPerLayer} /></b>
+              <LottieIcon className="absolute right-2 top-2 h-[34px] w-[34px]" colors={WHITE} />
             </div>
           </motion.div>
-          <motion.p className="pd-desc" variants={rise} custom={2} initial="hidden" animate="show">
+          <motion.p className="mt-[22px] text-muted" variants={rise} custom={2} initial="hidden" animate="show">
             {p.description}
           </motion.p>
-              <motion.div className="pd-cta" variants={rise} custom={3} initial="hidden" animate="show">
+              <motion.div className="mt-6 flex flex-wrap items-center gap-3" variants={rise} custom={3} initial="hidden" animate="show">
             <SplitButton href="/contact" dark>Request a quote</SplitButton>
-            {c.whatsapp && <a className="btn ghost" href={c.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>}
-            {c.phone && <a className="btn ghost" href={`tel:${c.phone}`}>Call now</a>}
+            {c.whatsapp && <a className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-[14px]" href={c.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>}
+            {c.phone && <a className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-[14px]" href={`tel:${c.phone}`}>Call now</a>}
           </motion.div>
 
-          <motion.div className="pd-trust" variants={rise} custom={4} initial="hidden" animate="show">
-            <div className="pd-trust-item">
-              <span className="pd-trust-icon" aria-hidden="true">
+          <motion.div className="mt-7 grid grid-cols-[repeat(3,1fr)] gap-3 max-[720px]:mt-[22px] max-[720px]:grid-cols-[1fr] max-[720px]:gap-2.5" variants={rise} custom={4} initial="hidden" animate="show">
+            <div className="flex items-start gap-3 rounded-2xl border-2 border-solid border-ink bg-white px-4 py-3.5 max-[720px]:px-3.5 max-[720px]:py-3">
+              <span className={ICON} aria-hidden="true">
                 <ShieldCheck size={28} strokeWidth={2.5} />
               </span>
               <div>
-                <strong>Quality Assured</strong>
-                <span>Color-coated mild steel</span>
+                <strong className="block text-[0.95rem] font-bold leading-[1.25]">Quality Assured</strong>
+                <span className="mt-0.5 block pl-1 pt-[3px] text-[0.8rem] leading-[1.35] text-muted-2">Color-coated mild steel</span>
               </div>
             </div>
-            <div className="pd-trust-item">
-              <span className="pd-trust-icon" aria-hidden="true">
+            <div className="flex items-start gap-3 rounded-2xl border-2 border-solid border-ink bg-white px-4 py-3.5 max-[720px]:px-3.5 max-[720px]:py-3">
+              <span className={ICON} aria-hidden="true">
                 <Truck size={28} strokeWidth={2.5} />
               </span>
               <div>
-                <strong>Reliable Delivery</strong>
-                <span>Pan-India shipping</span>
+                <strong className="block text-[0.95rem] font-bold leading-[1.25]">Reliable Delivery</strong>
+                <span className="mt-0.5 block pl-1 pt-[3px] text-[0.8rem] leading-[1.35] text-muted-2">Pan-India shipping</span>
               </div>
             </div>
-            <div className="pd-trust-item">
-              <span className="pd-trust-icon" aria-hidden="true">
+            <div className="flex items-start gap-3 rounded-2xl border-2 border-solid border-ink bg-white px-4 py-3.5 max-[720px]:px-3.5 max-[720px]:py-3">
+              <span className={ICON} aria-hidden="true">
                 <Award size={28} strokeWidth={2.5} />
               </span>
               <div>
-                <strong>Trusted Maker</strong>
-                <span>Arya Industry standard</span>
+                <strong className="block text-[0.95rem] font-bold leading-[1.25]">Trusted Maker</strong>
+                <span className="mt-0.5 block pl-1 pt-[3px] text-[0.8rem] leading-[1.35] text-muted-2">Arya Industry standard</span>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
 
-      <section className="wrap pd-sec">
-        <Reveal className="pd-title">
-          <h2>Built to this spec</h2>
+      <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
+        <Reveal className="mb-[26px] flex items-end justify-between gap-6">
+          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">Built to this spec</h2>
         </Reveal>
-        <div className="pd-spec">
-          <Reveal>
-            <figure className="pd-blue">
+        <div className="grid grid-cols-[0.9fr_1.1fr] items-stretch gap-6 max-[960px]:grid-cols-[1fr]">
+          <Reveal className="flex flex-col">
+            <figure className="grid h-full place-items-center gap-2.5 rounded-[32px] border-2 border-solid border-ink bg-white bg-[linear-gradient(rgba(122,139,153,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(122,139,153,0.16)_1px,transparent_1px)] bg-[length:24px_24px] p-6">
               <RackBlueprint height={s.height} layers={s.layersPerRack} load={s.loadPerLayer} />
-              <figcaption>{s.layersPerRack ? "Drawn from the listed height and layers." : "Layer count in the drawing is illustrative."}</figcaption>
+              <figcaption className="text-[0.78rem] font-semibold text-muted-2">{s.layersPerRack ? "Drawn from the listed height and layers." : "Layer count in the drawing is illustrative."}</figcaption>
             </figure>
           </Reveal>
-          <div className="pd-table">
+          <div className="flex flex-col overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-white">
             {specs.map(([k, v], idx) => (
               <Reveal key={k} i={idx * 0.6}>
-                <div className="pd-row">
-                  <span>{labels[k] || k}</span>
-                  <b>{v ?? "On request"}</b>
+                <div className={`flex justify-between gap-5 border-b border-solid border-line px-6 py-[18px] transition-[background] duration-[180ms] hover:bg-panel ${idx === specs.length - 1 ? "border-b-0" : ""}`}>
+                  <span className="font-semibold text-muted-2">{labels[k] || k}</span>
+                  <b className="text-right">{v ?? "On request"}</b>
                 </div>
               </Reveal>
             ))}
@@ -219,15 +228,15 @@ export default function ProductDetail({ product: p, related }) {
       </section>
 
       {p.keyFeatures?.length > 0 && (
-        <section className="wrap pd-sec">
-          <Reveal className="pd-title">
-            <h2>Key features</h2>
+        <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
+          <Reveal className="mb-[26px] flex items-end justify-between gap-6">
+            <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">Key features</h2>
           </Reveal>
-          <div className="pd-feats">
+          <div className="grid grid-cols-[repeat(2,1fr)] gap-[18px] max-[960px]:grid-cols-[1fr]">
             {p.keyFeatures.map((f, idx) => (
-              <Reveal key={f} className="pd-cell" i={(idx % 2) * 1.2}>
-                <div className="pd-feat">
-                  <em>{String(idx + 1).padStart(2, "0")}</em>
+              <Reveal key={f} className="flex" i={(idx % 2) * 1.2}>
+                <div className="relative flex-1 rounded-[24px] border-2 border-solid border-ink bg-white py-[26px] pl-[92px] pr-[26px] transition-[transform,box-shadow,background] duration-[180ms] ease-out hover:-translate-y-[5px] hover:bg-panel hover:shadow-soft max-[720px]:py-[22px] max-[720px]:pl-[76px] max-[720px]:pr-5">
+                  <em className="absolute left-6 top-5 font-display text-[2.6rem] font-bold not-italic leading-none text-safety max-[720px]:left-[18px] max-[720px]:text-[2.2rem]">{String(idx + 1).padStart(2, "0")}</em>
                   <p>{f}</p>
                 </div>
               </Reveal>
@@ -237,22 +246,23 @@ export default function ProductDetail({ product: p, related }) {
       )}
 
       {p.applications?.length > 0 && (
-        <section className="wrap pd-sec">
-          <div className="pd-apps">
+        <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
+          <div className="rounded-[32px] border-2 border-solid border-ink bg-[linear-gradient(155deg,#3e5c76_0%,#263a4b_100%)] p-10 text-white max-[960px]:px-[22px] max-[960px]:py-7">
             <Reveal>
-              <span className="cat-eyebrow">Applications</span>
-              <h2>Where it works</h2>
+              <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-mist after:h-px after:w-12 after:bg-steel-deep after:content-['']">Applications</span>
+              <h2 className="mt-2.5 text-[length:clamp(1.9rem,3.6vw,3rem)] text-white">Where it works</h2>
             </Reveal>
-            <ul>
+            <ul className="mt-[26px] grid list-none grid-cols-[1fr_1fr] gap-x-6 gap-y-3 max-[960px]:grid-cols-[1fr]">
               {p.applications.map((a, idx) => (
                 <motion.li
                   key={a}
+                  className="flex items-start gap-3.5 rounded-2xl border border-solid border-white/[0.22] bg-white/[0.07] px-4 py-3.5 transition-[background] duration-[180ms] hover:bg-white/[0.14]"
                   initial={{ opacity: 0, x: -28 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.4 }}
                   transition={{ duration: 0.5, delay: (idx % 2) * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <i>✦</i>
+                  <i className="not-italic text-safety">✦</i>
                   <span>{a}</span>
                 </motion.li>
               ))}
@@ -262,22 +272,22 @@ export default function ProductDetail({ product: p, related }) {
       )}
 
       {related.length > 0 && (
-        <section className="wrap pd-sec">
-          <Reveal className="pd-title">
-            <h2>More like this</h2>
-            <Link href="/products" className="btn ghost">All products</Link>
+        <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
+          <Reveal className="mb-[26px] flex items-end justify-between gap-6">
+            <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">More like this</h2>
+            <Link href="/products" className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-pill">All products</Link>
           </Reveal>
-          <div className="pd-rel">
+          <div className="grid grid-cols-[repeat(3,1fr)] gap-5 max-[720px]:grid-cols-[1fr] max-[960px]:grid-cols-[1fr_1fr]">
             {related.map((r, idx) => (
               <Reveal key={r.id} i={idx}>
-                <Link href={`/products/${r.slug || r.id}`} className="pd-rcard">
-                  <div className="pd-rimg">
-                    <img src={r.image} alt={r.name} loading="lazy" />
+                <Link href={`/products/${r.slug || r.id}`} className="group/r block h-full overflow-hidden rounded-[24px] border-2 border-solid border-ink bg-white transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1.5 hover:shadow-lift-hover">
+                  <div className="grid h-[400px] place-items-center border-b-[3px] border-solid border-safety bg-white p-2">
+                    <img className="max-h-full max-w-full object-contain transition-transform duration-[250ms] ease-out group-hover/r:scale-[1.06]" src={r.image} alt={r.name} loading="lazy" />
                   </div>
-                  <div className="pd-rbody">
-                    <h3>{r.name}</h3>
-                    <p>{r.specs?.height} · {r.specs?.loadPerLayer} per layer</p>
-                    <span className="pd-rgo" aria-hidden="true"><Arrow /></span>
+                  <div className="relative bg-cool pb-5 pl-5 pr-16 pt-4">
+                    <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{r.name}</h3>
+                    <p className="mt-1 text-[0.84rem] text-muted-2">{r.specs?.height} · {r.specs?.loadPerLayer} per layer</p>
+                    <span className="absolute bottom-[18px] right-[18px] grid h-[34px] w-[34px] place-items-center rounded-circle border border-solid border-line bg-white transition-[background] duration-[180ms] group-hover/r:border-safety group-hover/r:bg-safety" aria-hidden="true"><Arrow /></span>
                   </div>
                 </Link>
               </Reveal>
@@ -287,18 +297,18 @@ export default function ProductDetail({ product: p, related }) {
       )}
 
       <Reveal>
-        <section className="pd-band">
-          <div className="pd-band-l">
-            <LottieIcon className="pd-band-lottie" colors={WHITE} />
+        <section className="mx-11 my-16 flex flex-wrap items-center justify-between gap-8 rounded-[36px] border-2 border-solid border-ink bg-ink px-12 py-11 text-white max-[960px]:mx-3 max-[960px]:my-12 max-[960px]:rounded-[28px] max-[960px]:px-6 max-[960px]:py-8">
+          <div className="flex w-[65%] items-center gap-[22px]">
+            <LottieIcon className="h-[84px] w-[84px] shrink-0" colors={WHITE} />
             <div>
-              <h2>Need the {p.name} in bulk?</h2>
-              <p>Minimum order is {p.moq}. Send us your quantity and site details and we will reply with a quote.</p>
+              <h2 className="max-w-[20ch] text-[length:clamp(1.7rem,3.2vw,2.7rem)] text-white">Need the {p.name} in bulk?</h2>
+              <p className="mt-2 max-w-[46ch] text-mist">Minimum order is {p.moq}. Send us your quantity and site details and we will reply with a quote.</p>
             </div>
           </div>
-          <div className="pd-band-r">
+          <div className="flex flex-col items-start gap-2.5">
             <SplitButton href="/contact">Get a quote</SplitButton>
-            {c.phone && <a className="pd-link" href={`tel:${c.phone}`}>{c.phone}</a>}
-            {c.email && <a className="pd-link" href={`mailto:${c.email}`}>{c.email}</a>}
+            {c.phone && <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`}>{c.phone}</a>}
+            {c.email && <a className="font-semibold text-white hover:text-safety" href={`mailto:${c.email}`}>{c.email}</a>}
           </div>
         </section>
       </Reveal>

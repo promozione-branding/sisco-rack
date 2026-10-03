@@ -40,11 +40,11 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${display.variable} ${body.variable} ${serif.variable}`}
     >
-      <body>
+      <body className="bg-bg font-body leading-[1.6] text-ink overflow-x-hidden">
         <SmoothScroll>
   <TopBar/>
   <Navbar />
-  <main>{children}</main>
+  <main className="relative z-[1]">{children}</main>
   <Footer />
   <FloatingContact />
 </SmoothScroll>

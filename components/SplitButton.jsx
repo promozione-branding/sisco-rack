@@ -12,12 +12,12 @@ export default function SplitButton({
   className = "",
   ...props
 }) {
-  const classes = `split ${dark ? "dark" : ""} ${className}`
+  const classes = `group/split inline-flex items-stretch overflow-hidden rounded-[14px] font-semibold ${dark ? "bg-ink text-white" : "bg-white text-ink"} ${className}`
 
   const content = (
     <>
-      <span className="split-label">{children}</span>
-      <span className="split-arrow" aria-hidden="true">
+      <span className="px-6 py-3.5">{children}</span>
+      <span className="grid w-[54px] place-items-center bg-safety text-ink transition-[width] duration-[250ms] group-hover/split:w-[68px]" aria-hidden="true">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path
             d="M4 4l8 8M12 5v7H5"
