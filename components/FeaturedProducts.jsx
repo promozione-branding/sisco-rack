@@ -3,9 +3,12 @@
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
+import { Ruler, Layers, Weight, ArrowRight } from "lucide-react"
 import { products } from "@/lib/products"
 
-const WORD_LIMIT = 10
+const WORD_LIMIT = 12
+const NAVY = "#0b2a5b"
+const AMBER = "#f5a623"
 
 function truncateWords(text = "", limit = WORD_LIMIT) {
   const words = text.trim().split(/\s+/).filter(Boolean)
@@ -16,6 +19,15 @@ function truncateWords(text = "", limit = WORD_LIMIT) {
     short: words.slice(0, limit).join(" ") + "…",
     needsMore: true,
   }
+}
+
+function getSpecs(p) {
+  const s = p.specs || {}
+  return [
+    { icon: Ruler, value: s.height, label: "Height" },
+    { icon: Layers, value: s.layersPerRack, label: "Layers" },
+    { icon: Weight, value: s.capacity ?? s.load ?? s.loadCapacity, label: "Capacity" },
+  ].filter((x) => x.value !== undefined && x.value !== null && x.value !== "")
 }
 
 const UP = "absolute bottom-0 top-0 w-5 origin-bottom bg-blue bg-[radial-gradient(circle,var(--panel)_3px,transparent_4px)] bg-[length:20px_28px] bg-[position:center_8px] max-[540px]:w-3.5 max-[540px]:bg-[length:14px_24px]"
@@ -102,6 +114,9 @@ export default function FeaturedProducts() {
                 const i = r * 4 + k
                 const fullText = p.text || p.description || ""
                 const { short, needsMore } = truncateWords(fullText)
+                const specs = getSpecs(p)
+                const price = p.price || "On request"
+                const isActive = active === p.id
 
                 return (
                   <motion.article
@@ -117,35 +132,81 @@ export default function FeaturedProducts() {
                       if (i === last && def === "show") setSettled(true)
                     }}
                   >
-                    <div className={`h-[360px] rounded-[20px] border border-solid px-2 pb-3.5 pt-2 shadow-lift transition-[transform,box-shadow,background,color,border-color] duration-[180ms] ease-out group-hover/card:-translate-y-1.5 group-hover/card:shadow-lift-hover ${active === p.id ? "border-[navy] bg-[#253970] text-white" : "border-line bg-[linear-gradient(to_bottom,#e3e8ec_0,#e3e8ec_258px,#e3e8ec_258px,#e3e8ec_100%)]"}`}>
-                      <Link href={`/products/${p.slug || p.id}`} className="block" tabIndex={settled ? 0 : -1}>
-                        <div className="h-[250px] overflow-hidden rounded-[14px] border-b-[3px] border-solid border-safety bg-bg">
-                          <img className="block h-full w-full object-fill transition-transform duration-[250ms] ease-out group-hover/card:scale-[1.07]" src={p.image} alt={p.name} loading="lazy" />
+                    <Link
+                      href={`/products/${p.slug || p.id}`}
+                      tabIndex={settled ? 0 : -1}
+                      className={`flex h-full flex-col overflow-hidden rounded-[28px] bg-white transition-[transform,box-shadow] duration-200 ease-out group-hover/card:-translate-y-1.5 ${
+                        isActive
+                          ? "shadow-[0_18px_40px_rgba(15,40,90,0.20)] ring-2 ring-[#f5a623]"
+                          : "shadow-[0_10px_30px_rgba(15,40,90,0.10)]"
+                      }`}
+                    >
+                      {/* Image + floating spec pill */}
+                      <div className="relative flex-none">
+                        <div className="h-[250px] overflow-hidden bg-slate-100">
+                          <img
+                            className="block h-full w-full object-cover object-center transition-transform duration-300 ease-out group-hover/card:scale-[1.06]"
+                            src={p.image}
+                            alt={p.name}
+                            loading="lazy"
+                          />
                         </div>
-                        <div className="grid grid-cols-[1fr_34px] items-end gap-2.5 px-2 pt-[22px]">
-                          <div>
-                            <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{p.name}</h3>
-                            <p className={`mt-1 text-[0.82rem] leading-[1.45] ${active === p.id ? "text-mist" : "text-muted-2"}`}>
-                              {short}
-                              {needsMore && (
-                                <span> Read more</span>
-                              )}
-                            </p>
+
+                        {specs.length > 0 && (
+                          <div
+                            className="absolute -bottom-8 left-3 right-3 grid items-center rounded-2xl bg-white px-1.5 py-2.5 shadow-[0_6px_20px_rgba(15,40,90,0.12)]"
+                            style={{ gridTemplateColumns: `repeat(${specs.length}, 1fr)` }}
+                          >
+                            {specs.map(({ icon: Icon, value, label }, n) => (
+                              <div
+                                key={label}
+                                className={`flex items-center justify-center gap-1.5 px-1 ${n > 0 ? "border-l border-solid border-slate-200" : ""}`}
+                              >
+                                <Icon className="h-5 w-5 shrink-0" style={{ color: NAVY }} />
+                                <div className="min-w-0 leading-tight">
+                                  <p className="truncate text-[0.78rem] font-bold" style={{ color: NAVY }}>{value}</p>
+                                  <p className="truncate text-[0.64rem] text-slate-500">{label}</p>
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                          <span className={`grid h-[34px] w-[34px] place-items-center rounded-circle border border-solid bg-white text-ink transition-[background,transform] duration-[180ms] ease-out group-hover/card:translate-x-[3px] ${active === p.id ? "border-white" : "border-line"}`} aria-hidden="true">
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                              <path
-                                d="M2 7h10M8 3l4 4-4 4"
-                                stroke="currentColor"
-                                strokeWidth="1.6"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
+                        )}
+                      </div>
+
+                      {/* Body */}
+                      <div className="flex flex-1 flex-col px-[18px] pb-[18px] pt-[44px]">
+                        <span className="h-[3px] w-[28%] rounded-full" style={{ background: AMBER }} />
+
+                        <h3
+                          className="mt-3.5 font-body text-[1.05rem] font-extrabold leading-[1.3] tracking-normal"
+                          style={{ color: NAVY }}
+                        >
+                          {p.name}
+                        </h3>
+                        <p className="mt-1 min-h-[4.2em] text-[0.84rem] leading-[1.45] text-slate-500">
+                          {short}
+                          {needsMore && (
+                            <span className="font-semibold" style={{ color: NAVY }}> Read more</span>
+                          )}
+                        </p>
+
+                        <div className="mt-auto flex items-center gap-3 pt-4">
+                          <span
+                            className="flex h-[48px] flex-1 items-center justify-center rounded-full bg-slate-100 px-4 text-[0.9rem] font-bold"
+                            style={{ color: NAVY }}
+                          >
+                            {price}
+                          </span>
+                          <span
+                            className="grid h-[48px] w-[48px] shrink-0 place-items-center rounded-full shadow-[0_6px_14px_rgba(245,166,35,0.45)] transition-transform duration-200 group-hover/card:translate-x-[3px]"
+                            style={{ background: AMBER, color: NAVY }}
+                            aria-hidden="true"
+                          >
+                            <ArrowRight className="h-[18px] w-[18px]" />
                           </span>
                         </div>
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   </motion.article>
                 )
               })}
