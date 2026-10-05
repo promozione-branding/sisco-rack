@@ -28,14 +28,27 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div>
-            <h3 className="mb-3.5 text-[1.4rem] text-safety">Reach us</h3>
-            <ul className="list-none">
-              <li className="mb-2">sales@rackwellsteel.com</li>
-              <li className="mb-2">+91 8043834499</li>
-              <li className="mb-2">Mon to Sat, 8am to 6pm</li>
-            </ul>
-          </div>
+       <div>
+  <h3 className="mb-3.5 text-[1.4rem] text-safety">Reach us</h3>
+  <ul className="list-none">
+    <li className="mb-2">
+      <a href="mailto:info.siscosteel@gmail.com" className="hover:text-safety">
+        info.siscosteel@gmail.com
+      </a>
+    </li>
+    <li className="mb-2">
+      <a href="tel:+919953018892" className="hover:text-safety">
+        +91 9953018892
+      </a>
+    </li>
+    <li className="mb-2">
+      <a href="tel:+917629827285" className="hover:text-safety">
+        +91 7629827285
+      </a>
+    </li>
+    <li className="mb-2">Mon to Sat, 8am to 6pm</li>
+  </ul>
+</div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <small className={smallCls}>© 2026 {brand}. All rights reserved.</small>

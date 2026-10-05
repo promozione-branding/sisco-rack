@@ -24,7 +24,7 @@ const inputCls =
 const infoRows = [
   {
     icon: Phone, bg: "bg-sky-100", color: "text-sky-600", title: "Sales",
-    lines: ["sales@rackwellsteel.com", "+91 8043834499"],
+    lines: ["sales@rackwellsteel.com", "+917629827285"],
   },
   {
     icon: Clock, bg: "bg-amber-50", color: "text-amber-500", title: "Hours",

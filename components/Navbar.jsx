@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className="relative mx-auto flex h-[92px] max-w-[1100px] items-center justify-between gap-6 rounded-b-[44px] bg-[#253970] pl-8 pr-6 text-white before:absolute before:-left-11 before:top-0 before:h-11 before:w-11 before:bg-[radial-gradient(circle_at_0_100%,transparent_43px,#253970_44px)] before:content-[''] after:absolute after:-right-11 after:top-0 after:h-11 after:w-11 after:bg-[radial-gradient(circle_at_100%_100%,transparent_43px,#253970_44px)] after:content-[''] max-[960px]:mx-3 max-[960px]:h-[76px] max-[960px]:rounded-b-[32px] max-[960px]:pl-5 max-[960px]:pr-4 max-[960px]:before:hidden max-[960px]:after:hidden">
 <Link href="/" className="flex items-center gap-2 font-display text-[1.7rem] font-bold text-white" onClick={closeAll}>
   <img
-    src="https://static.wixstatic.com/media/70a687_e0785cfd276744b6b939427b963b2746~mv2.png/v1/fill/w_810,h_224,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.png"
+    src="/siscologo.png"
     alt="Logo"
     width={100}
   />
