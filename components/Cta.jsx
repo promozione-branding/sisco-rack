@@ -81,7 +81,7 @@ export default function CTA() {
               WhatsApp Us
             </a>
 
-           <SplitButton href="/contact" dark>Get a quote</SplitButton>
+           <SplitButton dark>Get a quote</SplitButton>
           </motion.div>
         </div>
 
