@@ -103,11 +103,16 @@ export default function About() {
         text="Sisco started as a two-person welding bay. Today we make racking for warehouses, workshops and shops across the country."
         backgroundImage="/about_bg.png"
       />
-
-      <section className="bg-[#eceef1] py-12 max-[720px]:py-8">
+      <IndustriesServed />
+<section
+  className="bg-[#eceef1] bg-cover bg-center bg-no-repeat py-12 max-[720px]:py-8"
+  style={{
+    backgroundImage:
+      "linear-gradient(90deg, rgba(236,238,241,0.96) 0%, rgba(236,238,241,0.88) 40%, rgba(236,238,241,0.45) 100%), url('/steel.png')",
+  }}
+>
         <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
           <div className="grid grid-cols-[1fr_1fr] items-center gap-10 max-[960px]:grid-cols-[1fr]">
-            {/* Left: accent bar + heading + copy */}
             <div className="relative pl-12 max-[720px]:pl-8">
               <span
                 aria-hidden="true"
@@ -136,7 +141,6 @@ export default function About() {
               </p>
             </div>
 
-            {/* Right: staggered stat cards joined by a yellow line */}
             <div className="relative flex flex-col gap-5 min-[961px]:min-h-[470px] min-[961px]:gap-4">
               <svg
                 aria-hidden="true"
@@ -182,8 +186,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      <IndustriesServed />
       <WhyChooseUs />
       <CTA />
     </>

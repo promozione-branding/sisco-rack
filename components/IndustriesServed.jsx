@@ -4,6 +4,16 @@ const BLUE_TINT = "#e6effc"
 const YELLOW = "#e0a400"
 const YELLOW_TINT = "#fdf3d6"
 
+const BOARD_W = 1126
+const BOARD_H = 498
+
+const SIDE_IMAGES = {
+  left: "/testimonial_1.png",
+  top: "/testimonial_2.png",
+  middle: "/testimonial_3.png",
+  bottom: "/testimonial_2.png",
+}
+
 const svgBase = {
   width: 34,
   height: 34,
@@ -78,85 +88,167 @@ const icons = {
   ),
 }
 
-// Desktop positions are percentages of the 883 x 450 board (l = left, t = top, w = width, h = height)
 const industries = [
-  { label: "Warehouses & Logistics", icon: "warehouse", tone: "blue", l: "19%", t: "0%", w: "23.2%", h: "27.8%" },
-  { label: "E-commerce & Fulfilment", icon: "package", tone: "yellow", l: "60.6%", t: "0%", w: "21.9%", h: "27.8%" },
-  { label: "Retail & Supermarkets", icon: "retail", tone: "blue", l: "0%", t: "33.3%", w: "22.4%", h: "28.2%" },
-  { label: "Manufacturing Plants", icon: "factory", tone: "yellow", l: "39.6%", t: "33.3%", w: "22.4%", h: "28.2%" },
-  { label: "Cold Storage & Food Processing", icon: "snowflake", tone: "blue", l: "75.9%", t: "33.3%", w: "24.1%", h: "30%" },
-  { label: "Pharma & Healthcare", icon: "pharma", tone: "yellow", l: "7.6%", t: "69.1%", w: "23.4%", h: "30.2%" },
-  { label: "Automotive & Workshops", icon: "wrench", tone: "blue", l: "41.8%", t: "69.1%", w: "22.9%", h: "30.2%" },
-  { label: "Government & Archives", icon: "archive", tone: "yellow", l: "73.4%", t: "69.1%", w: "22.9%", h: "30.2%" },
+  { n: "01", label: "Warehouses & Logistics", icon: "warehouse", tone: "blue", img: "/Warehouse.png", x: 178, y: 1, w: 311, h: 138 },
+  { n: "02", label: "E-commerce & Fulfilment", icon: "package", tone: "yellow", img: "/Packaging.png", x: 624, y: 1, w: 284, h: 138 },
+  { n: "03", label: "Retail & Supermarkets", icon: "retail", tone: "blue", img: "/supermarket_rack_use.png", x: 0, y: 177, w: 307, h: 138 },
+  { n: "04", label: "Manufacturing Plants", icon: "factory", tone: "yellow", img: "/manufacturing_plants_use.png", x: 394, y: 177, w: 317, h: 138 },
+  { n: "05", label: "Cold Storage & Food Processing", icon: "snowflake", tone: "blue", img: "/food_processing.png", x: 801, y: 177, w: 308, h: 138 },
+  { n: "06", label: "Pharma & Healthcare", icon: "pharma", tone: "yellow", img: "/pharma.png", x: 225, y: 358, w: 282, h: 140 },
+  { n: "07", label: "Automotive & Workshops", icon: "wrench", tone: "blue", img: "/automative.png", x: 577, y: 358, w: 324, h: 140 },
 ]
+
+const routes = [
+  { d: "M489 79H620", arrow: true },
+  { d: "M178 82C130 82 99 116 99 168", arrow: true },
+  { d: "M335 140C335 190 352 215 391 215", arrow: true },
+  { d: "M908 82C955 82 981 112 981 170" },
+  { d: "M711 235C760 235 782 255 801 285" },
+  { d: "M426 316C426 340 300 330 300 358" },
+  { d: "M120 316C120 345 225 340 225 410" },
+]
+
+const pct = (v, total) => `${((v / total) * 100).toFixed(3)}%`
+
+const shapeMask = (d) => {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='${d}' fill='#000'/></svg>`
+  const url = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`
+  return {
+    WebkitMaskImage: url,
+    maskImage: url,
+    WebkitMaskSize: "100% 100%",
+    maskSize: "100% 100%",
+    WebkitMaskRepeat: "no-repeat",
+    maskRepeat: "no-repeat",
+  }
+}
+
+const LEFT_SHAPE = "M0 0 L30 0 C62 18 100 36 100 58 C100 74 90 88 82 100 L0 100 Z"
+const LEFT_HALO = "M0 0 L36 0 C72 18 108 36 108 58 C108 76 97 90 89 100 L0 100 Z"
+const TOP_SHAPE = "M22 0 C6 25 0 55 0 100 L100 80 L100 0 Z"
+const MIDDLE_SHAPE = "M0 22 L100 2 L100 90 L0 98 Z"
+const BOTTOM_SHAPE = "M14 4 L100 0 L100 83 C70 72 8 52 14 4 Z"
+
+function Chevron({ color }) {
+  return (
+    <span
+      className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_6px_rgba(20,30,70,0.18)]"
+      style={{ color }}
+    >
+      <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M3.5 1.5L7 5l-3.5 3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  )
+}
 
 function IndustryCard({ item }) {
   const isBlue = item.tone === "blue"
   const accent = isBlue ? BLUE : YELLOW
   const tint = isBlue ? BLUE_TINT : YELLOW_TINT
+  const numberColor = isBlue ? "#a9c3f1" : "#f2c44c"
 
   return (
     <div
-      className="flex flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-4 py-5 text-center shadow-[0_8px_24px_-8px_rgba(20,30,70,0.22),0_1px_3px_rgba(20,30,70,0.08)] lg:absolute lg:left-[var(--l)] lg:top-[var(--t)] lg:h-[var(--h)] lg:w-[var(--w)] lg:py-0"
+      className="group relative min-h-[132px] rounded-[10px] bg-white shadow-[0_10px_28px_-10px_rgba(20,30,70,0.25),0_1px_3px_rgba(20,30,70,0.08)] lg:absolute lg:left-[var(--l)] lg:top-[var(--t)] lg:h-[var(--h)] lg:min-h-0 lg:w-[var(--w)]"
       style={{
         borderLeft: `4px solid ${accent}`,
-        "--l": item.l,
-        "--t": item.t,
-        "--w": item.w,
-        "--h": item.h,
+        "--l": pct(item.x, BOARD_W),
+        "--t": pct(item.y, BOARD_H),
+        "--w": pct(item.w, BOARD_W),
+        "--h": pct(item.h, BOARD_H),
       }}
     >
-      <span
-        className="flex h-[58px] w-[58px] items-center justify-center rounded-full"
-        style={{ background: tint, color: accent }}
-      >
-        {icons[item.icon]}
-      </span>
-      <span
-        className="max-w-[11rem] text-[1.05rem] font-semibold leading-snug"
-        style={{ color: NAVY }}
-      >
-        {item.label}
-      </span>
+      <img
+        src={item.img}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="pointer-events-none absolute -right-[3%] -top-[14%] left-[50%] z-10 h-[96%] w-[50%] object-contain object-right-bottom drop-shadow-[0_14px_14px_rgba(15,25,60,0.35)] transition-transform duration-300 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.03] w-auto"
+      />
+      <div className="relative z-20 flex h-full max-w-[56%] flex-col justify-center gap-2.5 px-5 py-4 lg:px-[6%] lg:py-0">
+        <div className="flex items-center gap-3">
+          <span
+            className="flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full [&_svg]:h-7 [&_svg]:w-7"
+            style={{ background: tint, color: accent }}
+          >
+            {icons[item.icon]}
+          </span>
+          <span className="font-display text-[2.5rem] font-extrabold leading-none tracking-tight" style={{ color: numberColor }}>
+            {item.n}
+          </span>
+        </div>
+        <div className="flex items-end gap-2">
+          <span className="max-w-[10rem] text-[0.75rem] font-bold leading-snug" style={{ color: NAVY }}>
+            {item.label}
+          </span>
+          <Chevron color={accent} />
+        </div>
+      </div>
     </div>
   )
 }
 
 function Connectors() {
-  const dotted = {
-    stroke: YELLOW,
-    strokeWidth: 3,
-    strokeLinecap: "round",
-    strokeDasharray: "0.1 9",
-    fill: "none",
-  }
   return (
     <svg
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-      viewBox="0 0 883 450"
+      viewBox={`0 0 ${BOARD_W} ${BOARD_H}`}
     >
-      {/* Warehouses -> E-commerce */}
-      <path d="M376 59H525" {...dotted} />
-      <circle cx="442" cy="59" r="3.5" fill={YELLOW} />
-      <path d="M529 54l9 5-9 5z" fill={YELLOW} />
-
-      {/* Warehouses -> Manufacturing */}
-      <path d="M271 131C271 190 290 206 336 206" {...dotted} />
-      <path d="M338 201l9 5-9 5z" fill={YELLOW} />
-
-      {/* Manufacturing -> Cold storage */}
-      <path d="M553 214H640" {...dotted} />
-      <path d="M642 209l9 5-9 5z" fill={YELLOW} />
-
-      {/* Manufacturing -> Pharma */}
-      <path d="M382 281C372 330 350 384 286 384" {...dotted} />
-      <circle cx="382" cy="281" r="3.5" fill={YELLOW} />
-
-      {/* Automotive -> Government */}
-      <path d="M575 378H630" {...dotted} />
-      <path d="M632 373l9 5-9 5z" fill={YELLOW} />
+      <defs>
+        <marker id="industry-arrow" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+          <path d="M0 0.5L8 4.5L0 8.5z" fill={YELLOW} />
+        </marker>
+      </defs>
+      {routes.map((r) => (
+        <path key={`t-${r.d}`} d={r.d} fill="none" stroke="#e3e7ee" strokeWidth="14" strokeLinecap="round" />
+      ))}
+      {routes.map((r) => (
+        <path
+          key={`d-${r.d}`}
+          d={r.d}
+          fill="none"
+          stroke="#f2b705"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeDasharray="9 7"
+          markerEnd={r.arrow ? "url(#industry-arrow)" : undefined}
+        />
+      ))}
     </svg>
+  )
+}
+
+function SideImages() {
+  return (
+    <>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 hidden w-[25%] bg-white/55 min-[1200px]:block"
+        style={shapeMask(LEFT_HALO)}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 hidden w-[24%] bg-cover bg-bottom min-[1200px]:block"
+        style={{ backgroundImage: `url(${SIDE_IMAGES.left})`, ...shapeMask(LEFT_SHAPE) }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-0 hidden h-[37%] w-[19.5%] bg-cover bg-center min-[1200px]:block"
+        style={{ backgroundImage: `url(${SIDE_IMAGES.top})`, ...shapeMask(TOP_SHAPE) }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-[32%] hidden h-[27%] w-[19.5%] bg-cover bg-center min-[1200px]:block"
+        style={{ backgroundImage: `url(${SIDE_IMAGES.middle})`, ...shapeMask(MIDDLE_SHAPE) }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-[58%] hidden h-[36%] w-[16%] bg-cover bg-center min-[1200px]:block"
+        style={{ backgroundImage: `url(${SIDE_IMAGES.bottom})`, ...shapeMask(BOTTOM_SHAPE) }}
+      />
+    </>
   )
 }
 
@@ -166,12 +258,17 @@ export default function IndustriesServed() {
       className="relative overflow-hidden py-20 max-[720px]:py-12"
       style={{
         background:
-          "radial-gradient(circle at 15% 10%, #ffffff 0%, #f2f4f7 55%, #eceef2 100%)",
+          "radial-gradient(circle at 50% 0%, #ffffff 0%, #f3f6fb 55%, #e9eef6 100%)",
       }}
     >
-      <div className="mx-auto max-w-[1100px] px-14 max-[960px]:px-10 max-[720px]:px-5">
+      <SideImages />
+
+      <div className="relative z-10 mx-auto max-w-[1200px] px-14 max-[960px]:px-10 max-[720px]:px-5">
         <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[0.9rem] font-bold uppercase tracking-[0.12em] shadow-[0_6px_18px_-6px_rgba(20,30,70,0.25)]" style={{ color: NAVY }}>
+          <span
+            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-[0.9rem] font-bold uppercase tracking-[0.12em] shadow-[0_8px_22px_-8px_rgba(20,30,70,0.28)]"
+            style={{ color: NAVY }}
+          >
             {icons.pin}
             Industries we serve
           </span>
@@ -182,17 +279,17 @@ export default function IndustriesServed() {
           >
             Racking Built For
             <br />
-            <span style={{ color: "#3d5078" }}>Every Kind of Storage Floor</span>
+            <span style={{ color: "#2c4b8f" }}>Every Kind of Storage Floor</span>
           </h2>
 
-          <p className="mx-auto mt-5 max-w-[34rem] text-[1.1rem] leading-[1.6] text-[#5b6478]">
+          <p className="mx-auto mt-5 max-w-[40rem] text-[1.1rem] leading-[1.6] text-[#5b6478]">
             Proven expertise. Trusted solutions.
             <br />
             Load-rated steel racks for the way each industry stores, picks and moves.
           </p>
         </div>
 
-        <div className="relative mx-auto mt-14 grid max-w-[900px] grid-cols-2 gap-5 max-[560px]:grid-cols-1 lg:mt-16 lg:block lg:aspect-[883/450]">
+        <div className="relative mx-auto mt-14 grid max-w-[1126px] grid-cols-2 gap-5 max-[560px]:grid-cols-1 lg:mt-14 lg:block lg:aspect-[1126/498]">
           <Connectors />
           {industries.map((item) => (
             <IndustryCard key={item.label} item={item} />
