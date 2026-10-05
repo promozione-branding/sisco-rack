@@ -9,7 +9,13 @@ export default function Footer() {
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
         <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr] gap-8">
           <div>
-            <h3 className="mb-3.5 text-[1.4rem] text-safety">{brand}</h3>
+            <Link href="/" className="flex items-center gap-2 font-display text-[1.7rem] font-bold text-white">
+  <img
+    src="/sisco_logo_transparent.png"
+    alt="Logo"
+    width={100}
+  />
+</Link>
             <p className="max-w-[38ch]">Industrial racking and shelving, made to your floor plan and installed by our own crews.</p>
           </div>
           <div>

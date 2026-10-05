@@ -76,7 +76,7 @@ export default function QuoteModal({ open, onClose }) {
             {/* Left panel */}
             <div className="flex flex-col bg-[#253970] p-9 text-white max-[800px]:hidden">
               <div className="w-fit rounded-[10px]">
-                <img src="/siscologo.png" alt="Logo" className="h-auto w-[140px]" />
+                <img src="/sisco_logo_transparent.png" alt="Logo" className="h-auto w-[140px]" />
               </div>
 
               <p className="mt-9 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-safety">Get in touch</p>
