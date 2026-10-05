@@ -212,7 +212,7 @@ const openQuote = (e) => {
               </span>
               <div>
                 <strong className="block text-[0.95rem] font-bold leading-[1.25]">Trusted Maker</strong>
-                <span className="mt-0.5 block pl-1 pt-[3px] text-[0.8rem] leading-[1.35] text-muted-2">Arya Industry standard</span>
+                <span className="mt-0.5 block pl-1 pt-[3px] text-[0.8rem] leading-[1.35] text-muted-2">Sisco Steel Industry standard</span>
               </div>
             </div>
           </motion.div>
