@@ -46,7 +46,7 @@ export default function Hero() {
         transition={{ delay: 1 }}
         onClickCapture={openQuote}
       >
-        <SplitButton dark>
+        <SplitButton href="/" dark>
           Get a quote
         </SplitButton>
         <Link href="/products" className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-white/70 bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-white transition-[background,color] duration-[250ms] [font-family:inherit] hover:border-white hover:bg-white hover:text-ink">

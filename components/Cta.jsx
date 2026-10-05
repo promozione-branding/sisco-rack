@@ -86,7 +86,7 @@ export default function CTA() {
         </div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 border-t border-solid border-white/[0.18] bg-[#253970] px-5 py-[18px] text-[0.9rem] font-medium text-white/[0.78] backdrop-blur-[8px] max-[720px]:gap-x-3 max-[720px]:gap-y-1.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[0.82rem]"
+          className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 border-t border-solid border-white/[0.18] bg-[#cdcdcd] px-5 py-[18px] text-[0.9rem] font-medium text-white/[0.78] backdrop-blur-[8px] max-[720px]:gap-x-3 max-[720px]:gap-y-1.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[0.82rem]"
           variants={rise}
           initial="hidden"
           animate="show"

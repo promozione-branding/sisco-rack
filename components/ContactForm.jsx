@@ -121,7 +121,7 @@ export default function ContactForm() {
           <div className="mt-6 flex items-center gap-8 max-[720px]:flex-col max-[720px]:items-stretch">
             <button
               type="submit"
-              className="flex h-[58px] w-[550px] max-w-full cursor-pointer items-center justify-center gap-3 rounded-xl text-[1.1rem] font-semibold text-white shadow-[0_8px_20px_rgba(15,60,150,0.3)] transition hover:brightness-110 [font-family:inherit]"
+              className="flex h-[58px] w-[650px] max-w-full cursor-pointer items-center justify-center gap-3 rounded-xl text-[1.1rem] font-semibold text-white shadow-[0_8px_20px_rgba(15,60,150,0.3)] transition hover:brightness-110 [font-family:inherit]"
               style={{ background: `linear-gradient(90deg, ${NAVY}, ${BLUE})` }}
             >
               Send request <ArrowRight className="h-5 w-5" />
