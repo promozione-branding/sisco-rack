@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { brand, links, categories } from "@/lib/data"
 import LottieIcon from "./LottieIcon"
 import SplitButton from "./SplitButton"
+import QuoteModal from "./QuoteModal"
 
 const linkBase = "flex items-center gap-2 rounded-pill px-4 py-2.5 font-semibold transition-[background,color] duration-200"
 const linkOn = "bg-white/[0.16] text-white"
@@ -16,12 +17,18 @@ export default function Navbar() {
   const path = usePathname()
   const [open, setOpen] = useState(false)
   const [drop, setDrop] = useState(false)
-
+const [quote, setQuote] = useState(false)
   const closeAll = () => {
     setOpen(false)
     setDrop(false)
   }
-
+const openQuote = (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+  setOpen(false)
+  setDrop(false)
+  setQuote(true)
+}
   return (
     <header className="sticky top-0 z-30 h-0">
       <div className="relative mx-auto flex h-[92px] max-w-[1100px] items-center justify-between gap-6 rounded-b-[44px] bg-[#253970] pl-8 pr-6 text-white before:absolute before:-left-11 before:top-0 before:h-11 before:w-11 before:bg-[radial-gradient(circle_at_0_100%,transparent_43px,#253970_44px)] before:content-[''] after:absolute after:-right-11 after:top-0 after:h-11 after:w-11 after:bg-[radial-gradient(circle_at_100%_100%,transparent_43px,#253970_44px)] after:content-[''] max-[960px]:mx-3 max-[960px]:h-[76px] max-[960px]:rounded-b-[32px] max-[960px]:pl-5 max-[960px]:pr-4 max-[960px]:before:hidden max-[960px]:after:hidden">
@@ -76,19 +83,22 @@ export default function Navbar() {
             )
           )}
           <li className="hidden max-[960px]:block max-[960px]:pt-2 [&>a]:flex [&>a]:items-center [&>a]:gap-2 [&>a]:rounded-pill [&>a]:px-4 [&>a]:py-2.5 [&>a]:text-white/85 [&>a]:transition-[background,color] [&>a]:duration-200 [&>a:hover]:bg-white/[0.12] [&>a:hover]:text-white">
-            <SplitButton href="/contact">Get a quote</SplitButton>
+           <div onClickCapture={openQuote}>
+  <SplitButton >Get a quote</SplitButton>
+</div>
           </li>
         </ul>
         <div className="flex items-center gap-[18px]">
-          <a href="tel:+15550142290" className="font-semibold text-white/85 hover:text-safety max-[960px]:hidden">Call sales</a>
-          <div className="max-[960px]:hidden">
-            <SplitButton href="/contact">Get a quote</SplitButton>
-          </div>
+          <a href="tel:+919953018892" className="font-semibold text-white/85 hover:text-safety max-[960px]:hidden">Call sales</a>
+        <div className="max-[960px]:hidden" onClickCapture={openQuote}>
+  <SplitButton >Get a quote</SplitButton>
+</div>
           <button className="hidden rounded-pill border-2 border-solid border-white/50 bg-transparent px-4 py-2 font-semibold text-white [font-family:inherit] cursor-pointer max-[960px]:block" onClick={() => setOpen(!open)} aria-expanded={open}>
             {open ? "Close" : "Menu"}
           </button>
         </div>
       </div>
+      <QuoteModal open={quote} onClose={() => setQuote(false)} />
     </header>
   )
 }

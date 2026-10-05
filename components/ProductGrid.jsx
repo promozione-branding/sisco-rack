@@ -55,7 +55,7 @@ export default function ProductGrid() {
             {shown.map((p) => {
               const specs = getSpecs(p)
               const desc = p.text || p.description || ""
-              const price = p.price || "On request"
+              const price = "View more"
 
               return (
                 <motion.article

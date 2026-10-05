@@ -115,7 +115,7 @@ export default function FeaturedProducts() {
                 const fullText = p.text || p.description || ""
                 const { short, needsMore } = truncateWords(fullText)
                 const specs = getSpecs(p)
-                const price = p.price || "View more"
+                const price = "View more"
                 const isActive = active === p.id
 
                 return (

@@ -8,6 +8,7 @@ import LottieIcon from "./LottieIcon"
 import RackBlueprint from "./RackBlueprint"
 import { ShieldCheck, Truck, Award } from "lucide-react"
 import ShelfCrew from "./ShelfCrew"
+import QuoteModal from "./QuoteModal"
 
 const UP = "absolute bottom-0 top-0 w-4 bg-blue bg-[radial-gradient(circle,var(--panel)_2.5px,transparent_3.5px)] bg-[length:16px_24px] bg-[position:center_6px]"
 const THUMB = "relative h-[84px] w-[84px] cursor-pointer rounded-[14px] border-2 border-solid bg-white p-1 transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-[5px] max-[720px]:h-16 max-[720px]:w-16"
@@ -124,7 +125,16 @@ export default function ProductDetail({ product: p, related }) {
   const s = p.specs || {}
   const c = p.contact || {}
   const images = p.images?.length ? p.images : [p.image]
-
+    const [open, setOpen] = useState(false)
+      const [drop, setDrop] = useState(false)
+const [quote, setQuote] = useState(false)
+const openQuote = (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+  setOpen(false)
+  setDrop(false)
+  setQuote(true)
+}
   return (
     <MotionConfig reducedMotion="user">
       <section className="relative isolate overflow-hidden border-2 border-solid border-ink bg-[linear-gradient(165deg,#c9eaf2_0%,#dbe3fa_40%,#f6f8f9_100%)] pb-10 pt-[124px] before:absolute before:inset-0 before:-z-[1] before:content-[''] before:bg-[repeating-linear-gradient(0deg,rgba(62,92,118,0.14)_0_1px,transparent_1px_4px),repeating-linear-gradient(90deg,rgba(62,92,118,0.1)_0_1px,transparent_1px_7px)] before:[mask-image:linear-gradient(170deg,#000_0%,transparent_70%)] max-[960px]:mx-3 max-[960px]:mt-2.5 max-[960px]:rounded-[28px] max-[960px]:pb-8 max-[960px]:pt-[104px]">
@@ -170,7 +180,9 @@ export default function ProductDetail({ product: p, related }) {
             {p.description}
           </motion.p>
               <motion.div className="mt-6 flex flex-wrap items-center gap-3" variants={rise} custom={3} initial="hidden" animate="show">
-            <SplitButton href="/contact" dark>Request a quote</SplitButton>
+            <div onClickCapture={openQuote}>
+  <SplitButton dark>Get a quote</SplitButton>
+</div>
             {c.whatsapp && <a className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-[14px]" href={c.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>}
             {c.phone && <a className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-[14px]" href={`tel:${c.phone}`}>Call now</a>}
           </motion.div>
@@ -310,12 +322,15 @@ export default function ProductDetail({ product: p, related }) {
             </div>
           </div>
           <div className="flex flex-col items-start gap-2.5">
-            <SplitButton href="/contact">Get a quote</SplitButton>
+            <div onClickCapture={openQuote}>
+  <SplitButton >Get a quote</SplitButton>
+</div>
             {c.phone && <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`}>{c.phone}</a>}
             {c.email && <a className="font-semibold text-white hover:text-safety" href={`mailto:${c.email}`}>{c.email}</a>}
           </div>
         </section>
       </Reveal>
+      <QuoteModal open={quote} onClose={() => setQuote(false)} />
     </MotionConfig>
   )
 }
