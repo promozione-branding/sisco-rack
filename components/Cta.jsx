@@ -2,7 +2,8 @@
 
 import { motion, MotionConfig } from "framer-motion"
 import SplitButton from "./SplitButton"
-
+import QuoteModal from "./QuoteModal"
+import { useState } from "react"
 const BAR_LINK = "text-white/90 transition-[color] duration-200 hover:text-safety"
 
 const rise = {
@@ -15,6 +16,20 @@ const rise = {
 }
 
 export default function CTA() {
+  const [open, setOpen] = useState(false)
+    const [drop, setDrop] = useState(false)
+  const [quote, setQuote] = useState(false)
+    const closeAll = () => {
+      setOpen(false)
+      setDrop(false)
+    }
+  const openQuote = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setOpen(false)
+    setDrop(false)
+    setQuote(true)
+  }
   return (
     <MotionConfig reducedMotion="user">
       <section className="relative isolate mt-[50px] flex min-h-[80svh] flex-col items-center justify-center overflow-hidden bg-[#1a1f24] text-center text-white">
@@ -51,6 +66,7 @@ export default function CTA() {
             initial="hidden"
             animate="show"
             custom={2}
+            onClickCapture={openQuote}
           >
 
             <a
@@ -82,6 +98,7 @@ export default function CTA() {
           <span className="select-none opacity-[0.45]">|</span>
           <span>Sisco Racks</span>
         </motion.div>
+              <QuoteModal open={quote} onClose={() => setQuote(false)} />
       </section>
     </MotionConfig>
   )
