@@ -151,7 +151,7 @@ useEffect(() => {
   }
 
   return (
-    <section className="py-12 max-[720px]:py-10">
+    <section className="py-12 max-[720px]:py-10 bg-white">
       <div className="mb-11 text-center min-[961px]:mb-[18px]">
         <motion.span
           className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']"
