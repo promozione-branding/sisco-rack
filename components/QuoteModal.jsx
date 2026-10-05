@@ -81,7 +81,7 @@ export default function QuoteModal({ open, onClose }) {
 
               <p className="mt-9 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-safety">Get in touch</p>
               <h2 className="mt-3 text-[2.8rem] font-extrabold leading-[1.05]">
-                Let&apos;s build <span className="font-normal text-white/40">something better.</span>
+                Let&apos;s build something better.
               </h2>
               <p className="mt-6 text-[0.95rem] leading-relaxed text-white/70">
                 Tell us about your racking or shelving project and our team will help you find the right solution.

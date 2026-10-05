@@ -30,7 +30,7 @@ export const metadata = {
     "Pallet racks, slotted angle, boltless shelving, cantilever racks and mezzanine floors built to your floor plan.",
 
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon_original.png",
   },
 }
 
