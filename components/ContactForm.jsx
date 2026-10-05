@@ -181,11 +181,11 @@ export default function ContactForm() {
             </div>
           </aside>
 
-          <div className="grid grid-cols-4 items-center rounded-2xl bg-white px-6 py-5 shadow-[0_6px_24px_rgba(15,40,90,0.06)] max-[1100px]:grid-cols-2 max-[1100px]:gap-5 max-[560px]:grid-cols-1">
+          <div className="grid grid-cols-4 items-center rounded-2xl bg-white px-2 py-5 shadow-[0_6px_24px_rgba(15,40,90,0.06)] max-[1100px]:grid-cols-2 max-[1100px]:gap-5 max-[560px]:grid-cols-1">
             {features.map(({ icon: Icon, bg, color, title, sub }, i) => (
               <div
                 key={title}
-                className={`flex items-center gap-3 px-3 ${i > 0 ? "min-[1101px]:border-l min-[1101px]:border-slate-200" : ""}`}
+                className={`flex items-center gap-3 ${i > 0 ? "min-[1101px]:border-l min-[1101px]:border-slate-200" : ""}`}
               >
                 <span className={`flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full ${bg}`}>
                   <Icon className={`h-6 w-6 ${color}`} />
