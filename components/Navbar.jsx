@@ -72,7 +72,17 @@ export default function Navbar() {
                     >
                       {categories.map((c) => (
                         <li key={c.id}>
-                          <Link href="/products" className="block rounded-[14px] px-4 py-3 font-semibold text-ink hover:bg-steel" onClick={closeAll}>{c.name}</Link>
+                          {c.action === "quote" ? (
+                           <button
+  type="button"
+  className="block w-full cursor-pointer appearance-none rounded-[14px] border-0 bg-transparent px-4 py-3 text-left text-[length:inherit] font-semibold leading-[inherit] text-ink [font-family:inherit] hover:bg-steel"
+  onClick={openQuote}
+>
+  {c.name}
+</button>
+                          ) : (
+                            <Link href="/products" className="block rounded-[14px] px-4 py-3 font-semibold text-ink hover:bg-steel" onClick={closeAll}>{c.name}</Link>
+                          )}
                         </li>
                       ))}
                     </motion.ul>

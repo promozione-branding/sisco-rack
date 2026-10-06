@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { industries } from "@/lib/industries"
 import SplitButton from "./SplitButton"
+import QuoteModal from "./QuoteModal"
 
 const WA_NUMBER = "917629827285"
 
@@ -90,6 +91,7 @@ export default function Categories() {
   const inView = useInView(panel, { once: true, amount: 0.25 })
   const reduce = useReducedMotion()
   const [can, setCan] = useState({ prev: false, next: true })
+  const [quote, setQuote] = useState(false)
   const state = inView || reduce ? "show" : "hidden"
   const paused = useRef(false)
   const lastManual = useRef(0)
@@ -215,6 +217,12 @@ export default function Categories() {
                 >
                   <Link
                     href="/products"
+                    onClick={(e) => {
+                      if (s.action === "quote") {
+                        e.preventDefault()
+                        setQuote(true)
+                      }
+                    }}
                     className="group/card block h-full select-none rounded-[20px] border border-solid border-line bg-[#e3e8ec] px-2 pb-[18px] pt-2 shadow-lift transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-1.5 hover:border-safety hover:shadow-lift-hover"
                     draggable={false}
                   >
@@ -284,6 +292,8 @@ export default function Categories() {
           </div>
         </div>
       </div>
+
+      <QuoteModal open={quote} onClose={() => setQuote(false)} />
     </section>
   )
 }
