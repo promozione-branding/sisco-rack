@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { brand, links, categories } from "@/lib/data"
 import LottieIcon from "./LottieIcon"
 import SplitButton from "./SplitButton"
-import QuoteModal from "./QuoteModal"
+import InstallationServicesModal from "./InstallationServicesModal"
 
 const linkBase = "flex items-center gap-2 rounded-pill px-4 py-2.5 font-semibold transition-[background,color] duration-200"
 const linkOn = "bg-white/[0.16] text-white"
@@ -133,7 +133,7 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      <QuoteModal open={quote} onClose={() => setQuote(false)} />
+      <InstallationServicesModal open={quote} onClose={() => setQuote(false)} />
     </header>
   )
 }

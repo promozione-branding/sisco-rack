@@ -5,7 +5,7 @@ import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { industries } from "@/lib/industries"
 import SplitButton from "./SplitButton"
-import QuoteModal from "./QuoteModal"
+import InstallationServicesModal from "./InstallationServicesModal"
 
 const WA_NUMBER = "917629827285"
 
@@ -293,7 +293,7 @@ export default function Categories() {
         </div>
       </div>
 
-      <QuoteModal open={quote} onClose={() => setQuote(false)} />
+      <InstallationServicesModal open={quote} onClose={() => setQuote(false)} />
     </section>
   )
 }
