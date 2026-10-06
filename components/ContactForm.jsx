@@ -140,7 +140,6 @@ export default function ContactForm() {
           )}
         </form>
 
-        {/* RIGHT: location + features */}
         <div className="grid gap-5">
           <aside
             className="relative overflow-hidden rounded-3xl p-[52px] text-white shadow-[0_10px_40px_rgba(15,40,90,0.2)] max-[720px]:p-8"

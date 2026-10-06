@@ -1,3 +1,4 @@
+import CTA from "@/components/Cta"
 import ProductGrid from "@/components/ProductGrid"
 import ProductHead from "@/components/ProductHead"
 
@@ -8,6 +9,7 @@ export default function Products() {
     <>
       <ProductHead title="Racks and shelving" text="Filter by type, then send us the models you want and your bay sizes for a fixed quote." />
       <ProductGrid />
+      <CTA/>
     </>
   )
 }
