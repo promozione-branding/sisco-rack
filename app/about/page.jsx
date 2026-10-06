@@ -1,7 +1,10 @@
+import AboutUsHome from "@/components/AboutUsHome"
+import AboutWhyChooseUs from "@/components/AboutWhyChooseUs"
 import CTA from "@/components/Cta"
 import IndustriesServed from "@/components/IndustriesServed"
 import PageHead from "@/components/PageHead"
 import WhyChooseUs from "@/components/WhyChooseUs"
+import { aboutPageAbout, aboutWhyChoose } from "@/lib/aboutContent"
 
 export const metadata = { title: "About | Rackwell Steel" }
 
@@ -103,6 +106,7 @@ export default function About() {
         text="Sisco started as a two-person welding bay. Today we make racking for warehouses, workshops and shops across the country."
         backgroundImage="/about_bg.png"
       />
+      <AboutUsHome {...aboutPageAbout}/>
       <IndustriesServed />
 <section
   className="bg-[#eceef1] bg-cover bg-center bg-no-repeat py-12 max-[720px]:py-8"
@@ -123,21 +127,19 @@ export default function About() {
                 className="font-display text-[4.8rem] font-extrabold leading-[0.95] tracking-tight max-[720px]:text-[3.2rem]"
                 style={{ color: NAVY }}
               >
-                Steel
+                Steel 
                 <br />
-                we can
+                you
                 <br />
-                vouch for
+                can trust
               </h2>
               <p className="mt-7 max-w-[30rem] text-[1.05rem] leading-[1.6] text-[#1f2740]">
-                Over two decades of engineering excellence, precision
-                manufacturing, and a relentless focus on quality have made us a
-                trusted name in steel racks and storage solutions.
+                Since 2015, Sisco Steel Products has focused on quality manufacturing, durable products, and practical storage solutions for industrial, commercial, and retail applications.
               </p>
               <p className="mt-4 text-[1.05rem] leading-[1.6] text-[#1f2740]">
-                Built strong. Backed by experience.
+                Built for performance. 
                 <br />
-                Trusted nationwide.
+                Focused on quality.
               </p>
             </div>
 
@@ -164,21 +166,20 @@ export default function About() {
               </svg>
 
               <StatCard
-                value="18"
-                label="years making racks"
+                value="11+"
+                label="years of experience"
                 icon={<CalendarIcon />}
                 className="min-[961px]:w-[48%]"
               />
               <StatCard
-                value="6,400"
-                label="installations delivered"
+                value="5,000+"
+                label="Racks Supplied"
                 icon={<TruckIcon />}
                 className="min-[961px]:ml-[16%] min-[961px]:w-[52%]"
               />
               <StatCard
-                value="10"
-                unit="yr"
-                label="frame warranty"
+                value="2017"
+                label="GST registered"
                 icon={<ShieldIcon />}
                 className="min-[961px]:ml-[42%] min-[961px]:w-[48%]"
               />
@@ -186,7 +187,7 @@ export default function About() {
           </div>
         </div>
       </section>
-      <WhyChooseUs />
+      <AboutWhyChooseUs />
       <CTA />
     </>
   )
