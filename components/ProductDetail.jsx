@@ -323,7 +323,7 @@ export default function ProductDetail({ product: p, related }) {
             <div className="grid grid-cols-[1.45fr_1fr] items-stretch gap-6 max-[1180px]:grid-cols-[1fr]">
               {p.keyFeatures?.length > 0 && (
                 <Reveal className="flex">
-                  <div className={`${CARD} w-full p-6 h-[340px]`}>
+                  <div className={`${CARD} w-full p-6 min-h`}>
                     <SectionTitle>Key features</SectionTitle>
                     <div className="mt-12 grid grid-cols-[repeat(3,1fr)] gap-x-6 gap-y-12 max-[960px]:grid-cols-[1fr_1fr] max-[720px]:grid-cols-[1fr]">
                       {p.keyFeatures.map((f, idx) => (
