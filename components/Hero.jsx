@@ -32,12 +32,12 @@ export default function Hero() {
       <div className="absolute inset-0 -z-[2] scale-[1.02] bg-[url('/hero.jpg')] bg-cover bg-center bg-no-repeat" aria-hidden="true" />
       <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(162,174,192,0.55)_0%,rgba(56,61,67,0.72)_45%,rgb(181_181_181/88%)_100%_70%)]" aria-hidden="true" />
 
-      <h1 className="text-[length:clamp(2.8rem,7.2vw,6rem)] leading-[0.92] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
+      <h2 className="text-[length:clamp(2.8rem,7.2vw,6rem)] leading-[0.92] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
         <motion.span className="block" {...line(0)}>Build storage faster</motion.span>
         <motion.span className="block" {...line(1)}>
           Load with <em className="font-normal tracking-normal text-[#f0b429]">confidence</em>
         </motion.span>
-      </h1>
+      </h2>
 
       <motion.div
         className="mt-7 flex flex-wrap justify-center gap-3.5"

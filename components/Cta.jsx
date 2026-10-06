@@ -37,17 +37,17 @@ export default function CTA() {
         <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(18,22,28,0.55)_0%,rgb(68_83_102/72%)_45%,rgb(68_89_123/88%)_100%_100%)]" aria-hidden="true" />
 
         <div className="relative z-[1] max-w-[920px] px-6 max-[720px]:px-[18px] max-[720px]:pb-[90px] max-[720px]:pt-[100px]">
-          <motion.h1
+          <motion.h2
             className="text-[length:clamp(2.6rem,6.5vw,4.6rem)] leading-[1.08] tracking-[-0.01em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.4)] max-[720px]:text-[length:clamp(2.2rem,8vw,3.2rem)]"
             variants={rise}
             initial="hidden"
             animate="show"
             custom={0}
           >
-            Build Stronger Floors
+            Make your storage 
             <br />
-            <span className="block">with Industrial Racking Systems</span>
-          </motion.h1>
+            <span className="block">work better with smart racking</span>
+          </motion.h2>
 
           <motion.p
             className="mx-auto mb-9 mt-[22px] max-w-[52ch] text-[1.1rem] leading-[1.55] text-white/[0.88] max-[720px]:mb-7 max-[720px]:text-[1rem]"
@@ -56,8 +56,7 @@ export default function CTA() {
             animate="show"
             custom={1}
           >
-            Get expert guidance on the right pallet racking, cantilever and
-            mezzanine solutions for your warehouse, factory or distribution centre.
+            Choose slotted angle racks, supermarket racks, Heavy-Duty Racks, and Mezzanine Floors. They fit your storage plans and your daily work needs.
           </motion.p>
 
           <motion.div
@@ -81,12 +80,12 @@ export default function CTA() {
               WhatsApp Us
             </a>
 
-           <SplitButton dark>Get a quote</SplitButton>
+           <SplitButton href="/" dark>Get a quote</SplitButton>
           </motion.div>
         </div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 border-t border-solid border-white/[0.18] bg-[#cdcdcd] px-5 py-[18px] text-[0.9rem] font-medium text-white/[0.78] backdrop-blur-[8px] max-[720px]:gap-x-3 max-[720px]:gap-y-1.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[0.82rem]"
+          className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 border-t border-solid border-white/[0.18] bg-[#253970] px-5 py-[18px] text-[0.9rem] font-medium text-white/[0.78] backdrop-blur-[8px] max-[720px]:gap-x-3 max-[720px]:gap-y-1.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[0.82rem]"
           variants={rise}
           initial="hidden"
           animate="show"

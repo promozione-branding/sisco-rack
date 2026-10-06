@@ -7,8 +7,9 @@ import Industries from "@/components/Industries"
 import Categories from "@/components/Categories"
 import Testimonials from "@/components/Testimonials"
 import QueryForm from "@/components/QueryForm"
-import AboutUsSection from "@/components/AboutUsSection"
 import Cta from "@/components/Cta"
+import OurStory from "@/components/OurStory"
+import AboutUsHome from "@/components/AboutUsHome"
 
 export default function Home() {
   return (
@@ -16,9 +17,10 @@ export default function Home() {
       <Hero />
       <Marquee />
       <FeaturedProducts />
+      <AboutUsHome/>
       <Categories/>
       <Industries/>
-      <AboutUsSection/>
+      <OurStory/>
       <Cta/>
       <WhyChooseUs />
       <Testimonials/>

@@ -167,7 +167,7 @@ function Count({ to, suffix }) {
   )
 }
 
-export default function AboutUsSection() {
+export default function OurStory() {
   const collage = useRef(null)
   const stats = useRef(null)
   const line = useRef(null)
@@ -220,7 +220,7 @@ export default function AboutUsSection() {
 
       <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
         <Reveal className="mb-[26px] flex items-end justify-between gap-6">
-          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">What is stamped on every job</h2>
+          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">What Sets Us Apart</h2>
         </Reveal>
         <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[720px]:grid-cols-[1fr] max-[960px]:grid-cols-[1fr_1fr]">
           {values.map((v, i) => (

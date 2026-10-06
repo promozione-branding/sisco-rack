@@ -44,7 +44,7 @@ export default function FloatingContact() {
         >
           <a className={linkCls} href={`tel:${contact.phoneHref}`} aria-label="Call us">
             <span className={labelCls}>Call us</span>
-            <span className={`${btnCls} bg-[#5e5e5e] text-safety`}>
+            <span className={`${btnCls} bg-[#e82f17] text-safety`}>
               <Call />
             </span>
           </a>

@@ -194,7 +194,7 @@ export default function Testimonials() {
               Client stories
             </span>
             <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
-              Trusted by teams that store heavy
+              What Our Customers Say
             </h2>
           </div>
 

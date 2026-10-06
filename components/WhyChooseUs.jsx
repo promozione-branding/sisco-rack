@@ -8,7 +8,6 @@ import { reasons } from "@/lib/data"
 const NAVY = "#0b1a40"
 const YELLOW = "#f5b800"
 
-// One headline figure per reason, same order as `reasons`.
 const figures = [
   { value: "1.5×", label: "rated load tested" },
   { value: "Custom", label: "bays and aisles" },
@@ -23,14 +22,11 @@ const images = [
   "/warranty.jpeg",
 ]
 
-// Inline icons (lucide-style), same order as `reasons`. No extra package needed.
 const icons = [
-  // gauge: load tested
   <>
     <path d="m12 14 4-4" />
     <path d="M3.34 19a10 10 0 1 1 17.32 0" />
   </>,
-  // ruler: made to your floor plan
   <>
     <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
     <path d="m14.5 12.5 2-2" />
@@ -38,7 +34,6 @@ const icons = [
     <path d="m8.5 6.5 2-2" />
     <path d="m17.5 15.5 2-2" />
   </>,
-  // truck: fast delivery and install
   <>
     <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
     <path d="M15 18H9" />
@@ -123,11 +118,10 @@ export default function WhyChooseUs() {
         className="font-display text-[3.2rem] font-extrabold leading-[1.05] tracking-tight max-[720px]:text-[2.4rem]"
         style={{ color: NAVY }}
       >
-        Why choose Sisco
+        Why Choose Sisco Steel Products
       </h2>
       <p className="mt-5 max-w-[30rem] text-[1.1rem] leading-[1.65] text-[#4b5469]">
-        We make the steel, test it, ship it and fit it. Fewer hand-offs mean
-        fewer surprises on install day.
+        As a trusted Slotted Angle Rack Manufacturer, Sisco Steel Products focuses on quality manufacturing, durable products, and reliable service to meet diverse storage requirements.
       </p>
     </>
   )
@@ -139,14 +133,11 @@ export default function WhyChooseUs() {
         style={{ "--h": `${100 + items.length * 70}vh` }}
         className="bg-white max-[960px]:py-12 min-[961px]:h-[var(--h)]"
       >
-        {/* ---------- Desktop: pinned stage ---------- */}
         <div className="sticky top-0 flex h-screen items-center max-[960px]:hidden">
           <div className="mx-auto w-full max-w-full px-14">
             <div className="grid grid-cols-[5fr_7fr] grid-rows-[auto_auto] gap-x-16 gap-y-8">
-              {/* Row 1, left: heading + intro */}
               <div className="col-start-1 row-start-1">{heading}</div>
 
-              {/* Row 2, left: sliding image */}
               <div className="relative col-start-1 row-start-2">
                 <div
                   className={`relative h-[clamp(320px,56vh,540px)] w-full bg-[#dfe3ea] shadow-[0_24px_50px_-20px_rgba(11,26,64,0.45)] ${FRAME}`}
