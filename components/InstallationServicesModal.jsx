@@ -202,11 +202,11 @@ export default function InstallationServicesModal({ open, onClose }) {
                 <img src="/sisco_logo_transparent.png" alt="Logo" className="h-auto w-[120px]" />
               </div>
 
-              <p className="mt-8 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[#e8a317]">Installation &amp; Dismantling</p>
+              <p className="mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[#e8a317]">Installation &amp; Dismantling</p>
               <h2 className="mt-3 text-[2.2rem] font-extrabold leading-[1.08] max-[800px]:text-[1.8rem]">
                 Racks up, racks down. Done safely.
               </h2>
-              <p className="mt-5 text-[0.95rem] leading-relaxed text-white/70">
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-white/70">
                 From a fresh warehouse setup to moving your storage to a new site, our crew handles the heavy work.
               </p>
 
@@ -221,7 +221,7 @@ export default function InstallationServicesModal({ open, onClose }) {
                 ))}
               </ul>
 
-              <div className="mt-auto border-t border-solid border-white/15 pt-6 max-[800px]:mt-8">
+              <div className="mt-4 border-t border-solid border-white/15 pt-6 max-[800px]:mt-2">
                 <p className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white/50">Talk to our service team</p>
                 <a href={PHONE_HREF} className="mb-4 flex items-center gap-3 text-white hover:text-[#e8a317]">
                   <span className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-[#e8a317]">

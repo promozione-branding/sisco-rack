@@ -360,7 +360,7 @@ export default function ProductDetail({ product: p, related }) {
     const img = app.image || images[(idx + 1) % images.length]
     return (
       <li key={app.title} className="flex items-start gap-3">
-        <img className="h-[62px] w-[84px] shrink-0 rounded-[8px] object-cover" src={img} alt="" loading="lazy" />
+        {/* <img className="h-[62px] w-[84px] shrink-0 rounded-[8px] object-cover" src={img} alt="" loading="lazy" /> */}
         <div className="min-w-0">
           <span className="flex items-start gap-1.5 text-[0.9rem] font-bold leading-[1.3]">
             <Icon size={18} strokeWidth={2.2} className="mt-[0.15em] shrink-0" aria-hidden="true" />
