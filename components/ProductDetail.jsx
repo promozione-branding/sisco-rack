@@ -303,7 +303,7 @@ export default function ProductDetail({ product: p, related }) {
                 <figcaption className="text-[0.72rem] text-muted-2">{s.layersPerRack ? "Drawn from the listed height and layers." : "Layer count in the drawing is illustrative."}</figcaption>
               </figure>
 
-              <div className="flex flex-col justify-center gap-5 rounded-lg border border-solid border-line p-4 bg-[#f3f5f8]">
+              <div className="flex flex-col justify-start gap-5 self-start rounded-lg border border-solid border-line bg-[#f3f5f8] p-4">
                 {highlights.map(({ Icon, title, text }, k) => (
                   <div key={title} className="flex items-start gap-4">
                     <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-circle ${hlTints[k % hlTints.length]}`} aria-hidden="true"><Icon size={22} strokeWidth={2} /></span>
@@ -323,17 +323,25 @@ export default function ProductDetail({ product: p, related }) {
             <div className="grid grid-cols-[1.45fr_1fr] items-stretch gap-6 max-[1180px]:grid-cols-[1fr]">
               {p.keyFeatures?.length > 0 && (
                 <Reveal className="flex">
-                  <div className={`${CARD} w-full p-6 min-h`}>
-                    <SectionTitle>Key features</SectionTitle>
-                    <div className="mt-12 grid grid-cols-[repeat(3,1fr)] gap-x-6 gap-y-12 max-[960px]:grid-cols-[1fr_1fr] max-[720px]:grid-cols-[1fr]">
-                      {p.keyFeatures.map((f, idx) => (
-                        <div key={f} className="flex items-start gap-3">
-                          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-circle bg-[#f5b82e] text-[0.78rem] font-bold text-white shadow-[0_0_0_4px_#fdf1d3]">{String(idx + 1).padStart(2, "0")}</span>
-                          <p className="text-[0.82rem] leading-[1.45] text-muted">{f}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                <div className={`${CARD} w-full p-6`}>
+  <SectionTitle>Key features</SectionTitle>
+  <div className="mt-6 grid grid-cols-[repeat(3,1fr)] content-start gap-x-6 gap-y-8 max-[960px]:grid-cols-[1fr_1fr] max-[720px]:grid-cols-[1fr]">
+    {p.keyFeatures.map((f, idx) => {
+      const i = f.indexOf(":")
+      const head = i > -1 ? f.slice(0, i) : null
+      const body = i > -1 ? f.slice(i + 1).trim() : f
+      return (
+        <div key={f} className="flex items-start gap-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-circle bg-[#f5b82e] text-[0.78rem] font-bold text-white shadow-[0_0_0_4px_#fdf1d3]">{String(idx + 1).padStart(2, "0")}</span>
+          <p className="text-[0.82rem] leading-[1.45] text-muted">
+            {head && <strong className="block font-bold text-ink">{head}</strong>}
+            {body}
+          </p>
+        </div>
+      )
+    })}
+  </div>
+</div>
                 </Reveal>
               )}
 
@@ -341,25 +349,31 @@ export default function ProductDetail({ product: p, related }) {
                 <Reveal className="flex">
                   <div className="w-full rounded-[24px] bg-[linear-gradient(155deg,#12347a_0%,#0c2457_100%)] p-6 text-white">
                     <SectionTitle light>Where it works</SectionTitle>
-                    <ul className="mt-5 grid list-none grid-cols-[1fr_1fr] gap-4 max-[720px]:grid-cols-[1fr]">
-                      {p.applications.map((a, idx) => {
-                        const app = typeof a === "string" ? { title: a } : a
-                        const Icon = appIcons[idx % appIcons.length]
-                        const img = app.image || images[(idx + 1) % images.length]
-                        return (
-                        <li key={app.title} className="flex items-center gap-3">
-  <img className="h-[62px] w-[84px] shrink-0 rounded-[8px] object-cover" src={img} alt="" loading="lazy" />
-  <div className="min-w-0">
-    <span className="flex items-start gap-1.5 text-[0.85rem] font-bold leading-[1.45]">
-      <Icon size={18} strokeWidth={2.2} className="mt-[0.2em] shrink-0" aria-hidden="true" />
-      <span>{app.title}</span>
-    </span>
-    {app.description && <span className="mt-0.5 block text-[0.74rem] leading-[1.35] text-white/75">{app.description}</span>}
-  </div>
-</li>
-                        )
-                      })}
-                    </ul>
+                  <ul className="mt-5 grid list-none grid-cols-[1fr_1fr] content-start items-start gap-x-4 gap-y-6 max-[720px]:grid-cols-[1fr]">
+  {p.applications.map((a, idx) => {
+    const raw = typeof a === "string" ? { title: a } : a
+    const colon = !raw.description ? raw.title.indexOf(":") : -1
+    const app = colon > -1
+      ? { ...raw, title: raw.title.slice(0, colon), description: raw.title.slice(colon + 1).trim() }
+      : raw
+    const Icon = appIcons[idx % appIcons.length]
+    const img = app.image || images[(idx + 1) % images.length]
+    return (
+      <li key={app.title} className="flex items-start gap-3">
+        <img className="h-[62px] w-[84px] shrink-0 rounded-[8px] object-cover" src={img} alt="" loading="lazy" />
+        <div className="min-w-0">
+          <span className="flex items-start gap-1.5 text-[0.9rem] font-bold leading-[1.3]">
+            <Icon size={18} strokeWidth={2.2} className="mt-[0.15em] shrink-0" aria-hidden="true" />
+            <span>{app.title}</span>
+          </span>
+          {app.description && (
+            <span className="mt-1 block text-[0.78rem] font-normal leading-[1.45] text-white/75">{app.description}</span>
+          )}
+        </div>
+      </li>
+    )
+  })}
+</ul>
                   </div>
                 </Reveal>
               )}
