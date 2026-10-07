@@ -3,10 +3,10 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import { Ruler, Layers, Weight, ArrowRight } from "lucide-react"
+import { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette, ArrowRight } from "lucide-react"
 import { categories } from "@/lib/data"
 import { products } from "@/lib/products"
-
+import { useRouter, useSearchParams } from "next/navigation"
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
 
@@ -14,13 +14,32 @@ const TAB = "cursor-pointer rounded-pill border-2 border-solid border-ink px-5 p
 const TAB_ON = "bg-ink text-bg"
 const TAB_OFF = "bg-transparent text-inherit hover:bg-steel"
 
+
+const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()
+
+// Priority order: the first two that exist for a product are shown
+const SPEC_CANDIDATES = [
+  { icon: Tag, label: "Type", keys: ["rack type", "floor type", "product type", "type", "structural type", "shelf type", "design", "mount type"] },
+  { icon: Weight, label: "Load Capacity", keys: ["load capacity per layer", "load per layer", "load capacity per level", "load capacity per shelf", "max load per shelf", "load capacity", "storage capacity", "bearing capacity", "frame load capacity", "weight tolerance capacity"] },
+  { icon: Ruler, label: "Height", keys: ["height", "height feet", "height in feet", "system height", "platform height"] },
+  { icon: Layers, label: "Material", keys: ["material", "material grade"] },
+  { icon: Paintbrush, label: "Finish", keys: ["surface treatment", "surface finish", "finish", "finishing", "finish type", "finishing type", "coating", "coated"] },
+  { icon: List, label: "Shelves", keys: ["number of shelves", "no of shelves", "number of levels", "layers per rack", "number of tiers", "shelves"] },
+  { icon: Info, label: "Usage", keys: ["usage application", "usage", "application", "applications", "uses", "usage area"] },
+  { icon: Palette, label: "Color", keys: ["color", "rack color", "color theme"] },
+]
+
 function getSpecs(p) {
-  const s = p.specs || {}
-  return [
-    { icon: Ruler, value: s.height, label: "Height" },
-    { icon: Layers, value: s.layersPerRack, label: "Layers" },
-    { icon: Weight, value: s.capacity ?? s.load ?? s.loadCapacity, label: "Capacity" },
-  ].filter((x) => x.value !== undefined && x.value !== null && x.value !== "")
+  const map = {}
+  for (const [k, v] of Object.entries(p.specs || {})) map[norm(k)] = v
+
+  const found = []
+  for (const { icon, label, keys } of SPEC_CANDIDATES) {
+    const key = keys.find((k) => map[k] !== undefined && map[k] !== null && String(map[k]).trim() !== "")
+    if (key) found.push({ icon, label, value: String(map[key]).trim() })
+    if (found.length === 2) break
+  }
+  return found
 }
 
 const WA_NUMBER = "+917629827285" 
@@ -36,7 +55,16 @@ const openWhatsApp = (e, message) => {
 }
 
 export default function ProductGrid() {
-  const [cat, setCat] = useState("all")
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const param = searchParams.get("cat")
+  const cat = categories.some((c) => c.id === param && !c.action) ? param : "all"
+
+  const selectCat = (id) => {
+    router.replace(id === "all" ? "/products" : `/products?cat=${id}`, { scroll: false })
+  }
+
   const shown = cat === "all" ? products : products.filter((p) => p.cat === cat)
 
   return (
@@ -44,20 +72,20 @@ export default function ProductGrid() {
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
         <div className="mb-9 flex flex-wrap gap-2.5">
           <button
-            className={`${TAB} ${cat === "all" ? TAB_ON : TAB_OFF}`}
-            onClick={() => setCat("all")}
-          >
-            All products
-          </button>
-          {categories.map((c) => (
-            <button
-              key={c.id}
-              className={`${TAB} ${cat === c.id ? TAB_ON : TAB_OFF}`}
-              onClick={() => setCat(c.id)}
-            >
-              {c.name}
-            </button>
-          ))}
+  className={`${TAB} ${cat === "all" ? TAB_ON : TAB_OFF}`}
+  onClick={() => selectCat("all")}
+>
+  All products
+</button>
+{categories.filter((c) => !c.action).map((c) => (
+  <button
+    key={c.id}
+    className={`${TAB} ${cat === c.id ? TAB_ON : TAB_OFF}`}
+    onClick={() => selectCat(c.id)}
+  >
+    {c.name}
+  </button>
+))}
         </div>
 
         <motion.div
@@ -96,25 +124,23 @@ export default function ProductGrid() {
                         />
                       </div>
 
-                      {specs.length > 0 && (
-                        <div
-                          className="absolute -bottom-9 left-3.5 right-3.5 grid items-center rounded-2xl bg-white px-2 py-3 shadow-[0_6px_20px_rgba(15,40,90,0.12)]"
-                          style={{ gridTemplateColumns: `repeat(${specs.length}, 1fr)` }}
-                        >
-                          {specs.map(({ icon: Icon, value, label }, i) => (
-                            <div
-                              key={label}
-                              className={`flex items-center justify-center gap-2 px-1 ${i > 0 ? "border-l border-solid border-slate-200" : ""}`}
-                            >
-                              <Icon className="h-[22px] w-[22px] shrink-0" style={{ color: NAVY }} />
-                              <div className="min-w-0 leading-tight">
-                                <p className="truncate text-[0.82rem] font-bold" style={{ color: NAVY }}>{value}</p>
-                                <p className="truncate text-[0.68rem] text-slate-500">{label}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+             {specs.length > 0 && (
+  <div className="absolute -bottom-9 left-3.5 right-3.5 grid grid-cols-[repeat(2,minmax(0,1fr))] items-center overflow-hidden rounded-2xl bg-white px-2 py-3 shadow-[0_6px_20px_rgba(15,40,90,0.12)]">
+    {specs.map(({ icon: Icon, value, label }, i) => (
+      <div
+        key={label}
+        title={`${label}: ${value}`}
+        className={`flex min-w-0 items-center justify-center gap-2 px-1 ${i > 0 ? "border-l border-solid border-slate-200" : ""}`}
+      >
+        <Icon className="h-[22px] w-[22px] shrink-0" style={{ color: NAVY }} />
+        <div className="min-w-0 flex-1 leading-tight">
+          <p className="truncate text-[0.82rem] font-bold" style={{ color: NAVY }}>{value}</p>
+          <p className="truncate text-[0.68rem] text-slate-500">{label}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
                     </div>
 
                     {/* Body */}

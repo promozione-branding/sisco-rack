@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { featuredproducts } from "@/lib/data"
-import { Tag, Weight, ArrowRight } from "lucide-react"
+import { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette, ArrowRight } from "lucide-react"
 const WORD_LIMIT = 12
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
@@ -39,29 +39,29 @@ function truncateWords(text = "", limit = WORD_LIMIT) {
 
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()
 
-const TYPE_KEYS = ["rack type", "floor type", "product type", "type", "structural type", "shelf type", "design", "mount type"]
-const LOAD_KEYS = [
-  "load capacity per layer", "load per layer", "load capacity per level",
-  "load capacity per shelf", "max load per shelf", "load capacity",
-  "storage capacity", "bearing capacity", "frame load capacity", "weight tolerance capacity",
+// Priority order: the first two that exist for a product are shown
+const SPEC_CANDIDATES = [
+  { icon: Tag, label: "Type", keys: ["rack type", "floor type", "product type", "type", "structural type", "shelf type", "design", "mount type"] },
+  { icon: Weight, label: "Load Capacity", keys: ["load capacity per layer", "load per layer", "load capacity per level", "load capacity per shelf", "max load per shelf", "load capacity", "storage capacity", "bearing capacity", "frame load capacity", "weight tolerance capacity"] },
+  { icon: Ruler, label: "Height", keys: ["height", "height feet", "height in feet", "system height", "platform height"] },
+  { icon: Layers, label: "Material", keys: ["material", "material grade"] },
+  { icon: Paintbrush, label: "Finish", keys: ["surface treatment", "surface finish", "finish", "finishing", "finish type", "finishing type", "coating", "coated"] },
+  { icon: List, label: "Shelves", keys: ["number of shelves", "no of shelves", "number of levels", "layers per rack", "number of tiers", "shelves"] },
+  { icon: Info, label: "Usage", keys: ["usage application", "usage", "application", "applications", "uses", "usage area"] },
+  { icon: Palette, label: "Color", keys: ["color", "rack color", "color theme"] },
 ]
 
-function pick(specs, keys) {
-  const map = {}
-  for (const [k, v] of Object.entries(specs)) map[norm(k)] = v
-  for (const key of keys) {
-    const v = map[key]
-    if (v !== undefined && v !== null && String(v).trim() !== "") return v
-  }
-  return undefined
-}
-
 function getSpecs(p) {
-  const s = p.specs || {}
-  return [
-    { icon: Tag, value: pick(s, TYPE_KEYS), label: "Type" },
-    { icon: Weight, value: pick(s, LOAD_KEYS), label: "Load Capacity" },
-  ].filter((x) => x.value !== undefined && x.value !== null && x.value !== "")
+  const map = {}
+  for (const [k, v] of Object.entries(p.specs || {})) map[norm(k)] = v
+
+  const found = []
+  for (const { icon, label, keys } of SPEC_CANDIDATES) {
+    const key = keys.find((k) => map[k] !== undefined && map[k] !== null && String(map[k]).trim() !== "")
+    if (key) found.push({ icon, label, value: String(map[key]).trim() })
+    if (found.length === 2) break
+  }
+  return found
 }
 
 const UP = "absolute bottom-0 top-0 w-5 origin-bottom bg-blue bg-[radial-gradient(circle,var(--panel)_3px,transparent_4px)] bg-[length:20px_28px] bg-[position:center_8px] max-[540px]:w-3.5 max-[540px]:bg-[length:14px_24px]"
@@ -186,25 +186,23 @@ export default function FeaturedProducts() {
                           />
                         </div>
 
-                        {specs.length > 0 && (
-                          <div
-                            className="absolute -bottom-8 left-3 right-3 grid items-center rounded-2xl bg-white px-1.5 py-2.5 shadow-[0_6px_20px_rgba(15,40,90,0.12)]"
-                            style={{ gridTemplateColumns: `repeat(${specs.length}, 1fr)` }}
-                          >
-                            {specs.map(({ icon: Icon, value, label }, n) => (
-                              <div
-                                key={label}
-                                className={`flex items-center justify-center gap-1.5 px-1 ${n > 0 ? "border-l border-solid border-slate-200" : ""}`}
-                              >
-                                <Icon className="h-5 w-5 shrink-0" style={{ color: NAVY }} />
-                                <div className="min-w-0 leading-tight">
-                                  <p className="truncate text-[0.78rem] font-bold" style={{ color: NAVY }}>{value}</p>
-                                  <p className="truncate text-[0.64rem] text-slate-500">{label}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+               {specs.length > 0 && (
+  <div className="absolute -bottom-9 left-3.5 right-3.5 grid grid-cols-[repeat(2,minmax(0,1fr))] items-center overflow-hidden rounded-2xl bg-white px-2 py-3 shadow-[0_6px_20px_rgba(15,40,90,0.12)]">
+    {specs.map(({ icon: Icon, value, label }, i) => (
+      <div
+        key={label}
+        title={`${label}: ${value}`}
+        className={`flex min-w-0 items-center justify-center gap-2 px-1 ${i > 0 ? "border-l border-solid border-slate-200" : ""}`}
+      >
+        <Icon className="h-[22px] w-[22px] shrink-0" style={{ color: NAVY }} />
+        <div className="min-w-0 flex-1 leading-tight">
+          <p className="truncate text-[0.82rem] font-bold" style={{ color: NAVY }}>{value}</p>
+          <p className="truncate text-[0.68rem] text-slate-500">{label}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
                       </div>
 
                       {/* Body */}
