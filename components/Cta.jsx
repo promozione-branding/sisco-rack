@@ -69,7 +69,7 @@ export default function CTA() {
           >
 
             <a
-              href="https://wa.me/917629827285"
+              href="https://wa.me/919953018892"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 rounded-md border-[1.5px] border-solid border-white/55 bg-[rgba(25,139,25,0.55)] px-[26px] py-3.5 text-[0.98rem] font-semibold text-white backdrop-blur-[6px] [transition:background_0.22s,border-color_0.22s,transform_0.18s] hover:-translate-y-0.5 hover:border-white hover:bg-white/[0.12] max-[720px]:w-full max-[720px]:max-w-[280px] max-[720px]:justify-center"
