@@ -91,9 +91,9 @@ export default function CTA() {
           animate="show"
           custom={3}
         >
-          <a className={BAR_LINK} href="tel:+919650167709">+91 96501 67709</a>
+          <a className={BAR_LINK} href="tel:++919953018892">+91 9953018892</a>
           <span className="select-none opacity-[0.45]">|</span>
-          <a className={BAR_LINK} href="mailto:hello@yourracks.com">hello@yourracks.com</a>
+          <a className={BAR_LINK} href="mailto:info.siscosteel@gmail.com">info.siscosteel@gmail.com</a>
           <span className="select-none opacity-[0.45]">|</span>
           <span>Sisco Racks</span>
         </motion.div>
