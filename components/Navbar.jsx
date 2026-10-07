@@ -32,6 +32,13 @@ export default function Navbar() {
     setDrop(false)
     setQuote(true)
   }
+
+const flash =
+  "relative w-fit overflow-hidden rounded-pill " +
+  "after:pointer-events-none after:absolute after:top-0 after:-left-3/4 after:h-full after:w-1/2 " +
+  "after:-skew-x-[20deg] after:bg-gradient-to-r after:from-transparent after:via-white/60 after:to-transparent " +
+  "after:content-[''] after:animate-[flash-sweep_2.8s_ease-in-out_infinite] motion-reduce:after:hidden"
+
   return (
     <header className="sticky top-0 z-30 h-0">
       <div className="relative mx-auto flex h-[92px] max-w-[1100px] items-center justify-between gap-6 rounded-b-[44px] bg-[#253970] pl-8 pr-6 text-white before:absolute before:-left-11 before:top-0 before:h-11 before:w-11 before:bg-[radial-gradient(circle_at_0_100%,transparent_43px,#253970_44px)] before:content-[''] after:absolute after:-right-11 after:top-0 after:h-11 after:w-11 after:bg-[radial-gradient(circle_at_100%_100%,transparent_43px,#253970_44px)] after:content-[''] max-[960px]:mx-3 max-[960px]:h-[76px] max-[960px]:rounded-b-[32px] max-[960px]:pl-5 max-[960px]:pr-4 max-[960px]:before:hidden max-[960px]:after:hidden">
@@ -107,8 +114,8 @@ export default function Navbar() {
             </a>
           </li>
           <li className="hidden max-[960px]:block max-[960px]:pt-2 [&>a]:flex [&>a]:items-center [&>a]:gap-2 [&>a]:rounded-pill [&>a]:px-4 [&>a]:py-2.5 [&>a]:text-white/85 [&>a]:transition-[background,color] [&>a]:duration-200 [&>a:hover]:bg-white/[0.12] [&>a:hover]:text-white">
-            <div onClickCapture={openQuote}>
-              <SplitButton >Get a quote</SplitButton>
+            <div>
+              <SplitButton  className="flash-btn" onClickCapture={openQuote}>Get a quote</SplitButton>
             </div>
           </li>
         </ul>
@@ -125,9 +132,9 @@ export default function Navbar() {
             </svg>
             WhatsApp
           </a>
-          <div className="max-[960px]:hidden" onClickCapture={openQuote}>
-            <SplitButton >Get a quote</SplitButton>
-          </div>
+<div>
+  <SplitButton className="flash-btn max-[960px]:hidden" onClickCapture={openQuote}>Get a quote</SplitButton>
+</div>
           <button className="hidden rounded-pill border-2 border-solid border-white/50 bg-transparent px-4 py-2 font-semibold text-white [font-family:inherit] cursor-pointer max-[960px]:block" onClick={() => setOpen(!open)} aria-expanded={open}>
             {open ? "Close" : "Menu"}
           </button>

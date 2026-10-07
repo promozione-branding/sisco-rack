@@ -24,7 +24,7 @@ const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.
 export default function FloatingContact() {
   return (
     <MotionConfig reducedMotion="user">
-      <div className="fixed bottom-20 right-11 z-40 flex flex-col items-end gap-3.5 max-[720px]:bottom-4 max-[720px]:right-3.5 max-[720px]:gap-3">
+      <div className="fixed bottom-10 right-11 z-40 flex flex-col items-end gap-3.5 max-[720px]:bottom-4 max-[720px]:right-3.5 max-[720px]:gap-3">
         <motion.div
           initial={{ scale: 0, y: 40, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -44,7 +44,7 @@ export default function FloatingContact() {
         >
           <a className={linkCls} href={`tel:${contact.phoneHref}`} aria-label="Call us">
             <span className={labelCls}>Call us</span>
-            <span className={`${btnCls} bg-[#e82f17] text-safety`}>
+            <span className={`${btnCls} bg-[#e82f17] text-white`}>
               <Call />
             </span>
           </a>

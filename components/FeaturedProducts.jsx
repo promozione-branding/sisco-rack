@@ -3,9 +3,8 @@
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
-import { Ruler, Weight, ArrowRight } from "lucide-react"
 import { featuredproducts } from "@/lib/data"
-
+import { Tag, Weight, ArrowRight } from "lucide-react"
 const WORD_LIMIT = 12
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
@@ -38,11 +37,30 @@ function truncateWords(text = "", limit = WORD_LIMIT) {
   }
 }
 
+const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()
+
+const TYPE_KEYS = ["rack type", "floor type", "product type", "type", "structural type", "shelf type", "design", "mount type"]
+const LOAD_KEYS = [
+  "load capacity per layer", "load per layer", "load capacity per level",
+  "load capacity per shelf", "max load per shelf", "load capacity",
+  "storage capacity", "bearing capacity", "frame load capacity", "weight tolerance capacity",
+]
+
+function pick(specs, keys) {
+  const map = {}
+  for (const [k, v] of Object.entries(specs)) map[norm(k)] = v
+  for (const key of keys) {
+    const v = map[key]
+    if (v !== undefined && v !== null && String(v).trim() !== "") return v
+  }
+  return undefined
+}
+
 function getSpecs(p) {
   const s = p.specs || {}
   return [
-    { icon: Ruler, value: s.height, label: "Height" },
-    { icon: Weight, value: s.capacity ?? s.load ?? s.loadCapacity ?? s.loadPerLayer, label: "Capacity" },
+    { icon: Tag, value: pick(s, TYPE_KEYS), label: "Type" },
+    { icon: Weight, value: pick(s, LOAD_KEYS), label: "Load Capacity" },
   ].filter((x) => x.value !== undefined && x.value !== null && x.value !== "")
 }
 
