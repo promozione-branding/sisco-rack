@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Mail, Phone, Clock } from "lucide-react"
+import { Mail, Phone, Clock , } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
 import { brand, categories, links } from "@/lib/data"
 
 const smallCls = "mt-7 block border-t border-solid border-[#45535f] pt-4 text-[#9fb0bd]"
@@ -52,12 +53,17 @@ export default function Footer() {
                   +91 9953018892
                 </a>
               </li>
-              <li className={itemCls}>
-                <Phone className={iconCls} aria-hidden="true" />
-                <a href="tel:+917629827285" className="hover:text-safety">
-                  +91 7629827285
-                </a>
-              </li>
+             <li className={itemCls}>
+  <FaWhatsapp className={iconCls} aria-hidden="true" />
+  <a
+    href="https://wa.me/917629827285"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-safety"
+  >
+    +91 7629827285 (WhatsApp)
+  </a>
+</li>
               <li className={itemCls}>
                 <Clock className={iconCls} aria-hidden="true" />
                 <span>Mon to Sat, 8am to 6pm</span>
