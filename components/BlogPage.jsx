@@ -9,7 +9,7 @@ const NAVY = "#0b2a5b"
 const BLUE = "#0f4aa8"
 const AMBER = "#f5a623"
 
-const wrap = "mx-auto grid max-w-[1910px] grid-cols-[1.02fr_1.18fr] items-stretch gap-5 px-14 py-9 max-[1100px]:grid-cols-1 max-[720px]:px-5"
+const wrap = "mx-auto grid max-w-[1910px] items-stretch gap-5 px-14 py-9 max-[1100px]:grid-cols-1 max-[720px]:px-5"
 const focus =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f5a623]"
 const panel = "bg-white shadow-[0_10px_40px_rgba(15,40,90,0.08)]"
