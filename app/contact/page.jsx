@@ -1,8 +1,9 @@
 import PageHead from "@/components/PageHead"
 import ContactForm from "@/components/ContactForm"
 import Map from "@/components/Map"
+import { pageSeo } from "@/lib/seo"
 
-export const metadata = { title: "Contact | Rackwell Steel" }
+export const metadata = { title: pageSeo.contact.title, description: pageSeo.contact.description }
 
 export default function Contact() {
   return (

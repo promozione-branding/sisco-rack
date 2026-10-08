@@ -5,8 +5,9 @@ import IndustriesServed from "@/components/IndustriesServed"
 import PageHead from "@/components/PageHead"
 import WhyChooseUs from "@/components/WhyChooseUs"
 import { aboutPageAbout, aboutWhyChoose } from "@/lib/aboutContent"
+import { pageSeo } from "@/lib/seo"
 
-export const metadata = { title: "About | Rackwell Steel" }
+export const metadata = { title: pageSeo.about.title, description: pageSeo.about.description }
 
 const NAVY = "#0b1a40"
 const YELLOW = "#f5b800"

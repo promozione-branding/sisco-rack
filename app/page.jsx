@@ -1,3 +1,4 @@
+import { pageSeo } from "@/lib/seo"
 import Hero from "@/components/Hero"
 import Marquee from "@/components/Marquee"
 import FeaturedProducts from "@/components/FeaturedProducts"
@@ -11,6 +12,8 @@ import Cta from "@/components/Cta"
 import OurStory from "@/components/OurStory"
 import AboutUsHome from "@/components/AboutUsHome"
 import { homeAbout } from "@/lib/aboutContent"
+
+export const metadata = { title: pageSeo.home.title, description: pageSeo.home.description }
 
 export default function Home() {
   return (

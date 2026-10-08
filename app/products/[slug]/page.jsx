@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { products } from "@/lib/products"
 import ProductDetail from "@/components/ProductDetail"
+import { productSeo } from "@/lib/seo"
 
 const find = (slug) => products.find((p) => (p.slug || p.id) === slug)
 
@@ -12,6 +13,8 @@ export async function generateMetadata({ params }) {
   const { slug } = await params
   const p = find(slug)
   if (!p) return { title: "Product not found" }
+  const seo = productSeo[p.slug || p.id]
+  if (seo) return { title: seo.title, description: seo.description }
   return { title: `${p.name} | Rackwell Steel`, description: p.description.slice(0, 155) }
 }
 
