@@ -6,7 +6,7 @@ import SplitButton from "./SplitButton"
 import QuoteModal from "./QuoteModal"
 import { useState, useEffect } from "react"
 
-const slides = ["/hero.jpg", "/industrial_store_rack.png", "/slotted_angle_section_panel_raw.png"]
+const slides = ["/hero.webp", "/industrial_store_rack.webp", "/slotted_angle_section_panel_raw.webp"]
 
 const line = (i) => ({
   initial: { opacity: 0, y: 46 },
