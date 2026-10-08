@@ -1,7 +1,10 @@
 import Link from "next/link"
+import { Mail, Phone, Clock } from "lucide-react"
 import { brand, categories, links } from "@/lib/data"
 
 const smallCls = "mt-7 block border-t border-solid border-[#45535f] pt-4 text-[#9fb0bd]"
+const itemCls = "mb-2 flex items-center gap-2.5"
+const iconCls = "h-4 w-4 shrink-0 text-safety"
 
 export default function Footer() {
   return (
@@ -10,12 +13,12 @@ export default function Footer() {
         <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr] gap-8">
           <div>
             <Link href="/" className="flex items-center gap-2 font-display text-[1.7rem] font-bold text-white">
-  <img
-    src="/sisco_logo_transparent.png"
-    alt="Logo"
-    width={100}
-  />
-</Link>
+              <img
+                src="/sisco_logo_transparent.png"
+                alt="Logo"
+                width={100}
+              />
+            </Link>
             <p className="max-w-[38ch]">Industrial racking and shelving, made to your floor plan and installed by our own crews.</p>
           </div>
           <div>
@@ -26,7 +29,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-                    <div>
+          <div>
             <h3 className="mb-3.5 text-[1.4rem] text-safety">Categories</h3>
             <ul className="list-none">
               {categories.map((l) => (
@@ -34,27 +37,33 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-       <div>
-  <h3 className="mb-3.5 text-[1.4rem] text-safety">Reach us</h3>
-  <ul className="list-none">
-    <li className="mb-2">
-      <a href="mailto:info.siscosteel@gmail.com" className="hover:text-safety">
-        info.siscosteel@gmail.com
-      </a>
-    </li>
-    <li className="mb-2">
-      <a href="tel:+919953018892" className="hover:text-safety">
-        +91 9953018892
-      </a>
-    </li>
-    <li className="mb-2">
-      <a href="tel:+917629827285" className="hover:text-safety">
-        +91 7629827285
-      </a>
-    </li>
-    <li className="mb-2">Mon to Sat, 8am to 6pm</li>
-  </ul>
-</div>
+          <div>
+            <h3 className="mb-3.5 text-[1.4rem] text-safety">Reach us</h3>
+            <ul className="list-none">
+              <li className={itemCls}>
+                <Mail className={iconCls} aria-hidden="true" />
+                <a href="mailto:info.siscosteel@gmail.com" className="break-all hover:text-safety">
+                  info.siscosteel@gmail.com
+                </a>
+              </li>
+              <li className={itemCls}>
+                <Phone className={iconCls} aria-hidden="true" />
+                <a href="tel:+919953018892" className="hover:text-safety">
+                  +91 9953018892
+                </a>
+              </li>
+              <li className={itemCls}>
+                <Phone className={iconCls} aria-hidden="true" />
+                <a href="tel:+917629827285" className="hover:text-safety">
+                  +91 7629827285
+                </a>
+              </li>
+              <li className={itemCls}>
+                <Clock className={iconCls} aria-hidden="true" />
+                <span>Mon to Sat, 8am to 6pm</span>
+              </li>
+            </ul>
+          </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <small className={smallCls}>© 2026 {brand}. All rights reserved.</small>
