@@ -4,7 +4,7 @@ import Map from "@/components/Map"
 import { pageSeo } from "@/lib/seo"
 import BlogPage from "@/components/BlogPage"
 
-export const metadata = { title: pageSeo.contact.title, description: pageSeo.contact.description }
+export const metadata = { title: pageSeo.blogs.title, description: pageSeo.blogs.description }
 
 export default function Contact() {
   return (

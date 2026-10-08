@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
+import axios from "axios"
 import {
   User, Mail, Package, FileText, ChevronDown, ArrowRight, ShieldCheck,
   MapPin, Phone, Clock, Send, Settings, Truck, Headphones,
@@ -45,11 +46,57 @@ const features = [
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    setSent(true)
-    e.target.reset()
+    setError("")
+    setLoading(true)
+
+    const form = e.currentTarget
+    const formDataRaw = new FormData(form)
+
+    const name = formDataRaw.get("name")?.trim()
+    const phone = formDataRaw.get("phone")?.trim()
+    const email = formDataRaw.get("email")?.trim()
+    const product = formDataRaw.get("product")?.trim()
+    const message = formDataRaw.get("message")?.trim()
+
+    const formData = {
+      platform: "Sisco steel Products",
+      supplierToken: "6a266629a0e54917311a8ce5",
+      platformEmail: "info.siscosteel@gmail.com",
+      name,
+      phone,
+      email,
+      product,
+      message,
+      place: "N/A",
+    }
+
+    if (!/^\d{10}$/.test(formData.phone)) {
+      setError("Enter a valid 10-digit phone number")
+      setLoading(false)
+      return
+    }
+
+    try {
+      const { data } = await axios.post(
+        "https://brandbnalo.com/api/form/add",
+        formData
+      )
+
+      setSent(true)
+      form.reset()
+
+      setTimeout(() => setSent(false), 5000)
+    } catch (err) {
+      console.error(err)
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -60,11 +107,11 @@ export default function ContactForm() {
         style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),` }}
       />
 
-<div className="mx-auto grid max-w-[1910px] grid-cols-[1.02fr_1.18fr] items-stretch gap-5 px-14 py-9 max-[1100px]:grid-cols-1 max-[720px]:px-5">
-  <form
-  onSubmit={submit}
-  className="flex flex-col rounded-3xl bg-white p-[30px] shadow-[0_10px_40px_rgba(15,40,90,0.08)]"
->
+      <div className="mx-auto grid max-w-[1910px] grid-cols-[1.02fr_1.18fr] items-stretch gap-5 px-14 py-9 max-[1100px]:grid-cols-1 max-[720px]:px-5">
+        <form
+          onSubmit={submit}
+          className="flex flex-col rounded-3xl bg-white p-[30px] shadow-[0_10px_40px_rgba(15,40,90,0.08)]"
+        >
           <div className="flex items-center gap-4">
             <span className="text-[0.8rem] font-bold uppercase tracking-wide" style={{ color: BLUE }}>
               Get in touch
@@ -79,7 +126,7 @@ export default function ContactForm() {
             Tell us about your requirements and our team will get back to you with the best solution for your storage needs.
           </p>
 
-<div className="mt-9 flex flex-1 flex-col gap-[22px]">
+          <div className="mt-9 flex flex-1 flex-col gap-[22px]">
             <div className="grid grid-cols-2 gap-[18px] max-[720px]:grid-cols-1">
               <label className={box}>
                 <User className={iconCls} />
@@ -91,16 +138,32 @@ export default function ContactForm() {
               </label>
             </div>
 
+            {/* Phone field */}
+            <label className={box}>
+              <Phone className={iconCls} />
+              <input
+                className={inputCls}
+                name="phone"
+                type="tel"
+                placeholder="Phone number *"
+                required
+                maxLength={10}
+              />
+            </label>
+
             <label className={box}>
               <Package className={iconCls} />
               <div className="w-full pl-14 pr-12 pb-3 pt-3">
                 <span className="block text-[0.72rem] text-slate-500">What do you need? *</span>
                 <select
-                  name="type"
+                  name="product"
                   className="w-full appearance-none bg-transparent text-[0.95rem] max-[720px]:text-[16px] font-medium text-slate-800 outline-none [font-family:inherit]"
+                  required
                 >
                   {categories.map((c) => (
-                    <option key={c.id}>{c.name}</option>
+                    <option key={c.id} value={c.name}>
+                      {c.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -121,13 +184,19 @@ export default function ContactForm() {
           <div className="mt-6 flex items-center gap-8 max-[720px]:flex-col max-[720px]:items-stretch">
             <button
               type="submit"
-              className="flex h-[58px] w-[650px] max-w-full cursor-pointer items-center justify-center gap-3 rounded-xl text-[1.1rem] font-semibold text-white shadow-[0_8px_20px_rgba(15,60,150,0.3)] transition hover:brightness-110 [font-family:inherit]"
+              disabled={loading}
+              className="flex h-[58px] w-[650px] max-w-full cursor-pointer items-center justify-center gap-3 rounded-xl text-[1.1rem] font-semibold text-white shadow-[0_8px_20px_rgba(15,60,150,0.3)] transition hover:brightness-110 disabled:opacity-70 [font-family:inherit]"
               style={{ background: `linear-gradient(90deg, ${NAVY}, ${BLUE})` }}
             >
-              Send request <ArrowRight className="h-5 w-5" />
+              {loading ? "Sending..." : "Send request"} <ArrowRight className="h-5 w-5" />
             </button>
-            
           </div>
+
+          {error && (
+            <div className="mt-5 rounded-xl border border-red-200 bg-red-50 px-5 py-3.5 font-semibold text-red-700">
+              {error}
+            </div>
+          )}
 
           {sent && (
             <motion.div

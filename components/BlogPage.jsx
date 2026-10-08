@@ -300,7 +300,7 @@ export default function BlogPage() {
             </ul>
           </section>
 
-          <section className="rounded-3xl bg-gradient-to-b from-sky-50 to-sky-200 px-4 pb-6 pt-5 shadow-[0_10px_40px_rgba(15,40,90,0.08)] text-center md:col-span-2 lg:col-span-1">
+          {/* <section className="rounded-3xl bg-gradient-to-b from-sky-50 to-sky-200 px-4 pb-6 pt-5 shadow-[0_10px_40px_rgba(15,40,90,0.08)] text-center md:col-span-2 lg:col-span-1">
             <span
               className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full"
               style={{ background: NAVY }}
@@ -340,7 +340,7 @@ export default function BlogPage() {
                 </button>
               </form>
             )}
-          </section>
+          </section> */}
         </aside>
       </div>
     </main>
