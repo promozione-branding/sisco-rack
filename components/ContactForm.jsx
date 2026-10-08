@@ -9,7 +9,7 @@ import {
 import { categories } from "@/lib/data"
 
 const BANNER_IMG = "/"
-const FACTORY_IMG = "/testimonial_1.png"
+const FACTORY_IMG = "/testimonial_1.webp"
 
 const NAVY = "#0b2a5b"
 const BLUE = "#0f4aa8"

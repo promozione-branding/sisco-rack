@@ -10,7 +10,7 @@ export default function Contact() {
       <PageHead 
   title="Contact" 
   text="Get in touch with us."
-  backgroundImage="/testimonial_6.png"
+  backgroundImage="/testimonial_6.webp"
 />
       <ContactForm />
       <Map/>

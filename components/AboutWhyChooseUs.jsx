@@ -101,7 +101,7 @@ export default function AboutWhyChooseUs({
   intro = defaultIntro,
   note = defaultNote,
   items = defaultItems,
-  image = "/delivery.png",
+  image = "/delivery.webp",
   imageAlt = "Delivery truck and warehouse with steel racks",
   badge = defaultBadge,
   contactHref = "/contact",

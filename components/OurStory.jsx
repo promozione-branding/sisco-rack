@@ -12,7 +12,7 @@ const rise = {
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] } })
 }
 
-const valueImages = ["/welding.png", "/steel.png" , "finishing.png" , "mezzanine.png"]
+const valueImages = ["/welding.webp", "/steel.webp" , "finishing.webp" , "mezzanine.webp"]
 
 const Svg = ({ children }) => (
   <svg viewBox="0 0 24 24" className="h-11 w-11 max-[720px]:h-9 max-[720px]:w-9" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

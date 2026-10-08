@@ -8,10 +8,10 @@ const BOARD_W = 1126
 const BOARD_H = 498
 
 const SIDE_IMAGES = {
-  left: "/testimonial_1.png",
-  top: "/testimonial_2.png",
-  middle: "/testimonial_3.png",
-  bottom: "/testimonial_2.png",
+  left: "/testimonial_1.webp",
+  top: "/testimonial_2.webp",
+  middle: "/testimonial_3.webp",
+  bottom: "/testimonial_2.webp",
 }
 
 const svgBase = {
@@ -89,13 +89,13 @@ const icons = {
 }
 
 const industries = [
-  { n: "01", label: "Warehouses & Logistics", icon: "warehouse", tone: "blue", img: "/Warehouse.png", x: 178, y: 1, w: 311, h: 138 },
-  { n: "02", label: "E-commerce & Fulfilment", icon: "package", tone: "yellow", img: "/Packaging.png", x: 624, y: 1, w: 284, h: 138 },
-  { n: "03", label: "Retail & Supermarkets", icon: "retail", tone: "blue", img: "/supermarket_rack_use.png", x: 0, y: 177, w: 307, h: 138 },
-  { n: "04", label: "Manufacturing Plants", icon: "factory", tone: "yellow", img: "/manufacturing_plants_use.png", x: 394, y: 177, w: 317, h: 138 },
-  { n: "05", label: "Cold Storage & Food Processing", icon: "snowflake", tone: "blue", img: "/food_processing.png", x: 801, y: 177, w: 308, h: 138 },
-  { n: "06", label: "Pharma & Healthcare", icon: "pharma", tone: "yellow", img: "/pharma.png", x: 225, y: 358, w: 282, h: 140 },
-  { n: "07", label: "Automotive & Workshops", icon: "wrench", tone: "blue", img: "/automative.png", x: 577, y: 358, w: 324, h: 140 },
+  { n: "01", label: "Warehouses & Logistics", icon: "warehouse", tone: "blue", img: "/Warehouse.webp", x: 178, y: 1, w: 311, h: 138 },
+  { n: "02", label: "E-commerce & Fulfilment", icon: "package", tone: "yellow", img: "/Packaging.webp", x: 624, y: 1, w: 284, h: 138 },
+  { n: "03", label: "Retail & Supermarkets", icon: "retail", tone: "blue", img: "/supermarket_rack_use.webp", x: 0, y: 177, w: 307, h: 138 },
+  { n: "04", label: "Manufacturing Plants", icon: "factory", tone: "yellow", img: "/manufacturing_plants_use.webp", x: 394, y: 177, w: 317, h: 138 },
+  { n: "05", label: "Cold Storage & Food Processing", icon: "snowflake", tone: "blue", img: "/food_processing.webp", x: 801, y: 177, w: 308, h: 138 },
+  { n: "06", label: "Pharma & Healthcare", icon: "pharma", tone: "yellow", img: "/pharma.webp", x: 225, y: 358, w: 282, h: 140 },
+  { n: "07", label: "Automotive & Workshops", icon: "wrench", tone: "blue", img: "/automative.webp", x: 577, y: 358, w: 324, h: 140 },
 ]
 
 const routes = [

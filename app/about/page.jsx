@@ -104,7 +104,7 @@ export default function About() {
       <PageHead
         title="Built on the shop floor"
         text="Sisco started as a two-person welding bay. Today we make racking for warehouses, workshops and shops across the country."
-        backgroundImage="/about_bg.png"
+        backgroundImage="/about_bg.webp"
       />
       <AboutUsHome {...aboutPageAbout}/>
       <IndustriesServed />
@@ -112,7 +112,7 @@ export default function About() {
   className="bg-[#eceef1] bg-cover bg-center bg-no-repeat py-12 max-[720px]:py-8"
   style={{
     backgroundImage:
-      "linear-gradient(90deg, rgba(236,238,241,0.96) 0%, rgba(236,238,241,0.88) 40%, rgba(236,238,241,0.45) 100%), url('/steel.png')",
+      "linear-gradient(90deg, rgba(236,238,241,0.96) 0%, rgba(236,238,241,0.88) 40%, rgba(236,238,241,0.45) 100%), url('/steel.webp')",
   }}
 >
         <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">

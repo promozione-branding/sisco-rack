@@ -199,7 +199,7 @@ export default function InstallationServicesModal({ open, onClose }) {
               </button>
 
               <div className="w-fit rounded-[10px]">
-                <img src="/sisco_logo_transparent.png" alt="Logo" className="h-auto w-[120px]" />
+                <img src="/sisco_logo_transparent.webp" alt="Logo" className="h-auto w-[120px]" />
               </div>
 
               <p className="mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[#e8a317]">Installation &amp; Dismantling</p>

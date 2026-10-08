@@ -15,7 +15,7 @@ const defaultFigures = [
   { value: "10 yr", label: "frame warranty" },
 ]
 
-const fallbackImages = ["/load-test.jpg", "/hero.jpg", "/installation.jpg", "/warranty.jpeg"]
+const fallbackImages = ["/load-test.webp", "/hero.webp", "/installation.webp", "/warranty.webp"]
 
 const icons = [
   <>

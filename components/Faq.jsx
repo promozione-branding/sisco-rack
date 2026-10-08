@@ -4,7 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { faqs } from "@/lib/data"
 
-const IMAGE_SRC = "/testimonial_5.png"
+const IMAGE_SRC = "/testimonial_5.webp"
 
 const waveMask = (d) => {
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='0'><stop offset='0.86' stop-color='#000'/><stop offset='1' stop-color='#000' stop-opacity='0'/></linearGradient></defs><path d='${d}' fill='url(#g)'/></svg>`

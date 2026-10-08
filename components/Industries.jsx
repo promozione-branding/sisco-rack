@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 
 const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1100 200'><text x='550' y='100' text-anchor='middle' dominant-baseline='central' font-family='Arial Black,Arial,Helvetica,sans-serif' font-weight='900' font-size='150' textLength='900' lengthAdjust='spacingAndGlyphs' fill='black'>Sisco Racks</text></svg>`
 
@@ -18,6 +18,23 @@ export default function Industries() {
   const mask = useRef(null)
   const media = useRef(null)
   const eyebrow = useRef(null)
+  const [videoSrc, setVideoSrc] = useState(null)
+
+  // Load the video only when the section is close to the screen, and pick a size that suits the device
+  useEffect(() => {
+    const el = container.current
+    if (!el) return
+    const pick = () => {
+      const small = window.innerWidth < 900
+      const saver = navigator.connection?.saveData
+      if (saver) return
+      setVideoSrc(small ? "/bg_main_mobile.mp4" : "/bg_main_720.mp4")
+    }
+    if (!("IntersectionObserver" in window)) { pick(); return }
+    const io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { pick(); io.disconnect() } }, { rootMargin: "800px 0px" })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   useEffect(() => {
     let eased = 0
@@ -100,9 +117,7 @@ export default function Industries() {
           }}
         >
           <div className="relative mt-10 h-full w-full origin-center overflow-hidden will-change-transform" ref={media}>
-            <video className="absolute inset-0 h-full w-full object-cover object-center" autoPlay muted loop playsInline preload="auto">
-              <source src="/bg_main.mp4" type="video/mp4" />
-            </video>
+            <video className="absolute inset-0 h-full w-full object-cover object-center" autoPlay muted loop playsInline preload="none" poster="/bg_main_poster.jpg" src={videoSrc || undefined} />
           </div>
         </div>
       </div>

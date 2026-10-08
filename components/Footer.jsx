@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 font-display text-[1.7rem] font-bold text-white">
               <img
-                src="/sisco_logo_transparent.png"
+                src="/sisco_logo_transparent.webp"
                 alt="Logo"
                 width={100}
               />
