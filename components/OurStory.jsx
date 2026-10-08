@@ -196,7 +196,7 @@ export default function OurStory() {
 
         <div className="relative h-[clamp(380px,60svh,560px)]" ref={collage}>
           <motion.div className="absolute left-0 top-0 h-[78%] w-[72%] overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-[linear-gradient(135deg,#c5ced5,#e9edf0)]" style={{ y: driftA }} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <img className="block h-full w-full object-fill" src="/slotted.jpeg" alt="Our plant floor" loading="lazy" />
+            <img className="block h-full w-full object-fill" src="/slotted_angle_category.webp" alt="Our plant floor" loading="lazy" />
           </motion.div>
           <motion.div className="absolute bottom-0 right-0 h-1/2 w-[52%] overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-[linear-gradient(135deg,#c5ced5,#e9edf0)] shadow-[0_16px_32px_rgba(31,42,51,0.2)]" style={{ y: driftB }} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}>
             <img className="block h-full w-full object-fill" src="/mezzanine.webp" alt="An installation crew at work" loading="lazy" />
