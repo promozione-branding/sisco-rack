@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 export default function PageHead({ title, text , backgroundImage}) {
   return (
     <section
-      className="relative flex min-h-[420px] w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 py-20 text-center text-white before:absolute before:inset-0 before:z-[1] before:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.35)_50%,rgba(0,0,0,0.6)_100%)] before:content-[''] min-[768px]:min-h-[520px] min-[768px]:px-8 min-[768px]:py-[120px]"
+      className="relative flex h-[80svh] w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 py-20 text-center text-white before:absolute before:inset-0 before:z-[1] before:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.35)_50%,rgba(0,0,0,0.6)_100%)] before:content-[''] min-[768px]:min-h-[520px] min-[768px]:px-8 min-[768px]:py-[120px]"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="relative z-[2] mx-auto w-full max-w-[900px]">
