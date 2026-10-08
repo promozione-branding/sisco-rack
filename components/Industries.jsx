@@ -28,7 +28,7 @@ export default function Industries() {
       const small = window.innerWidth < 900
       const saver = navigator.connection?.saveData
       if (saver) return
-      setVideoSrc(small ? "/bg_main_mobile.mp4" : "/bg_main_720.mp4")
+      setVideoSrc(small ? "/bg_main_enhanced.mp4" : "/bg_main_enhanced.mp4")
     }
     if (!("IntersectionObserver" in window)) { pick(); return }
     const io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { pick(); io.disconnect() } }, { rootMargin: "800px 0px" })
