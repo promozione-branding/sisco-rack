@@ -11,7 +11,7 @@ const PHONE_HREF = "tel:+919953018892"
 
 const labelCls = "mb-2 block text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#6b7a90]"
 const fieldCls =
-  "w-full rounded-[14px] border border-solid border-[#e3e7ee] bg-[#fafafa] py-3.5 pl-11 pr-4 text-[0.95rem] text-[#253970] outline-none transition-colors placeholder:text-[#9aa5b5] focus:border-[#253970] focus:bg-white"
+  "w-full rounded-[14px] border border-solid border-[#e3e7ee] bg-[#fafafa] py-3.5 pl-11 pr-4 text-[0.95rem] max-[720px]:text-[16px] text-[#253970] outline-none transition-colors placeholder:text-[#9aa5b5] focus:border-[#253970] focus:bg-white"
 const iconCls = "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8a96a8]"
 
 function Icon({ children }) {
@@ -67,7 +67,7 @@ export default function QuoteModal({ open, onClose }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="quote-title"
-            className="grid max-h-[92vh] w-full max-w-[1000px] grid-cols-[0.8fr_1.2fr] overflow-y-auto rounded-[28px] bg-white shadow-2xl max-[800px]:grid-cols-1"
+            className="grid max-h-[92dvh] w-full max-w-[1000px] grid-cols-[0.8fr_1.2fr] overflow-y-auto rounded-[28px] bg-white shadow-2xl max-[800px]:grid-cols-1"
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}

@@ -19,7 +19,7 @@ const box =
   "relative flex items-center rounded-xl border border-solid border-slate-300 bg-white transition focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100"
 const iconCls = "pointer-events-none absolute left-5 h-[22px] w-[22px] text-slate-500"
 const inputCls =
-  "w-full bg-transparent py-[22px] pl-14 pr-4 text-[0.95rem] text-slate-800 outline-none placeholder:text-slate-500 [font-family:inherit]"
+  "w-full bg-transparent py-[22px] pl-14 pr-4 text-[0.95rem] max-[720px]:text-[16px] text-slate-800 outline-none placeholder:text-slate-500 [font-family:inherit]"
 
 const infoRows = [
   {
@@ -97,7 +97,7 @@ export default function ContactForm() {
                 <span className="block text-[0.72rem] text-slate-500">What do you need? *</span>
                 <select
                   name="type"
-                  className="w-full appearance-none bg-transparent text-[0.95rem] font-medium text-slate-800 outline-none [font-family:inherit]"
+                  className="w-full appearance-none bg-transparent text-[0.95rem] max-[720px]:text-[16px] font-medium text-slate-800 outline-none [font-family:inherit]"
                 >
                   {categories.map((c) => (
                     <option key={c.id}>{c.name}</option>

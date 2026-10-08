@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
         <SmoothScroll>
   <TopBar/>
   <Navbar />
-  <main className="relative z-[1]">{children}</main>
+  <main className="relative z-[1] overflow-x-clip">{children}</main>
   <Footer />
   <FloatingContact />
 </SmoothScroll>

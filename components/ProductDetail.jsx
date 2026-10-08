@@ -225,7 +225,7 @@ export default function ProductDetail({ product: p, related }) {
               {p.description}
             </motion.p>
 
-            <motion.div className="mt-6 grid grid-cols-[repeat(3,1fr)] gap-3 max-[720px]:grid-cols-[1fr]" variants={rise} custom={3} initial="hidden" animate="show">
+            <motion.div className="mt-6 grid grid-cols-[repeat(3,1fr)] gap-3 max-[1280px]:grid-cols-[1fr] min-[721px]:max-[960px]:grid-cols-[repeat(3,1fr)] max-[720px]:grid-cols-[1fr]" variants={rise} custom={3} initial="hidden" animate="show">
               <div className="flex items-center gap-4 rounded-[18px] bg-[#fdf3dc] px-5 py-4">
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-circle bg-[#fbe5b0] text-[#d98c00]"><IndianRupee size={26} strokeWidth={2.5} /></span>
                 <div>
@@ -265,9 +265,9 @@ export default function ProductDetail({ product: p, related }) {
               )}
             </motion.div>
 
-            <motion.div className={`${CARD} mt-6 grid grid-cols-[repeat(4,1fr)] max-[960px]:grid-cols-[1fr_1fr] max-[480px]:grid-cols-[1fr]`} variants={rise} custom={5} initial="hidden" animate="show">
+            <motion.div className={`${CARD} mt-6 grid grid-cols-[repeat(4,1fr)] max-[1280px]:grid-cols-[1fr_1fr] max-[480px]:grid-cols-[1fr]`} variants={rise} custom={5} initial="hidden" animate="show">
               {trust.map(({ Icon, title, text }, k) => (
-                <div key={title} className={`flex items-center gap-3 px-4 py-4 ${k > 0 ? "border-l border-solid border-line max-[960px]:odd:border-l-0 max-[480px]:border-l-0" : ""}`}>
+                <div key={title} className={`flex items-center gap-3 px-4 py-4 ${k > 0 ? "border-l border-solid border-line max-[1280px]:odd:border-l-0 max-[480px]:border-l-0" : ""}`}>
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-circle bg-[#fdf1d3] text-[#e8a317]" aria-hidden="true"><Icon size={20} strokeWidth={2.2} /></span>
                   <div className="min-w-0">
                     <strong className="block text-[0.82rem] font-bold leading-[1.25]">{title}</strong>

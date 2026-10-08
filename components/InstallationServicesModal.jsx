@@ -23,7 +23,7 @@ const INCLUDED = [
 
 const labelCls = "mb-2 block text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#7a6a4a]"
 const fieldCls =
-  "w-full rounded-[14px] border border-solid border-[#eadfc6] bg-[#fffdf8] py-3.5 pl-11 pr-4 text-[0.95rem] text-[#1f2a33] outline-none transition-colors placeholder:text-[#b3a78d] focus:border-[#e8a317] focus:bg-white"
+  "w-full rounded-[14px] border border-solid border-[#eadfc6] bg-[#fffdf8] py-3.5 pl-11 pr-4 text-[0.95rem] max-[720px]:text-[16px] text-[#1f2a33] outline-none transition-colors placeholder:text-[#b3a78d] focus:border-[#e8a317] focus:bg-white"
 const iconCls = "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#b08a2e]"
 
 function Icon({ children }) {
@@ -90,7 +90,7 @@ export default function InstallationServicesModal({ open, onClose }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="install-quote-title"
-            className="grid max-h-[98vh] w-full max-w-[1000px] grid-cols-[1.2fr_0.8fr] overflow-y-auto rounded-[28px] bg-white shadow-2xl max-[800px]:grid-cols-1"
+            className="grid max-h-[96dvh] w-full max-w-[1000px] grid-cols-[1.2fr_0.8fr] overflow-y-auto rounded-[28px] bg-white shadow-2xl max-[800px]:grid-cols-1"
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -102,7 +102,7 @@ export default function InstallationServicesModal({ open, onClose }) {
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="absolute right-5 top-5 hidden h-10 w-10 cursor-pointer place-items-center rounded-full border border-solid border-[#eadfc6] bg-white text-[#7a6a4a] transition-colors hover:bg-[#fff6e0] max-[800px]:grid"
+                className="absolute right-5 top-5 hidden h-10 w-10 cursor-pointer place-items-center rounded-full border border-solid border-[#eadfc6] bg-white text-[#7a6a4a] transition-colors hover:bg-[#fff6e0]"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
               </button>
@@ -193,7 +193,7 @@ export default function InstallationServicesModal({ open, onClose }) {
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="absolute right-5 top-5 grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-solid border-white/20 bg-white/5 text-white transition-colors hover:bg-white/15 max-[800px]:hidden"
+                className="absolute right-5 top-5 grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-solid border-white/20 bg-white/5 text-white transition-colors hover:bg-white/15"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
               </button>
