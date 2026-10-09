@@ -11,7 +11,7 @@ const AMBER = "#f5a623"
 
 const WA_NUMBER = "+917629827285"
 
-// Featured products: 6 cards (2 rows of 3), picked round-robin across categories
+// Featured products: 6 cards (2 rows of 3)
 const FEATURED_CATS = ["slotted", "mezzanine", "supermarket", "heavy"]
 const byCat = FEATURED_CATS.map((c) => featuredproducts.filter((p) => p.cat === c))
 const featured = [...byCat.map((list) => list[0]), ...byCat.map((list) => list[1])].filter(Boolean).slice(0, 8)
