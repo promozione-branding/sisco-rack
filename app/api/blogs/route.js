@@ -2,23 +2,31 @@ import { NextResponse } from "next/server"
 import { revalidatePath } from "next/cache"
 import { isAdmin } from "@/lib/auth"
 import db from "@/lib/db"
-import { Blog, getBlogs, slugify } from "@/lib/blogs"
+import Blog from "@/models/Blogs"
+import { getBlogs, pickBlog, slugify } from "@/lib/blogs"
 
+// Public: list
 export async function GET() {
   return NextResponse.json(await getBlogs())
 }
 
+// Admin: add
 export async function POST(req) {
   if (!(await isAdmin())) return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
 
-  const { title, content, image } = await req.json()
-  if (!title || !content) return NextResponse.json({ message: "title and content required" }, { status: 400 })
+  const data = pickBlog(await req.json().catch(() => ({})))
+  if (!data.permalink && data.title) data.permalink = slugify(data.title)
+
+  if (!data.title || !data.permalink || !data.date || !data.image || !data.imageFileId) {
+    return NextResponse.json({ message: "Title, permalink, date and cover image are required" }, { status: 400 })
+  }
 
   await db()
-  let slug = slugify(title) || "post"
-  if (await Blog.exists({ slug })) slug += "-" + Date.now().toString(36)
+  if (await Blog.exists({ permalink: data.permalink })) {
+    return NextResponse.json({ message: "This permalink already exists" }, { status: 409 })
+  }
 
-  const blog = await Blog.create({ title, content, image, slug })
+  const blog = await Blog.create(data)
   revalidatePath("/blogs")
   return NextResponse.json(blog, { status: 201 })
 }

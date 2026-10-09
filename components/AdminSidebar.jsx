@@ -62,7 +62,7 @@ export default function AdminSidebar() {
 
         <button
           onClick={logout}
-          className={`${base} ml-auto text-red-200 hover:bg-red-500/15 hover:text-red-100 md:ml-0 md:mt-auto md:border-t md:border-white/10 md:pt-4`}
+          className={`${base} ml-auto text-red-600 hover:bg-red-500/15 hover:text-red-100 md:ml-0 md:mt-auto md:border-t md:border-white/10 md:pt-4`}
         >
           <LogOut className="h-[18px] w-[18px] shrink-0" />
           Logout
