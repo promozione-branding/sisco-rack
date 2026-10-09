@@ -164,25 +164,6 @@ export default function BlogPage() {
 
   return (
     <main className="bg-slate-50 pb-12 sm:pb-16" style={{ color: NAVY }}>
-  
-
-      <div className={wrap}>
-        <nav className="max-w-full flex gap-3 overflow-x-auto px-4 pb-3 pt-6 [scrollbar-width:none] sm:mx-0 sm:px-0 md:flex-wrap md:overflow-visible [&::-webkit-scrollbar]:hidden">
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setActive(t.id)}
-              className={`shrink-0 cursor-pointer whitespace-nowrap rounded-full border border-solid px-5 py-2.5 text-[13px] font-medium shadow-sm transition [font-family:inherit] sm:px-6 ${focus} ${
-                active === t.id
-                  ? `border-transparent text-white shadow-[0_8px_20px_rgba(15,60,150,0.3)] ${grad}`
-                  : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
-              }`}
-            >
-              {t.name}
-            </button>
-          ))}
-        </nav>
-      </div>
 
       <div className={`${wrap} mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-7 xl:grid-cols-[minmax(0,1fr)_300px]`}>
         <div className="min-w-0">
