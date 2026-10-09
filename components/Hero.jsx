@@ -92,9 +92,7 @@ export default function Hero() {
         </AnimatePresence>
       )}
 
-      <div
-        className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.22)_50%,rgba(0,0,0,0.38)_100%)]"
-        aria-hidden="true"
+      <div aria-hidden="true"
       />
 
       <h2 className="text-[length:clamp(2.8rem,7.2vw,6rem)] leading-[0.92] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
