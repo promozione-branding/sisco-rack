@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import FloatingContact from "@/components/FloatingContact"
 import TopBar from "@/components/TopBar"
+import HideOnAdmin from "@/components/HideOnAdmin"
 
 const display = Barlow_Condensed({
   subsets: ["latin"],
@@ -44,13 +45,19 @@ export default function RootLayout({ children }) {
         <link rel="preload" as="image" href="/hero_1400.webp" imageSrcSet="/hero_800_mob.webp 800w, /hero_1400.webp 1400w" imageSizes="100vw" fetchPriority="high" />
       </head>
       <body className="bg-bg font-body leading-[1.6] text-ink overflow-x-hidden">
-        <SmoothScroll>
-          <TopBar />
-          <Navbar />
-          <main className="relative z-[1] overflow-x-clip">{children}</main>
-          <Footer />
-          <FloatingContact />
-        </SmoothScroll>
+  <SmoothScroll>
+  <HideOnAdmin>
+    <TopBar />
+    <Navbar />
+  </HideOnAdmin>
+
+  <main className="relative z-[1] overflow-x-clip">{children}</main>
+
+  <HideOnAdmin>
+    <Footer />
+    <FloatingContact />
+  </HideOnAdmin>
+</SmoothScroll>
       </body>
     </html>
   )

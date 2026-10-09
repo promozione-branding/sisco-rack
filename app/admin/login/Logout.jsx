@@ -1,0 +1,17 @@
+"use client"
+import { useRouter } from "next/navigation"
+
+export default function LogoutButton() {
+  const router = useRouter()
+  return (
+    <button
+      onClick={async () => {
+        await fetch("/api/auth", { method: "DELETE" })
+        router.replace("/admin/login")
+        router.refresh()
+      }}
+    >
+      Logout
+    </button>
+  )
+}

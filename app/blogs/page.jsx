@@ -6,7 +6,7 @@ import BlogPage from "@/components/BlogPage"
 
 export const metadata = { title: pageSeo.blogs.title, description: pageSeo.blogs.description }
 
-export default function Contact() {
+export default function Blogs() {
   return (
     <>
     <PageHead 
