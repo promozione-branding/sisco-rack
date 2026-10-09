@@ -3,17 +3,25 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import SplitButton from "./SplitButton"
+import { submitEnquiry } from "@/lib/submitEnquiry"
+
+const SERVICE_LABELS = {
+  slotted: "Slotted Angle Racks",
+  supermarket: "Supermarket Racks",
+  mezzanine: "Mezzanine Floors",
+  heavy: "Heavy Duty Racks",
+  other: "Other / Custom",
+}
+
+const fieldCls =
+  "rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 font-normal text-inherit transition-[border-color,background] duration-200 [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white"
+
+const EMPTY = { name: "", email: "", phone: "", company: "", service: "", message: "" }
 
 export default function QueryForm({ className = "" }) {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    service: "",
-    message: "",
-  })
-  const [status, setStatus] = useState("idle") 
+  const [form, setForm] = useState(EMPTY)
+  const [status, setStatus] = useState("idle")
+  const [errorMsg, setErrorMsg] = useState("")
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -21,19 +29,26 @@ export default function QueryForm({ className = "" }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setErrorMsg("")
     setStatus("loading")
 
-    try {
-      const res = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      })
+    const message = form.company.trim()
+      ? `Company: ${form.company.trim()}\n\n${form.message}`
+      : form.message
 
-      if (!res.ok) throw new Error("Failed")
+    try {
+      await submitEnquiry({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        product: SERVICE_LABELS[form.service] || "",
+        message,
+      })
       setStatus("success")
-      setForm({ name: "", email: "", phone: "", company: "", service: "", message: "" })
-    } catch {
+      setForm(EMPTY)
+      setTimeout(() => setStatus("idle"), 5000)
+    } catch (err) {
+      setErrorMsg(err.message)
       setStatus("error")
     }
   }
@@ -68,71 +83,39 @@ export default function QueryForm({ className = "" }) {
           <div className="grid grid-cols-[1fr_1fr] gap-3.5 max-[960px]:grid-cols-[1fr]">
             <label className="grid gap-[5px] text-[0.85rem] font-semibold">
               <span className="text-ink">Full Name *</span>
-              <input
-                className="rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 font-normal text-inherit transition-[border-color,background] duration-200 [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white"
-                name="name"
-                type="text"
-                required
-                value={form.name}
-                onChange={handleChange}
-                placeholder="John Doe"
-              />
+              <input className={fieldCls} name="name" type="text" required value={form.name} onChange={handleChange} placeholder="John Doe" />
             </label>
             <label className="grid gap-[5px] text-[0.85rem] font-semibold">
               <span className="text-ink">Email *</span>
-              <input
-                className="rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 font-normal text-inherit transition-[border-color,background] duration-200 [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white"
-                name="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={handleChange}
-                placeholder="john@company.com"
-              />
+              <input className={fieldCls} name="email" type="email" required value={form.email} onChange={handleChange} placeholder="john@company.com" />
             </label>
           </div>
 
           <div className="grid grid-cols-[1fr_1fr] gap-3.5 max-[960px]:grid-cols-[1fr]">
             <label className="grid gap-[5px] text-[0.85rem] font-semibold">
-              <span className="text-ink">Phone</span>
-              <input
-                className="rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 font-normal text-inherit transition-[border-color,background] duration-200 [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white"
-                name="phone"
-                type="tel"
-                value={form.phone}
-                onChange={handleChange}
-                placeholder="+91 98765 43210"
-              />
+              <span className="text-ink">Phone *</span>
+              <input className={fieldCls} name="phone" type="tel" required maxLength={10} value={form.phone} onChange={handleChange} placeholder="9876543210" />
             </label>
             <label className="grid gap-[5px] text-[0.85rem] font-semibold">
               <span className="text-ink">Company</span>
-              <input
-                className="rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 font-normal text-inherit transition-[border-color,background] duration-200 [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white"
-                name="company"
-                type="text"
-                value={form.company}
-                onChange={handleChange}
-                placeholder="Your company name"
-              />
+              <input className={fieldCls} name="company" type="text" value={form.company} onChange={handleChange} placeholder="Your company name" />
             </label>
           </div>
 
           <label className="grid gap-[5px] text-[0.85rem] font-semibold">
             <span className="text-ink">Service interested in</span>
-            <select className="rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 font-normal text-inherit transition-[border-color,background] duration-200 [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white" name="service" value={form.service} onChange={handleChange}>
+            <select className={fieldCls} name="service" value={form.service} onChange={handleChange}>
               <option value="">Select a service</option>
-              <option value="slotted">Slotted Angle Racks</option>
-              <option value="supermarket">Supermarket Racks</option>
-              <option value="mezzanine">Mezzanine Floors</option>
-              <option value="heavy">Heavy Duty Racks</option>
-              <option value="other">Other / Custom</option>
+              {Object.entries(SERVICE_LABELS).map(([value, label]) => (
+                <option key={value} value={value}>{label}</option>
+              ))}
             </select>
           </label>
 
           <label className="grid gap-[5px] text-[0.85rem] font-semibold">
             <span className="text-ink">Your Query *</span>
             <textarea
-              className="rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 font-normal text-inherit transition-[border-color,background] duration-200 [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white min-h-20 resize-y"
+              className={`${fieldCls} min-h-20 resize-y`}
               name="message"
               required
               rows={5}
@@ -151,7 +134,7 @@ export default function QueryForm({ className = "" }) {
               <p className="text-[0.95rem] font-semibold text-[#1a7a3c]">Thank you! We’ll get back to you shortly.</p>
             )}
             {status === "error" && (
-              <p className="text-[0.95rem] font-semibold text-[#b42318]">Something went wrong. Please try again.</p>
+              <p className="text-[0.95rem] font-semibold text-[#b42318]">{errorMsg || "Something went wrong. Please try again."}</p>
             )}
           </div>
         </motion.form>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
+import { submitEnquiry } from "@/lib/submitEnquiry"
 
 const EMAIL = "info.siscosteel@gmail.com"
 const PHONE = "+91 9953018892"
@@ -36,6 +37,8 @@ function Icon({ children }) {
 
 export default function InstallationServicesModal({ open, onClose }) {
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
   useEffect(() => {
     if (!open) return
@@ -50,30 +53,46 @@ export default function InstallationServicesModal({ open, onClose }) {
   }, [open, onClose])
 
   useEffect(() => {
-    if (open) setSent(false)
+    if (open) {
+      setSent(false)
+      setError("")
+    }
   }, [open])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const d = Object.fromEntries(new FormData(e.currentTarget))
+    setError("")
+    setLoading(true)
 
-    const body = [
-      `Name: ${d.name}`,
-      `Phone: ${d.phone}`,
-      `Email: ${d.email}`,
-      `Service: ${d.service}`,
-      `Site location: ${d.location}`,
-      `Preferred start date: ${d.date}`,
-      "",
-      d.message
-    ].join("\n")
+    const form = e.currentTarget
+    const d = Object.fromEntries(new FormData(form))
 
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Installation / dismantling enquiry from " + d.name)}&body=${encodeURIComponent(body)}`
-    setSent(true)
+    const message = [
+      d.date ? `Preferred start date: ${d.date}` : "",
+      d.message ? `Site details: ${d.message}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n")
+
+    try {
+      await submitEnquiry({
+        name: d.name,
+        phone: d.phone,
+        email: d.email,
+        product: d.service,
+        message: message || "N/A",
+        place: d.location,
+      })
+      setSent(true)
+      form.reset()
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (typeof document === "undefined") return null
-
 
   return createPortal(
     <AnimatePresence>
@@ -131,7 +150,7 @@ export default function InstallationServicesModal({ open, onClose }) {
                     <label htmlFor="i-phone" className={labelCls}>Phone number</label>
                     <div className="relative">
                       <Icon><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></Icon>
-                      <input id="i-phone" name="phone" type="tel" required placeholder="Enter your Mobile Number" className={fieldCls} />
+                      <input id="i-phone" name="phone" type="tel" required maxLength={10} placeholder="Enter your Mobile Number" className={fieldCls} />
                     </div>
                   </div>
 
@@ -145,13 +164,13 @@ export default function InstallationServicesModal({ open, onClose }) {
                     </select>
                   </div>
 
-                <div>
-  <label htmlFor="i-email" className={labelCls}>Email address</label>
-  <div className="relative">
-    <Icon><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></Icon>
-    <input id="i-email" name="email" type="email" placeholder="Enter your Email" className={fieldCls} />
-  </div>
-</div>
+                  <div>
+                    <label htmlFor="i-email" className={labelCls}>Email address</label>
+                    <div className="relative">
+                      <Icon><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></Icon>
+                      <input id="i-email" name="email" type="email" placeholder="Enter your Email" className={fieldCls} />
+                    </div>
+                  </div>
 
                   <div>
                     <label htmlFor="i-location" className={labelCls}>Site location</label>
@@ -169,16 +188,23 @@ export default function InstallationServicesModal({ open, onClose }) {
                     </div>
                   </div>
 
-             
-
                   <div className="col-span-2 max-[600px]:col-span-1">
                     <label htmlFor="i-message" className={labelCls}>Site details</label>
                     <textarea id="i-message" name="message" rows={4} placeholder="Approx. area, number of racks, floor type, access constraints..." className={`${fieldCls} !pl-4 resize-none`} />
                   </div>
 
                   <div className="col-span-2 max-[600px]:col-span-1">
-                    <button type="submit" className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] border-0 bg-[#e8a317] py-4 font-bold text-[#1f2a33] transition-colors hover:bg-[#d49410]">
-                      Request Site Visit
+                    {error && (
+                      <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[0.9rem] font-semibold text-red-700">
+                        {error}
+                      </div>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] border-0 bg-[#e8a317] py-4 font-bold text-[#1f2a33] transition-colors hover:bg-[#d49410] disabled:opacity-70"
+                    >
+                      {loading ? "Sending..." : "Request Site Visit"}
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                     </button>
                     <p className="mt-4 text-center text-[0.7rem] text-[#b3a78d]">We usually confirm site visits within one business day.</p>
