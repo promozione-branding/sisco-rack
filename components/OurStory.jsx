@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, MotionConfig, useScroll, useTransform, useSpring, useInView, useReducedMotion, animate } from "framer-motion"
 import SplitButton from "./SplitButton"
-import LottieIcon from "./LottieIcon"
+import dynamic from "next/dynamic"
+const LottieIcon = dynamic(() => import("./LottieIcon"), { ssr: false })
 import { story, aboutStats, milestones, values } from "@/lib/about"
 
 const rise = {
