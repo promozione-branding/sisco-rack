@@ -33,7 +33,7 @@ export default function CTA() {
   return (
     <MotionConfig reducedMotion="user">
       <section className="relative isolate mt-[50px] flex min-h-[80svh] flex-col items-center justify-center overflow-hidden bg-[#1a1f24] text-center text-white">
-        <div className="absolute inset-0 -z-[2] scale-[1.04] bg-[url('/about_bg.webp')] bg-cover bg-center bg-no-repeat" aria-hidden="true" />
+        <div className="absolute inset-0 -z-[2] scale-[1.04] bg-[url('/about_bg_.webp')] bg-cover bg-center bg-no-repeat" aria-hidden="true" />
         <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(18,22,28,0.55)_0%,rgb(68_83_102/72%)_45%,rgb(68_89_123/88%)_100%_100%)]" aria-hidden="true" />
 
         <div className="relative z-[1] max-w-[920px] px-6 max-[720px]:px-[18px] max-[720px]:pb-[90px] max-[720px]:pt-[100px]">
