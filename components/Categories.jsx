@@ -182,12 +182,28 @@ export default function Categories() {
       </div>
 
       <div className="relative isolate mx-11 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-[linear-gradient(90deg,#434c54_10%,#e2e2e2_30%)] max-[960px]:mx-3 max-[960px]:rounded-[28px] max-[960px]:bg-none max-[960px]:bg-panel">
-        <div className="absolute bottom-0 left-0 top-0 -z-[1] flex w-[33%] items-center justify-center bg-[linear-gradient(90deg,#ca8a04_0%,#374151_100%)] [mask-image:linear-gradient(90deg,#000_55%,transparent_100%)] max-[960px]:h-[300px]" aria-hidden="true">
-         <img src="/leftslide2.webp" alt="" loading="lazy" decoding="async" />
+        {/* Decorative image:
+            - desktop / tablet: leftslide2.webp (left strip)
+            - mobile (≤720px): shelf_mobile_347x986.webp as a full-cover background */}
+        <div
+          className="absolute bottom-0 left-0 top-0 -z-[1] flex w-[33%] items-center justify-center bg-[linear-gradient(90deg,#ca8a04_0%,#374151_100%)] [mask-image:linear-gradient(90deg,#000_55%,transparent_100%)] max-[960px]:h-[300px] max-[720px]:inset-0 max-[720px]:h-full max-[720px]:w-full max-[720px]:bg-none max-[720px]:[mask-image:none] max-[720px]:after:absolute max-[720px]:after:inset-0 max-[720px]:after:content-[''] max-[720px]:after:bg-[linear-gradient(180deg,rgba(255,255,255,0)_35%,rgba(255,255,255,0.88)_100%)]"
+          aria-hidden="true"
+        >
+          <picture className="max-[720px]:block max-[720px]:h-full max-[720px]:w-full">
+            <source media="(max-width: 720px)" srcSet="/shelf_mobile_347x986.webp" />
+            <img
+              src="/leftslide2.webp"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="max-[720px]:h-full max-[720px]:w-full max-[720px]:object-cover max-[720px]:object-top"
+            />
+          </picture>
         </div>
-        <div className="min-w-0 pb-[30px] pl-[32%] pr-10 pt-9 max-[960px]:px-5 max-[960px]:pb-9 max-[960px]:pt-[190px]">
+
+        <div className="min-w-0 pb-[30px] pl-[32%] pr-10 pt-9 max-[960px]:px-5 max-[960px]:pb-9 max-[960px]:pt-[190px] max-[720px]:px-3 max-[720px]:pb-6 max-[720px]:pt-6">
           <div
-            className="mt-9 overflow-hidden rounded-[28px] border border-solid border-line bg-white/60 backdrop-blur-[10px] min-[961px]:mt-[18px]"
+            className="mt-9 overflow-hidden rounded-[28px] border border-solid border-line bg-white/60 backdrop-blur-[10px] min-[961px]:mt-[18px] max-[720px]:mt-0"
             ref={panel}
             onMouseEnter={() => { paused.current = true }}
             onMouseLeave={() => { paused.current = false }}
@@ -233,6 +249,7 @@ export default function Categories() {
                         alt={s.title}
                         draggable={false}
                         loading="lazy"
+                        decoding="async"
                       />
                     </div>
 
