@@ -183,7 +183,7 @@ export default function Categories() {
 
       <div className="relative isolate mx-11 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-[linear-gradient(90deg,#434c54_10%,#e2e2e2_30%)] max-[960px]:mx-3 max-[960px]:rounded-[28px] max-[960px]:bg-none max-[960px]:bg-panel">
         <div className="absolute bottom-0 left-0 top-0 -z-[1] flex w-[33%] items-center justify-center bg-[linear-gradient(90deg,#ca8a04_0%,#374151_100%)] [mask-image:linear-gradient(90deg,#000_55%,transparent_100%)] max-[960px]:h-[300px]" aria-hidden="true">
-          <img src="/leftslide2.webp" alt="" />
+         <img src="/leftslide2.webp" alt="" loading="lazy" decoding="async" />
         </div>
         <div className="min-w-0 pb-[30px] pl-[32%] pr-10 pt-9 max-[960px]:px-5 max-[960px]:pb-9 max-[960px]:pt-[190px]">
           <div
