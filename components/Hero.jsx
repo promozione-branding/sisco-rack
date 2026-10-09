@@ -7,7 +7,7 @@ import QuoteModal from "./QuoteModal"
 import { useState, useEffect } from "react"
 
 const slides = [
-  { src: "/hero_1400.webp", srcSet: "/hero_800_.webp 800w, /hero_1400.webp 1400w" },
+  { src: "/hero_1400.webp", srcSet: "/hero_800.webp 800w, /hero_1400.webp 1400w" },
   { src: "/industrial_store_rack_1400.webp", srcSet: "/industrial_store_rack_800.webp 800w, /industrial_store_rack_1400.webp 1400w" },
   { src: "/slotted_angle_section_panel_raw_1400.webp", srcSet: "/slotted_angle_section_panel_raw_800.webp 800w, /slotted_angle_section_panel_raw_1400.webp 1400w" },
 ]
