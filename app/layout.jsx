@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
       className={`${display.variable} ${body.variable} ${serif.variable}`}
     >
       <head>
-        <link rel="preload" as="image" href="/hero_1400.webp" imageSrcSet="/hero_800_mob_.webp 800w, /hero_1400.webp 1400w" imageSizes="100vw" fetchPriority="high" />
+        <link rel="preload" as="image" href="/hero_1400.webp" imageSrcSet="/hero_800_mob.webp 800w, /hero_1400.webp 1400w" imageSizes="100vw" fetchPriority="high" />
       </head>
       <body className="bg-bg font-body leading-[1.6] text-ink overflow-x-hidden">
         <SmoothScroll>
