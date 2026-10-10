@@ -1,11 +1,9 @@
 import Link from "next/link"
-import { cache } from "react"
 import { notFound } from "next/navigation"
 import { getBlog, thumb } from "@/lib/blogs"
 
 export const revalidate = 60
 
-const load = cache(getBlog)
 const plainText = (html = "") => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
 
 export async function generateMetadata({ params }) {
