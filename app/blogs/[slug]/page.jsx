@@ -8,7 +8,7 @@ const plainText = (html = "") => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, "
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const blog = await load(slug)
+  const blog = await getBlog(slug)
   if (!blog) return {}
   return {
     title: blog.metaTitle || `${blog.title} | Sisco Steel`,
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogDetailPage({ params }) {
   const { slug } = await params
-  const blog = await load(slug)
+  const blog = await getBlog(slug)
   if (!blog) notFound()
 
   const date = new Date(blog.date).toLocaleDateString("en-IN", {
