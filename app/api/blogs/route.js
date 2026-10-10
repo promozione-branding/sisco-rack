@@ -5,6 +5,9 @@ import db from "@/lib/db"
 import Blog from "@/models/Blogs"
 import { getBlogs, pickBlog, slugify } from "@/lib/blogs"
 
+// Never cache this route at build time
+export const dynamic = "force-dynamic"
+
 // Public: list
 export async function GET() {
   return NextResponse.json(await getBlogs())
@@ -28,5 +31,6 @@ export async function POST(req) {
 
   const blog = await Blog.create(data)
   revalidatePath("/blogs")
+  revalidatePath(`/blogs/${blog.permalink}`)
   return NextResponse.json(blog, { status: 201 })
 }

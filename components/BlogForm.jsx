@@ -15,21 +15,6 @@ const label = "text-sm font-medium text-slate-700"
 
 const toSlug = (s) => s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
 
-const toPlain = (html) => {
-  if (!html) return ""
-  const doc = new DOMParser().parseFromString(html, "text/html")
-  return (doc.body.textContent || "").replace(/\u00a0/g, " ").trim()
-}
-
-const baseConfig = {
-  askBeforePasteHTML: false,
-  askBeforePasteFromWord: false,
-  defaultActionOnPaste: "insert_clear_html",
-  showCharsCounter: false,
-  showWordsCounter: false,
-  showXPathInStatusbar: false,
-}
-
 export default function BlogForm({ blog }) {
   const router = useRouter()
   const editing = Boolean(blog)
@@ -49,26 +34,15 @@ export default function BlogForm({ blog }) {
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
 
-  // Editor configs (memoized so Jodit doesn't re-initialize on every render)
-  const shortConfig = useMemo(
-    () => ({
-      ...baseConfig,
-      minHeight: 60,
-      height: 90,
-      placeholder: "",
-      buttons: "bold,italic,underline,|,undo,redo",
-      toolbarAdaptive: false,
-      statusbar: false,
-    }),
-    []
-  )
-  const textareaConfig = useMemo(
-    () => ({ ...shortConfig, minHeight: 100, height: 140 }),
-    [shortConfig]
-  )
+  // Jodit is only used for the blog content (memoized so it doesn't re-initialize on every render)
   const contentConfig = useMemo(
     () => ({
-      ...baseConfig,
+      askBeforePasteHTML: false,
+      askBeforePasteFromWord: false,
+      defaultActionOnPaste: "insert_clear_html",
+      showCharsCounter: false,
+      showWordsCounter: false,
+      showXPathInStatusbar: false,
       minHeight: 360,
       placeholder: "Write your blog here…",
       uploader: { insertImageAsBase64URI: true },
@@ -78,10 +52,8 @@ export default function BlogForm({ blog }) {
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
 
-  const setPlain = (key) => (html) => setForm((f) => ({ ...f, [key]: toPlain(html) }))
-
-  const onTitle = (html) => {
-    const title = toPlain(html)
+  const onTitle = (e) => {
+    const title = e.target.value
     setForm((f) => ({ ...f, title, ...(permalinkEdited ? {} : { permalink: toSlug(title) }) }))
   }
 
@@ -142,10 +114,8 @@ export default function BlogForm({ blog }) {
   return (
     <form onSubmit={submit} className="max-w-7xl space-y-5 rounded-xl bg-white p-6 shadow">
       <div>
-        <span className={label}>Title</span>
-        <div className="mt-1">
-          <JoditEditor value={form.title} config={shortConfig} onBlur={onTitle} />
-        </div>
+        <label className={label} htmlFor="title">Title</label>
+        <input id="title" required value={form.title} onChange={onTitle} className={input} />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
@@ -174,17 +144,13 @@ export default function BlogForm({ blog }) {
       </div>
 
       <div>
-        <span className={label}>Meta title (SEO)</span>
-        <div className="mt-1">
-          <JoditEditor value={form.metaTitle} config={shortConfig} onBlur={setPlain("metaTitle")} />
-        </div>
+        <label className={label} htmlFor="metaTitle">Meta title (SEO)</label>
+        <input id="metaTitle" value={form.metaTitle} onChange={set("metaTitle")} className={input} />
       </div>
 
       <div>
-        <span className={label}>Meta description (SEO)</span>
-        <div className="mt-1">
-          <JoditEditor value={form.metaDescription} config={textareaConfig} onBlur={setPlain("metaDescription")} />
-        </div>
+        <label className={label} htmlFor="metaDescription">Meta description (SEO)</label>
+        <textarea id="metaDescription" rows={3} value={form.metaDescription} onChange={set("metaDescription")} className={input} />
       </div>
 
       <div>

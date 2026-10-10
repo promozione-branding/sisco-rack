@@ -6,6 +6,9 @@ import BlogPage from "@/components/BlogPage"
 
 export const metadata = { title: pageSeo.blogs.title, description: pageSeo.blogs.description }
 
+// Safety net: even if on-demand revalidation or a cache layer misses, the list refreshes within 60s
+export const revalidate = 60
+
 export default function Blogs() {
   return (
     <>
