@@ -11,8 +11,10 @@ import {
   ShieldCheck, Truck, Award, Settings, Heart, Share2, MessageCircle, Phone,
   IndianRupee, FileText, ShoppingBag, ArrowUpDown, Layers, Package, PaintBucket,
   LayoutGrid, Columns3, Boxes, Wrench, Warehouse, Factory, Store, Lock,
-  BadgeCheck
+  BadgeCheck,
+  Mail
 } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
 
 const UP = "absolute bottom-0 top-0 w-4 bg-blue bg-[radial-gradient(circle,var(--panel)_2.5px,transparent_3.5px)] bg-[length:16px_24px] bg-[position:center_6px]"
 const THUMB = "relative h-[84px] w-[84px] cursor-pointer rounded-[14px] border-2 border-solid bg-white p-1 transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-[5px] max-[720px]:h-16 max-[720px]:w-16"
@@ -65,7 +67,7 @@ const hlIcons = [Layers, Settings, ShieldCheck, Wrench]
 const hlTints = ["bg-[#e3effd] text-blue", "bg-[#e3effd] text-blue", "bg-[#fdf1d3] text-[#e8a317]", "bg-[#e3effd] text-blue"]
 
 const appIcons = [Warehouse, Boxes, Factory, Store]
-
+const iconCls = "h-4 w-4 shrink-0 text-safety"
 const rise = {
   hidden: { opacity: 0, y: 36 },
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] } })
@@ -416,8 +418,22 @@ export default function ProductDetail({ product: p, related }) {
               <div onClickCapture={openQuote}>
                 <SplitButton>Request a quote</SplitButton>
               </div>
-              {c.phone && <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`}>{c.phone}</a>}
-              {c.email && <a className="font-semibold text-white hover:text-safety" href={`mailto:${c.email}`}>{c.email}</a>}
+             {c.phone && (
+  <div className="flex items-center gap-2.5">
+    <Phone className={iconCls} aria-hidden="true" />
+    <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`}>
+      {c.phone}
+    </a>
+  </div>
+)}
+{c.email && (
+  <div className="flex items-center gap-2.5">
+    <Mail className={iconCls} aria-hidden="true" />
+    <a className="font-semibold text-white hover:text-safety" href={`mailto:${c.email}`}>
+      {c.email}
+    </a>
+  </div>
+)}
             </div>
           </section>
         </Reveal>
