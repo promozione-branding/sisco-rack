@@ -47,9 +47,20 @@ export default async function BlogDetailPage({ params }) {
         </div>
       </section>
 
-      <article className="relative z-10 mx-auto -mt-14 mb-16 w-full max-w-[820px] px-4">
+      <article className="relative z-10 mx-auto -mt-14 mb-16 w-full max-w-[1180px] px-4">
         <div className="rounded-[28px] bg-white p-6 shadow-[0_18px_50px_rgba(15,40,90,0.12)] md:p-12">
-          <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }} />
+          {/* Image left, description right (stacks on mobile) */}
+          <div className="grid items-start gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-12">
+            <div className="md:sticky md:top-28 md:self-start">
+              <img
+                src={thumb(blog.image, 900)}
+                alt={blog.title}
+                className="w-full rounded-2xl object-cover shadow-[0_10px_30px_rgba(15,40,90,0.15)] md:max-h-[calc(100svh-8rem)]"
+              />
+            </div>
+
+            <div className="blog-content min-w-0" dangerouslySetInnerHTML={{ __html: blog.content }} />
+          </div>
 
           <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-6">
             <Link href="/blogs" className="font-semibold text-[#253970] hover:underline">← Back to all blogs</Link>
