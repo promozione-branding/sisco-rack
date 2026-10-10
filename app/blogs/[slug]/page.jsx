@@ -22,9 +22,9 @@ export default async function BlogDetailPage({ params }) {
   const blog = await getBlog(slug)
   if (!blog) notFound()
 
-  const date = new Date(blog.date).toLocaleDateString("en-IN", {
-    day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
-  })
+  // const date = new Date(blog.date).toLocaleDateString("en-IN", {
+  //   day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
+  // })
   const minutes = Math.max(1, Math.round(plainText(blog.content).split(" ").length / 200))
 
   return (
@@ -40,9 +40,9 @@ export default async function BlogDetailPage({ params }) {
         <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(11,42,91,0.55)_0%,rgba(11,42,91,0.75)_100%)]" aria-hidden="true" />
 
         <div className="mx-auto w-full max-w-[860px]">
-          <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#f5a623]">
+          {/* <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#f5a623]">
             {date} · {minutes} min read
-          </p>
+          </p> */}
           <h1 className="mt-3 text-[length:clamp(2rem,5.2vw,3.6rem)] leading-[1.1] text-white">{blog.title}</h1>
         </div>
       </section>

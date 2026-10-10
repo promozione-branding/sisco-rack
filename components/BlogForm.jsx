@@ -1,13 +1,34 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
+import dynamic from "next/dynamic"
 import { useRouter } from "next/navigation"
+
+const JoditEditor = dynamic(() => import("jodit-react"), {
+  ssr: false,
+  loading: () => <div className="mt-1 h-24 animate-pulse rounded-lg bg-slate-100" />,
+})
 
 const input =
   "mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900"
 const label = "text-sm font-medium text-slate-700"
 
 const toSlug = (s) => s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
+
+const toPlain = (html) => {
+  if (!html) return ""
+  const doc = new DOMParser().parseFromString(html, "text/html")
+  return (doc.body.textContent || "").replace(/\u00a0/g, " ").trim()
+}
+
+const baseConfig = {
+  askBeforePasteHTML: false,
+  askBeforePasteFromWord: false,
+  defaultActionOnPaste: "insert_clear_html",
+  showCharsCounter: false,
+  showWordsCounter: false,
+  showXPathInStatusbar: false,
+}
 
 export default function BlogForm({ blog }) {
   const router = useRouter()
@@ -28,10 +49,39 @@ export default function BlogForm({ blog }) {
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
 
+  // Editor configs (memoized so Jodit doesn't re-initialize on every render)
+  const shortConfig = useMemo(
+    () => ({
+      ...baseConfig,
+      minHeight: 60,
+      height: 90,
+      placeholder: "",
+      buttons: "bold,italic,underline,|,undo,redo",
+      toolbarAdaptive: false,
+      statusbar: false,
+    }),
+    []
+  )
+  const textareaConfig = useMemo(
+    () => ({ ...shortConfig, minHeight: 100, height: 140 }),
+    [shortConfig]
+  )
+  const contentConfig = useMemo(
+    () => ({
+      ...baseConfig,
+      minHeight: 360,
+      placeholder: "Write your blog here…",
+      uploader: { insertImageAsBase64URI: true },
+    }),
+    []
+  )
+
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
 
-  const onTitle = (e) => {
-    const title = e.target.value
+  const setPlain = (key) => (html) => setForm((f) => ({ ...f, [key]: toPlain(html) }))
+
+  const onTitle = (html) => {
+    const title = toPlain(html)
     setForm((f) => ({ ...f, title, ...(permalinkEdited ? {} : { permalink: toSlug(title) }) }))
   }
 
@@ -62,6 +112,8 @@ export default function BlogForm({ blog }) {
   const submit = async (e) => {
     e.preventDefault()
     setError("")
+    if (!form.title.trim()) return setError("Title is required")
+    if (!form.permalink) return setError("Permalink is required")
     if (!form.image || !form.imageFileId) return setError("Please upload a cover image")
 
     setSaving(true)
@@ -90,8 +142,10 @@ export default function BlogForm({ blog }) {
   return (
     <form onSubmit={submit} className="max-w-7xl space-y-5 rounded-xl bg-white p-6 shadow">
       <div>
-        <label className={label} htmlFor="title">Title</label>
-        <input id="title" required value={form.title} onChange={onTitle} className={input} />
+        <span className={label}>Title</span>
+        <div className="mt-1">
+          <JoditEditor value={form.title} config={shortConfig} onBlur={onTitle} />
+        </div>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
@@ -120,25 +174,28 @@ export default function BlogForm({ blog }) {
       </div>
 
       <div>
-        <label className={label} htmlFor="metaTitle">Meta title (SEO)</label>
-        <input id="metaTitle" value={form.metaTitle} onChange={set("metaTitle")} className={input} />
+        <span className={label}>Meta title (SEO)</span>
+        <div className="mt-1">
+          <JoditEditor value={form.metaTitle} config={shortConfig} onBlur={setPlain("metaTitle")} />
+        </div>
       </div>
 
       <div>
-        <label className={label} htmlFor="metaDescription">Meta description (SEO)</label>
-        <textarea id="metaDescription" rows={3} value={form.metaDescription} onChange={set("metaDescription")} className={input} />
+        <span className={label}>Meta description (SEO)</span>
+        <div className="mt-1">
+          <JoditEditor value={form.metaDescription} config={textareaConfig} onBlur={setPlain("metaDescription")} />
+        </div>
       </div>
 
       <div>
-        <label className={label} htmlFor="content">Content (HTML)</label>
-        <textarea
-          id="content"
-          rows={14}
-          value={form.content}
-          onChange={set("content")}
-          placeholder="<p>Write your blog here…</p>"
-          className={`${input} font-mono text-sm`}
-        />
+        <span className={label}>Content</span>
+        <div className="mt-1">
+          <JoditEditor
+            value={form.content}
+            config={contentConfig}
+            onBlur={(html) => setForm((f) => ({ ...f, content: html }))}
+          />
+        </div>
       </div>
 
       {error && (
