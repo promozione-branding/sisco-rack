@@ -137,7 +137,7 @@ export default function InstallationServicesModal({ open, onClose }) {
                   <button type="button" onClick={onClose} className="mt-6 cursor-pointer rounded-[14px] bg-[#e8a317] px-6 py-3 font-semibold text-[#1f2a33]">Close</button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-7 grid grid-cols-2 gap-x-5 gap-y-5 max-[600px]:grid-cols-1">
+                <form onSubmit={handleSubmit} className="mt-7 grid grid-cols-2 gap-x-5 gap-y-2 max-[600px]:grid-cols-1">
                   <div>
                     <label htmlFor="i-name" className={labelCls}>Your name</label>
                     <div className="relative">
