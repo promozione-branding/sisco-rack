@@ -117,7 +117,7 @@ export default function ProductGrid() {
                     <div className="relative flex-none">
                       <div className="h-[300px] overflow-hidden bg-slate-100 max-[720px]:h-[240px]">
                         <img
-                          className="block h-full w-full object-cover object-center transition-transform duration-300 ease-out group-hover/card:scale-[1.05]"
+                          className="block h-full w-full object-fill object-center transition-transform duration-300 ease-out group-hover/card:scale-[1.05]"
                           src={p.image}
                           alt={p.name}
                           loading="lazy"
