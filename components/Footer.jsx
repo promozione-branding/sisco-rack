@@ -71,10 +71,21 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 max-[600px]:flex-col max-[600px]:items-start">
-          <small className={smallCls}>© 2026 {brand}. All rights reserved.</small>
-          <small className={smallCls}>Designed and developed by Inquiry Bazaar</small>
-        </div>
+       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 max-[600px]:flex-col max-[600px]:items-start">
+  <small className={smallCls}>
+    © {new Date().getFullYear()} {brand}. All rights reserved.
+  </small>
+
+  <small className={smallCls}>
+    Designed and developed by{" "}
+    <a
+      href="https://inquirybazaar.com/"
+      className="font-medium underline-offset-4 transition-colors hover:underline"
+    >
+      Inquiry Bazaar
+    </a>
+  </small>
+</div>
       </div>
     </footer>
   )
