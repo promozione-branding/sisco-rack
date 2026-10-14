@@ -5,7 +5,6 @@ import db from "@/lib/db"
 import Blog from "@/models/Blogs"
 import { getBlogs, pickBlog, slugify } from "@/lib/blogs"
 
-// Never cache this route at build time
 export const dynamic = "force-dynamic"
 
 // Public: list
@@ -13,7 +12,7 @@ export async function GET() {
   return NextResponse.json(await getBlogs())
 }
 
-// Admin: add
+// Admin: 
 export async function POST(req) {
   if (!(await isAdmin())) return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
 
