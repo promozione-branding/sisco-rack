@@ -114,7 +114,7 @@ export default function FeaturedProductsGrid({ products: featured }) {
 
               return (
                 <motion.article
-                  key={p.id}
+                  key={`${p.id}-${mobile ? "m" : "d"}`}
                   className={`group/card relative z-[1] max-[540px]:w-[85%] max-[540px]:shrink-0 max-[540px]:snap-center ${settled ? "" : "pointer-events-none"}`}
                   variants={variants}
                   custom={{ col: k, row: r, i }}
