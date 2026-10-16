@@ -56,7 +56,7 @@ export default function Hero() {
   const current = slides[slide]
 
   return (
-    <section className="relative isolate flex h-[80svh] max-h-[860px] min-h-[560px] flex-col items-center justify-center overflow-hidden bg-[linear-gradient(165deg,#c9eaf2_0%,#dbe3fa_32%,#f3f6fb_62%,#ffffff_82%)] px-6 pb-[124px] pt-[104px] text-center text-white before:absolute before:inset-0 before:-z-[1] before:content-[''] before:bg-[repeating-linear-gradient(0deg,rgba(62,92,118,0.16)_0_1px,transparent_1px_4px),repeating-linear-gradient(90deg,rgba(62,92,118,0.12)_0_1px,transparent_1px_7px)] before:[mask-image:linear-gradient(170deg,#000_0%,rgba(0,0,0,0.5)_35%,transparent_70%)] max-[720px]:h-[68svh] max-[720px]:max-h-[600px] max-[720px]:min-h-[480px] max-[720px]:px-[18px] max-[720px]:pb-[100px] max-[720px]:pt-[84px]">
+    <section className="relative isolate flex h-[80svh] max-h-[860px] min-h-[560px] flex-col items-center justify-center overflow-hidden bg-[linear-gradient(165deg,#c9eaf2_0%,#dbe3fa_32%,#f3f6fb_62%,#ffffff_82%)] px-6 pb-[124px] pt-[104px] text-center text-white before:absolute before:inset-0 before:-z-[1] before:content-[''] before:bg-[repeating-linear-gradient(0deg,rgba(62,92,118,0.16)_0_1px,transparent_1px_4px),repeating-linear-gradient(90deg,rgba(62,92,118,0.12)_0_1px,transparent_1px_7px)] before:[mask-image:linear-gradient(170deg,#000_0%,rgba(0,0,0,0.5)_35%,transparent_70%)] max-[720px]:h-[68svh] max-[720px]:max-h-[600px] max-[720px]:min-h-[480px] max-[720px]:px-[18px] max-[720px]:pb-[10px] max-[720px]:pt-[84px]">
       {/* Slide 0: plain <img>, visible in the server HTML so LCP is not gated on JS */}
       <img
         src={slides[0].src}
@@ -103,7 +103,7 @@ export default function Hero() {
       </h2>
 
       <div
-        className="hero-rise mt-7 flex flex-wrap justify-center gap-3.5 [animation-delay:.4s] max-[720px]:mt-5 max-[720px]:gap-2.5"
+        className="hero-rise mt-7 flex flex-wrap justify-center gap-3.5 [animation-delay:.4s] max-[720px]:mt-[20px] max-[720px]:gap-2.5"
         onClickCapture={openQuote}
       >
         <SplitButton href="/" dark>
