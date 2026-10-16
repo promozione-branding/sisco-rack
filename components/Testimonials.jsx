@@ -135,34 +135,6 @@ const articleBase =
 
 const tone = (t) => (t === "dark" ? "bg-[#253970] text-white" : "bg-white")
 
-/* ---------- Static layout (phones, tablets, reduced motion) ---------- */
-
-function StaticList() {
-  return (
-    <div className="mx-auto max-w-full px-14 py-12 max-[960px]:px-10 max-[720px]:px-5 max-[720px]:py-10">
-      <div className="mb-11 text-center text-[#253970]">
-        <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
-          Client stories
-        </span>
-        <h2 className="mt-3.5">What Our Customers Say</h2>
-      </div>
-
-      <div className="grid grid-cols-1 gap-6">
-        {testimonials.map((t, i) => (
-          <article
-            key={t.name}
-            className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
-          >
-            <Body data={t} side={sideFor(i)} />
-          </article>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/* ---------- Desktop stacked card ---------- */
-
 function Card({ data, i, progress }) {
   const enter = useTransform(progress, (v) => {
     if (i === 0) return 0
@@ -178,11 +150,11 @@ function Card({ data, i, progress }) {
 
   return (
     <motion.div
-      className="absolute inset-0 will-change-transform [backface-visibility:hidden]"
+      className="absolute inset-0 will-change-transform"
       style={{ y: slotY, rotate: tilt, zIndex: i }}
     >
       <motion.article
-        className={`${articleBase} ${tone(data.tone)} [backface-visibility:hidden]`}
+        className={`${articleBase} ${tone(data.tone)}`}
         style={{ y, scale, opacity, transformOrigin: "50% 0%" }}
       >
         <Body data={data} side={sideFor(i)} />
@@ -205,7 +177,6 @@ export default function Testimonials() {
     stiffness: 120,
     damping: 28,
     mass: 0.4,
-    restDelta: 0.0005,
   })
 
   const beam = useTransform(progress, (v) => clamp(v / 0.88, 0, 1))
@@ -216,20 +187,35 @@ export default function Testimonials() {
 
   if (reduce) {
     return (
-      <section>
-        <StaticList />
+      <section className="py-12 max-[720px]:py-10">
+        <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
+          <div className="mb-11 text-center text-[#253970] min-[961px]:mb-[18px]">
+            <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
+              Client stories
+            </span>
+            <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
+              What Our Customers Say
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6">
+            {testimonials.map((t, i) => (
+              <article
+                key={t.name}
+                className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
+              >
+                <Body data={t} side={sideFor(i)} />
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
     )
   }
 
   return (
-    <section
-      ref={box}
-      style={{ "--h": `${n * 95}svh` }}
-      className="relative min-[1101px]:h-[var(--h)]"
-    >
-      {/* Desktop only: sticky scroll-linked stack */}
-      <div className="sticky top-0 h-[100svh] min-h-[560px] px-11 py-3.5 max-[1100px]:hidden">
+    <section className="relative" ref={box} style={{ height: `${n * 95}vh` }}>
+      <div className="sticky top-0 h-[100svh] min-h-[560px] px-11 py-3.5 max-[960px]:px-3 max-[960px]:py-2.5">
         <div
           className="
             relative isolate grid h-full grid-cols-[0.8fr_1.2fr] items-center gap-12
@@ -239,6 +225,9 @@ export default function Testimonials() {
             before:absolute before:inset-0 before:-z-[1] before:content-['']
             before:bg-[repeating-linear-gradient(0deg,rgba(62,92,118,0.12)_0_1px,transparent_1px_4px),repeating-linear-gradient(90deg,rgba(62,92,118,0.09)_0_1px,transparent_1px_7px)]
             before:[mask-image:linear-gradient(200deg,#000_0%,transparent_60%)]
+
+            max-[960px]:grid-cols-[1fr] max-[960px]:content-center max-[960px]:gap-1
+            max-[960px]:rounded-[28px] max-[960px]:px-[22px]
           "
         >
           <div>
@@ -250,7 +239,7 @@ export default function Testimonials() {
               Trusted by teams that store heavy
             </h2>
 
-            <p className="mt-[18px] max-w-[46ch] text-[1rem] text-muted">
+            <p className="mt-[18px] max-w-[46ch] text-[1rem] text-muted max-[960px]:hidden">
               Warehouses, workshops and shops across the country rely on our racking every day. Here is what they say.
             </p>
 
@@ -264,7 +253,7 @@ export default function Testimonials() {
             </div>
 
             <div
-              className="mt-3.5 h-3.5 max-w-[360px] overflow-hidden rounded-lg border-2 border-solid border-ink bg-steel"
+              className="mt-3.5 h-3.5 max-w-[360px] overflow-hidden rounded-lg border-2 border-solid border-ink bg-steel max-[960px]:hidden"
               aria-hidden="true"
             >
               <motion.i
@@ -273,7 +262,7 @@ export default function Testimonials() {
               />
             </div>
 
-            <div className="mt-4 flex gap-2" aria-hidden="true">
+            <div className="mt-4 flex gap-2 max-[960px]:mt-2.5" aria-hidden="true">
               {testimonials.map((t, i) => (
                 <span
                   key={t.name}
@@ -285,17 +274,12 @@ export default function Testimonials() {
             </div>
           </div>
 
-          <div className="relative mt-10 h-[min(310px,56svh)]">
+          <div className="relative mt-10 h-[min(310px,56svh)] max-[960px]:mt-[34px] max-[960px]:h-[min(430px,62svh)]">
             {testimonials.map((t, i) => (
               <Card key={t.name} data={t} i={i} progress={progress} />
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Phones and tablets: plain static list, no scroll-linked animation */}
-      <div className="min-[1101px]:hidden">
-        <StaticList />
       </div>
     </section>
   )
