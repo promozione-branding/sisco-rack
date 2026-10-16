@@ -82,9 +82,13 @@ export default function FeaturedProductsGrid({ products: featured }) {
 
       {rows.map((row, r) => (
         <div
-          className="relative mb-[30px] grid grid-cols-[repeat(3,1fr)] gap-[22px] pb-3.5 max-[960px]:grid-cols-[1fr_1fr] max-[540px]:grid-cols-[1fr]"
-          key={r}
-        >
+  className="relative mb-[30px] grid grid-cols-1 gap-[22px] pb-3.5
+    min-[541px]:grid-cols-2
+    md:grid-cols-3
+    min-[1025px]:grid-cols-3
+    md:max-[1024px]:[&>article:nth-of-type(3)]:hidden"
+  key={r}
+>
           <motion.i
             className="absolute -left-2.5 -right-2.5 bottom-0 h-3.5 rounded-lg border-2 border-solid border-ink bg-safety"
             style={{ originX: 0 }}
