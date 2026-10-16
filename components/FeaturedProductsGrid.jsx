@@ -51,7 +51,7 @@ export default function FeaturedProductsGrid({ products: featured }) {
   const [settled, setSettled] = useState(false)
   const variants = reduce ? flat : drop
   const state = inView || reduce ? "show" : "hidden"
-  const rows = [featured.slice(0, 4), featured.slice(4, 8)].filter((row) => row.length > 0)
+const rows = [featured.slice(0, 3), featured.slice(3, 6), featured.slice(6, 9)].filter((row) => row.length > 0)
   const last = featured.length - 1
 
   useEffect(() => {
@@ -81,12 +81,11 @@ export default function FeaturedProductsGrid({ products: featured }) {
       />
 
       {rows.map((row, r) => (
-        <div
+      <div
   className="relative mb-[30px] grid grid-cols-1 gap-[22px] pb-3.5
     min-[541px]:grid-cols-2
     md:grid-cols-3
-    min-[1025px]:grid-cols-3
-    md:max-[1024px]:[&>article:nth-of-type(3)]:hidden"
+    md:[&>article:nth-of-type(4)]:hidden"
   key={r}
 >
           <motion.i
