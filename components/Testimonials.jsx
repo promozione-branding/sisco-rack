@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState , useEffect } from "react"
 import {
   motion,
   useScroll,
@@ -47,7 +47,17 @@ const QuoteMark = ({ size = 42 }) => (
     />
   </svg>
 )
-
+function useTouchLike() {
+  const [touch, setTouch] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: coarse), (max-width: 1024px)")
+    const set = () => setTouch(mq.matches)
+    set()
+    mq.addEventListener("change", set)
+    return () => mq.removeEventListener("change", set)
+  }, [])
+  return touch
+}
 function Author({ data, dark }) {
   const initials = data.name
     .split(" ")
@@ -149,14 +159,14 @@ function Card({ data, i, progress }) {
   const opacity = useTransform(depth, (d) => 1 - clamp(d - 2.2, 0, 1))
 
   return (
-    <motion.div
-      className="absolute inset-0 will-change-transform"
-      style={{ y: slotY, rotate: tilt, zIndex: i }}
-    >
-      <motion.article
-        className={`${articleBase} ${tone(data.tone)}`}
-        style={{ y, scale, opacity, transformOrigin: "50% 0%" }}
-      >
+<motion.div
+  className="absolute inset-0 will-change-transform [backface-visibility:hidden]"
+  style={{ y: slotY, rotate: tilt, zIndex: i, translateZ: 0 }}
+>
+  <motion.article
+    className={`${articleBase} ${tone(data.tone)} [backface-visibility:hidden]`}
+    style={{ y, scale, opacity, transformOrigin: "50% 0%" }}
+  >
         <Body data={data} side={sideFor(i)} />
       </motion.article>
     </motion.div>
@@ -168,16 +178,21 @@ export default function Testimonials() {
   const reduce = useReducedMotion()
   const [idx, setIdx] = useState(0)
 
-  const { scrollYProgress } = useScroll({
-    target: box,
-    offset: ["start start", "end end"],
-  })
+const touch = useTouchLike()
 
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
-    mass: 0.4,
-  })
+const { scrollYProgress } = useScroll({
+  target: box,
+  offset: ["start start", "end end"],
+})
+
+const smooth = useSpring(scrollYProgress, {
+  stiffness: 120,
+  damping: 28,
+  mass: 0.4,
+  restDelta: 0.0005,
+})
+
+const progress = touch ? scrollYProgress : smooth
 
   const beam = useTransform(progress, (v) => clamp(v / 0.88, 0, 1))
 
@@ -214,7 +229,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="relative" ref={box} style={{ height: `${n * 95}vh` }}>
+  <section className="relative" ref={box} style={{ height: `${n * 95}svh` }}>
       <div className="sticky top-0 h-[100svh] min-h-[560px] px-11 py-3.5 max-[960px]:px-3 max-[960px]:py-2.5">
         <div
           className="
