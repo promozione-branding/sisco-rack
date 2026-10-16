@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="relative z-[1] bg-[#253970] pb-[18px] pt-11 text-bg">
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
-        <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr] gap-8 max-[1100px]:grid-cols-[1fr_1fr] max-[1100px]:gap-x-10 max-[1100px]:gap-y-9 max-[600px]:grid-cols-[1fr] max-[600px]:gap-y-8">
+        <div className="grid grid-cols-[1fr_0.5fr_1fr_1fr] gap-8 max-[1100px]:grid-cols-[1fr_1fr] max-[1100px]:gap-x-10 max-[1100px]:gap-y-9 max-[600px]:grid-cols-[1fr] max-[600px]:gap-y-8">
           <div>
             <Link href="/" className="flex items-center gap-2 font-display text-[1.7rem] font-bold text-white">
               <img
