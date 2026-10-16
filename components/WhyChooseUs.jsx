@@ -116,10 +116,17 @@ export default function WhyChooseUs({
   const cardY = useTransform(local, [0, 1], [28, -28])
   const imgY = useTransform(local, [0, 1], [-18, 18])
 
+  // Hysteresis: the index only changes once scroll is clearly past a slide
+  // boundary, so tiny back-and-forth scrolling can't retrigger transitions.
   useEffect(() => {
+    const BUFFER = 0.12
     const update = (p) => {
-      const idx = Math.max(0, Math.min(n - 1, Math.floor(p * n)))
-      setView((v) => (v.index === idx ? v : { index: idx, dir: idx > v.index ? 1 : -1 }))
+      const raw = Math.min(Math.max(p, 0), 0.9999) * n
+      setView((v) => {
+        if (raw >= v.index - BUFFER && raw < v.index + 1 + BUFFER) return v
+        const idx = Math.max(0, Math.min(n - 1, Math.floor(raw)))
+        return idx === v.index ? v : { index: idx, dir: idx > v.index ? 1 : -1 }
+      })
     }
     update(scrollYProgress.get())
     return scrollYProgress.on("change", update)
@@ -155,10 +162,11 @@ export default function WhyChooseUs({
     <MotionConfig reducedMotion="user">
       <section
         ref={sectionRef}
-        style={{ "--h": `${100 + n * 70}vh` }}
-        className="bg-white max-[960px]:py-12 min-[961px]:h-[var(--h)]"
+        style={{ "--h": `${100 + n * 70}svh` }}
+        className="bg-white max-[1100px]:py-12 min-[1101px]:h-[var(--h)]"
       >
-        <div className="sticky top-0 flex h-screen items-center max-[960px]:hidden">
+        {/* Desktop only: sticky scroll-linked slideshow */}
+        <div className="sticky top-0 flex h-[100svh] items-center max-[1100px]:hidden">
           <div className="mx-auto w-full max-w-full px-14">
             <div className="grid grid-cols-[5fr_7fr] grid-rows-[auto_auto] gap-x-16 gap-y-8">
               <div className="col-span-2 col-start-1 row-start-1">{headingBlock}</div>
@@ -256,7 +264,8 @@ export default function WhyChooseUs({
           </div>
         </div>
 
-        <div className="mx-auto px-10 max-[720px]:px-5 min-[961px]:hidden">
+        {/* Phones and tablets: plain static list, no scroll-linked animation */}
+        <div className="mx-auto px-10 max-[720px]:px-5 min-[1101px]:hidden">
           {headingBlock}
           <ol className="mt-10 flex flex-col gap-4">
             {items.map((r, i) => (
