@@ -107,7 +107,7 @@ const openProductQuote = (e) => {
               </li>
             )
           )}
-          <li className="hidden max-[1180px]:block max-[1180px]:pt-2">
+          <li className="hidden max-[1180px]:block max-[1180px]:pt-2 w-[200px]">
             <a
               href={whatsappUrl}
               target="_blank"
