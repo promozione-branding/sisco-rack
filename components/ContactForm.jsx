@@ -16,6 +16,8 @@ const NAVY = "#0b2a5b"
 const BLUE = "#0f4aa8"
 const AMBER = "#f5a623"
 
+const FIELD_W = "max-w-[680px]"
+
 const box =
   "relative flex items-center rounded-xl border border-solid border-slate-300 bg-white transition focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100"
 const iconCls = "pointer-events-none absolute left-5 h-[22px] w-[22px] text-slate-500"
@@ -101,12 +103,10 @@ export default function ContactForm() {
 
   return (
     <section className="bg-slate-50">
-      {/* Top banner */}
       <div
         className="h-[98px] w-full bg-cover bg-center"
         style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),` }}
       />
-
       <div className="mx-auto grid max-w-[1910px] grid-cols-[1.02fr_1.18fr] items-stretch gap-5 px-14 py-9 max-[1100px]:grid-cols-1 max-[720px]:px-5">
         <form
           onSubmit={submit}
@@ -126,7 +126,7 @@ export default function ContactForm() {
             Tell us about your requirements and our team will get back to you with the best solution for your storage needs.
           </p>
 
-          <div className="mt-9 flex flex-1 flex-col gap-[22px]">
+          <div className={`mt-9 flex w-full flex-1 flex-col gap-[22px] ${FIELD_W}`}>
             <div className="grid grid-cols-2 gap-[18px] max-[720px]:grid-cols-1">
               <label className={box}>
                 <User className={iconCls} />
@@ -185,7 +185,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={loading}
-              className="flex h-[58px] w-[650px] max-w-full cursor-pointer items-center justify-center gap-3 rounded-xl text-[1.1rem] font-semibold text-white shadow-[0_8px_20px_rgba(15,60,150,0.3)] transition hover:brightness-110 disabled:opacity-70 [font-family:inherit]"
+              className={`flex h-[58px] w-full ${FIELD_W} cursor-pointer items-center justify-center gap-3 rounded-xl text-[1.1rem] font-semibold text-white shadow-[0_8px_20px_rgba(15,60,150,0.3)] transition hover:brightness-110 disabled:opacity-70 [font-family:inherit]`}
               style={{ background: `linear-gradient(90deg, ${NAVY}, ${BLUE})` }}
             >
               {loading ? "Sending..." : "Send request"} <ArrowRight className="h-5 w-5" />
@@ -193,14 +193,14 @@ export default function ContactForm() {
           </div>
 
           {error && (
-            <div className="mt-5 rounded-xl border border-red-200 bg-red-50 px-5 py-3.5 font-semibold text-red-700">
+            <div className={`mt-5 w-full ${FIELD_W} rounded-xl border border-red-200 bg-red-50 px-5 py-3.5 font-semibold text-red-700`}>
               {error}
             </div>
           )}
 
           {sent && (
             <motion.div
-              className="mt-5 rounded-xl border border-green-200 bg-green-50 px-5 py-3.5 font-semibold text-green-800"
+              className={`mt-5 w-full ${FIELD_W} rounded-xl border border-green-200 bg-green-50 px-5 py-3.5 font-semibold text-green-800`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
             >
