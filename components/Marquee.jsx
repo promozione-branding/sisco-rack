@@ -4,7 +4,7 @@ export default function Marquee() {
   const row = [...marqueeItems, ...marqueeItems]
   return (
     <div
-      className="overflow-hidden border-2 border-solid border-ink bg-[#253970] py-3 text-bg max-[720px]:mx-3"
+      className="overflow-hidden border-2 border-solid border-ink bg-[#253970] py-3 text-bg max-[720px]"
       aria-hidden="true"
     >
       <div className="marquee-track flex w-max">
