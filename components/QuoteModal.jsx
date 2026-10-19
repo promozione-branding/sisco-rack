@@ -7,8 +7,8 @@ import { categories } from "@/lib/data"
 import { submitEnquiry } from "@/lib/submitEnquiry"
 
 const EMAIL = "info.siscosteel@gmail.com"
-const PHONE = "+91 9953018892"
-const PHONE_HREF = "tel:+919953018892"
+const PHONE = "+91 7629827285"
+const PHONE_HREF = "tel:+917629827285"
 
 const labelCls = "mb-2 block text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#6b7a90]"
 const fieldCls =

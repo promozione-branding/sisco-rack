@@ -49,8 +49,8 @@ export default function Footer() {
               </li>
               <li className={itemCls}>
                 <Phone className={iconCls} aria-hidden="true" />
-                <a href="tel:+919953018892" className="hover:text-safety">
-                  +91 9953018892
+                <a href="tel:+917629827285" className="hover:text-safety">
+                  +91 7629827285
                 </a>
               </li>
              <li className={itemCls}>
