@@ -110,7 +110,7 @@ export default function Hero() {
   </SplitButton>
   <Link
     href="/products"
-    className="bg-white text-black inline-block cursor-pointer rounded-[14px] border-2 border-solid border-white/70 bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-white transition-[background,color] duration-[250ms] [font-family:inherit] hover:border-white hover:bg-gray-800 hover:text-white"
+    className="bg-white text-black inline-block cursor-pointer rounded-[14px] border-2 border-solid border-white/70 bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-white transition-[background,color] duration-[250ms] [font-family:inherit] hover:border-white hover:bg-gray-800 hover:text-white sm:text-black"
   >
     Browse products
   </Link>
