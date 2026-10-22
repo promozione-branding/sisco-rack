@@ -21,7 +21,7 @@ function Pinned({ children, className, speed }) {
     if (!t || !p) return
 
     const measure = () => {
-      const vh = window.innerHeight
+      const vh = typeof window !== "undefined" ? window.innerHeight : 0
       const h = p.offsetHeight
       const dist = Math.max(0, t.scrollWidth - p.clientWidth)
       dims.current = { dist, h, speed: dims.current.speed }
@@ -46,7 +46,7 @@ function Pinned({ children, className, speed }) {
 
   const raw = useTransform(scrollYProgress, (v) => {
     const { dist, h, speed: s } = dims.current
-    const vh = window.innerHeight
+    const vh = typeof window !== "undefined" ? window.innerHeight : 0
     const top = Math.max(0, (vh - h) / 2) // where the row pins
     const total = h + dist * s // wrapper height
     const pinned = v * (total + vh) - (vh - top)
