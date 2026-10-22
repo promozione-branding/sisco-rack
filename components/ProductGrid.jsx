@@ -1,15 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette, ArrowRight } from "lucide-react"
 import { categories } from "@/lib/data"
 import { products } from "@/lib/products"
 import { useRouter, useSearchParams } from "next/navigation"
+
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
 
+// Tabs: wrap on desktop, single swipeable row on mobile.
+// Hover style only applies on devices with a real pointer (no sticky hover on touch).
 const TAB =
   "shrink-0 snap-start whitespace-nowrap cursor-pointer rounded-pill border-2 border-solid border-ink px-5 py-2.5 text-base font-semibold leading-[inherit] transition-[background] duration-200 [font-family:inherit] " +
   "max-[720px]:px-4 max-[720px]:py-2 max-[720px]:text-sm"
@@ -43,7 +46,7 @@ function getSpecs(p) {
   return found
 }
 
-const WA_NUMBER = "+917629827285" 
+const WA_NUMBER = "+917629827285"
 
 const openWhatsApp = (e, message) => {
   e.preventDefault()
@@ -68,26 +71,60 @@ export default function ProductGrid() {
 
   const shown = cat === "all" ? products : products.filter((p) => p.cat === cat)
 
+  // ---- Tabs slider ----
+  const tabs = [{ id: "all", name: "All products" }, ...categories.filter((c) => !c.action)]
+  const rowRef = useRef(null)
+  const [dot, setDot] = useState(0)
+
+  // keep the active pill centered when the category changes or the page loads
+  useEffect(() => {
+    const row = rowRef.current
+    const el = row?.querySelector("[data-active='true']")
+    if (!row || !el) return
+    row.scrollTo({
+      left: el.offsetLeft - (row.clientWidth - el.offsetWidth) / 2,
+      behavior: "smooth",
+    })
+  }, [cat])
+
+  // update the progress dots while swiping
+  const onRowScroll = (e) => {
+    const row = e.currentTarget
+    const max = row.scrollWidth - row.clientWidth
+    setDot(max > 0 ? Math.round((row.scrollLeft / max) * (tabs.length - 1)) : 0)
+  }
+
   return (
     <section className="py-12 max-[720px]:py-10">
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
-    <div className="mb-9 flex flex-wrap gap-2.5 max-[720px]:mb-6 max-[720px]:-mx-5 max-[720px]:flex-nowrap max-[720px]:snap-x max-[720px]:gap-2 max-[720px]:overflow-x-auto max-[720px]:px-5 max-[720px]:pb-2 max-[720px]:[scrollbar-width:none] max-[720px]:[&::-webkit-scrollbar]:hidden">
-  <button
-    className={`${TAB} ${cat === "all" ? TAB_ON : TAB_OFF}`}
-    onClick={() => selectCat("all")}
-  >
-    All products
-  </button>
-  {categories.filter((c) => !c.action).map((c) => (
-    <button
-      key={c.id}
-      className={`${TAB} ${cat === c.id ? TAB_ON : TAB_OFF}`}
-      onClick={() => selectCat(c.id)}
-    >
-      {c.name}
-    </button>
-  ))}
-</div>
+        <div className="mb-9 max-[720px]:mb-6">
+          <div
+            ref={rowRef}
+            onScroll={onRowScroll}
+            className="relative flex flex-wrap gap-2.5 max-[720px]:-mx-5 max-[720px]:flex-nowrap max-[720px]:snap-x max-[720px]:snap-mandatory max-[720px]:gap-2 max-[720px]:overflow-x-auto max-[720px]:px-5 max-[720px]:pb-2 max-[720px]:[-webkit-overflow-scrolling:touch] max-[720px]:[scrollbar-width:none] max-[720px]:[&::-webkit-scrollbar]:hidden"
+          >
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                data-active={cat === t.id}
+                className={`${TAB} ${cat === t.id ? TAB_ON : TAB_OFF}`}
+                onClick={() => selectCat(t.id)}
+              >
+                {t.name}
+              </button>
+            ))}
+          </div>
+
+          {/* progress dots, mobile only */}
+          <div className="mt-2 hidden justify-center gap-1.5 max-[720px]:flex" aria-hidden>
+            {tabs.map((t, i) => (
+              <span
+                key={t.id}
+                className={`h-1.5 w-1.5 rounded-full transition-colors ${i === dot ? "bg-ink" : "bg-slate-300"}`}
+              />
+            ))}
+          </div>
+        </div>
 
         <motion.div
           className="grid grid-cols-[repeat(4,1fr)] gap-6 max-[1280px]:grid-cols-[repeat(3,1fr)] max-[960px]:grid-cols-[1fr_1fr] max-[600px]:grid-cols-[1fr]"
@@ -125,23 +162,23 @@ export default function ProductGrid() {
                         />
                       </div>
 
-             {specs.length > 0 && (
-  <div className="absolute -bottom-9 left-3.5 right-3.5 grid grid-cols-[repeat(2,minmax(0,1fr))] items-center overflow-hidden rounded-2xl bg-white px-2 py-3 shadow-[0_6px_20px_rgba(15,40,90,0.12)]">
-    {specs.map(({ icon: Icon, value, label }, i) => (
-      <div
-        key={label}
-        title={`${label}: ${value}`}
-        className={`flex min-w-0 items-center justify-center gap-2 px-1 ${i > 0 ? "border-l border-solid border-slate-200" : ""}`}
-      >
-        <Icon className="h-[22px] w-[22px] shrink-0" style={{ color: NAVY }} />
-        <div className="min-w-0 flex-1 leading-tight">
-          <p className="truncate text-[0.82rem] font-bold" style={{ color: NAVY }}>{value}</p>
-          <p className="truncate text-[0.68rem] text-slate-500">{label}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+                      {specs.length > 0 && (
+                        <div className="absolute -bottom-9 left-3.5 right-3.5 grid grid-cols-[repeat(2,minmax(0,1fr))] items-center overflow-hidden rounded-2xl bg-white px-2 py-3 shadow-[0_6px_20px_rgba(15,40,90,0.12)]">
+                          {specs.map(({ icon: Icon, value, label }, i) => (
+                            <div
+                              key={label}
+                              title={`${label}: ${value}`}
+                              className={`flex min-w-0 items-center justify-center gap-2 px-1 ${i > 0 ? "border-l border-solid border-slate-200" : ""}`}
+                            >
+                              <Icon className="h-[22px] w-[22px] shrink-0" style={{ color: NAVY }} />
+                              <div className="min-w-0 flex-1 leading-tight">
+                                <p className="truncate text-[0.82rem] font-bold" style={{ color: NAVY }}>{value}</p>
+                                <p className="truncate text-[0.68rem] text-slate-500">{label}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
                     {/* Body */}
@@ -166,20 +203,20 @@ export default function ProductGrid() {
                           {price}
                         </span>
                         <span
-  role="link"
-  tabIndex={0}
-  aria-label={`Chat on WhatsApp about ${p.name}`}
-  title="Chat on WhatsApp"
-  onClick={(e) => openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`)}
-  onKeyDown={(e) => {
-    if (e.key === "Enter" || e.key === " ") openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`)
-  }}
-  className="grid h-[54px] w-[54px] shrink-0 cursor-pointer place-items-center rounded-full bg-[#25D366] text-white shadow-[0_6px_14px_rgba(37,211,102,0.45)] transition-transform duration-200 hover:scale-110"
->
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.21-8.23 8.21z" />
-  </svg>
-</span>
+                          role="link"
+                          tabIndex={0}
+                          aria-label={`Chat on WhatsApp about ${p.name}`}
+                          title="Chat on WhatsApp"
+                          onClick={(e) => openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`)
+                          }}
+                          className="grid h-[54px] w-[54px] shrink-0 cursor-pointer place-items-center rounded-full bg-[#25D366] text-white shadow-[0_6px_14px_rgba(37,211,102,0.45)] transition-transform duration-200 hover:scale-110"
+                        >
+                          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.21-8.23 8.21z" />
+                          </svg>
+                        </span>
                         <span
                           className="grid h-[54px] w-[54px] shrink-0 place-items-center rounded-full text-[#0b2a5b] shadow-[0_6px_14px_rgba(245,166,35,0.45)] transition-transform duration-200 group-hover/card:translate-x-[3px]"
                           style={{ background: AMBER }}
