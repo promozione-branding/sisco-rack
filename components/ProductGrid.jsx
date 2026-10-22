@@ -10,10 +10,11 @@ import { useRouter, useSearchParams } from "next/navigation"
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
 
-const TAB = "cursor-pointer rounded-pill border-2 border-solid border-ink px-5 py-2.5 font-semibold leading-[inherit] transition-[background] duration-200 [font-family:inherit] [font-size:inherit]"
+const TAB =
+  "shrink-0 snap-start whitespace-nowrap cursor-pointer rounded-pill border-2 border-solid border-ink px-5 py-2.5 text-base font-semibold leading-[inherit] transition-[background] duration-200 [font-family:inherit] " +
+  "max-[720px]:px-4 max-[720px]:py-2 max-[720px]:text-sm"
 const TAB_ON = "bg-ink text-bg"
-const TAB_OFF = "bg-transparent text-inherit hover:bg-steel"
-
+const TAB_OFF = "bg-transparent text-inherit [@media(hover:hover)]:hover:bg-steel"
 
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()
 
@@ -70,23 +71,23 @@ export default function ProductGrid() {
   return (
     <section className="py-12 max-[720px]:py-10">
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
-        <div className="mb-9 flex flex-wrap gap-2.5">
-          <button
-  className={`${TAB} ${cat === "all" ? TAB_ON : TAB_OFF}`}
-  onClick={() => selectCat("all")}
->
-  All products
-</button>
-{categories.filter((c) => !c.action).map((c) => (
+    <div className="mb-9 flex flex-wrap gap-2.5 max-[720px]:mb-6 max-[720px]:-mx-5 max-[720px]:flex-nowrap max-[720px]:snap-x max-[720px]:gap-2 max-[720px]:overflow-x-auto max-[720px]:px-5 max-[720px]:pb-2 max-[720px]:[scrollbar-width:none] max-[720px]:[&::-webkit-scrollbar]:hidden">
   <button
-    key={c.id}
-    className={`${TAB} ${cat === c.id ? TAB_ON : TAB_OFF}`}
-    onClick={() => selectCat(c.id)}
+    className={`${TAB} ${cat === "all" ? TAB_ON : TAB_OFF}`}
+    onClick={() => selectCat("all")}
   >
-    {c.name}
+    All products
   </button>
-))}
-        </div>
+  {categories.filter((c) => !c.action).map((c) => (
+    <button
+      key={c.id}
+      className={`${TAB} ${cat === c.id ? TAB_ON : TAB_OFF}`}
+      onClick={() => selectCat(c.id)}
+    >
+      {c.name}
+    </button>
+  ))}
+</div>
 
         <motion.div
           className="grid grid-cols-[repeat(4,1fr)] gap-6 max-[1280px]:grid-cols-[repeat(3,1fr)] max-[960px]:grid-cols-[1fr_1fr] max-[600px]:grid-cols-[1fr]"
