@@ -241,7 +241,6 @@ export default function OurStory() {
           <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">What Sets Us Apart</h2>
         </Reveal>
 
-        {/* Desktop / tablet: regular grid */}
         <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[960px]:grid-cols-[1fr_1fr] max-[720px]:hidden">
           {values.map((v, i) => (
             <Reveal key={v.no} i={i} className="flex">
@@ -250,8 +249,6 @@ export default function OurStory() {
           ))}
         </div>
 
-        {/* Mobile: pinned row that slides sideways as you scroll down.
-            -mx-5 cancels the section padding so the row runs edge to edge. */}
         <div className="-mx-5 min-[721px]:hidden">
           <HScroll>
             {values.map((v, i) => (
