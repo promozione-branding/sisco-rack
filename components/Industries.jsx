@@ -102,7 +102,7 @@ export default function Industries() {
 
   return (
     <section className="relative h-[200vh] max-[720px]:h-[180vh]" ref={container}>
-      <div className="sticky top-0 h-[100svh] min-h-[380px] w-full overflow-hidden bg-white">
+      <div className="sticky top-0 min-h-[380px] w-full overflow-hidden bg-white">
         <p className="pointer-events-none absolute inset-x-0 top-[27%] z-20 px-5 text-center text-[1rem] font-extrabold uppercase tracking-[0.18em] text-muted-3 min-[641px]:top-[30%] min-[641px]:text-[0.875rem] min-[641px]:tracking-[0.3em]" ref={eyebrow}>Storage solutions</p>
         <div
           className="absolute inset-0 overflow-hidden pb-[60px] [mask-repeat:no-repeat]"
