@@ -48,6 +48,7 @@ export default function QuoteModal({ open, onClose }) {
       await submitEnquiry({
         name: d.name,
         phone: d.phone,
+        email: d.email,
         product: d.product,
         message: d.message,
       })
@@ -77,7 +78,7 @@ export default function QuoteModal({ open, onClose }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="quote-title"
-            className="relative max-h-[92dvh] w-full max-w-[440px] overflow-y-auto rounded-[24px] bg-white p-6 shadow-2xl"
+            className="relative max-h-[92dvh] w-full max-w-[520px] overflow-y-auto rounded-[24px] bg-white p-6 shadow-2xl"
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -106,7 +107,7 @@ export default function QuoteModal({ open, onClose }) {
                 <button type="button" onClick={onClose} className="mt-5 cursor-pointer rounded-xl bg-[#253970] px-6 py-2.5 font-semibold text-white">Close</button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-5 grid gap-3">
+              <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-2 gap-3 max-[480px]:grid-cols-1">
                 <input name="name" required aria-label="Your name" placeholder="Your name" className={fieldCls} />
 
                 <input
@@ -115,13 +116,15 @@ export default function QuoteModal({ open, onClose }) {
                   inputMode="numeric"
                   required
                   maxLength={10}
-                  aria-label="Mobile number"
+                  aria-label="Phone number"
                   placeholder="Mobile number"
                   className={fieldCls}
                 />
 
-                <select name="product" defaultValue="" aria-label="Product" className={fieldCls}>
-                  <option value="">Select a product (optional)</option>
+                <input name="email" type="email" aria-label="Email address" placeholder="Email address" className={fieldCls} />
+
+                <select name="product" defaultValue="" aria-label="Product / requirement" className={fieldCls}>
+                  <option value="">Select a product</option>
                   {categories.map((c) => (
                     <option key={c.id} value={c.name}>{c.name}</option>
                   ))}
@@ -131,12 +134,12 @@ export default function QuoteModal({ open, onClose }) {
                   name="message"
                   rows={3}
                   aria-label="Message"
-                  placeholder="Tell us about your project (optional)"
-                  className={`${fieldCls} resize-none`}
+                  placeholder="Tell us about your project..."
+                  className={`${fieldCls} col-span-2 resize-none max-[480px]:col-span-1`}
                 />
 
                 {error && (
-                  <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[0.85rem] font-semibold text-red-700">
+                  <div className="col-span-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[0.85rem] font-semibold text-red-700">
                     {error}
                   </div>
                 )}
@@ -144,13 +147,13 @@ export default function QuoteModal({ open, onClose }) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border-0 bg-[#253970] py-3.5 font-bold text-white transition-colors hover:bg-[#1b2c5a] disabled:opacity-70"
+                  className="col-span-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border-0 bg-[#253970] py-3.5 max-[480px]:col-span-1 font-bold text-white transition-colors hover:bg-[#1b2c5a] disabled:opacity-70"
                 >
                   {loading ? "Sending..." : "Send Enquiry"}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                 </button>
 
-                <p className="text-center text-[0.78rem] text-[#6b7a90]">
+                <p className="col-span-2 text-center text-[0.78rem] text-[#6b7a90] max-[480px]:col-span-1">
                   Prefer a call? <a href={PHONE_HREF} className="font-semibold text-[#253970] underline">{PHONE}</a>
                 </p>
               </form>
