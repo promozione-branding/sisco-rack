@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   motion,
   useScroll,
@@ -17,6 +17,22 @@ const n = testimonials.length
 const at = (v) => clamp(v / 0.88, 0, 1) * (n - 1)
 
 const sideFor = (i) => (i % 2 === 0 ? "left" : "right")
+
+// Vertical offset (px) between stacked cards. Smaller on mobile so the
+// peeking edges don't ride up over the counter and dots.
+function usePeekStep() {
+  const [step, setStep] = useState(24)
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 960px)")
+    const update = () => setStep(mq.matches ? 14 : 24)
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
+  }, [])
+
+  return step
+}
 
 const Star = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true">
@@ -114,8 +130,9 @@ function Body({ data, side }) {
         </div>
       )}
 
+      {/* max-[700px]:pr-8 keeps text clear of the floating WhatsApp / call buttons */}
       <div
-        className={`relative flex h-full min-w-0 flex-col justify-between max-[700px]:p-0 ${
+        className={`relative flex h-full min-w-0 flex-col justify-between max-[700px]:p-0 max-[700px]:pr-8 ${
           data.image ? (left ? "pl-[38%]" : "pr-[38%]") : ""
         }`}
       >
@@ -135,7 +152,7 @@ const articleBase =
 
 const tone = (t) => (t === "dark" ? "bg-[#253970] text-white" : "bg-white")
 
-function Card({ data, i, progress }) {
+function Card({ data, i, progress, step }) {
   const enter = useTransform(progress, (v) => {
     if (i === 0) return 0
     return (1 - clamp(at(v) - (i - 1), 0, 1)) * 118
@@ -144,7 +161,7 @@ function Card({ data, i, progress }) {
   const slotY = useTransform(enter, (v) => `${v}%`)
   const tilt = useTransform(enter, (v) => (v / 118) * 4)
   const depth = useTransform(progress, (v) => Math.max(0, at(v) - i))
-  const y = useTransform(depth, (d) => -d * 24)
+  const y = useTransform(depth, (d) => -d * step)
   const scale = useTransform(depth, (d) => 1 - d * 0.05)
   const opacity = useTransform(depth, (d) => 1 - clamp(d - 2.2, 0, 1))
 
@@ -166,6 +183,7 @@ function Card({ data, i, progress }) {
 export default function Testimonials() {
   const box = useRef(null)
   const reduce = useReducedMotion()
+  const step = usePeekStep()
   const [idx, setIdx] = useState(0)
 
   const { scrollYProgress } = useScroll({
@@ -230,7 +248,8 @@ export default function Testimonials() {
             max-[960px]:rounded-[28px] max-[960px]:px-[22px]
           "
         >
-          <div>
+          {/* z-10 keeps the counter and dots above any card edge that peeks up */}
+          <div className="relative z-10">
             <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
               Client stories
             </span>
@@ -274,9 +293,10 @@ export default function Testimonials() {
             </div>
           </div>
 
-          <div className="relative mt-10 h-[min(310px,56svh)] max-[960px]:mt-[34px] max-[960px]:h-[min(430px,62svh)]">
+          {/* Mobile: 56px top margin covers the max peek (14px step * ~3.2 depth = ~45px) */}
+          <div className="relative mt-10 h-[min(310px,56svh)] max-[960px]:mt-[56px] max-[960px]:h-[min(400px,58svh)]">
             {testimonials.map((t, i) => (
-              <Card key={t.name} data={t} i={i} progress={progress} />
+              <Card key={t.name} data={t} i={i} progress={progress} step={step} />
             ))}
           </div>
         </div>

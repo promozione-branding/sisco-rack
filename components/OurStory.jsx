@@ -169,7 +169,6 @@ function Count({ to, suffix }) {
   )
 }
 
-// "What Sets Us Apart" card, shared by the desktop grid and the mobile HScroll row
 function ValueCard({ v, i }) {
   return (
     <div className="group relative flex-1 overflow-hidden rounded-[22px] border-2 border-solid border-ink bg-[#253970] px-[30px] pb-[34px] pt-11 transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-2 hover:-rotate-1 hover:shadow-lift-hover">
@@ -237,7 +236,8 @@ export default function OurStory() {
       </section>
 
       <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
-        <Reveal className="mb-[26px] flex items-end justify-between gap-6">
+        {/* Desktop heading; on mobile the heading lives inside HScroll so it pins with the cards */}
+        <Reveal className="mb-[26px] flex items-end justify-between gap-6 max-[720px]:hidden">
           <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">What Sets Us Apart</h2>
         </Reveal>
 
@@ -250,7 +250,13 @@ export default function OurStory() {
         </div>
 
         <div className="-mx-5 min-[721px]:hidden">
-          <HScroll>
+          <HScroll
+            header={
+              <h2 className="px-5 pb-3 text-[length:clamp(1.9rem,3.6vw,3rem)]">
+                What Sets Us Apart
+              </h2>
+            }
+          >
             {values.map((v, i) => (
               <li key={v.no} className="flex w-[80vw] max-w-[20rem] shrink-0">
                 <ValueCard v={v} i={i} />
