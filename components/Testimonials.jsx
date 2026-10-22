@@ -190,7 +190,7 @@ export default function Testimonials() {
       <section className="py-12 max-[720px]:py-10">
         <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
           <div className="mb-11 text-center text-[#253970] min-[961px]:mb-[18px]">
-            <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
+            <span className="mt-8 inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
               Client stories
             </span>
             <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
