@@ -131,7 +131,7 @@ export default function About() {
                 Steel 
                 <br />
                 you
-                <br />
+    
                 can trust
               </h2>
               <p className="mt-7 max-w-[30rem] text-[1.05rem] leading-[1.6] text-[#1f2740]">
