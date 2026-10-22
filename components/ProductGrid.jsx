@@ -11,8 +11,6 @@ import { useRouter, useSearchParams } from "next/navigation"
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
 
-// Tabs: wrap on desktop, single swipeable row on mobile.
-// Hover style only applies on devices with a real pointer (no sticky hover on touch).
 const TAB =
   "shrink-0 snap-start whitespace-nowrap cursor-pointer rounded-pill border-2 border-solid border-ink px-5 py-2.5 text-base font-semibold leading-[inherit] transition-[background] duration-200 [font-family:inherit] " +
   "max-[720px]:px-4 max-[720px]:py-2 max-[720px]:text-sm"

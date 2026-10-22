@@ -14,7 +14,7 @@ const rise = {
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] } })
 }
 
-const valueImages = ["/welding.webp", "/steel.webp" , "finishing.webp" , "mezzanine.webp"]
+const valueImages = ["/welding.webp", "/steel.webp", "/finishing.webp", "/mezzanine.webp"]
 
 const Svg = ({ children }) => (
   <svg viewBox="0 0 24 24" className="h-11 w-11 max-[720px]:h-9 max-[720px]:w-9" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -223,7 +223,7 @@ export default function OurStory() {
 
       <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
         <Reveal className="mb-[26px] flex items-end justify-between gap-6">
-          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">Built level by level</h2>
+          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)] font-bold text-[#253970]">Built level by level</h2>
         </Reveal>
         <div className="relative py-2" ref={line}>
           <div className="absolute bottom-0 left-1/2 top-0 w-[18px] -translate-x-1/2 overflow-hidden rounded-[9px] bg-blue bg-[radial-gradient(circle,var(--panel)_2.5px,transparent_3.5px)] bg-[length:18px_26px] bg-[position:center_6px] max-[720px]:left-3.5" aria-hidden="true">
@@ -236,9 +236,11 @@ export default function OurStory() {
       </section>
 
       <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
-        {/* Desktop heading; on mobile the heading lives inside HScroll so it pins with the cards */}
-        <Reveal className="mb-[26px] flex items-end justify-between gap-6 max-[720px]:hidden">
-          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">What Sets Us Apart</h2>
+        {/* Desktop heading */}
+        <Reveal className="mb-[26px] flex items-end justify-between gap-6 max-[720px]">
+          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)] font-bold text-[#253970]">
+            What Sets Us Apart
+          </h2>
         </Reveal>
 
         <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[960px]:grid-cols-[1fr_1fr] max-[720px]:hidden">
@@ -252,7 +254,7 @@ export default function OurStory() {
         <div className="-mx-5 min-[721px]:hidden">
           <HScroll
             header={
-              <h2 className="px-5 pb-3 text-[length:clamp(1.9rem,3.6vw,3rem)]">
+              <h2 className="px-5 pb-3 text-[length:clamp(1.9rem,3.6vw,3rem)] font-bold text-[#253970]">
                 What Sets Us Apart
               </h2>
             }
