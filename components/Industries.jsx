@@ -116,7 +116,7 @@ export default function Industries() {
             WebkitMaskPosition: "center"
           }}
         >
-          <div className="relative mt-10 h-full w-full origin-center overflow-hidden will-change-transform" ref={media}>
+          <div className="relative h-full w-full origin-center overflow-hidden will-change-transform" ref={media}>
             <video className="absolute inset-0 h-full w-full object-cover object-center" autoPlay muted loop playsInline preload="none" poster="/bg_main_poster_.jpg" src={videoSrc || undefined} />
           </div>
         </div>

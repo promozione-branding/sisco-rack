@@ -6,22 +6,11 @@ import { motion, AnimatePresence } from "framer-motion"
 import { categories } from "@/lib/data"
 import { submitEnquiry } from "@/lib/submitEnquiry"
 
-const EMAIL = "info.siscosteel@gmail.com"
 const PHONE = "+91 7629827285"
 const PHONE_HREF = "tel:+917629827285"
 
-const labelCls = "mb-2 block text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#6b7a90]"
 const fieldCls =
-  "w-full rounded-[14px] border border-solid border-[#e3e7ee] bg-[#fafafa] py-3.5 pl-11 pr-4 text-[0.95rem] max-[720px]:text-[16px] text-[#253970] outline-none transition-colors placeholder:text-[#9aa5b5] focus:border-[#253970] focus:bg-white"
-const iconCls = "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8a96a8]"
-
-function Icon({ children }) {
-  return (
-    <svg className={iconCls} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {children}
-    </svg>
-  )
-}
+  "w-full rounded-xl border border-solid border-[#e3e7ee] bg-[#fafafa] px-4 py-3 text-[0.95rem] max-[720px]:text-[16px] text-[#253970] outline-none transition-colors placeholder:text-[#9aa5b5] focus:border-[#253970] focus:bg-white"
 
 export default function QuoteModal({ open, onClose }) {
   const [sent, setSent] = useState(false)
@@ -59,7 +48,6 @@ export default function QuoteModal({ open, onClose }) {
       await submitEnquiry({
         name: d.name,
         phone: d.phone,
-        email: d.email,
         product: d.product,
         message: d.message,
       })
@@ -89,130 +77,84 @@ export default function QuoteModal({ open, onClose }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="quote-title"
-            className="grid max-h-[92dvh] w-full max-w-[1000px] grid-cols-[0.8fr_1.2fr] overflow-y-auto rounded-[28px] bg-white shadow-2xl max-[800px]:grid-cols-1"
+            className="relative max-h-[92dvh] w-full max-w-[440px] overflow-y-auto rounded-[24px] bg-white p-6 shadow-2xl"
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
             transition={{ duration: 0.25 }}
           >
-            {/* Left panel */}
-            <div className="flex flex-col bg-[#253970] p-9 text-white max-[800px]:hidden">
-              <div className="w-fit rounded-[10px]">
-                <img src="/sisco_logo_transparent.webp" alt="Logo" className="h-auto w-[140px]" />
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute right-4 top-4 grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-solid border-[#e3e7ee] bg-white text-[#6b7a90] transition-colors hover:bg-[#f3f5f9]"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
+            </button>
+
+            <h3 id="quote-title" className="pr-10 text-[1.5rem] font-extrabold leading-tight text-[#253970]">
+              Get a free quote
+            </h3>
+            <p className="mt-1 text-[0.88rem] text-[#6b7a90]">
+              Share a few details and we&apos;ll get back to you.
+            </p>
+
+            {sent ? (
+              <div className="mt-6 rounded-2xl bg-[#f3f5f9] p-6 text-center">
+                <p className="text-lg font-bold text-[#253970]">Thank you!</p>
+                <p className="mt-1 text-[0.9rem] text-[#6b7a90]">We&apos;ve received your enquiry and will reply shortly.</p>
+                <button type="button" onClick={onClose} className="mt-5 cursor-pointer rounded-xl bg-[#253970] px-6 py-2.5 font-semibold text-white">Close</button>
               </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="mt-5 grid gap-3">
+                <input name="name" required aria-label="Your name" placeholder="Your name" className={fieldCls} />
 
-              <p className="mt-9 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-safety">Get in touch</p>
-              <h2 className="mt-3 text-[2.8rem] font-extrabold leading-[1.05]">
-                Let&apos;s build something better.
-              </h2>
-              <p className="mt-6 text-[0.95rem] leading-relaxed text-white/70">
-                Tell us about your racking or shelving project and our team will help you find the right solution.
-              </p>
+                <input
+                  name="phone"
+                  type="tel"
+                  inputMode="numeric"
+                  required
+                  maxLength={10}
+                  aria-label="Mobile number"
+                  placeholder="Mobile number"
+                  className={fieldCls}
+                />
 
-              <div className="mt-auto border-t border-solid border-white/15 pt-6">
-                <p className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white/50">Speak with our team</p>
-                <a href={PHONE_HREF} className="mb-4 flex items-center gap-3 hover:text-safety">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-safety">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg>
-                  </span>
-                  <span>
-                    <span className="block text-[0.95rem] font-bold">{PHONE}</span>
-                    <span className="block text-[0.7rem] text-white/60">Call us directly</span>
-                  </span>
-                </a>
-                <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 hover:text-safety">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-safety">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
-                  </span>
-                  <span>
-                    <span className="block break-all text-[0.9rem] font-bold">{EMAIL}</span>
-                    <span className="block text-[0.7rem] text-white/60">Email our team</span>
-                  </span>
-                </a>
-              </div>
-            </div>
+                <select name="product" defaultValue="" aria-label="Product" className={fieldCls}>
+                  <option value="">Select a product (optional)</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={c.name}>{c.name}</option>
+                  ))}
+                </select>
 
-            {/* Right panel */}
-            <div className="relative p-9 max-[800px]:p-6">
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Close"
-                className="absolute right-5 top-5 grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-solid border-[#e3e7ee] bg-white text-[#6b7a90] transition-colors hover:bg-[#f3f5f9]"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
-              </button>
+                <textarea
+                  name="message"
+                  rows={3}
+                  aria-label="Message"
+                  placeholder="Tell us about your project (optional)"
+                  className={`${fieldCls} resize-none`}
+                />
 
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[#9aa5b5]">Project enquiry</p>
-              <h3 id="quote-title" className="mt-2 text-[2rem] font-extrabold text-[#253970]">Tell us what you need.</h3>
-              <p className="mt-1 text-[0.95rem] text-[#9aa5b5]">Fill in your details and we&apos;ll get back to you.</p>
-
-              {sent ? (
-                <div className="mt-10 rounded-[18px] bg-[#f3f5f9] p-8 text-center">
-                  <p className="text-xl font-bold text-[#253970]">Thank you!</p>
-                  <p className="mt-2 text-[#6b7a90]">We&apos;ve received your enquiry and will get back to you shortly.</p>
-                  <button type="button" onClick={onClose} className="mt-6 cursor-pointer rounded-[14px] bg-[#253970] px-6 py-3 font-semibold text-white">Close</button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="mt-7 grid grid-cols-2 gap-x-5 gap-y-5 max-[600px]:grid-cols-1">
-                  <div>
-                    <label htmlFor="q-name" className={labelCls}>Your name</label>
-                    <div className="relative">
-                      <Icon><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></Icon>
-                      <input id="q-name" name="name" required placeholder="Enter your name" className={fieldCls} />
-                    </div>
+                {error && (
+                  <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[0.85rem] font-semibold text-red-700">
+                    {error}
                   </div>
+                )}
 
-                  <div>
-                    <label htmlFor="q-phone" className={labelCls}>Phone number</label>
-                    <div className="relative">
-                      <Icon><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></Icon>
-                      <input id="q-phone" name="phone" type="tel" required maxLength={10} placeholder="Enter your Mobile Number" className={fieldCls} />
-                    </div>
-                  </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border-0 bg-[#253970] py-3.5 font-bold text-white transition-colors hover:bg-[#1b2c5a] disabled:opacity-70"
+                >
+                  {loading ? "Sending..." : "Send Enquiry"}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </button>
 
-                  <div>
-                    <label htmlFor="q-email" className={labelCls}>Email address</label>
-                    <div className="relative">
-                      <Icon><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></Icon>
-                      <input id="q-email" name="email" type="email" placeholder="Enter your Email" className={fieldCls} />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="q-product" className={labelCls}>Product / requirement</label>
-                    <select id="q-product" name="product" defaultValue="" className={`${fieldCls} !pl-4`}>
-                      <option value="">Select a product</option>
-                      {categories.map((c) => (
-                        <option key={c.id} value={c.name}>{c.name}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="col-span-2 max-[600px]:col-span-1">
-                    <label htmlFor="q-message" className={labelCls}>Message</label>
-                    <textarea id="q-message" name="message" rows={5} placeholder="Tell us about your project..." className={`${fieldCls} !pl-4 resize-none`} />
-                  </div>
-
-                  <div className="col-span-2 max-[600px]:col-span-1">
-                    {error && (
-                      <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[0.9rem] font-semibold text-red-700">
-                        {error}
-                      </div>
-                    )}
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] border-0 bg-[#253970] py-4 font-bold text-white transition-colors hover:bg-[#1b2c5a] disabled:opacity-70"
-                    >
-                      {loading ? "Sending..." : "Send Enquiry"}
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-                    </button>
-                    <p className="mt-4 text-center text-[0.7rem] text-[#9aa5b5]">Our team typically responds within one business day.</p>
-                  </div>
-                </form>
-              )}
-            </div>
+                <p className="text-center text-[0.78rem] text-[#6b7a90]">
+                  Prefer a call? <a href={PHONE_HREF} className="font-semibold text-[#253970] underline">{PHONE}</a>
+                </p>
+              </form>
+            )}
           </motion.div>
         </motion.div>
       )}

@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, MotionConfig, useScroll, useTransform, useSpring, useInView, useReducedMotion, animate } from "framer-motion"
 import SplitButton from "./SplitButton"
+import HScroll from "./HScroll"
 import dynamic from "next/dynamic"
 const LottieIcon = dynamic(() => import("./LottieIcon"), { ssr: false })
 import { story, aboutStats, milestones, values } from "@/lib/about"
@@ -168,6 +169,22 @@ function Count({ to, suffix }) {
   )
 }
 
+// "What Sets Us Apart" card, shared by the desktop grid and the mobile HScroll row
+function ValueCard({ v, i }) {
+  return (
+    <div className="group relative flex-1 overflow-hidden rounded-[22px] border-2 border-solid border-ink bg-[#253970] px-[30px] pb-[34px] pt-11 transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-2 hover:-rotate-1 hover:shadow-lift-hover">
+      <div className="absolute inset-0 bg-cover bg-no-repeat bg-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" style={{ backgroundImage: `url(${v.image || valueImages[i % valueImages.length]})` }} aria-hidden="true" />
+      <div className="absolute inset-0 bg-[#253970]/70 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(circle_at_16px_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_16px_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px)]" aria-hidden="true" />
+      <div className="relative z-[3]">
+        <em className="block font-display text-[2.6rem] font-bold not-italic leading-none text-safety">{v.no}</em>
+        <h3 className="mt-2.5 font-body text-[1.1rem] font-bold leading-[1.3] tracking-normal text-white">{v.title}</h3>
+        <p className="mt-2 text-[0.92rem] text-white/80">{v.text}</p>
+      </div>
+    </div>
+  )
+}
+
 export default function OurStory() {
   const collage = useRef(null)
   const stats = useRef(null)
@@ -223,21 +240,26 @@ export default function OurStory() {
         <Reveal className="mb-[26px] flex items-end justify-between gap-6">
           <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">What Sets Us Apart</h2>
         </Reveal>
-        <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[720px]:grid-cols-[1fr] max-[960px]:grid-cols-[1fr_1fr]">
+
+        {/* Desktop / tablet: regular grid */}
+        <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[960px]:grid-cols-[1fr_1fr] max-[720px]:hidden">
           {values.map((v, i) => (
             <Reveal key={v.no} i={i} className="flex">
-              <div className="group relative flex-1 overflow-hidden rounded-[22px] border-2 border-solid border-ink bg-[#253970] px-[30px] pb-[34px] pt-11 transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-2 hover:-rotate-1 hover:shadow-lift-hover">
-                <div className="absolute inset-0 bg-cover bg-no-repeat bg-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" style={{ backgroundImage: `url(${v.image || valueImages[i % valueImages.length]})` }} aria-hidden="true" />
-                <div className="absolute inset-0 bg-[#253970]/70 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" aria-hidden="true" />
-                <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(circle_at_16px_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_16px,#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_16px_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px),radial-gradient(circle_at_calc(100%_-_16px)_calc(100%_-_16px),#7a8b99_0_4px,transparent_5px)]" aria-hidden="true" />
-                <div className="relative z-[3]">
-                  <em className="block font-display text-[2.6rem] font-bold not-italic leading-none text-safety">{v.no}</em>
-                  <h3 className="mt-2.5 font-body text-[1.1rem] font-bold leading-[1.3] tracking-normal text-white">{v.title}</h3>
-                  <p className="mt-2 text-[0.92rem] text-white/80">{v.text}</p>
-                </div>
-              </div>
+              <ValueCard v={v} i={i} />
             </Reveal>
           ))}
+        </div>
+
+        {/* Mobile: pinned row that slides sideways as you scroll down.
+            -mx-5 cancels the section padding so the row runs edge to edge. */}
+        <div className="-mx-5 min-[721px]:hidden">
+          <HScroll>
+            {values.map((v, i) => (
+              <li key={v.no} className="flex w-[80vw] max-w-[20rem] shrink-0">
+                <ValueCard v={v} i={i} />
+              </li>
+            ))}
+          </HScroll>
         </div>
       </section>
     </MotionConfig>

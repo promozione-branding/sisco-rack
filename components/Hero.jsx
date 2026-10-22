@@ -102,20 +102,19 @@ export default function Hero() {
         </span>
       </h2>
 
-      <div
-        className="hero-rise mt-7 flex flex-wrap justify-center gap-3.5 [animation-delay:.4s] max-[720px]:mt-[20px] max-[720px]:gap-2.5"
-        onClickCapture={openQuote}
-      >
-        <SplitButton href="/" dark>
-          Get a quote
-        </SplitButton>
-        <Link
-          href="/products"
-          className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-white/70 bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-white transition-[background,color] duration-[250ms] [font-family:inherit] hover:border-white hover:bg-white hover:text-ink"
-        >
-          Browse products
-        </Link>
-      </div>
+<div
+  className="hero-rise mt-7 flex flex-wrap justify-center gap-3.5 [animation-delay:.4s] max-[720px]:mt-[20px] max-[720px]:gap-2.5"
+>
+  <SplitButton href="/" dark onClick={openQuote}>
+    Get a quote
+  </SplitButton>
+  <Link
+    href="/products"
+    className="bg-white text-black inline-block cursor-pointer rounded-[14px] border-2 border-solid border-white/70 bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-white transition-[background,color] duration-[250ms] [font-family:inherit] hover:border-white hover:bg-gray-800 hover:text-white"
+  >
+    Browse products
+  </Link>
+</div>
 
       <div className="absolute bottom-[88px] left-1/2 z-10 flex -translate-x-1/2 gap-2 max-[720px]:bottom-[64px]">
         {slides.map((_, i) => (
