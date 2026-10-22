@@ -108,12 +108,12 @@ export default function Hero() {
   <SplitButton href="/" dark onClick={openQuote}>
     Get a quote
   </SplitButton>
-  <Link
-    href="/products"
-    className="bg-white text-black inline-block cursor-pointer rounded-[14px] border-2 border-solid border-white/70 bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-white transition-[background,color] duration-[250ms] [font-family:inherit] hover:border-white hover:bg-gray-800 hover:text-white sm:text-black"
-  >
-    Browse products
-  </Link>
+<Link
+  href="/products"
+  className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-white/70 bg-white px-7 py-3.5 text-[1rem] font-semibold text-black transition-[background,color,border-color] duration-[250ms] [font-family:inherit] hover:border-gray-800 hover:bg-gray-800 hover:text-white"
+>
+  Browse products
+</Link>
 </div>
 
       <div className="absolute bottom-[88px] left-1/2 z-10 flex -translate-x-1/2 gap-2 max-[720px]:bottom-[64px]">
