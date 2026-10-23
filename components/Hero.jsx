@@ -56,7 +56,7 @@ export default function Hero() {
 
     intervalRef.current = setInterval(() => {
       setSlide((s) => (s + 1) % slides.length)
-    }, 5000)
+    }, 3000)
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)

@@ -255,7 +255,7 @@ function SideImages() {
 export default function IndustriesServed() {
   return (
     <section
-      className="relative overflow-hidden py-20 max-[720px]:py-12"
+      className="relative overflow-hidden py-20 max-[720px]:py-4"
       style={{
         background:
           "radial-gradient(circle at 50% 0%, #ffffff 0%, #f3f6fb 55%, #e9eef6 100%)",

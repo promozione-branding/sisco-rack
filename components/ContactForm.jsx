@@ -104,7 +104,7 @@ export default function ContactForm() {
   return (
     <section className="bg-slate-50">
       <div
-        className="h-[98px] w-full bg-cover bg-center"
+        className="h-[56px] w-full bg-cover bg-center"
         style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),` }}
       />
       <div className="mx-auto grid max-w-[1910px] grid-cols-[1.02fr_1.18fr] items-stretch gap-5 px-14 py-9 max-[1100px]:grid-cols-1 max-[720px]:px-5">
