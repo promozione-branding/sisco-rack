@@ -316,7 +316,7 @@ const SPEC_LIMIT = 6
   )}
 </div>
               </div>
-
+   
               <figure className="grid place-items-center gap-2 rounded-[18px] bg-[#f3f5f8] bg-[radial-gradient(rgba(122,139,153,0.28)_1px,transparent_1px)] bg-[length:14px_14px] p-4 max-[1180px]:order-3 max-[1180px]:col-span-2 max-[960px]:col-span-1">
                 <RackBlueprint height={s.height} layers={s.layersPerRack} load={s.loadPerLayer} />
                 <figcaption className="text-[0.72rem] text-muted-2">{s.layersPerRack ? "Drawn from the listed height and layers." : "Layer count in the drawing is illustrative."}</figcaption>
