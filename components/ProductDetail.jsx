@@ -208,8 +208,6 @@ const SPEC_LIMIT = 6
             {p.name}
           </motion.h1>
           <motion.div className="mt-[18px] flex flex-wrap gap-2.5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-            <span className="rounded-pill border-[1.5px] border-solid border-safety bg-white/[0.85] px-4 py-[7px] text-[0.82rem] font-semibold">{p.category}</span>
-            <span className="rounded-pill border-[1.5px] border-solid border-line bg-white/[0.85] px-4 py-[7px] text-[0.82rem] font-semibold">{p.brand}</span>
             {s.height && <span className="rounded-pill border-[1.5px] border-solid border-line bg-white/[0.85] px-4 py-[7px] text-[0.82rem] font-semibold">{s.height} tall</span>}
           </motion.div>
         </div>
