@@ -190,7 +190,7 @@ function MobileTestimonials() {
   return (
     <section className="py-6">
       <HScroll
-        speed={0.4}      
+        speed={0.9}      
         className="gap-4 pr-5" 
         header={
           <div className="mb-6 px-5 text-center text-[#253970]">
@@ -220,11 +220,9 @@ function MobileTestimonials() {
   )
 }
 
-export default function Testimonials() {
+function DesktopTestimonials() {
   const box = useRef(null)
-  const reduce = useReducedMotion()
   const step = usePeekStep()
-  const isMobile = useIsMobile(960)
   const [idx, setIdx] = useState(0)
 
   const { scrollYProgress } = useScroll({
@@ -243,40 +241,6 @@ export default function Testimonials() {
   useMotionValueEvent(progress, "change", (v) => {
     setIdx(clamp(Math.round(at(v)), 0, n - 1))
   })
-
-  // Reduced motion → simple stacked list
-  if (reduce) {
-    return (
-      <section className="py-12 max-[720px]:py-10">
-        <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
-          <div className="mb-11 text-center text-[#253970] min-[961px]:mb-[18px]">
-            <span className="mt-8 inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
-              Client stories
-            </span>
-            <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
-              What Our Customers Say
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            {testimonials.map((t, i) => (
-              <article
-                key={t.name}
-                className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
-              >
-                <Body data={t} side={sideFor(i)} />
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  // Mobile → use HScroll
-  if (isMobile) {
-    return <MobileTestimonials />
-  }
 
   // Desktop → original vertical scroll-driven version
   return (
@@ -349,4 +313,41 @@ export default function Testimonials() {
       </div>
     </section>
   )
+}
+
+function ReducedTestimonials() {
+  return (
+      <section className="py-12 max-[720px]:py-10">
+        <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
+          <div className="mb-11 text-center text-[#253970] min-[961px]:mb-[18px]">
+            <span className="mt-8 inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
+              Client stories
+            </span>
+            <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
+              What Our Customers Say
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6">
+            {testimonials.map((t, i) => (
+              <article
+                key={t.name}
+                className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
+              >
+                <Body data={t} side={sideFor(i)} />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+  )
+}
+
+export default function Testimonials() {
+  const reduce = useReducedMotion()
+  const isMobile = useIsMobile(960)
+
+  if (reduce) return <ReducedTestimonials />
+  if (isMobile) return <MobileTestimonials />
+  return <DesktopTestimonials />
 }
