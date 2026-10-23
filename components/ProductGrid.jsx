@@ -69,12 +69,10 @@ export default function ProductGrid() {
 
   const shown = cat === "all" ? products : products.filter((p) => p.cat === cat)
 
-  // ---- Tabs slider ----
   const tabs = [{ id: "all", name: "All products" }, ...categories.filter((c) => !c.action)]
   const rowRef = useRef(null)
   const [dot, setDot] = useState(0)
 
-  // keep the active pill centered when the category changes or the page loads
   useEffect(() => {
     const row = rowRef.current
     const el = row?.querySelector("[data-active='true']")
@@ -93,7 +91,7 @@ export default function ProductGrid() {
   }
 
   return (
-    <section className="py-12 max-[720px]:py-10">
+    <section className="py-8 max-[720px]:py-5">
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
         <div className="mb-9 max-[720px]:mb-6">
           <div

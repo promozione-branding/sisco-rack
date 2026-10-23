@@ -107,6 +107,16 @@ const openProductQuote = (e) => {
               </li>
             )
           )}
+            <li className="hidden max-[1180px]:block max-[1180px]:pt-2 [&>a]:flex [&>a]:items-center [&>a]:gap-2 [&>a]:rounded-pill [&>a]:px-4 [&>a]:py-2.5 [&>a]:text-white/85 [&>a]:transition-[background,color] [&>a]:duration-200 [&>a:hover]:bg-white/[0.12] [&>a:hover]:text-white">
+            <div>
+              <SplitButton  className="flash-btn" onClickCapture={openQuote}>Installation & Dismantling Services </SplitButton>
+            </div>
+          </li>
+                  <li className="hidden max-[1180px]:block max-[1180px]:pt-2 [&>a]:flex [&>a]:items-center [&>a]:gap-2 [&>a]:rounded-pill [&>a]:px-4 [&>a]:py-2.5 [&>a]:text-white/85 [&>a]:transition-[background,color] [&>a]:duration-200 [&>a:hover]:bg-white/[0.12] [&>a:hover]:text-white">
+            <div>
+              <SplitButton  className="flash-btn" onClickCapture={openProductQuote}>Get a quote</SplitButton>
+            </div>
+          </li>
           <li className="hidden max-[1180px]:block max-[1180px]:pt-2 w-[200px]">
             <a
               href={whatsappUrl}
@@ -118,16 +128,8 @@ const openProductQuote = (e) => {
               Chat on WhatsApp
             </a>
           </li>
-          <li className="hidden max-[1180px]:block max-[1180px]:pt-2 [&>a]:flex [&>a]:items-center [&>a]:gap-2 [&>a]:rounded-pill [&>a]:px-4 [&>a]:py-2.5 [&>a]:text-white/85 [&>a]:transition-[background,color] [&>a]:duration-200 [&>a:hover]:bg-white/[0.12] [&>a:hover]:text-white">
-            <div>
-              <SplitButton  className="flash-btn" onClickCapture={openProductQuote}>Get a quote</SplitButton>
-            </div>
-          </li>
-             <li className="hidden max-[1180px]:block max-[1180px]:pt-2 [&>a]:flex [&>a]:items-center [&>a]:gap-2 [&>a]:rounded-pill [&>a]:px-4 [&>a]:py-2.5 [&>a]:text-white/85 [&>a]:transition-[background,color] [&>a]:duration-200 [&>a:hover]:bg-white/[0.12] [&>a:hover]:text-white">
-            <div>
-              <SplitButton  className="flash-btn" onClickCapture={openQuote}>Installation & Dismantling Services </SplitButton>
-            </div>
-          </li>
+  
+           
         </ul>
         <div className="flex items-center gap-[18px]">
           <a
