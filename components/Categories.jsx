@@ -210,7 +210,7 @@ export default function Categories() {
             onTouchEnd={() => { setTimeout(() => { paused.current = false }, 2500) }}
           >
             <div
-              className="flex cursor-grab snap-x snap-mandatory gap-[18px] overflow-x-auto scroll-p-[22px] p-[22px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden data-[dragging]:cursor-grabbing data-[dragging]:snap-none"
+              className="flex cursor-grab snap-x snap-mandatory gap-[18px] overflow-x-auto scroll-p-[22px] p-[22px] max-[720px]:scroll-p-3 max-[720px]:p-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden data-[dragging]:cursor-grabbing data-[dragging]:snap-none"
               ref={track}
               onScroll={measure}
               onPointerDown={onDown}
@@ -222,7 +222,7 @@ export default function Categories() {
               {industries.map((s, i) => (
                 <motion.div
                   key={s.id}
-                  className="flex-[0_0_min(320px,78%)] snap-start"
+                  className="flex-[0_0_min(320px,78%)] max-[720px]:flex-[0_0_92%] snap-start"
                   variants={reduce ? still : item}
                   custom={i}
                   initial="hidden"
