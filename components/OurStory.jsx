@@ -236,12 +236,11 @@ export default function OurStory() {
       </section>
 
       <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
-        {/* Desktop heading */}
-        <Reveal className="mb-[26px] flex items-end justify-between gap-6 max-[720px]">
-          <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)] font-bold text-[#253970]">
-            What Sets Us Apart
-          </h2>
-        </Reveal>
+      <Reveal className="mb-[26px] flex items-end justify-between gap-6 max-[720px]:hidden">
+  <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)] font-bold text-[#253970]">
+    What Sets Us Apart
+  </h2>
+</Reveal>
 
         <div className="grid grid-cols-[repeat(4,1fr)] gap-[18px] max-[960px]:grid-cols-[1fr_1fr] max-[720px]:hidden">
           {values.map((v, i) => (

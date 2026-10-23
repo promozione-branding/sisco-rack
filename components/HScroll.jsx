@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useSpring, useTransform, useReducedMotion } from "framer-motion"
 
 
-function Pinned({ children, className, speed }) {
+function Pinned({ children, className, speed, header }) {
   const box = useRef(null)
   const pin = useRef(null)
   const track = useRef(null)
@@ -59,6 +59,7 @@ function Pinned({ children, className, speed }) {
   return (
     <div ref={box} style={{ height: size.h + size.dist * speed || undefined }}>
       <div ref={pin} className="sticky overflow-hidden" style={{ top }}>
+        {header}
         <motion.ul
           ref={track}
           role="list"
@@ -72,22 +73,25 @@ function Pinned({ children, className, speed }) {
   )
 }
 
-export default function HScroll({ children, className = "", speed = 1 }) {
+export default function HScroll({ children, className = "", speed = 1, header = null }) {
   const reduce = useReducedMotion()
 
   if (reduce) {
     return (
-      <ul
-        role="list"
-        className={`m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${className}`}
-      >
-        {children}
-      </ul>
+      <>
+        {header}
+        <ul
+          role="list"
+          className={`m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${className}`}
+        >
+          {children}
+        </ul>
+      </>
     )
   }
 
   return (
-    <Pinned className={className} speed={speed}>
+    <Pinned className={className} speed={speed} header={header}>
       {children}
     </Pinned>
   )
