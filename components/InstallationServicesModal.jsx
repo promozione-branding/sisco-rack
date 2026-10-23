@@ -77,18 +77,21 @@ export default function InstallationServicesModal({ open, onClose }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#10161b]/75 p-4 backdrop-blur-sm max-[480px]:p-2"
+          className="fixed inset-0 z-[100] overflow-y-auto overscroll-contain bg-[#10161b]/75 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          onMouseDown={(e) => e.target === e.currentTarget && onClose()}
         >
+          <div
+            className="flex min-h-full items-center justify-center p-4 max-[480px]:p-2"
+            onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+          >
           <motion.div
             role="dialog"
             aria-modal="true"
             aria-labelledby="install-quote-title"
-            className="relative max-h-[96dvh] w-full max-w-[560px] overflow-y-auto overflow-x-hidden overscroll-contain rounded-[24px] bg-white p-7 shadow-2xl max-[480px]:rounded-[20px] max-[480px]:p-5"
+            className="relative w-full max-w-[560px] overflow-x-hidden rounded-[24px] bg-white p-7 shadow-2xl max-[480px]:rounded-[20px] max-[480px]:p-5"
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -116,7 +119,7 @@ export default function InstallationServicesModal({ open, onClose }) {
                 <button type="button" onClick={onClose} className="mt-5 cursor-pointer rounded-[12px] border-0 bg-[#e8a317] px-6 py-2.5 font-semibold text-[#1f2a33]">Close</button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 max-[480px]:grid-cols-[minmax(0,1fr)]">
+              <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 max-[600px]:grid-cols-[minmax(0,1fr)]">
                 <div className="min-w-0">
                   <label htmlFor="i-name" className={labelCls}>Name</label>
                   <input id="i-name" name="name" required placeholder="Your name" className={fieldCls} />
@@ -152,12 +155,12 @@ export default function InstallationServicesModal({ open, onClose }) {
                   <input id="i-date" name="date" type="date" className={`${fieldCls} min-h-[50px] appearance-none text-left [&::-webkit-date-and-time-value]:text-left`} />
                 </div>
 
-                <div className="col-span-2 min-w-0 max-[480px]:col-span-1">
+                <div className="col-span-2 min-w-0 max-[600px]:col-span-1">
                   <label htmlFor="i-message" className={labelCls}>Site details <span className="font-normal normal-case tracking-normal text-[#b3a78d]">(optional)</span></label>
                   <textarea id="i-message" name="message" rows={3} placeholder="Area, number of racks, access constraints..." className={`${fieldCls} resize-none`} />
                 </div>
 
-                <div className="col-span-2 min-w-0 max-[480px]:col-span-1">
+                <div className="col-span-2 min-w-0 max-[600px]:col-span-1">
                   {error && (
                     <div className="mb-3 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[0.9rem] font-semibold text-red-700">
                       {error}
@@ -177,6 +180,7 @@ export default function InstallationServicesModal({ open, onClose }) {
               </form>
             )}
           </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>,
