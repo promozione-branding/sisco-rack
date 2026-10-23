@@ -190,7 +190,7 @@ function MobileTestimonials() {
   return (
     <section className="py-6">
       <HScroll
-        speed={0.9}      
+        speed={0.4}      
         className="gap-4 pr-5" 
         header={
           <div className="mb-6 px-5 text-center text-[#253970]">
