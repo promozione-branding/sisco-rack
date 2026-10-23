@@ -293,14 +293,14 @@ const SPEC_LIMIT = 6
     const Icon = specIcons[k] || LayoutGrid
     const hideOnMobile = !showAllSpecs && idx >= SPEC_LIMIT
     return (
-      <div
-        key={k}
-        className={`flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem] ${hideOnMobile ? "max-[720px]:hidden" : ""}`}
-      >
-        <Icon size={20} strokeWidth={2} className="shrink-0 text-ink" aria-hidden="true" />
-        <span className="font-medium text-ink">{labels[k] || k}</span>
-        <span className="ml-auto text-right text-muted">{v ?? "On request"}</span>
-      </div>
+<div
+  key={k}
+  className={`flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem] max-[720px]:gap-3 max-[720px]:px-3 max-[720px]:py-2 max-[720px]:text-[0.8rem] ${hideOnMobile ? "max-[720px]:hidden" : ""}`}
+>
+  <Icon size={20} strokeWidth={2} className="shrink-0 text-ink max-[720px]:h-[17px] max-[720px]:w-[17px]" aria-hidden="true" />
+  <span className="font-medium text-ink">{labels[k] || k}</span>
+  <span className="ml-auto text-right text-muted">{v ?? "On request"}</span>
+</div>
     )
   })}
 
@@ -410,7 +410,7 @@ const SPEC_LIMIT = 6
               {related.map((r, idx) => (
                 <Reveal key={r.id} i={idx}>
                   <Link href={`/products/${r.slug || r.id}`} className="group/r block h-full overflow-hidden rounded-[24px] border-2 border-solid border-ink bg-white transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1.5 hover:shadow-lift-hover">
-                    <div className="grid h-[400px] place-items-center border-b-[3px] border-solid border-safety bg-white p-2">
+                    <div className="grid place-items-center border-b-[3px] border-solid border-safety bg-white">
                       <img className="max-h-full max-w-full object-contain transition-transform duration-[250ms] ease-out group-hover/r:scale-[1.06]" src={r.image} alt={r.name} loading="lazy" />
                     </div>
                     <div className="relative bg-cool pb-5 pl-5 pr-16 pt-4">
