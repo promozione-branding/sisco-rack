@@ -293,7 +293,7 @@ export default function Categories() {
           </div>
 
           <div className="mt-[30px] flex flex-wrap items-center justify-between gap-6 min-[961px]:mt-4">
-            <p className="max-w-[44ch] text-[0.92rem] text-muted">From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
+            <p className="max-w-[44ch] text-[0.92rem] text-black backdrop-blur-sm">From design and fabrication to installation and inspection, we deliver reliable racking services built to improve efficiency and safety.</p>
             <div className="flex items-center gap-2.5">
               <button className={NAV_BTN} onClick={() => { lastManual.current = Date.now(); step(-1) }} disabled={!can.prev} aria-label="Previous category">
                 <Arrow flip />

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import SplitButton from "./SplitButton"
 import QuoteModal from "./QuoteModal"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 
 const slides = [
   { src: "/hero_1400.webp", srcSet: "/hero_800_mob.webp 800w, /hero_1400.webp 1400w" },
@@ -12,19 +12,21 @@ const slides = [
   { src: "/slotted_angle_section_panel_raw_1400.webp", srcSet: "/slotted_angle_section_panel_raw_800.webp 800w, /slotted_angle_section_panel_raw_1400.webp 1400w" },
 ]
 
+const INTERVAL = 4500 // comfortable speed
+
 export default function Hero() {
   const [quote, setQuote] = useState(false)
   const [slide, setSlide] = useState(0)
   const [ready, setReady] = useState(false)
-  const intervalRef = useRef(null)
+  const timer = useRef(null)
+  const paused = useRef(false)
 
-  // Faster + more reliable ready trigger for mobile
+  // Preload + ready (reliable on mobile)
   useEffect(() => {
     let cancelled = false
 
-    const go = () => {
+    const start = () => {
       if (cancelled) return
-      // start preloading the other two images
       slides.slice(1).forEach(({ src, srcSet }) => {
         const img = new Image()
         img.sizes = "100vw"
@@ -34,47 +36,58 @@ export default function Hero() {
       setReady(true)
     }
 
-    // Always fall back quickly (critical on mobile)
-    const t = setTimeout(go, 1200)
+    // Always start within 1 second max
+    const fallback = setTimeout(start, 1000)
 
     if (document.readyState === "complete") {
-      // already loaded → start even sooner
-      setTimeout(go, 400)
+      clearTimeout(fallback)
+      setTimeout(start, 200)
     } else {
-      window.addEventListener("load", () => setTimeout(go, 300), { once: true })
+      window.addEventListener("load", () => {
+        clearTimeout(fallback)
+        setTimeout(start, 200)
+      }, { once: true })
     }
 
     return () => {
       cancelled = true
-      clearTimeout(t)
+      clearTimeout(fallback)
     }
   }, [])
 
-  // Auto play
+  const startTimer = useCallback(() => {
+    if (timer.current) clearInterval(timer.current)
+    timer.current = setInterval(() => {
+      if (!paused.current) {
+        setSlide((s) => (s + 1) % slides.length)
+      }
+    }, INTERVAL)
+  }, [])
+
+  // Auto-play
   useEffect(() => {
     if (!ready) return
-
-    intervalRef.current = setInterval(() => {
-      setSlide((s) => (s + 1) % slides.length)
-    }, 3000)
-
+    startTimer()
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (timer.current) clearInterval(timer.current)
     }
-  }, [ready])
+  }, [ready, startTimer])
 
-  const pause = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
+  // Pause only while finger is down (better mobile UX)
+  const onTouchStart = () => {
+    paused.current = true
+  }
+  const onTouchEnd = () => {
+    // small delay so the user can tap dots without immediate resume
+    setTimeout(() => {
+      paused.current = false
+    }, 1800)
   }
 
-  const resume = () => {
-    if (!ready || intervalRef.current) return
-    intervalRef.current = setInterval(() => {
-      setSlide((s) => (s + 1) % slides.length)
-    }, 3000)
+  const goTo = (i) => {
+    setSlide(i)
+    // restart the timer so the next auto change feels natural
+    startTimer()
   }
 
   const openQuote = (e) => {
@@ -88,11 +101,12 @@ export default function Hero() {
   return (
     <section
       className="relative isolate flex h-[80svh] max-h-[860px] min-h-[560px] flex-col items-center justify-center overflow-hidden bg-[linear-gradient(165deg,#c9eaf2_0%,#dbe3fa_32%,#f3f6fb_62%,#ffffff_82%)] px-6 pb-[124px] pt-[104px] text-center text-white before:absolute before:inset-0 before:-z-[1] before:content-[''] before:bg-[repeating-linear-gradient(0deg,rgba(62,92,118,0.16)_0_1px,transparent_1px_4px),repeating-linear-gradient(90deg,rgba(62,92,118,0.12)_0_1px,transparent_1px_7px)] before:[mask-image:linear-gradient(170deg,#000_0%,rgba(0,0,0,0.5)_35%,transparent_70%)] max-[720px]:h-[68svh] max-[720px]:max-h-[600px] max-[720px]:min-h-[480px] max-[720px]:px-[18px] max-[720px]:pb-[10px] max-[720px]:pt-[84px]"
-      onMouseEnter={pause}
-      onMouseLeave={resume}
-      onTouchStart={pause}
-      onTouchEnd={resume}
+      onMouseEnter={() => { paused.current = true }}
+      onMouseLeave={() => { paused.current = false }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
+      {/* LCP image */}
       <img
         src={slides[0].src}
         srcSet={slides[0].srcSet}
@@ -106,6 +120,7 @@ export default function Hero() {
         className="absolute inset-0 -z-[2] h-full w-full object-cover object-center"
       />
 
+      {/* Sliding images */}
       {ready && (
         <AnimatePresence mode="wait" initial={false}>
           <motion.img
@@ -119,7 +134,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.85, ease: "easeInOut" }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
           />
         </AnimatePresence>
       )}
@@ -148,7 +163,7 @@ export default function Hero() {
         {slides.map((_, i) => (
           <button
             key={i}
-            onClick={() => setSlide(i)}
+            onClick={() => goTo(i)}
             aria-label={`Go to slide ${i + 1}`}
             className={`h-2 rounded-full transition-all duration-300 ${
               i === slide ? "w-6 bg-white" : "w-2 bg-white/50 active:bg-white/80"
