@@ -171,6 +171,8 @@ export default function ProductDetail({ product: p, related }) {
   const images = p.images?.length ? p.images : [p.image]
   const [quote, setQuote] = useState(false)
   const [wish, setWish] = useState(false)
+const [showAllSpecs, setShowAllSpecs] = useState(false)
+const SPEC_LIMIT = 6
 
   const openQuote = (e) => {
     e.preventDefault()
@@ -286,18 +288,33 @@ export default function ProductDetail({ product: p, related }) {
             <div className={`${CARD} grid grid-cols-[1fr_1.05fr_0.85fr] gap-6 p-6 max-[1180px]:grid-cols-[1fr_1fr] max-[960px]:grid-cols-[1fr]`}>
               <div className="flex flex-col">
                 <SectionTitle>Built to this spec</SectionTitle>
-                <div className="mt-5 flex flex-col gap-2">
-                  {specs.map(([k, v]) => {
-                    const Icon = specIcons[k] || LayoutGrid
-                    return (
-                      <div key={k} className="flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem]">
-                        <Icon size={20} strokeWidth={2} className="shrink-0 text-ink" aria-hidden="true" />
-                        <span className="font-medium text-ink">{labels[k] || k}</span>
-                        <span className="ml-auto text-right text-muted">{v ?? "On request"}</span>
-                      </div>
-                    )
-                  })}
-                </div>
+  <div className="mt-5 flex flex-col gap-2">
+  {specs.map(([k, v], idx) => {
+    const Icon = specIcons[k] || LayoutGrid
+    const hideOnMobile = !showAllSpecs && idx >= SPEC_LIMIT
+    return (
+      <div
+        key={k}
+        className={`flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem] ${hideOnMobile ? "max-[720px]:hidden" : ""}`}
+      >
+        <Icon size={20} strokeWidth={2} className="shrink-0 text-ink" aria-hidden="true" />
+        <span className="font-medium text-ink">{labels[k] || k}</span>
+        <span className="ml-auto text-right text-muted">{v ?? "On request"}</span>
+      </div>
+    )
+  })}
+
+  {specs.length > SPEC_LIMIT && (
+    <button
+      type="button"
+      onClick={() => setShowAllSpecs((v) => !v)}
+      aria-expanded={showAllSpecs}
+      className="hidden cursor-pointer items-center justify-center rounded-[10px] border-2 border-solid border-blue bg-white py-2.5 text-[0.9rem] font-bold text-ink transition-[background,color] duration-[200ms] [font-family:inherit] hover:bg-blue hover:text-white max-[720px]:flex"
+    >
+      {showAllSpecs ? "View less" : `View more (${specs.length - SPEC_LIMIT})`}
+    </button>
+  )}
+</div>
               </div>
 
               <figure className="grid place-items-center gap-2 rounded-[18px] bg-[#f3f5f8] bg-[radial-gradient(rgba(122,139,153,0.28)_1px,transparent_1px)] bg-[length:14px_14px] p-4 max-[1180px]:order-3 max-[1180px]:col-span-2 max-[960px]:col-span-1">
