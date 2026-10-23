@@ -128,7 +128,7 @@ export default function Categories() {
       const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4
       if (atEnd) el.scrollTo({ left: 0, behavior: "smooth" })
       else step(1)
-    }, 2200)
+    }, 1200)
     return () => clearInterval(id)
   }, [reduce, visible])
 
@@ -182,9 +182,6 @@ export default function Categories() {
       </div>
 
       <div className="relative isolate mx-11 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-[linear-gradient(90deg,#434c54_10%,#e2e2e2_30%)] max-[960px]:mx-3 max-[960px]:rounded-[28px] max-[960px]:bg-none max-[960px]:bg-panel">
-        {/* Decorative image:
-            - desktop / tablet: leftslide2.webp (left strip)
-            - mobile (≤720px): shelf_mobile_347x986.webp as a full-cover background */}
         <div
           className="absolute bottom-0 left-0 top-0 -z-[1] flex w-[33%] items-center justify-center bg-[linear-gradient(90deg,#ca8a04_0%,#374151_100%)] [mask-image:linear-gradient(90deg,#000_55%,transparent_100%)] max-[960px]:h-[300px] max-[720px]:inset-0 max-[720px]:h-full max-[720px]:w-full max-[720px]:bg-none max-[720px]:[mask-image:none] max-[720px]:after:absolute max-[720px]:after:inset-0 max-[720px]:after:content-[''] max-[720px]:after:bg-[linear-gradient(180deg,rgba(255,255,255,0)_35%,rgba(255,255,255,0.88)_100%)]"
           aria-hidden="true"
