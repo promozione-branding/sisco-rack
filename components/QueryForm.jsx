@@ -54,7 +54,7 @@ export default function QueryForm({ className = "" }) {
   }
 
   return (
-    <section className={`mb-8 mx-11 my-10 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-panel max-[960px]:mx-3 max-[960px]:my-0 max-[960px]:rounded-[28px] ${className}`}>
+<section className={`mx-11 my-10 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-panel max-[960px]:mx-3 max-[960px]:mb-10 max-[960px]:mt-0 max-[960px]:rounded-[28px] ${className}`}>
       <div className="grid grid-cols-[1fr_1.15fr] max-[960px]:grid-cols-[1fr]">
         <div className="flex flex-col justify-center bg-[linear-gradient(160deg,#c5ced5_0%,#e9edf0_100%)] px-10 py-9 max-[960px]:px-6 max-[960px]:pb-6 max-[960px]:pt-8">
           <span className="inline-flex w-fit items-center gap-2.5 rounded-pill border border-solid border-safety bg-white/70 px-4 py-[7px] text-[0.72rem] font-semibold uppercase tracking-[0.16em]">
