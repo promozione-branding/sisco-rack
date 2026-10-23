@@ -415,7 +415,7 @@ const SPEC_LIMIT = 6
                     </div>
                     <div className="relative bg-cool pb-5 pl-5 pr-16 pt-4">
                       <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{r.name}</h3>
-                      <p className="mt-1 text-[0.84rem] text-muted-2">{r.specs?.height} · {r.specs?.loadPerLayer} per layer</p>
+                      {/* <p className="mt-1 text-[0.84rem] text-muted-2">{r.specs?.height} · {r.specs?.loadPerLayer} per layer</p> */}
                       <span className="absolute bottom-[18px] right-[18px] grid h-[34px] w-[34px] place-items-center rounded-circle border border-solid border-line bg-white transition-[background] duration-[180ms] group-hover/r:border-safety group-hover/r:bg-safety" aria-hidden="true"><Arrow /></span>
                     </div>
                   </Link>
