@@ -190,8 +190,8 @@ function MobileTestimonials() {
   return (
     <section className="py-6">
       <HScroll
-        speed={1.15}
-        className="gap-4"
+        speed={0.9}      
+        className="gap-4 pr-5" 
         header={
           <div className="mb-6 px-5 text-center text-[#253970]">
             <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
@@ -220,7 +220,6 @@ function MobileTestimonials() {
   )
 }
 
-/* ---------- Main component ---------- */
 export default function Testimonials() {
   const box = useRef(null)
   const reduce = useReducedMotion()
