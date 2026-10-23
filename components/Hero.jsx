@@ -74,7 +74,7 @@ export default function Hero() {
     if (!ready || intervalRef.current) return
     intervalRef.current = setInterval(() => {
       setSlide((s) => (s + 1) % slides.length)
-    }, 5000)
+    }, 3000)
   }
 
   const openQuote = (e) => {
@@ -106,7 +106,6 @@ export default function Hero() {
         className="absolute inset-0 -z-[2] h-full w-full object-cover object-center"
       />
 
-      {/* All slides after ready (including return to 0) */}
       {ready && (
         <AnimatePresence mode="wait" initial={false}>
           <motion.img
