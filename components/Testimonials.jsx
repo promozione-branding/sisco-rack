@@ -9,20 +9,16 @@ import {
   useMotionValueEvent,
   useReducedMotion,
 } from "framer-motion"
-
 import { testimonials } from "@/lib/testimonials"
+import HScroll from "./HScroll"
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v))
 const n = testimonials.length
 const at = (v) => clamp(v / 0.88, 0, 1) * (n - 1)
-
 const sideFor = (i) => (i % 2 === 0 ? "left" : "right")
 
-// Vertical offset (px) between stacked cards. Smaller on mobile so the
-// peeking edges don't ride up over the counter and dots.
 function usePeekStep() {
   const [step, setStep] = useState(24)
-
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 960px)")
     const update = () => setStep(mq.matches ? 14 : 24)
@@ -30,8 +26,19 @@ function usePeekStep() {
     mq.addEventListener("change", update)
     return () => mq.removeEventListener("change", update)
   }, [])
-
   return step
+}
+
+function useIsMobile(breakpoint = 960) {
+  const [mobile, setMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`)
+    const update = () => setMobile(mq.matches)
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
+  }, [breakpoint])
+  return mobile
 }
 
 const Star = () => (
@@ -130,7 +137,6 @@ function Body({ data, side }) {
         </div>
       )}
 
-      {/* max-[700px]:pr-8 keeps text clear of the floating WhatsApp / call buttons */}
       <div
         className={`relative flex h-full min-w-0 flex-col justify-between max-[700px]:p-0 max-[700px]:pr-8 ${
           data.image ? (left ? "pl-[38%]" : "pr-[38%]") : ""
@@ -180,10 +186,46 @@ function Card({ data, i, progress, step }) {
   )
 }
 
+function MobileTestimonials() {
+  return (
+    <section className="py-6">
+      <HScroll
+        speed={1.15}
+        className="gap-4"
+        header={
+          <div className="mb-6 px-5 text-center text-[#253970]">
+            <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
+              Client stories
+            </span>
+            <h2 className="mt-3.5 text-[length:clamp(1.8rem,6vw,2.4rem)]">
+              Trusted by teams that store heavy
+            </h2>
+          </div>
+        }
+      >
+        {testimonials.map((t, i) => (
+          <li
+            key={t.name}
+            className="flex-[0_0_min(340px,85vw)] list-none"
+          >
+            <article
+              className={`${articleBase} h-auto min-h-[340px] ${tone(t.tone)}`}
+            >
+              <Body data={t} side={sideFor(i)} />
+            </article>
+          </li>
+        ))}
+      </HScroll>
+    </section>
+  )
+}
+
+/* ---------- Main component ---------- */
 export default function Testimonials() {
   const box = useRef(null)
   const reduce = useReducedMotion()
   const step = usePeekStep()
+  const isMobile = useIsMobile(960)
   const [idx, setIdx] = useState(0)
 
   const { scrollYProgress } = useScroll({
@@ -203,6 +245,7 @@ export default function Testimonials() {
     setIdx(clamp(Math.round(at(v)), 0, n - 1))
   })
 
+  // Reduced motion → simple stacked list
   if (reduce) {
     return (
       <section className="py-12 max-[720px]:py-10">
@@ -231,6 +274,12 @@ export default function Testimonials() {
     )
   }
 
+  // Mobile → use HScroll
+  if (isMobile) {
+    return <MobileTestimonials />
+  }
+
+  // Desktop → original vertical scroll-driven version
   return (
     <section className="relative" ref={box} style={{ height: `${n * 95}vh` }}>
       <div className="sticky top-0 h-[100svh] min-h-[560px] px-11 py-3.5 max-[960px]:px-3 max-[960px]:py-2.5">
@@ -248,7 +297,6 @@ export default function Testimonials() {
             max-[960px]:rounded-[28px] max-[960px]:px-[22px]
           "
         >
-          {/* z-10 keeps the counter and dots above any card edge that peeks up */}
           <div className="relative z-10">
             <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
               Client stories
@@ -293,7 +341,6 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Mobile: 56px top margin covers the max peek (14px step * ~3.2 depth = ~45px) */}
           <div className="relative mt-10 h-[min(310px,56svh)] max-[960px]:mt-[56px] max-[960px]:h-[min(400px,58svh)]">
             {testimonials.map((t, i) => (
               <Card key={t.name} data={t} i={i} progress={progress} step={step} />

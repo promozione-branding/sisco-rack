@@ -258,51 +258,53 @@ export default function WhyChooseUs({
           </div>
         </div>
 
-        {/* Mobile / tablet (≤960px): heading scrolls normally, then the cards pin
-            and slide sideways as you scroll down. */}
-        <div className="min-[961px]:hidden">
-          <div className="mx-auto px-10 max-[720px]:px-5">{headingBlock}</div>
-
-          <div className="mt-10">
-            <HScroll>
-              {items.map((r, i) => (
-                <li
-                  key={`${i}-${r.title}`}
-                  className="grid w-[85vw] max-w-[26rem] shrink-0 grid-cols-[3rem_1fr] content-start gap-x-4 gap-y-2 rounded-3xl border-l-[6px] border-[#c9d4ee] bg-[#e9eefa] px-5 py-5"
-                >
-                  <span
-                    className="flex h-12 w-12 items-center justify-center rounded-xl"
-                    style={{ background: NAVY, color: YELLOW }}
-                  >
-                    <Icon icon={r.icon} />
-                  </span>
-                  <div>
-                    <div className={`relative mb-4 h-44 w-full ${FRAME}`}>
-                      <Image src={r.image} alt={r.title} fill sizes="85vw" className="object-cover" />
-                    </div>
-                    <h3 className="font-display text-[1.4rem] font-bold leading-tight" style={{ color: NAVY }}>
-                      {r.title}
-                    </h3>
-                    {r.text && <p className="mt-1 text-[0.95rem] leading-[1.5] text-[#3f4a66]">{r.text}</p>}
-                  </div>
-                  {r.figure && (
-                    <div className="col-start-2">
-                      <div className="font-display text-[1.7rem] font-extrabold leading-none" style={{ color: NAVY }}>
-                        {r.figure.value}
-                      </div>
-                      <div
-                        className="mt-1.5 inline-block border-t-2 pt-1 text-[0.85rem] font-medium text-[#3f4a66]"
-                        style={{ borderColor: YELLOW }}
-                      >
-                        {r.figure.label}
-                      </div>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </HScroll>
+{/* Mobile / tablet (≤960px) */}
+<div className="min-[961px]:hidden">
+  <HScroll
+    speed={1.1}
+    header={
+      <div className="mx-auto px-10 pb-6 max-[720px]:px-5">
+        {headingBlock}
+      </div>
+    }
+  >
+    {items.map((r, i) => (
+      <li
+        key={`${i}-${r.title}`}
+        className="grid w-[85vw] max-w-[26rem] shrink-0 grid-cols-[3rem_1fr] content-start gap-x-4 gap-y-2 rounded-3xl border-l-[6px] border-[#c9d4ee] bg-[#e9eefa] px-5 py-5"
+      >
+        <span
+          className="flex h-12 w-12 items-center justify-center rounded-xl"
+          style={{ background: NAVY, color: YELLOW }}
+        >
+          <Icon icon={r.icon} />
+        </span>
+        <div>
+          <div className={`relative mb-4 h-44 w-full ${FRAME}`}>
+            <Image src={r.image} alt={r.title} fill sizes="85vw" className="object-cover" />
           </div>
+          <h3 className="font-display text-[1.4rem] font-bold leading-tight" style={{ color: NAVY }}>
+            {r.title}
+          </h3>
+          {r.text && <p className="mt-1 text-[0.95rem] leading-[1.5] text-[#3f4a66]">{r.text}</p>}
         </div>
+        {r.figure && (
+          <div className="col-start-2">
+            <div className="font-display text-[1.7rem] font-extrabold leading-none" style={{ color: NAVY }}>
+              {r.figure.value}
+            </div>
+            <div
+              className="mt-1.5 inline-block border-t-2 pt-1 text-[0.85rem] font-medium text-[#3f4a66]"
+              style={{ borderColor: YELLOW }}
+            >
+              {r.figure.label}
+            </div>
+          </div>
+        )}
+      </li>
+    ))}
+  </HScroll>
+</div>
       </section>
     </MotionConfig>
   )
