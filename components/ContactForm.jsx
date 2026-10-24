@@ -27,15 +27,18 @@ const inputCls =
 const infoRows = [
   {
     icon: Phone, bg: "bg-sky-100", color: "text-sky-600", title: "Sales",
-    lines: ["sales@rackwellsteel.com", "+917629827285"],
+    lines: [
+      { text: "sales@rackwellsteel.com", href: "mailto:sales@rackwellsteel.com" },
+      { text: "+917629827285", href: "tel:+917629827285" },
+    ],
   },
   {
     icon: Clock, bg: "bg-amber-50", color: "text-amber-500", title: "Hours",
-    lines: ["Monday to Saturday", "8am to 6pm"],
+    lines: [{ text: "Monday to Saturday" }, { text: "8am to 6pm" }],
   },
   {
     icon: Send, bg: "bg-green-50", color: "text-green-600", title: "Quick response",
-    lines: ["Our team usually responds", "within 24 hours."],
+    lines: [{ text: "Our team usually responds" }, { text: "within 24 hours." }],
   },
 ]
 
@@ -227,9 +230,10 @@ export default function ContactForm() {
 
             <h3 className="mt-3 text-[2rem] font-bold leading-tight">Factory and showroom</h3>
 
-            <div className="mt-5 flex items-center gap-4 text-[1.1rem]">
+            <div className="mt-5 flex items-center gap-4 text-[0.8rem]">
               <MapPin className="h-7 w-7 fill-amber-400 text-amber-400" />
-              <span>New Delhi, Delhi</span>
+              <span className="font-bold backdrop-blur-md">GALI NO-1, 41-B, BHAGAT VIHAR, KARAWAL NAGAR,
+DELHI, New Delhi, Delhi, 110094</span>
             </div>
 
             <div className="mt-8 grid gap-7">
@@ -240,9 +244,20 @@ export default function ContactForm() {
                   </span>
                   <div className="leading-relaxed">
                     <p className="font-bold">{title}</p>
-                    {lines.map((l) => (
-                      <p key={l} className="text-[1.02rem] text-white/90">{l}</p>
-                    ))}
+                    {lines.map(({ text, href }) =>
+                      href ? (
+                        <p key={text} className="text-[1.02rem]">
+                          <a
+                            href={href}
+                            className="text-white/90 underline-offset-4 transition hover:text-amber-400 hover:underline"
+                          >
+                            {text}
+                          </a>
+                        </p>
+                      ) : (
+                        <p key={text} className="text-[1.02rem] text-white/90">{text}</p>
+                      )
+                    )}
                   </div>
                 </div>
               ))}
