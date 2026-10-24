@@ -322,7 +322,7 @@ export default function ProductDetail({ product: p, related }) {
                 <figcaption className="text-[0.72rem] text-muted-2">{s.layersPerRack ? "Drawn from the listed height and layers." : "Layer count in the drawing is illustrative."}</figcaption>
               </figure>
 
-              <div className="flex flex-col justify-start gap-6 self-start rounded-lg border border-solid border-line bg-[#f3f5f8] p-4 min-[1024px]:sticky min-[961px]:top-[110px]">
+              <div className="flex flex-col justify-start gap-6 self-start rounded-lg border border-solid border-line bg-[#f3f5f8] p-4 min-[1040px]:sticky min-[961px]:top-[110px]">
                 {highlights.map(({ Icon, title, text }, k) => (
                   <div key={title} className="flex items-start gap-4">
                     <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-circle ${hlTints[k % hlTints.length]}`} aria-hidden="true"><Icon size={22} strokeWidth={2} /></span>
