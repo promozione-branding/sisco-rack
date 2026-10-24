@@ -24,9 +24,6 @@ const CARD = "rounded-[24px] border border-solid border-line bg-white shadow-[0_
 const BTN = "inline-flex items-center justify-center gap-2.5 rounded-[12px] border-2 border-solid border-blue bg-white px-7 py-3.5 text-[1rem] font-bold text-ink transition-[background,color] duration-[200ms] [font-family:inherit] hover:bg-blue hover:text-white"
 const TILE_LABEL = "block text-[0.72rem] font-semibold uppercase tracking-[0.04em]"
 const TILE_VALUE = "mt-0.5 block font-display text-[1.45rem] font-bold leading-[1.15] text-ink"
-const WA_NUMBER = "917629827285"
-const waMessage = `Hi, I'm interested in ${p.name}. Can you share more details?`
-const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
 const labels = {
   height: "Height",
   layersPerRack: "Layers per rack",
@@ -175,6 +172,9 @@ export default function ProductDetail({ product: p, related }) {
   const [wish, setWish] = useState(false)
 const [showAllSpecs, setShowAllSpecs] = useState(false)
 const SPEC_LIMIT = 6
+const WA_NUMBER = "917629827285"
+const waMessage = `Hi, I'm interested in ${p.name}. Can you share more details?`
+const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
 
   const openQuote = (e) => {
     e.preventDefault()
