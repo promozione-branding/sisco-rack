@@ -84,12 +84,12 @@ export default function Footer() {
   </small>
 
   <small className={smallCls}>
-    Website Designed By 
+    Website Designed By Inquiry Bazaar Pvt. Ltd. 
     <a
       href="https://inquirybazaar.com/"
       className="font-medium underline-offset-4 transition-colors hover:underline"
     >
-      Inquiry Bazaar Pvt. Ltd.
+      B2B Marketplace
     </a>
   </small>
 </div>
