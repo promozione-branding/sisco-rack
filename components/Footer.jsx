@@ -33,9 +33,16 @@ export default function Footer() {
           <div>
             <h3 className="mb-3.5 text-[1.4rem] text-safety">Categories</h3>
             <ul className="list-none">
-              {categories.map((l) => (
-                <li key={l.id} className="mb-2"><Link href={"/products"} className="hover:text-safety">{l.name}</Link></li>
-              ))}
+            {categories.map((l) => (
+  <li key={l.id} className="mb-2">
+    <Link
+      href={l.action === "quote" ? "/products" : `/products?cat=${l.id}`}
+      className="hover:text-safety"
+    >
+      {l.name}
+    </Link>
+  </li>
+))}
             </ul>
           </div>
           <div>
