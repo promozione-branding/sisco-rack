@@ -405,20 +405,32 @@ const SPEC_LIMIT = 6
               <Link href="/products" className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-pill">All products</Link>
             </Reveal>
             <div className="grid grid-cols-[repeat(3,1fr)] gap-5 max-[720px]:grid-cols-[1fr] max-[960px]:grid-cols-[1fr_1fr]">
-              {related.map((r, idx) => (
-                <Reveal key={r.id} i={idx}>
-                  <Link href={`/products/${r.slug || r.id}`} className="group/r block h-full overflow-hidden rounded-[24px] border-2 border-solid border-ink bg-white transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1.5 hover:shadow-lift-hover">
-                    <div className="grid place-items-center border-b-[3px] border-solid border-safety bg-white">
-                      <img className="max-h-full max-w-full object-contain transition-transform duration-[250ms] ease-out group-hover/r:scale-[1.06]" src={r.image} alt={r.name} loading="lazy" />
-                    </div>
-                    <div className="relative bg-cool pb-5 pl-5 pr-16 pt-4">
-                      <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{r.name}</h3>
-                      {/* <p className="mt-1 text-[0.84rem] text-muted-2">{r.specs?.height} · {r.specs?.loadPerLayer} per layer</p> */}
-                      <span className="absolute bottom-[18px] right-[18px] grid h-[34px] w-[34px] place-items-center rounded-circle border border-solid border-line bg-white transition-[background] duration-[180ms] group-hover/r:border-safety group-hover/r:bg-safety" aria-hidden="true"><Arrow /></span>
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
+{related.map((r, idx) => (
+  <Reveal key={r.id} i={idx} className="h-full">
+    <Link
+      href={`/products/${r.slug || r.id}`}
+      className="group/r flex h-full flex-col overflow-hidden rounded-[24px] border-2 border-solid border-ink bg-white transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1.5 hover:shadow-lift-hover"
+    >
+      <div className="aspect-[4/3] w-full shrink-0 overflow-hidden border-b-[3px] border-solid border-safety bg-white">
+        <img
+          className="h-full w-full object-cover transition-transform duration-[250ms] ease-out group-hover/r:scale-[1.06]"
+          src={r.image}
+          alt={r.name}
+          loading="lazy"
+        />
+      </div>
+      <div className="relative flex min-h-[84px] flex-1 items-center bg-cool py-4 pl-5 pr-16">
+        <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{r.name}</h3>
+        <span
+          className="absolute right-[18px] top-1/2 grid h-[34px] w-[34px] -translate-y-1/2 place-items-center rounded-circle border border-solid border-line bg-white transition-[background] duration-[180ms] group-hover/r:border-safety group-hover/r:bg-safety"
+          aria-hidden="true"
+        >
+          <Arrow />
+        </span>
+      </div>
+    </Link>
+  </Reveal>
+))}
             </div>
           </section>
         )}
