@@ -24,7 +24,9 @@ const CARD = "rounded-[24px] border border-solid border-line bg-white shadow-[0_
 const BTN = "inline-flex items-center justify-center gap-2.5 rounded-[12px] border-2 border-solid border-blue bg-white px-7 py-3.5 text-[1rem] font-bold text-ink transition-[background,color] duration-[200ms] [font-family:inherit] hover:bg-blue hover:text-white"
 const TILE_LABEL = "block text-[0.72rem] font-semibold uppercase tracking-[0.04em]"
 const TILE_VALUE = "mt-0.5 block font-display text-[1.45rem] font-bold leading-[1.15] text-ink"
-
+const WA_NUMBER = "917629827285"
+const waMessage = `Hi, I'm interested in ${p.name}. Can you share more details?`
+const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
 const labels = {
   height: "Height",
   layersPerRack: "Layers per rack",
@@ -256,9 +258,9 @@ const SPEC_LIMIT = 6
                 <SplitButton dark>Request a quote</SplitButton>
               </div>
               {c.whatsapp && (
-                <a className={BTN} href={c.whatsapp} target="_blank" rel="noreferrer">
-                  <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
-                </a>
+               <a className={BTN} href={waHref} target="_blank" rel="noreferrer">
+  <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
+</a>
               )}
               {c.phone && (
                 <a className={BTN} href={`tel:${c.phone}`}>
