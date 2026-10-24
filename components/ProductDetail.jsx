@@ -170,11 +170,11 @@ export default function ProductDetail({ product: p, related }) {
   const images = p.images?.length ? p.images : [p.image]
   const [quote, setQuote] = useState(false)
   const [wish, setWish] = useState(false)
-const [showAllSpecs, setShowAllSpecs] = useState(false)
-const SPEC_LIMIT = 6
-const WA_NUMBER = "917629827285"
-const waMessage = `Hi, I'm interested in ${p.name}. Can you share more details?`
-const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
+  const [showAllSpecs, setShowAllSpecs] = useState(false)
+  const SPEC_LIMIT = 6
+  const WA_NUMBER = "917629827285"
+  const waMessage = `Hi, I'm interested in ${p.name}. Can you share more details?`
+  const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
 
   const openQuote = (e) => {
     e.preventDefault()
@@ -222,7 +222,6 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
           <div>
             <motion.div className="flex flex-wrap items-center justify-between gap-3" variants={rise} custom={0} initial="hidden" animate="show">
               <span className="rounded-pill bg-[#dbeafe] px-3.5 py-1.5 text-[0.75rem] font-bold uppercase tracking-[0.03em] text-blue">{p.category}</span>
-         
             </motion.div>
 
             <motion.p className="mt-5 max-w-[62ch] text-[1.05rem] leading-[1.6] text-muted" variants={rise} custom={2} initial="hidden" animate="show">
@@ -258,9 +257,9 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
                 <SplitButton dark>Request a quote</SplitButton>
               </div>
               {c.whatsapp && (
-               <a className={BTN} href={waHref} target="_blank" rel="noreferrer">
-  <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
-</a>
+                <a className={BTN} href={waHref} target="_blank" rel="noreferrer">
+                  <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
+                </a>
               )}
               {c.phone && (
                 <a className={BTN} href={`tel:${c.phone}`}>
@@ -286,51 +285,44 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
         <section className="mx-auto max-w-full px-14 pt-8 max-[960px]:px-10 max-[720px]:px-5">
           <Reveal>
             <div className={`${CARD} grid grid-cols-[1fr_1.05fr_0.85fr] gap-6 p-6 max-[1180px]:grid-cols-[1fr_1fr] max-[960px]:grid-cols-[1fr]`}>
+              {/* Left: specs list flows with the page scroll */}
               <div className="flex flex-col">
                 <SectionTitle>Built to this spec</SectionTitle>
-  <div
-  className="mt-5 flex flex-col gap-2
-    min-[961px]:max-h-[412px] min-[961px]:overflow-y-auto min-[961px]:overscroll-contain
-    min-[961px]:pr-2 min-[961px]:[scrollbar-width:thin]
-    min-[961px]:[scrollbar-color:#b8c2cc_transparent]"
->
-  {specs.map(([k, v], idx) => {
-    const Icon = specIcons[k] || LayoutGrid
-    const hideOnMobile = !showAllSpecs && idx >= SPEC_LIMIT
-    return (
-<div
-  key={k}
-  className={`flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem]
-    min-[961px]:h-[52px] min-[961px]:shrink-0
-    max-[720px]:gap-3 max-[720px]:px-3 max-[720px]:py-2 max-[720px]:text-[0.8rem]
-    ${hideOnMobile ? "max-[720px]:hidden" : ""}`}
->
-  <Icon size={20} strokeWidth={2} className="shrink-0 text-ink max-[720px]:h-[17px] max-[720px]:w-[17px]" aria-hidden="true" />
-  <span className="font-medium text-ink">{labels[k] || k}</span>
-  <span className="ml-auto text-right text-muted">{v ?? "On request"}</span>
-</div>
-    )
-  })}
+                <div className="mt-5 flex flex-col gap-2">
+                  {specs.map(([k, v], idx) => {
+                    const Icon = specIcons[k] || LayoutGrid
+                    const hideOnMobile = !showAllSpecs && idx >= SPEC_LIMIT
+                    return (
+                      <div
+                        key={k}
+                        className={`flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem] max-[720px]:gap-3 max-[720px]:px-3 max-[720px]:py-2 max-[720px]:text-[0.8rem] ${hideOnMobile ? "max-[720px]:hidden" : ""}`}
+                      >
+                        <Icon size={20} strokeWidth={2} className="shrink-0 text-ink max-[720px]:h-[17px] max-[720px]:w-[17px]" aria-hidden="true" />
+                        <span className="font-medium text-ink">{labels[k] || k}</span>
+                        <span className="ml-auto text-right text-muted">{v ?? "On request"}</span>
+                      </div>
+                    )
+                  })}
 
-  {specs.length > SPEC_LIMIT && (
-    <button
-      type="button"
-      onClick={() => setShowAllSpecs((v) => !v)}
-      aria-expanded={showAllSpecs}
-      className="hidden cursor-pointer items-center justify-center rounded-[10px] border-2 border-solid border-blue bg-white py-2.5 text-[0.9rem] font-bold text-ink transition-[background,color] duration-[200ms] [font-family:inherit] hover:bg-blue hover:text-white max-[720px]:flex"
-    >
-      {showAllSpecs ? "View less" : `View more (${specs.length - SPEC_LIMIT})`}
-    </button>
-  )}
-</div>
+                  {specs.length > SPEC_LIMIT && (
+                    <button
+                      type="button"
+                      onClick={() => setShowAllSpecs((v) => !v)}
+                      aria-expanded={showAllSpecs}
+                      className="hidden cursor-pointer items-center justify-center rounded-[10px] border-2 border-solid border-blue bg-white py-2.5 text-[0.9rem] font-bold text-ink transition-[background,color] duration-[200ms] [font-family:inherit] hover:bg-blue hover:text-white max-[720px]:flex"
+                    >
+                      {showAllSpecs ? "View less" : `View more (${specs.length - SPEC_LIMIT})`}
+                    </button>
+                  )}
+                </div>
               </div>
-   
-              <figure className="grid place-items-center gap-2 rounded-[18px] bg-[#f3f5f8] bg-[radial-gradient(rgba(122,139,153,0.28)_1px,transparent_1px)] bg-[length:14px_14px] p-4 max-[1180px]:order-3 max-[1180px]:col-span-2 max-[960px]:col-span-1">
+
+              <figure className="grid place-items-center gap-2 rounded-[18px] bg-[#f3f5f8] bg-[radial-gradient(rgba(122,139,153,0.28)_1px,transparent_1px)] bg-[length:14px_14px] p-4 min-[1181px]:sticky min-[1181px]:top-[110px] min-[1181px]:self-start max-[1180px]:order-3 max-[1180px]:col-span-2 max-[960px]:col-span-1">
                 <RackBlueprint height={s.height} layers={s.layersPerRack} load={s.loadPerLayer} />
                 <figcaption className="text-[0.72rem] text-muted-2">{s.layersPerRack ? "Drawn from the listed height and layers." : "Layer count in the drawing is illustrative."}</figcaption>
               </figure>
 
-              <div className="flex flex-col justify-start gap-5 self-start rounded-lg border border-solid border-line bg-[#f3f5f8] p-4">
+              <div className="flex flex-col justify-start gap-6 self-start rounded-lg border border-solid border-line bg-[#f3f5f8] p-4 min-[961px]:sticky min-[961px]:top-[110px]">
                 {highlights.map(({ Icon, title, text }, k) => (
                   <div key={title} className="flex items-start gap-4">
                     <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-circle ${hlTints[k % hlTints.length]}`} aria-hidden="true"><Icon size={22} strokeWidth={2} /></span>
@@ -350,25 +342,25 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
             <div className="grid grid-cols-[1.45fr_1fr] items-stretch gap-6 max-[1180px]:grid-cols-[1fr]">
               {p.keyFeatures?.length > 0 && (
                 <Reveal className="flex">
-                <div className={`${CARD} w-full p-6`}>
-  <SectionTitle>Key features</SectionTitle>
-  <div className="mt-6 grid grid-cols-[repeat(3,1fr)] content-start gap-x-6 gap-y-8 max-[960px]:grid-cols-[1fr_1fr] max-[720px]:grid-cols-[1fr]">
-    {p.keyFeatures.map((f, idx) => {
-      const i = f.indexOf(":")
-      const head = i > -1 ? f.slice(0, i) : null
-      const body = i > -1 ? f.slice(i + 1).trim() : f
-      return (
-        <div key={f} className="flex items-start gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-circle bg-[#f5b82e] text-[0.78rem] font-bold text-white shadow-[0_0_0_4px_#fdf1d3]">{String(idx + 1).padStart(2, "0")}</span>
-          <p className="text-[0.82rem] leading-[1.45] text-muted">
-            {head && <strong className="block font-bold text-ink">{head}</strong>}
-            {body}
-          </p>
-        </div>
-      )
-    })}
-  </div>
-</div>
+                  <div className={`${CARD} w-full p-6`}>
+                    <SectionTitle>Key features</SectionTitle>
+                    <div className="mt-6 grid grid-cols-[repeat(3,1fr)] content-start gap-x-6 gap-y-8 max-[960px]:grid-cols-[1fr_1fr] max-[720px]:grid-cols-[1fr]">
+                      {p.keyFeatures.map((f, idx) => {
+                        const i = f.indexOf(":")
+                        const head = i > -1 ? f.slice(0, i) : null
+                        const body = i > -1 ? f.slice(i + 1).trim() : f
+                        return (
+                          <div key={f} className="flex items-start gap-3">
+                            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-circle bg-[#f5b82e] text-[0.78rem] font-bold text-white shadow-[0_0_0_4px_#fdf1d3]">{String(idx + 1).padStart(2, "0")}</span>
+                            <p className="text-[0.82rem] leading-[1.45] text-muted">
+                              {head && <strong className="block font-bold text-ink">{head}</strong>}
+                              {body}
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
                 </Reveal>
               )}
 
@@ -376,31 +368,31 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
                 <Reveal className="flex">
                   <div className="w-full rounded-[24px] bg-[linear-gradient(155deg,#12347a_0%,#0c2457_100%)] p-6 text-white">
                     <SectionTitle light>Where it works</SectionTitle>
-                  <ul className="mt-5 grid list-none grid-cols-[1fr_1fr] content-start items-start gap-x-4 gap-y-6 max-[720px]:grid-cols-[1fr]">
-  {p.applications.map((a, idx) => {
-    const raw = typeof a === "string" ? { title: a } : a
-    const colon = !raw.description ? raw.title.indexOf(":") : -1
-    const app = colon > -1
-      ? { ...raw, title: raw.title.slice(0, colon), description: raw.title.slice(colon + 1).trim() }
-      : raw
-    const Icon = appIcons[idx % appIcons.length]
-    const img = app.image || images[(idx + 1) % images.length]
-    return (
-      <li key={app.title} className="flex items-start gap-3">
-        {/* <img className="h-[62px] w-[84px] shrink-0 rounded-[8px] object-cover" src={img} alt="" loading="lazy" /> */}
-        <div className="min-w-0">
-          <span className="flex items-start gap-1.5 text-[0.9rem] font-bold leading-[1.3]">
-            <Icon size={18} strokeWidth={2.2} className="mt-[0.15em] shrink-0" aria-hidden="true" />
-            <span>{app.title}</span>
-          </span>
-          {app.description && (
-            <span className="mt-1 block text-[0.78rem] font-normal leading-[1.45] text-white/75">{app.description}</span>
-          )}
-        </div>
-      </li>
-    )
-  })}
-</ul>
+                    <ul className="mt-5 grid list-none grid-cols-[1fr_1fr] content-start items-start gap-x-4 gap-y-6 max-[720px]:grid-cols-[1fr]">
+                      {p.applications.map((a, idx) => {
+                        const raw = typeof a === "string" ? { title: a } : a
+                        const colon = !raw.description ? raw.title.indexOf(":") : -1
+                        const app = colon > -1
+                          ? { ...raw, title: raw.title.slice(0, colon), description: raw.title.slice(colon + 1).trim() }
+                          : raw
+                        const Icon = appIcons[idx % appIcons.length]
+                        const img = app.image || images[(idx + 1) % images.length]
+                        return (
+                          <li key={app.title} className="flex items-start gap-3">
+                            {/* <img className="h-[62px] w-[84px] shrink-0 rounded-[8px] object-cover" src={img} alt="" loading="lazy" /> */}
+                            <div className="min-w-0">
+                              <span className="flex items-start gap-1.5 text-[0.9rem] font-bold leading-[1.3]">
+                                <Icon size={18} strokeWidth={2.2} className="mt-[0.15em] shrink-0" aria-hidden="true" />
+                                <span>{app.title}</span>
+                              </span>
+                              {app.description && (
+                                <span className="mt-1 block text-[0.78rem] font-normal leading-[1.45] text-white/75">{app.description}</span>
+                              )}
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
                   </div>
                 </Reveal>
               )}
@@ -415,32 +407,32 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
               <Link href="/products" className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-pill">All products</Link>
             </Reveal>
             <div className="grid grid-cols-[repeat(3,1fr)] gap-5 max-[720px]:grid-cols-[1fr] max-[960px]:grid-cols-[1fr_1fr]">
-{related.map((r, idx) => (
-  <Reveal key={r.id} i={idx} className="h-full">
-    <Link
-      href={`/products/${r.slug || r.id}`}
-      className="group/r flex h-full flex-col overflow-hidden rounded-[24px] border-2 border-solid border-ink bg-white transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1.5 hover:shadow-lift-hover"
-    >
-      <div className="aspect-[4/3] w-full shrink-0 overflow-hidden border-b-[3px] border-solid border-safety bg-white">
-        <img
-          className="h-full w-full object-cover transition-transform duration-[250ms] ease-out group-hover/r:scale-[1.06]"
-          src={r.image}
-          alt={r.name}
-          loading="lazy"
-        />
-      </div>
-      <div className="relative flex min-h-[84px] flex-1 items-center bg-cool py-4 pl-5 pr-16">
-        <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{r.name}</h3>
-        <span
-          className="absolute right-[18px] top-1/2 grid h-[34px] w-[34px] -translate-y-1/2 place-items-center rounded-circle border border-solid border-line bg-white transition-[background] duration-[180ms] group-hover/r:border-safety group-hover/r:bg-safety"
-          aria-hidden="true"
-        >
-          <Arrow />
-        </span>
-      </div>
-    </Link>
-  </Reveal>
-))}
+              {related.map((r, idx) => (
+                <Reveal key={r.id} i={idx} className="h-full">
+                  <Link
+                    href={`/products/${r.slug || r.id}`}
+                    className="group/r flex h-full flex-col overflow-hidden rounded-[24px] border-2 border-solid border-ink bg-white transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1.5 hover:shadow-lift-hover"
+                  >
+                    <div className="aspect-[4/3] w-full shrink-0 overflow-hidden border-b-[3px] border-solid border-safety bg-white">
+                      <img
+                        className="h-full w-full object-cover transition-transform duration-[250ms] ease-out group-hover/r:scale-[1.06]"
+                        src={r.image}
+                        alt={r.name}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="relative flex min-h-[84px] flex-1 items-center bg-cool py-4 pl-5 pr-16">
+                      <h3 className="font-body text-[1rem] font-bold leading-[1.3] tracking-normal">{r.name}</h3>
+                      <span
+                        className="absolute right-[18px] top-1/2 grid h-[34px] w-[34px] -translate-y-1/2 place-items-center rounded-circle border border-solid border-line bg-white transition-[background] duration-[180ms] group-hover/r:border-safety group-hover/r:bg-safety"
+                        aria-hidden="true"
+                      >
+                        <Arrow />
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
             </div>
           </section>
         )}
@@ -455,22 +447,22 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
               <div onClickCapture={openQuote}>
                 <SplitButton>Request a quote</SplitButton>
               </div>
-             {c.phone && (
-  <div className="flex items-center gap-2.5">
-    <Phone className={iconCls} aria-hidden="true" />
-    <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`}>
-      {c.phone}
-    </a>
-  </div>
-)}
-{c.email && (
-  <div className="flex items-center gap-2.5">
-    <Mail className={iconCls} aria-hidden="true" />
-    <a className="font-semibold text-white hover:text-safety" href={`mailto:${c.email}`}>
-      {c.email}
-    </a>
-  </div>
-)}
+              {c.phone && (
+                <div className="flex items-center gap-2.5">
+                  <Phone className={iconCls} aria-hidden="true" />
+                  <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`}>
+                    {c.phone}
+                  </a>
+                </div>
+              )}
+              {c.email && (
+                <div className="flex items-center gap-2.5">
+                  <Mail className={iconCls} aria-hidden="true" />
+                  <a className="font-semibold text-white hover:text-safety" href={`mailto:${c.email}`}>
+                    {c.email}
+                  </a>
+                </div>
+              )}
             </div>
           </section>
         </Reveal>
