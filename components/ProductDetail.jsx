@@ -288,14 +288,22 @@ const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}
             <div className={`${CARD} grid grid-cols-[1fr_1.05fr_0.85fr] gap-6 p-6 max-[1180px]:grid-cols-[1fr_1fr] max-[960px]:grid-cols-[1fr]`}>
               <div className="flex flex-col">
                 <SectionTitle>Built to this spec</SectionTitle>
-  <div className="mt-5 flex flex-col gap-2">
+  <div
+  className="mt-5 flex flex-col gap-2
+    min-[961px]:max-h-[412px] min-[961px]:overflow-y-auto min-[961px]:overscroll-contain
+    min-[961px]:pr-2 min-[961px]:[scrollbar-width:thin]
+    min-[961px]:[scrollbar-color:#b8c2cc_transparent]"
+>
   {specs.map(([k, v], idx) => {
     const Icon = specIcons[k] || LayoutGrid
     const hideOnMobile = !showAllSpecs && idx >= SPEC_LIMIT
     return (
 <div
   key={k}
-  className={`flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem] max-[720px]:gap-3 max-[720px]:px-3 max-[720px]:py-2 max-[720px]:text-[0.8rem] ${hideOnMobile ? "max-[720px]:hidden" : ""}`}
+  className={`flex items-center gap-4 rounded-[10px] bg-[#f3f5f8] px-4 py-2.5 text-[0.92rem]
+    min-[961px]:h-[52px] min-[961px]:shrink-0
+    max-[720px]:gap-3 max-[720px]:px-3 max-[720px]:py-2 max-[720px]:text-[0.8rem]
+    ${hideOnMobile ? "max-[720px]:hidden" : ""}`}
 >
   <Icon size={20} strokeWidth={2} className="shrink-0 text-ink max-[720px]:h-[17px] max-[720px]:w-[17px]" aria-hidden="true" />
   <span className="font-medium text-ink">{labels[k] || k}</span>
