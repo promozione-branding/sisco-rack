@@ -3,7 +3,7 @@ import ProductGrid from "@/components/ProductGrid"
 import ProductHead from "@/components/ProductHead"
 import { pageSeo } from "@/lib/seo"
 
-// Meta for /products; category views (/products/slotted, mezzanine, supermarket, heavy) use their own.
+// Meta for /products; category views (/products/slotted-angle-racks, mezzanine-floors, supermarket-racks, heavy-duty-racks) use their own.
 export const metadata = {
   title: pageSeo.products.title,
   description: pageSeo.products.description,

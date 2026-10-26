@@ -8,20 +8,22 @@ import CTA from "@/components/Cta"
 import { productSeo, categorySeo } from "@/lib/seo"
 
 const find = (slug) => products.find((p) => (p.slug || p.id) === slug)
-// /products/slotted, /products/mezzanine ... are category listings (no product uses these slugs)
-const findCategory = (slug) => categories.find((c) => c.id === slug && !c.action)
+// /products/slotted-angle-racks, /products/mezzanine-floors ... are category listings.
+// Category slugs take priority, so no product may reuse one of them.
+const findCategory = (slug) => categories.find((c) => c.slug === slug && !c.action)
 
 export function generateStaticParams() {
   return [
-    ...categories.filter((c) => !c.action).map((c) => ({ slug: c.id })),
+    ...categories.filter((c) => !c.action).map((c) => ({ slug: c.slug })),
     ...products.map((p) => ({ slug: p.slug || p.id })),
   ]
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  if (findCategory(slug)) {
-    const seo = categorySeo[slug]
+  const cat = findCategory(slug)
+  if (cat) {
+    const seo = categorySeo[cat.id]
     return { title: seo.title, description: seo.description }
   }
   const p = find(slug)
@@ -33,11 +35,12 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
   const { slug } = await params
-  if (findCategory(slug)) {
+  const cat = findCategory(slug)
+  if (cat) {
     return (
       <>
         <ProductHead title="Racks and shelving" text="Filter by type, then send us the models you want and your bay sizes for a fixed quote." />
-        <ProductGrid category={slug} />
+        <ProductGrid category={cat.id} />
         <CTA />
       </>
     )

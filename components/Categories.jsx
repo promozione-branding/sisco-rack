@@ -229,7 +229,7 @@ export default function Categories() {
                   animate={state}
                 >
                   <Link
-                    href={s.action === "quote" ? "/products" : `/products/${s.id}`}
+                    href={s.action === "quote" ? "/products" : `/products/${s.slug}`}
                     onClick={(e) => {
                       if (s.action === "quote") {
                         e.preventDefault()

@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server"
+import { categories } from "@/lib/data"
 
-const CATS = ["slotted", "mezzanine", "supermarket", "heavy"]
-
-// Old filter URLs: /products?cat=slotted -> /products/slotted (301, query string dropped)
+// Old filter URLs: /products?cat=slotted -> /products/slotted-angle-racks (301, query string dropped)
 export function middleware(req) {
   const cat = req.nextUrl.searchParams.get("cat")
-  if (cat && CATS.includes(cat)) {
+  const match = cat && categories.find((c) => !c.action && (c.id === cat || c.slug === cat))
+  if (match) {
     const url = req.nextUrl.clone()
-    url.pathname = `/products/${cat}`
+    url.pathname = `/products/${match.slug}`
     url.search = ""
     return NextResponse.redirect(url, 301)
   }

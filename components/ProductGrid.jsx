@@ -62,7 +62,8 @@ export default function ProductGrid({ category = "all" }) {
   const cat = categories.some((c) => c.id === category && !c.action) ? category : "all"
 
   const selectCat = (id) => {
-    router.replace(id === "all" ? "/products" : `/products/${id}`, { scroll: false })
+    const target = categories.find((c) => c.id === id)
+    router.replace(target?.slug ? `/products/${target.slug}` : "/products", { scroll: false })
   }
 
   const shown = cat === "all" ? products : products.filter((p) => p.cat === cat)

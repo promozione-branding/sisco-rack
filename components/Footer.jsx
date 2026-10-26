@@ -36,7 +36,7 @@ export default function Footer() {
             {categories.map((l) => (
   <li key={l.id} className="mb-2">
     <Link
-      href={l.action === "quote" ? "/products" : `/products/${l.id}`}
+      href={l.action === "quote" ? "/products" : `/products/${l.slug}`}
       className="hover:text-safety"
     >
       {l.name}
