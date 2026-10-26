@@ -88,7 +88,7 @@ const openProductQuote = (e) => {
 </button>
                           ) : (
                             <Link
-  href={`/products?cat=${c.id}`}
+  href={`/products/${c.id}`}
   className="block rounded-[14px] px-4 py-3 font-semibold text-ink hover:bg-steel"
   onClick={closeAll}
 >

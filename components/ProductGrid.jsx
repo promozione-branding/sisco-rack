@@ -6,7 +6,7 @@ import Link from "next/link"
 import { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette, ArrowRight } from "lucide-react"
 import { categories } from "@/lib/data"
 import { products } from "@/lib/products"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
@@ -56,15 +56,13 @@ const openWhatsApp = (e, message) => {
   )
 }
 
-export default function ProductGrid() {
+export default function ProductGrid({ category = "all" }) {
   const router = useRouter()
-  const searchParams = useSearchParams()
 
-  const param = searchParams.get("cat")
-  const cat = categories.some((c) => c.id === param && !c.action) ? param : "all"
+  const cat = categories.some((c) => c.id === category && !c.action) ? category : "all"
 
   const selectCat = (id) => {
-    router.replace(id === "all" ? "/products" : `/products?cat=${id}`, { scroll: false })
+    router.replace(id === "all" ? "/products" : `/products/${id}`, { scroll: false })
   }
 
   const shown = cat === "all" ? products : products.filter((p) => p.cat === cat)

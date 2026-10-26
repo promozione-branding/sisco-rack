@@ -1,16 +1,29 @@
 import { notFound } from "next/navigation"
 import { products } from "@/lib/products"
+import { categories } from "@/lib/data"
 import ProductDetail from "@/components/ProductDetail"
-import { productSeo } from "@/lib/seo"
+import ProductGrid from "@/components/ProductGrid"
+import ProductHead from "@/components/ProductHead"
+import CTA from "@/components/Cta"
+import { productSeo, categorySeo } from "@/lib/seo"
 
 const find = (slug) => products.find((p) => (p.slug || p.id) === slug)
+// /products/slotted, /products/mezzanine ... are category listings (no product uses these slugs)
+const findCategory = (slug) => categories.find((c) => c.id === slug && !c.action)
 
 export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug || p.id }))
+  return [
+    ...categories.filter((c) => !c.action).map((c) => ({ slug: c.id })),
+    ...products.map((p) => ({ slug: p.slug || p.id })),
+  ]
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
+  if (findCategory(slug)) {
+    const seo = categorySeo[slug]
+    return { title: seo.title, description: seo.description }
+  }
   const p = find(slug)
   if (!p) return { title: "Product not found" }
   const seo = productSeo[p.slug || p.id]
@@ -20,6 +33,15 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
   const { slug } = await params
+  if (findCategory(slug)) {
+    return (
+      <>
+        <ProductHead title="Racks and shelving" text="Filter by type, then send us the models you want and your bay sizes for a fixed quote." />
+        <ProductGrid category={slug} />
+        <CTA />
+      </>
+    )
+  }
   const product = find(slug)
   if (!product) notFound()
   const related = products.filter((p) => p.id !== product.id && p.cat === product.cat).slice(0, 3)
