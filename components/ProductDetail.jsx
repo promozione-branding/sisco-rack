@@ -204,7 +204,7 @@ export default function ProductDetail({ product: p, related }) {
             <span>/</span>
             <Link href="/products" className="hover:text-blue">Products</Link>
             <span>/</span>
-            <span>{p.category}</span>
+            <span aria-current="page">{p.name}</span>
           </motion.nav>
           <motion.h1 className="mt-3.5 max-w-[16ch] text-[length:clamp(2.6rem,6vw,5rem)]" initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
             {p.name}
