@@ -195,24 +195,26 @@ export default function Hero() {
         </Link>
       </div>
 
-      {/* Dots */}
-      <div className="absolute bottom-[80px] left-1/2 z-10 flex -translate-x-1/2 items-center max-[720px]:bottom-[56px]">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            aria-current={i === cur}
-            className="group grid h-6 min-w-6 place-items-center px-0.5"
-          >
-            <span
-              className={`block h-2 rounded-full transition-all duration-300 ${
-                i === cur ? "w-6 bg-white" : "w-2 bg-white/50 group-active:bg-white/80"
-              }`}
-            />
-          </button>
-        ))}
-      </div>
+{/* Dots */}
+<div className="absolute bottom-[80px] left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full px-3 py-2 max-[720px]:bottom-[56px]">
+  {slides.map((_, i) => (
+    <button
+      key={i}
+      onClick={() => goTo(i)}
+      aria-label={`Go to slide ${i + 1}`}
+      aria-current={i === cur}
+      className="group relative flex h-5 w-5 items-center justify-center"
+    >
+      <span
+        className={`block rounded-full transition-all duration-400 ease-out ${
+          i === cur
+            ? "h-2.5 w-7 bg-white shadow-[0_0_12px_rgba(255,255,255,0.55)]"
+            : "h-2 w-2 bg-white/55 group-hover:bg-white/80 group-active:scale-90"
+        }`}
+      />
+    </button>
+  ))}
+</div>
 
       <style jsx global>{`
         @keyframes heroReveal {
