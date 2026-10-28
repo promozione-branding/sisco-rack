@@ -196,20 +196,27 @@ export default function Hero() {
       </div>
 
 {/* Dots */}
-<div className="absolute bottom-[80px] left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full px-3 py-2 max-[720px]:bottom-[56px]">
+<div
+  role="tablist"
+  aria-label="Hero slides"
+  className="absolute bottom-[80px] left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 rounded-full bg-black/25 px-3 py-1.5 backdrop-blur-sm max-[720px]:bottom-[56px]"
+>
   {slides.map((_, i) => (
     <button
       key={i}
+      type="button"
+      role="tab"
       onClick={() => goTo(i)}
       aria-label={`Go to slide ${i + 1}`}
+      aria-selected={i === cur}
       aria-current={i === cur}
-      className="group relative flex h-5 w-5 items-center justify-center"
+      className="group relative flex h-5 w-6 cursor-pointer appearance-none items-center justify-center border-0 bg-transparent p-0 shadow-none outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-full"
     >
       <span
-        className={`block rounded-full transition-all duration-400 ease-out ${
+        className={`block h-2 rounded-full transition-all duration-300 ease-out ${
           i === cur
-            ? "h-2.5 w-7 bg-white shadow-[0_0_12px_rgba(255,255,255,0.55)]"
-            : "h-2 w-2 bg-white/55 group-hover:bg-white/80 group-active:scale-90"
+            ? "w-6 bg-safety"
+            : "w-2 bg-white/60 group-hover:bg-white group-active:scale-90"
         }`}
       />
     </button>
