@@ -30,7 +30,7 @@ export default function TopBar() {
             <span className={textCls}>{contact.email}</span>
           </a>
         </div>
-        <span className="whitespace-nowrap max-[720px]:hidden">{contact.hours}</span>
+        <span className="whitespace-nowrap max-[720px]:hidden">{contact.gst}</span>
       </div>
     </div>
   )
