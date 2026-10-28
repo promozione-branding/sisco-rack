@@ -6,6 +6,7 @@ import { motion, useInView, useReducedMotion } from "framer-motion"
 import { industries } from "@/lib/industries"
 import SplitButton from "./SplitButton"
 import InstallationServicesModal from "./InstallationServicesModal"
+import { cardImg } from "@/lib/smImages"
 
 const WA_NUMBER = "917629827285"
 
@@ -242,7 +243,9 @@ export default function Categories() {
                     <div className="h-[260px] overflow-hidden rounded-[14px] border-b-[3px] border-solid border-safety bg-[linear-gradient(135deg,#c5ced5,#e9edf0)]">
                       <img
                         className="pointer-events-none block h-full w-full object-fill transition-transform duration-[250ms] ease-out group-hover/card:scale-[1.06]"
-                        src={s.image}
+                        {...cardImg(s.image)}
+                        width={330}
+                        height={260}
                         alt={s.title}
                         draggable={false}
                         loading="lazy"

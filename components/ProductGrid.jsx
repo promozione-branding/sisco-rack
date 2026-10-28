@@ -7,6 +7,7 @@ import { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette, ArrowRight
 import { categories } from "@/lib/data"
 import { products } from "@/lib/products"
 import { useRouter } from "next/navigation"
+import { cardImg } from "@/lib/smImages"
 
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
@@ -151,9 +152,12 @@ export default function ProductGrid({ category = "all" }) {
                       <div className="h-[300px] overflow-hidden bg-slate-100 max-[720px]:h-[240px]">
                         <img
                           className="block h-full w-full object-fill object-center transition-transform duration-300 ease-out group-hover/card:scale-[1.05]"
-                          src={p.image}
+                          {...cardImg(p.image)}
+                          width={330}
+                          height={300}
                           alt={p.name}
                           loading="lazy"
+                          decoding="async"
                         />
                       </div>
 

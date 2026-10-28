@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import axios from "axios"
+import { postJson } from "@/lib/submitEnquiry"
 import {
   User, Mail, Package, FileText, ChevronDown, ArrowRight, ShieldCheck,
   MapPin, Phone, Clock, Send, Settings, Truck, Headphones,
@@ -87,10 +87,7 @@ export default function ContactForm() {
     }
 
     try {
-      const { data } = await axios.post(
-        "https://brandbnalo.com/api/form/add",
-        formData
-      )
+      await postJson("https://brandbnalo.com/api/form/add", formData)
 
       setSent(true)
       form.reset()

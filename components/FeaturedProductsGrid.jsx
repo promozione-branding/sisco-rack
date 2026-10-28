@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette, ArrowRight } from "lucide-react"
+import { cardImg } from "@/lib/smImages"
 
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
@@ -139,7 +140,9 @@ export default function FeaturedProductsGrid({ products: featured }) {
                       <div className="h-[250px] overflow-hidden bg-slate-100">
                         <img
                           className="block h-full w-full object-cover object-center transition-transform duration-300 ease-out group-hover/card:scale-[1.06]"
-                          src={p.image}
+                          {...cardImg(p.image)}
+                          width={330}
+                          height={250}
                           alt={p.name}
                           loading="lazy"
                           decoding="async"
