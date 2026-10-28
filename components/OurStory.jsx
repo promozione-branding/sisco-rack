@@ -129,7 +129,7 @@ function Reveal({ children, className, i = 0 }) {
 }
 
 function Word({ word, i, n, progress }) {
-  const opacity = useTransform(progress, [i / n, (i + 1) / n], [0.16, 1])
+  const opacity = useTransform(progress, [i / n, (i + 1) / n], [0.6, 1])
   return (
     <motion.span style={{ opacity }}>
       {word}

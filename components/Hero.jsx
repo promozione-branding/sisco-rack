@@ -196,17 +196,21 @@ export default function Hero() {
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-[88px] left-1/2 z-10 flex -translate-x-1/2 gap-2 max-[720px]:bottom-[64px]">
+      <div className="absolute bottom-[80px] left-1/2 z-10 flex -translate-x-1/2 items-center max-[720px]:bottom-[56px]">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === cur}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === cur ? "w-6 bg-white" : "w-2 bg-white/50 active:bg-white/80"
-            }`}
-          />
+            className="group grid h-6 min-w-6 place-items-center px-0.5"
+          >
+            <span
+              className={`block h-2 rounded-full transition-all duration-300 ${
+                i === cur ? "w-6 bg-white" : "w-2 bg-white/50 group-active:bg-white/80"
+              }`}
+            />
+          </button>
         ))}
       </div>
 

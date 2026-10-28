@@ -51,7 +51,7 @@ const Star = () => (
 )
 
 const Stars = ({ className = "" }) => (
-  <span className={`flex gap-[3px] text-safety ${className}`} aria-label="5 out of 5 stars">
+  <span className={`flex gap-[3px] text-safety ${className}`} role="img" aria-label="5 out of 5 stars">
     <Star /><Star /><Star /><Star /><Star />
   </span>
 )
