@@ -2,6 +2,7 @@
 
 import { motion, MotionConfig } from "framer-motion"
 import { contact } from "@/lib/contact"
+import { handleCallClick, handleWhatsappClick } from "@/lib/tracking"
 
 const WhatsApp = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -30,7 +31,14 @@ export default function FloatingContact() {
           animate={{ scale: 1, y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 220, damping: 14, delay: 1.6 }}
         >
-          <a className={linkCls} href={wa} target="_blank" rel="noreferrer" aria-label="Chat with us on WhatsApp">
+          <a
+            className={linkCls}
+            href={wa}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Chat with us on WhatsApp"
+            onClick={() => handleWhatsappClick({ source: "Website" })}
+          >
             <span className={labelCls}>Chat on WhatsApp</span>
             <span className={`${btnCls} bg-[#25d366] text-white before:pointer-events-none before:absolute before:-inset-0.5 before:animate-fc-pulse before:rounded-circle before:border-2 before:border-solid before:border-[#25d366] before:content-['']`}>
               <WhatsApp />
@@ -42,7 +50,12 @@ export default function FloatingContact() {
           animate={{ scale: 1, y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 220, damping: 14, delay: 1.8 }}
         >
-          <a className={linkCls} href={`tel:${contact.phoneHref}`} aria-label="Call us">
+          <a
+            className={linkCls}
+            href={`tel:${contact.phoneHref}`}
+            aria-label="Call us"
+            onClick={() => handleCallClick({ source: "Website" })}
+          >
             <span className={labelCls}>Call us</span>
             <span className={`${btnCls} bg-[#e82f17] text-white`}>
               <Call />

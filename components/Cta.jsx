@@ -5,6 +5,7 @@ import SplitButton from "./SplitButton"
 import QuoteModal from "./QuoteModal"
 import { useState } from "react"
 const BAR_LINK = "text-white/90 transition-[color] duration-200 hover:text-safety"
+import { handleCallClick, handleWhatsappClick } from "@/lib/tracking"
 
 const rise = {
   hidden: { opacity: 0, y: 28 },
