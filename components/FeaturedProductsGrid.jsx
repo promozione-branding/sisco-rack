@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette, ArrowRight } from "lucide-react"
 import { cardImg } from "@/lib/smImages"
+import { handleWhatsappClick } from "@/lib/tracking"
 
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
@@ -12,9 +13,11 @@ const WA_NUMBER = "+917629827285"
 
 const ICONS = { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette }
 
-const openWhatsApp = (e, message) => {
+const openWhatsApp = (e, message, product) => {
   e.preventDefault()
   e.stopPropagation()
+  // Track with the product so the API receives productId = product.name
+  handleWhatsappClick({ obj: product, source: "Website" })
   window.open(
     `https://wa.me/${WA_NUMBER.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`,
     "_blank",
@@ -198,9 +201,9 @@ export default function FeaturedProductsGrid({ products: featured }) {
                           tabIndex={0}
                           aria-label={`Chat on WhatsApp about ${p.name}`}
                           title="Chat on WhatsApp"
-                          onClick={(e) => openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`)}
+                          onClick={(e) => openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`, p)}
                           onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`)
+                            if (e.key === "Enter" || e.key === " ") openWhatsApp(e, `Hi, I'm interested in ${p.name}. Can you share more details?`, p)
                           }}
                           className="grid h-[48px] w-[48px] shrink-0 cursor-pointer place-items-center rounded-full bg-[#25D366] text-white shadow-[0_6px_14px_rgba(37,211,102,0.45)] transition-transform duration-200 hover:scale-110"
                         >

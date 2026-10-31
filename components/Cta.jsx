@@ -4,8 +4,9 @@ import { motion, MotionConfig } from "framer-motion"
 import SplitButton from "./SplitButton"
 import QuoteModal from "./QuoteModal"
 import { useState } from "react"
-const BAR_LINK = "text-white/90 transition-[color] duration-200 hover:text-safety"
 import { handleCallClick, handleWhatsappClick } from "@/lib/tracking"
+
+const BAR_LINK = "text-white/90 transition-[color] duration-200 hover:text-safety"
 
 const rise = {
   hidden: { opacity: 0, y: 28 },
@@ -18,12 +19,12 @@ const rise = {
 
 export default function CTA() {
   const [open, setOpen] = useState(false)
-    const [drop, setDrop] = useState(false)
+  const [drop, setDrop] = useState(false)
   const [quote, setQuote] = useState(false)
-    const closeAll = () => {
-      setOpen(false)
-      setDrop(false)
-    }
+  const closeAll = () => {
+    setOpen(false)
+    setDrop(false)
+  }
   const openQuote = (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -66,7 +67,6 @@ export default function CTA() {
             initial="hidden"
             animate="show"
             custom={2}
-            onClickCapture={openQuote}
           >
 
             <a
@@ -74,6 +74,7 @@ export default function CTA() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 rounded-md border-[1.5px] border-solid border-white/55 bg-[rgba(25,139,25,0.55)] px-[26px] py-3.5 text-[0.98rem] font-semibold text-white backdrop-blur-[6px] [transition:background_0.22s,border-color_0.22s,transform_0.18s] hover:-translate-y-0.5 hover:border-white hover:bg-white/[0.12] max-[720px]:w-full max-[720px]:max-w-[280px] max-[720px]:justify-center"
+              onClick={() => handleWhatsappClick({ source: "Website" })}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
@@ -81,7 +82,10 @@ export default function CTA() {
               WhatsApp Us
             </a>
 
-           <SplitButton href="/" dark>Get a quote</SplitButton>
+            {/* Quote capture now wraps only this button, so it no longer swallows the WhatsApp click */}
+            <span className="contents" onClickCapture={openQuote}>
+              <SplitButton href="/" dark>Get a quote</SplitButton>
+            </span>
           </motion.div>
         </div>
 
@@ -92,13 +96,19 @@ export default function CTA() {
           animate="show"
           custom={3}
         >
-          <a className={BAR_LINK} href="tel:+917629827285">+91 7629827285</a>
+          <a
+            className={BAR_LINK}
+            href="tel:+917629827285"
+            onClick={() => handleCallClick({ source: "Website" })}
+          >
+            +91 7629827285
+          </a>
           <span className="select-none opacity-[0.45]">|</span>
           <a className={BAR_LINK} href="mailto:info.siscosteel@gmail.com">info.siscosteel@gmail.com</a>
           <span className="select-none opacity-[0.45]">|</span>
           <span>Sisco Racks</span>
         </motion.div>
-              <QuoteModal open={quote} onClose={() => setQuote(false)} />
+        <QuoteModal open={quote} onClose={() => setQuote(false)} />
       </section>
     </MotionConfig>
   )

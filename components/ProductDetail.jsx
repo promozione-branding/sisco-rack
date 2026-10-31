@@ -15,6 +15,7 @@ import {
   Mail
 } from "lucide-react"
 import { FaWhatsapp } from "react-icons/fa"
+import { handleCallClick, handleWhatsappClick } from "@/lib/tracking"
 
 const UP = "absolute bottom-0 top-0 w-4 bg-blue bg-[radial-gradient(circle,var(--panel)_2.5px,transparent_3.5px)] bg-[length:16px_24px] bg-[position:center_6px]"
 const THUMB = "relative h-[84px] w-[84px] cursor-pointer rounded-[14px] border-2 border-solid bg-white p-1 transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-[5px] max-[720px]:h-16 max-[720px]:w-16"
@@ -256,16 +257,26 @@ export default function ProductDetail({ product: p, related }) {
               <div onClickCapture={openQuote}>
                 <SplitButton dark>Request a quote</SplitButton>
               </div>
-              {c.whatsapp && (
-                <a className={BTN} href={waHref} target="_blank" rel="noreferrer">
-                  <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
-                </a>
-              )}
-              {c.phone && (
-                <a className={BTN} href={`tel:${c.phone}`}>
-                  <Phone size={22} strokeWidth={2.2} /> Call now
-                </a>
-              )}
+             {c.whatsapp && (
+  <a
+    className={BTN}
+    href={waHref}
+    target="_blank"
+    rel="noreferrer"
+    onClick={() => handleWhatsappClick({ obj: p, source: "Website" })}
+  >
+    <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
+  </a>
+)}
+{c.phone && (
+  <a
+    className={BTN}
+    href={`tel:${c.phone}`}
+    onClick={() => handleCallClick({ obj: p, source: "Website" })}
+  >
+    <Phone size={22} strokeWidth={2.2} /> Call now
+  </a>
+)}
             </motion.div>
 
             <motion.div className={`${CARD} mt-6 grid grid-cols-[repeat(4,1fr)] max-[1280px]:grid-cols-[1fr_1fr] max-[480px]:grid-cols-[1fr]`} variants={rise} custom={5} initial="hidden" animate="show">
@@ -450,7 +461,7 @@ export default function ProductDetail({ product: p, related }) {
               {c.phone && (
                 <div className="flex items-center gap-2.5">
                   <Phone className={iconCls} aria-hidden="true" />
-                  <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`}>
+                  <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`} onClick={() => handleCallClick({ obj: p, source: "Website" })}>
                     {c.phone}
                   </a>
                 </div>
