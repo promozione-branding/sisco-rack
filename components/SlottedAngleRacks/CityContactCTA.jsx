@@ -1,0 +1,156 @@
+
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  Phone,
+  MessageCircle,
+  ArrowUpRight,
+} from "lucide-react";
+
+export default function CityContactCTA({
+  cityName = "Delhi",
+  phone = "+91 76298 27285",
+  whatsapp = "917629827285",
+  image = "/products/heavy-duty-industrial-rack.webp",
+}) {
+  const whatsappMessage = encodeURIComponent(
+    `Hello Sisco Racks, I need a slotted angle rack quotation in ${cityName}. Please share the details.`
+  );
+
+  return (
+    <section className="relative overflow-hidden bg-white py-14 sm:py-20">
+
+      <div className="mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
+
+        <div className="relative grid min-h-[480px] items-center overflow-hidden rounded-[28px] bg-[#F8FAFD] lg:grid-cols-[1.15fr_0.85fr] lg:rounded-[36px]">
+
+          {/* LEFT CONTENT */}
+          <div className="relative z-20 px-6 py-12 sm:px-10 lg:px-12 lg:py-16">
+
+            {/* Yellow accent */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: 65 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="mb-7 h-2 rounded-full bg-[#F5B817]"
+            />
+
+            {/* Heading */}
+            <motion.h2
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-[650px] text-4xl font-extrabold leading-[1.08] tracking-tight text-[#172F5D] sm:text-5xl lg:text-[58px]"
+            >
+              Get a Slotted Angle Rack
+              <span className="mt-2 block text-[#F2B30B]">
+                Quote in {cityName}
+              </span>
+            </motion.h2>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mt-6 max-w-[620px] text-base leading-7 text-[#536078] sm:text-lg"
+            >
+              Visit our showroom, call, or send your sizes on WhatsApp.
+            </motion.p>
+
+            {/* CTA BUTTONS */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+            >
+
+              {/* WhatsApp */}
+              <a
+                href={`https://wa.me/${whatsapp}?text=${whatsappMessage}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex min-h-[76px] items-center justify-between gap-4 rounded-full bg-[#16B653] px-6 py-4 text-white shadow-[0_12px_28px_rgba(22,182,83,0.22)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#109D46] sm:min-w-[280px] sm:px-8"
+              >
+                <div className="flex items-center gap-4">
+                  <MessageCircle size={35} strokeWidth={2.2} />
+
+                  <div>
+                    <span className="block text-xs font-semibold text-white/85">
+                      Get a Quote on
+                    </span>
+                    <span className="text-lg font-extrabold sm:text-xl">
+                      WhatsApp
+                    </span>
+                  </div>
+                </div>
+
+                <ArrowUpRight
+                  size={23}
+                  className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                />
+              </a>
+
+              {/* Call */}
+              <a
+                href={`tel:${phone.replace(/\s/g, "")}`}
+                className="group inline-flex min-h-[76px] items-center gap-4 rounded-full bg-[#F5B817] px-6 py-4 text-[#172F5D] shadow-[0_12px_28px_rgba(245,184,23,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#FFD04A] sm:min-w-[280px] sm:px-8"
+              >
+                <Phone
+                  size={32}
+                  fill="currentColor"
+                  strokeWidth={1.5}
+                />
+
+                <div>
+                  <span className="block text-xs font-semibold">
+                    Call Us
+                  </span>
+
+                  <span className="text-lg font-extrabold sm:text-xl">
+                    {phone}
+                  </span>
+                </div>
+              </a>
+
+            </motion.div>
+
+          </div>
+
+          {/* RIGHT IMAGE */}
+          <motion.div
+            initial={{ opacity: 0, scale: 1.08 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9 }}
+            className="relative min-h-[360px] overflow-hidden lg:absolute lg:inset-y-0 lg:right-0 lg:w-[43%] lg:min-h-full"
+          >
+
+            {/* Yellow curved background */}
+            <div className="absolute -left-20 top-[-15%] z-10 hidden h-[130%] w-36 rounded-[50%] bg-[#F5B817] lg:block" />
+
+            <img
+              src={image}
+              alt={`Industrial slotted angle racks in ${cityName}`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+
+            {/* Image overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#172F5D]/30 via-transparent to-transparent" />
+
+          </motion.div>
+
+          {/* Bottom brand accent */}
+          <div className="absolute bottom-0 left-0 z-20 h-2 w-full bg-gradient-to-r from-[#172F5D] via-[#F5B817] to-transparent" />
+
+        </div>
+      </div>
+    </section>
+  );
+}
