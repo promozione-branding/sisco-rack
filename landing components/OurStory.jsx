@@ -206,7 +206,7 @@ export default function OurStory() {
           <Statement text={story} />
           <Reveal i={1}>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <SplitButton href="/contact" dark>Talk to our team</SplitButton>
+              <SplitButton href="https://walink.me/fskx3z" dark>Instant WhatsApp Inquiry</SplitButton>
               <Link href="/products" className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg">See our racks</Link>
             </div>
           </Reveal>
