@@ -9,6 +9,7 @@ import dynamic from "next/dynamic"
 const LottieIcon = dynamic(() => import("./LottieIcon"), { ssr: false })
 import { story, aboutStats, milestones, values } from "@/lib/about"
 import { cardImg } from "@/lib/smImages"
+import QuoteModal from "./QuoteModal"
 
 const rise = {
   hidden: { opacity: 0, y: 36 },
@@ -185,9 +186,19 @@ function ValueCard({ v, i }) {
   )
 }
 
+// const openProductQuote = (e) => {
+//     e.preventDefault()
+//     e.stopPropagation()
+//     setOpen(false)
+//     setDrop(false)
+//     setProductquote(true)
+//   }
+
 export default function OurStory() {
   const collage = useRef(null)
   const stats = useRef(null)
+    const [productquote, setProductquote] = useState(false)  
+
   const line = useRef(null)
   const statsIn = useInView(stats, { once: true, amount: 0.4 })
 
@@ -207,7 +218,7 @@ export default function OurStory() {
           <Reveal i={1}>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <SplitButton href="https://walink.me/fskx3z" dark>Instant WhatsApp Inquiry</SplitButton>
-              <Link href="/products" className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg">See our racks</Link>
+              <button onClick={() => setProductquote(true)} className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg">Get a Free Quote Now</button>
             </div>
           </Reveal>
         </div>
@@ -267,6 +278,7 @@ export default function OurStory() {
           </HScroll>
         </div>
       </section>
+      <QuoteModal open={productquote} onClose={() => setProductquote(false)} />
     </MotionConfig>
   )
 }
