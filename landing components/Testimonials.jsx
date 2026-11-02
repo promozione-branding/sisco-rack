@@ -1,45 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValueEvent,
-  useReducedMotion,
-} from "framer-motion"
 import { testimonials } from "@/lib/testimonials"
-import HScroll from "./HScroll"
 
-const clamp = (v, a, b) => Math.min(b, Math.max(a, v))
-const n = testimonials.length
-const at = (v) => clamp(v / 0.88, 0, 1) * (n - 1)
 const sideFor = (i) => (i % 2 === 0 ? "left" : "right")
-
-function usePeekStep() {
-  const [step, setStep] = useState(24)
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 960px)")
-    const update = () => setStep(mq.matches ? 14 : 24)
-    update()
-    mq.addEventListener("change", update)
-    return () => mq.removeEventListener("change", update)
-  }, [])
-  return step
-}
-
-function useIsMobile(breakpoint = 960) {
-  const [mobile, setMobile] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`)
-    const update = () => setMobile(mq.matches)
-    update()
-    mq.addEventListener("change", update)
-    return () => mq.removeEventListener("change", update)
-  }, [breakpoint])
-  return mobile
-}
 
 const Star = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true">
@@ -158,196 +121,30 @@ const articleBase =
 
 const tone = (t) => (t === "dark" ? "bg-[#253970] text-white" : "bg-white")
 
-function Card({ data, i, progress, step }) {
-  const enter = useTransform(progress, (v) => {
-    if (i === 0) return 0
-    return (1 - clamp(at(v) - (i - 1), 0, 1)) * 118
-  })
-
-  const slotY = useTransform(enter, (v) => `${v}%`)
-  const tilt = useTransform(enter, (v) => (v / 118) * 4)
-  const depth = useTransform(progress, (v) => Math.max(0, at(v) - i))
-  const y = useTransform(depth, (d) => -d * step)
-  const scale = useTransform(depth, (d) => 1 - d * 0.05)
-  const opacity = useTransform(depth, (d) => 1 - clamp(d - 2.2, 0, 1))
-
+export default function Testimonials() {
   return (
-    <motion.div
-      className="absolute inset-0 will-change-transform"
-      style={{ y: slotY, rotate: tilt, zIndex: i }}
-    >
-      <motion.article
-        className={`${articleBase} ${tone(data.tone)}`}
-        style={{ y, scale, opacity, transformOrigin: "50% 0%" }}
-      >
-        <Body data={data} side={sideFor(i)} />
-      </motion.article>
-    </motion.div>
-  )
-}
+    <section className="py-12 max-[720px]:py-10">
+      <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
+        <div className="mb-11 text-center text-[#253970] min-[961px]:mb-[18px]">
+          <span className="mt-8 inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
+            Client stories
+          </span>
+          <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
+            What Our Customers Say
+          </h2>
+        </div>
 
-function MobileTestimonials() {
-  return (
-    <section className="py-6">
-      <HScroll
-        speed={0.9}      
-        className="gap-4 pr-5" 
-        header={
-          <div className="mb-6 px-5 text-center text-[#253970]">
-            <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
-              Client stories
-            </span>
-            <h2 className="mt-3.5 text-[length:clamp(1.8rem,6vw,2.4rem)]">
-              Trusted by teams that store heavy
-            </h2>
-          </div>
-        }
-      >
-        {testimonials.map((t, i) => (
-          <li
-            key={t.name}
-            className="flex-[0_0_min(340px,85vw)] list-none"
-          >
+        <div className="grid grid-cols-1 gap-6 min-[961px]:grid-cols-2">
+          {testimonials.map((t, i) => (
             <article
-              className={`${articleBase} h-auto min-h-[340px] ${tone(t.tone)}`}
+              key={t.name}
+              className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
             >
               <Body data={t} side={sideFor(i)} />
             </article>
-          </li>
-        ))}
-      </HScroll>
-    </section>
-  )
-}
-
-function DesktopTestimonials() {
-  const box = useRef(null)
-  const step = usePeekStep()
-  const [idx, setIdx] = useState(0)
-
-  const { scrollYProgress } = useScroll({
-    target: box,
-    offset: ["start start", "end end"],
-  })
-
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
-    mass: 0.4,
-  })
-
-  const beam = useTransform(progress, (v) => clamp(v / 0.88, 0, 1))
-
-  useMotionValueEvent(progress, "change", (v) => {
-    setIdx(clamp(Math.round(at(v)), 0, n - 1))
-  })
-
-  // Desktop → original vertical scroll-driven version
-  return (
-    <section className="relative" ref={box} style={{ height: `${n * 95}vh` }}>
-      <div className="sticky top-0 h-[100svh] min-h-[560px] px-11 py-3.5 max-[960px]:px-3 max-[960px]:py-2.5">
-        <div
-          className="
-            relative isolate grid h-full grid-cols-[0.8fr_1.2fr] items-center gap-12
-            overflow-hidden rounded-[36px] border-y-2 border-solid border-ink
-            bg-[linear-gradient(160deg,#d6e2ea_0%,var(--panel)_55%,#ffffff_100%)] px-16
-
-            before:absolute before:inset-0 before:-z-[1] before:content-['']
-            before:bg-[repeating-linear-gradient(0deg,rgba(62,92,118,0.12)_0_1px,transparent_1px_4px),repeating-linear-gradient(90deg,rgba(62,92,118,0.09)_0_1px,transparent_1px_7px)]
-            before:[mask-image:linear-gradient(200deg,#000_0%,transparent_60%)]
-
-            max-[960px]:grid-cols-[1fr] max-[960px]:content-center max-[960px]:gap-1
-            max-[960px]:rounded-[28px] max-[960px]:px-[22px]
-          "
-        >
-          <div className="relative z-10">
-            <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
-              Client stories
-            </span>
-
-            <h2 className="mt-4 text-[length:clamp(2rem,3.6vw,3.2rem)]">
-              Trusted by teams that store heavy
-            </h2>
-
-            <p className="mt-[18px] max-w-[46ch] text-[1rem] text-muted max-[960px]:hidden">
-              Warehouses, workshops and shops across the country rely on our racking every day. Here is what they say.
-            </p>
-
-            <div className="mt-[22px] flex items-baseline gap-2.5">
-              <b className="font-display text-[4rem] leading-none text-blue">
-                {String(idx + 1).padStart(2, "0")}
-              </b>
-              <span className="font-semibold text-muted-2">
-                / {String(n).padStart(2, "0")}
-              </span>
-            </div>
-
-            <div
-              className="mt-3.5 h-3.5 max-w-[360px] overflow-hidden rounded-lg border-2 border-solid border-ink bg-steel max-[960px]:hidden"
-              aria-hidden="true"
-            >
-              <motion.i
-                className="block h-full w-full origin-left bg-safety"
-                style={{ scaleX: beam }}
-              />
-            </div>
-
-            <div className="mt-4 flex gap-2 max-[960px]:mt-2.5" aria-hidden="true">
-              {testimonials.map((t, i) => (
-                <span
-                  key={t.name}
-                  className={`h-2.5 w-2.5 rounded-circle transition-[background,transform] duration-200 ${
-                    i === idx ? "scale-[1.3] bg-safety" : "bg-steel"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="relative mt-10 h-[min(310px,56svh)] max-[960px]:mt-[56px] max-[960px]:h-[min(400px,58svh)]">
-            {testimonials.map((t, i) => (
-              <Card key={t.name} data={t} i={i} progress={progress} step={step} />
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     </section>
   )
-}
-
-function ReducedTestimonials() {
-  return (
-      <section className="py-12 max-[720px]:py-10">
-        <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
-          <div className="mb-11 text-center text-[#253970] min-[961px]:mb-[18px]">
-            <span className="mt-8 inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">
-              Client stories
-            </span>
-            <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
-              What Our Customers Say
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            {testimonials.map((t, i) => (
-              <article
-                key={t.name}
-                className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
-              >
-                <Body data={t} side={sideFor(i)} />
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-  )
-}
-
-export default function Testimonials() {
-  const reduce = useReducedMotion()
-  const isMobile = useIsMobile(960)
-
-  if (reduce) return <ReducedTestimonials />
-  if (isMobile) return <MobileTestimonials />
-  return <DesktopTestimonials />
 }

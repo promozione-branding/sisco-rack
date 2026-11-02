@@ -1,7 +1,5 @@
 "use client"
 
-import { motion, useReducedMotion } from "framer-motion"
-
 const NAVY = "#0b2a5b"
 const BLUE = "#0f4aa8"
 const AMBER = "#f5a623"
@@ -15,19 +13,6 @@ export default function AboutUsHome({
   headingTag: Heading = "h1",
   reverse = false, // set true to put the image on the right
 }) {
-  const reduce = useReducedMotion()
-  const dir = reverse ? -1 : 1
-
-  const reveal = (x, delay = 0) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, x },
-          whileInView: { opacity: 1, x: 0 },
-          viewport: { once: true, amount: 0.25 },
-          transition: { duration: 0.7, delay, ease: "easeOut" },
-        }
-
   return (
     <section className="bg-slate-50 py-16 max-[720px]:py-10">
       <div
@@ -35,11 +20,10 @@ export default function AboutUsHome({
           reverse ? "grid-cols-[1.1fr_0.9fr]" : "grid-cols-[0.9fr_1.1fr]"
         }`}
       >
-        <motion.div
+        <div
           className={`relative mx-auto w-full max-w-[560px] max-[1100px]:max-w-[640px] ${
             reverse ? "order-2 max-[1100px]:order-none" : ""
           }`}
-          {...reveal(-40 * dir)}
         >
           <span
             className="absolute -bottom-4 -left-4 h-full w-full rounded-[32px]"
@@ -60,9 +44,9 @@ export default function AboutUsHome({
               loading="lazy"
             />
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div {...reveal(40 * dir, 0.1)}>
+        <div>
           <Heading
             className="text-[clamp(2rem,3.6vw,3.2rem)] font-extrabold leading-[1.1] tracking-tight"
             style={{ color: NAVY }}
@@ -80,7 +64,7 @@ export default function AboutUsHome({
               </p>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
