@@ -20,7 +20,7 @@ const linkCls = "group/fc relative flex items-center justify-end gap-2.5"
 const labelCls = "pointer-events-none translate-x-3.5 whitespace-nowrap rounded-pill border-2 border-solid border-ink bg-white px-4 py-2 text-[0.85rem] font-semibold opacity-0 transition-[opacity,transform] duration-[180ms] ease-out group-hover/fc:translate-x-0 group-hover/fc:opacity-100 group-focus-visible/fc:translate-x-0 group-focus-visible/fc:opacity-100 max-[720px]:hidden"
 const btnCls = "relative grid h-[58px] w-[58px] place-items-center rounded-circle border-2 border-solid border-ink shadow-[0_10px_22px_rgba(31,42,51,0.28)] transition-[transform,box-shadow] duration-[180ms] ease-out group-hover/fc:-translate-y-1 group-hover/fc:scale-[1.06] group-hover/fc:shadow-[0_16px_28px_rgba(31,42,51,0.34)] max-[720px]:h-[52px] max-[720px]:w-[52px]"
 
-const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappText)}`
+const wa = "https://walink.me/fskx3z"
 
 export default function FloatingContact() {
   return (
@@ -37,7 +37,7 @@ export default function FloatingContact() {
             target="_blank"
             rel="noreferrer"
             aria-label="Chat with us on WhatsApp"
-            onClick={() => handleWhatsappClick({ source: "Website" })}
+            // onClick={() => handleWhatsappClick({ source: "Website" })}
           >
             <span className={labelCls}>Chat on WhatsApp</span>
             <span className={`${btnCls} bg-[#25d366] text-white before:pointer-events-none before:absolute before:-inset-0.5 before:animate-fc-pulse before:rounded-circle before:border-2 before:border-solid before:border-[#25d366] before:content-['']`}>

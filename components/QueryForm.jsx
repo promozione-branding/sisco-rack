@@ -73,7 +73,8 @@ export default function QueryForm({ className = "" }) {
         </div>
 
         <motion.form
-          className="flex flex-col gap-3.5 bg-white px-10 py-8 max-[960px]:px-5 max-[960px]:pb-8 max-[960px]:pt-6"
+          className="flex flex-col gap-2.5 bg-white px-10 py-8 max-[960px]:px-5 
+          max-[960px]:pb-8 max-[960px]:pt-6"
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,16 +86,19 @@ export default function QueryForm({ className = "" }) {
               <span className="text-ink">Full Name *</span>
               <input className={fieldCls} name="name" type="text" required value={form.name} onChange={handleChange} placeholder="John Doe" />
             </label>
-            <label className="grid gap-[5px] text-[0.85rem] font-semibold">
-              <span className="text-ink">Email *</span>
-              <input className={fieldCls} name="email" type="email" required value={form.email} onChange={handleChange} placeholder="john@company.com" />
+      
+      <label className="grid gap-[5px] text-[0.85rem] font-semibold">
+              <span className="text-ink">Phone *</span>
+              <input className={fieldCls} name="phone" type="tel" required maxLength={10} value={form.phone} onChange={handleChange} placeholder="9876543210" />
             </label>
+            
+           
           </div>
 
           <div className="grid grid-cols-[1fr_1fr] gap-3.5 max-[960px]:grid-cols-[1fr]">
-            <label className="grid gap-[5px] text-[0.85rem] font-semibold">
-              <span className="text-ink">Phone *</span>
-              <input className={fieldCls} name="phone" type="tel" required maxLength={10} value={form.phone} onChange={handleChange} placeholder="9876543210" />
+             <label className="grid gap-[5px] text-[0.85rem] font-semibold">
+              <span className="text-ink">Email *</span>
+              <input className={fieldCls} name="email" type="email"  value={form.email} onChange={handleChange} placeholder="john@company.com" />
             </label>
             <label className="grid gap-[5px] text-[0.85rem] font-semibold">
               <span className="text-ink">Company</span>

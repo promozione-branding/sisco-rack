@@ -14,9 +14,7 @@ import { handleWhatsappClick } from "@/lib/tracking"
 const linkBase = "flex items-center gap-2 rounded-pill px-4 py-2.5 font-semibold transition-[background,color] duration-200"
 const linkOn = "bg-white/[0.16] text-white"
 const linkOff = "text-white/85 hover:bg-white/[0.12] hover:text-white"
-const WHATSAPP_NUMBER = "+917629827285"
-const WHATSAPP_MSG = encodeURIComponent("Hi, I'd like to know more about your products.")
-const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`
+const whatsappUrl = "https://walink.me/fskx3z";
 
 export default function Navbar() {
   const path = usePathname()
@@ -46,10 +44,12 @@ const openProductQuote = (e) => {
   return (
     <header className="sticky top-0 z-30 h-0 min-[1181px]:overflow-x-clip">
       <div className="relative mx-auto flex h-[92px] max-w-[1400px] items-center justify-between gap-6 rounded-b-[44px] bg-[#253970] pl-8 pr-6 text-white before:absolute before:-left-11 before:top-0 before:h-11 before:w-11 before:bg-[radial-gradient(circle_at_0_100%,transparent_43px,#253970_44px)] before:content-[''] after:absolute after:-right-11 after:top-0 after:h-11 after:w-11 after:bg-[radial-gradient(circle_at_100%_100%,transparent_43px,#253970_44px)] after:content-[''] max-[1180px]:mx-3 max-[1180px]:h-[76px] max-[1180px]:rounded-b-[32px] max-[1180px]:pl-5 max-[1180px]:pr-4 max-[1180px]:before:hidden max-[1180px]:after:hidden">
-        <Link href="/" className="flex items-center gap-2 font-display text-[1.7rem] font-bold text-white" onClick={closeAll}>
+        <Link href="/" className="flex items-center gap-2 font-display text-[1.7rem] font-bold
+         text-white" onClick={closeAll}>
           <img src="/sisco_logo_transparent.webp" alt="Logo" width={100} height={67} />
         </Link>
-        <ul className={`flex list-none items-center gap-1 max-[1180px]:absolute max-[1180px]:left-0 max-[1180px]:right-0 max-[1180px]:top-[calc(100%+10px)] max-[1180px]:flex-col max-[1180px]:items-stretch max-[1180px]:gap-1 max-[1180px]:max-h-[calc(100svh-130px)] max-[1180px]:overflow-y-auto max-[1180px]:overscroll-contain max-[1180px]:rounded-[28px] max-[1180px]:bg-[#253970] max-[1180px]:p-3.5 ${open ? "max-[1180px]:flex" : "max-[1180px]:hidden"}`}>
+        <ul className={`flex list-none items-center gap-1 
+          max-[1180px]:absolute max-[1180px]:left-0 max-[1180px]:right-0 max-[1180px]:top-[calc(100%+10px)] max-[1180px]:flex-col max-[1180px]:items-stretch max-[1180px]:gap-1 max-[1180px]:max-h-[calc(100svh-130px)] max-[1180px]:overflow-y-auto max-[1180px]:overscroll-contain max-[1180px]:rounded-[28px] max-[1180px]:bg-[#253970] max-[1180px]:p-3.5 ${open ? "max-[1180px]:flex" : "max-[1180px]:hidden"}`}>
           {links.map((l) =>
             l.href === "/products" ? (
               <li
@@ -64,7 +64,8 @@ const openProductQuote = (e) => {
               >
                 <Link href={l.href} className={`${linkBase} ${path === l.href ? linkOn : linkOff}`} onClick={closeAll}>
                   {l.label}
-                  <svg className="max-[1180px]:hidden" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                  <svg className="max-[1180px]:hidden" width="12" 
+                  height="12" viewBox="0 0 12 12" aria-hidden="true">
                     <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                   </svg>
                 </Link>

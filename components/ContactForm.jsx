@@ -28,7 +28,7 @@ const infoRows = [
   {
     icon: Phone, bg: "bg-sky-100", color: "text-sky-600", title: "Sales",
     lines: [
-      { text: "sales@rackwellsteel.com", href: "mailto:sales@rackwellsteel.com" },
+      { text: "info.siscosteel@gmail.com", href: "mailto:info.siscosteel@gmail.com" },
       { text: "+917629827285", href: "tel:+917629827285" },
     ],
   },

@@ -42,8 +42,46 @@ export default function RootLayout({ children }) {
       className={`${display.variable} ${body.variable} ${serif.variable}`}
     >
       <head>
-        <link rel="preload" as="image" href="/hero_1400.webp" imageSrcSet="/hero_800_mob.webp 800w, /hero_1400.webp 1400w" imageSizes="100vw" fetchPriority="high" />
-      </head>
+  <link
+    rel="preload"
+    as="image"
+    href="/hero_1400.webp"
+    imageSrcSet="/hero_800_mob.webp 800w, /hero_1400.webp 1400w"
+    imageSizes="100vw"
+    fetchPriority="high"
+  />
+
+  {/* Google Tag Manager */}
+  <Script
+    src="https://www.googletagmanager.com/gtm.js?id=GTM-TGHWB6HL"
+    strategy="beforeInteractive"
+  />
+
+  <Script id="gtm-init" strategy="beforeInteractive">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+    `}
+  </Script>
+
+  {/* Google Ads */}
+  <Script
+    src="https://www.googletagmanager.com/gtag/js?id=AW-18521489858"
+    strategy="beforeInteractive"
+  />
+
+  <Script id="google-ads-init" strategy="beforeInteractive">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18521489858');
+    `}
+  </Script>
+</head>
       <body className="bg-bg font-body leading-[1.6] text-ink overflow-x-hidden">
   <SmoothScroll>
   <HideOnAdmin>

@@ -1,6 +1,4 @@
 import PageHead from "@/components/PageHead"
-import ContactForm from "@/components/ContactForm"
-import Map from "@/components/Map"
 import { pageSeo } from "@/lib/seo"
 import BlogPage from "@/components/BlogPage"
 
@@ -18,7 +16,7 @@ export default function Blogs() {
   backgroundImage="/blog_hero.webp"
 />
       <BlogPage/>
-      <Map/>
+   
     </>
   )
 }
