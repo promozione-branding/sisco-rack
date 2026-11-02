@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react"
@@ -13,7 +12,8 @@ import "swiper/css/pagination"
 
 const slides = [
   {
-    desktop: "/sisco banne2.webp",
+    // NOTE: desktop image must be the version with the text removed
+    desktop: "/sisco_bann.webp",
     mobile: "/sloted angle.webp",
     alt: "Slotted Angle Rack - Industrial Storage Solutions",
   },
@@ -60,29 +60,44 @@ export default function Hero() {
         ))}
       </Swiper>
 
-      {/* Gradient Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-[2] 
-      bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      {/* Bottom Gradient Overlay */}
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-      {/* Content */}
-      <div className="absolute max-sm:top-[22%] bottom-10 left-5 z-[5] flex max-w-xl flex-col 
-      items-start gap-3 px-2 sm:top-15 md:bottom-16 md:left-10 md:gap-4 md:px-0">
+      {/* Left Gradient Overlay (desktop only, keeps text readable) */}
+      <div className="pointer-events-none absolute inset-0 z-[2] hidden bg-gradient-to-r from-black/60 via-black/10 to-transparent min-[721px]:block" />
 
-       <h1 className="block md:hidden text-3xl font-bold tracking-tight text-white
-drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)]
-sm:text-3xl md:text-6xl lg:text-6xl">
-  Slotted Angle Rack
-</h1>
+      {/* Desktop Text Overlay (replaces the text removed from the image) */}
+      <div className="pointer-events-none absolute left-[3.5%] top-1/2 z-[5] hidden -translate-y-1/2 min-[721px]:block">
+        <h2 className="font-bold leading-[1.05] tracking-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.45)]">
+          <span className="block text-5xl text-white lg:text-6xl xl:text-7xl">
+            Slotted Angle
+          </span>
+          <span className="block text-5xl text-[#F47B20] lg:text-6xl xl:text-7xl">
+            Racks
+          </span>
+        </h2>
+
+        {/* Orange divider */}
+        <div className="my-5 h-[4px] w-24 rounded-full bg-[#F47B20] lg:w-28" />
+
+        <p className="max-w-[22rem] text-base font-medium leading-snug text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] lg:text-lg xl:max-w-md xl:text-xl">
+          Durable &amp; Versatile Storage for Warehouses, Factories and Industrial Spaces.
+        </p>
+      </div>
+
+      {/* Content: mobile heading + Get a Quote button */}
+      <div className="absolute bottom-10 left-5 z-[5] flex max-w-xl flex-col items-start gap-3 px-2 max-[720px]:bottom-auto max-[720px]:top-[22%] min-[721px]:left-[3.5%] min-[721px]:px-0 md:bottom-16 md:gap-4">
+
+        {/* Mobile heading only */}
+        <h1 className="block text-3xl font-bold tracking-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)] min-[721px]:sr-only">
+          Slotted Angle Rack
+        </h1>
 
         {/* Get a Quote - All Devices */}
         <button
           type="button"
           onClick={() => setQuote(true)}
-          className="group flex items-center gap-2 rounded-full 
-          border border-white/50 bg-white px-4 py-2.5 text-xs 
-          font-semibold text-black shadow-xl transition-all 
-          duration-300 hover:bg-black hover:text-white md:gap-3 
-          md:px-5 md:py-3.5 md:text-sm"
+          className="group flex items-center gap-2 rounded-full border border-white/50 bg-white px-4 py-2.5 text-xs font-semibold text-black shadow-xl transition-all duration-300 hover:bg-black hover:text-white md:gap-3 md:px-5 md:py-3.5 md:text-sm"
         >
           Get a Quote
 

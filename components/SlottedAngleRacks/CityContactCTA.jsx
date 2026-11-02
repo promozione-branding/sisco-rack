@@ -1,7 +1,5 @@
-
 "use client";
 
-import { motion } from "framer-motion";
 import {
   Phone,
   MessageCircle,
@@ -29,45 +27,29 @@ export default function CityContactCTA({
           <div className="relative z-20 px-6 py-12 sm:px-10 lg:px-12 lg:py-16">
 
             {/* Yellow accent */}
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: 65 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="mb-7 h-2 rounded-full bg-[#F5B817]"
+            <div
+              className="mb-7 h-2 w-[65px] rounded-full bg-[#F5B817]"
             />
 
             {/* Heading */}
-            <motion.h2
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <h2
               className="max-w-[650px] text-4xl font-extrabold leading-[1.08] tracking-tight text-[#172F5D] sm:text-5xl lg:text-[58px]"
             >
               Get a Slotted Angle Rack
               <span className="mt-2 block text-[#F2B30B]">
                 Quote in {cityName}
               </span>
-            </motion.h2>
+            </h2>
 
             {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+            <p
               className="mt-6 max-w-[620px] text-base leading-7 text-[#536078] sm:text-lg"
             >
               Visit our showroom, call, or send your sizes on WhatsApp.
-            </motion.p>
+            </p>
 
             {/* CTA BUTTONS */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <div
               className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
             >
 
@@ -76,7 +58,7 @@ export default function CityContactCTA({
                 href={`https://wa.me/${whatsapp}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex min-h-[76px] items-center justify-between gap-4 rounded-full bg-[#16B653] px-6 py-4 text-white shadow-[0_12px_28px_rgba(22,182,83,0.22)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#109D46] sm:min-w-[280px] sm:px-8"
+                className="group inline-flex min-h-[76px] items-center justify-between gap-4 rounded-full bg-[#16B653] px-6 py-4 text-white shadow-[0_12px_28px_rgba(22,182,83,0.22)] hover:bg-[#109D46] sm:min-w-[280px] sm:px-8"
               >
                 <div className="flex items-center gap-4">
                   <MessageCircle size={35} strokeWidth={2.2} />
@@ -93,14 +75,14 @@ export default function CityContactCTA({
 
                 <ArrowUpRight
                   size={23}
-                  className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                  className=""
                 />
               </a>
 
               {/* Call */}
               <a
                 href={`tel:${phone.replace(/\s/g, "")}`}
-                className="group inline-flex min-h-[76px] items-center gap-4 rounded-full bg-[#F5B817] px-6 py-4 text-[#172F5D] shadow-[0_12px_28px_rgba(245,184,23,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#FFD04A] sm:min-w-[280px] sm:px-8"
+                className="group inline-flex min-h-[76px] items-center gap-4 rounded-full bg-[#F5B817] px-6 py-4 text-[#172F5D] shadow-[0_12px_28px_rgba(245,184,23,0.2)] hover:bg-[#FFD04A] sm:min-w-[280px] sm:px-8"
               >
                 <Phone
                   size={32}
@@ -119,16 +101,12 @@ export default function CityContactCTA({
                 </div>
               </a>
 
-            </motion.div>
+            </div>
 
           </div>
 
           {/* RIGHT IMAGE */}
-          <motion.div
-            initial={{ opacity: 0, scale: 1.08 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
+          <div
             className="relative min-h-[360px] overflow-hidden lg:absolute lg:inset-y-0 lg:right-0 lg:w-[43%] lg:min-h-full"
           >
 
@@ -144,7 +122,7 @@ export default function CityContactCTA({
             {/* Image overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#172F5D]/30 via-transparent to-transparent" />
 
-          </motion.div>
+          </div>
 
           {/* Bottom brand accent */}
           <div className="absolute bottom-0 left-0 z-20 h-2 w-full bg-gradient-to-r from-[#172F5D] via-[#F5B817] to-transparent" />

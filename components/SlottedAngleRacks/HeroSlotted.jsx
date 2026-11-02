@@ -1,7 +1,5 @@
-
 "use client";
 
-import { motion } from "framer-motion";
 import {
   CalendarDays,
   Layers3,
@@ -50,36 +48,27 @@ export default function HeroSlotted({city}) {
         <div className="w-full max-w-[920px]">
 
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+          <div
             className="mb-7 inline-flex items-center gap-3"
           >
             <span className="h-1 w-10 rounded-full " />
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
               
             </span>
-          </motion.div>
+          </div>
 
           {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+          <h1
             className="max-w-[900px] text-4xl font-extrabold leading-[1.12] tracking-tight text-white sm:text-7xl "
           >
             Slotted Angle Racks in {city},
             <span className="mt-2 block text-safety">
               Made in Our Karawal Nagar Factory
             </span>
-          </motion.h1>
+          </h1>
 
           {/* Description */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+          <div
             className="mt-7 max-w-[780px] space-y-1 text-base font-medium leading-5  text-white sm:text-lg"
           >
             <p>
@@ -96,18 +85,15 @@ export default function HeroSlotted({city}) {
               Delivered and installed across {city} by
               our own crew.
             </p>
-          </motion.div>
+          </div>
 
           {/* CTA buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+          <div
             className="mt-9 flex flex-wrap gap-3"
           >
             <button
               onClick={() => setProductquote(true)}
-              className="group inline-flex items-center gap-3 rounded-lg bg-[#F5B817] px-6 py-4 font-bold text-[#172653] shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[#FFD04A]"
+              className="group inline-flex items-center gap-3 rounded-lg bg-[#F5B817] px-6 py-4 font-bold text-[#172653] shadow-lg shadow-black/20 hover:bg-[#FFD04A]"
               href="#contact"
             >
               <FileText size={19} />
@@ -119,7 +105,7 @@ export default function HeroSlotted({city}) {
               href="https://wa.me/917629827285"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 rounded-lg border-2 border-white bg-[#172653]/80 px-5 py-4 font-bold text-white transition-all duration-300 hover:bg-white hover:text-[#203070]"
+              className="inline-flex items-center gap-3 rounded-lg border-2 border-white bg-[#172653]/80 px-5 py-4 font-bold text-white hover:bg-white hover:text-[#203070]"
             >
               <MessageCircle size={20} />
               WhatsApp +91 76298 27285
@@ -127,18 +113,15 @@ export default function HeroSlotted({city}) {
 
             <a
               href="tel:+917629827285"
-              className="inline-flex items-center gap-3 rounded-lg border-2 border-white bg-[#172653]/80 px-6 py-4 font-bold text-white transition-all duration-300 hover:bg-white hover:text-[#203070]"
+              className="inline-flex items-center gap-3 rounded-lg border-2 border-white bg-[#172653]/80 px-6 py-4 font-bold text-white hover:bg-white hover:text-[#203070]"
             >
               <Phone size={19} />
               Call Now
             </a>
-          </motion.div>
+          </div>
 
           {/* Trust strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+          <div
             className="mt-12 grid grid-cols-2 gap-5 rounded-xl border border-white/30 bg-[#172653]/95 p-5 shadow-xl md:grid-cols-4 md:gap-0"
           >
             {trustItems.map((item, index) => {
@@ -173,7 +156,7 @@ export default function HeroSlotted({city}) {
                 </div>
               );
             })}
-          </motion.div>
+          </div>
 
         </div>
       </div>

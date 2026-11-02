@@ -11,7 +11,7 @@ import CTA from "@/landing components/Cta"
 import WhyChooseUs from "@/landing components/WhyChooseUs"
 import Testimonials from "@/landing components/Testimonials"
 import Faq from "@/landing components/Faq"
-import QueryForm from "@/components/QueryForm"
+import QueryForm from "@/landing components/QueryForm"
 
 
 export const metadata = { title: pageSeo.home.title, description: pageSeo.home.description }
