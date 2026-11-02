@@ -6,6 +6,7 @@ import Footer from "@/components/Footer"
 import FloatingContact from "@/components/FloatingContact"
 import TopBar from "@/components/TopBar"
 import HideOnAdmin from "@/components/HideOnAdmin"
+import Script from "next/script"
 
 const display = Barlow_Condensed({
   subsets: ["latin"],
@@ -41,7 +42,8 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${display.variable} ${body.variable} ${serif.variable}`}
     >
-      <head>
+      
+<head>
   <link
     rel="preload"
     as="image"
@@ -82,6 +84,7 @@ export default function RootLayout({ children }) {
     `}
   </Script>
 </head>
+
       <body className="bg-bg font-body leading-[1.6] text-ink overflow-x-hidden">
   <SmoothScroll>
   <HideOnAdmin>

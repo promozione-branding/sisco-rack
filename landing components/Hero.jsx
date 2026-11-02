@@ -61,14 +61,18 @@ export default function Hero() {
       </Swiper>
 
       {/* Gradient Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 z-[2] 
+      bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
       {/* Content */}
-      <div className="absolute bottom-10 left-5 z-[5] flex max-w-xl flex-col items-start gap-3 px-2 md:bottom-16 md:left-10 md:gap-4 md:px-0">
+      <div className="absolute max-sm:top-[22%] bottom-10 left-5 z-[5] flex max-w-xl flex-col 
+      items-start gap-3 px-2 sm:top-15 md:bottom-16 md:left-10 md:gap-4 md:px-0">
 
-        <h1 className="text-2xl font-bold tracking-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)] sm:text-3xl md:text-5xl lg:text-6xl md:hidden">
-          Slotted Angle Rack
-        </h1>
+       <h1 className="block md:hidden text-3xl font-bold tracking-tight text-white
+drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)]
+sm:text-3xl md:text-6xl lg:text-6xl">
+  Slotted Angle Rack
+</h1>
 
         {/* Get a Quote - All Devices */}
         <button
