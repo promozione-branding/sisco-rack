@@ -176,15 +176,15 @@ export default function Hero() {
         />
       )}
 
-      <h2 className="text-[length:clamp(2.4rem,7.2vw,6rem)] leading-[0.92] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
+      <h1 className="text-[length:clamp(2.4rem,7.2vw,6rem)] leading-[0.92] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
         <span className="hero-rise block">Build storage faster</span>
         <span className="hero-rise block [animation-delay:.15s]">
           Load with <em className="font-normal tracking-normal text-[#f0b429]">confidence</em>
         </span>
-      </h2>
+      </h1>
 
       <div className="hero-rise mt-7 flex flex-wrap justify-center gap-3.5 [animation-delay:.4s] max-[720px]:mt-[20px] max-[720px]:gap-2.5">
-        <SplitButton href="/" dark onClick={openQuote}>
+        <SplitButton href="/contact" dark onClick={openQuote}>
           Get a quote
         </SplitButton>
         <Link

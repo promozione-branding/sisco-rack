@@ -5,7 +5,7 @@ import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { submitEnquiry } from "@/lib/submitEnquiry"
 
-const PHONE = "+91 7629827285"
+const PHONE = "+917629827285"
 const PHONE_HREF = "tel:+917629827285"
 
 const SERVICES = [

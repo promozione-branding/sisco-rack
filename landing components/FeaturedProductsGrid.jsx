@@ -21,7 +21,7 @@ import QuoteModal from "./QuoteModal"
 
 const NAVY = "#0b2a5b"
 const AMBER = "#f5a623"
-const WHATSAPP_LINK = "https://walink.me/fskx3z"
+const WHATSAPP_LINK = "http://wa.me/917629827285"
 
 const ICONS = { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette }
 

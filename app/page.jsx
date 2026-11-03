@@ -6,12 +6,14 @@ import WhyChooseUs from "@/components/WhyChooseUs"
 import Faq from "@/components/Faq"
 import Industries from "@/components/Industries"
 import Categories from "@/components/Categories"
-import Testimonials from "@/components/Testimonials"
+import dynamic from "next/dynamic"
 import QueryForm from "@/components/QueryForm"
 import Cta from "@/components/Cta"
 import OurStory from "@/components/OurStory"
 import AboutUsHome from "@/components/AboutUsHome"
 import { homeAbout } from "@/lib/aboutContent"
+
+const Testimonials = dynamic(() => import("@/components/Testimonials"))
 
 export const metadata = { title: pageSeo.home.title, description: pageSeo.home.description }
 

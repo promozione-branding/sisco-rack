@@ -8,7 +8,7 @@ import SplitButton from "./SplitButton"
 import QuoteModal from "./QuoteModal"
 import { cardImg } from "@/lib/smImages"
 
-const WHATSAPP_LINK = "https://walink.me/fskx3z"
+const WHATSAPP_LINK = "http://wa.me/917629827285"
 
 const openWhatsApp = (e) => {
   e.preventDefault()

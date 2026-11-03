@@ -30,9 +30,36 @@ const body = Public_Sans({
 })
 
 export const metadata = {
-  title: "Sisco Steel | Industrial storage racks",
+  title: "Storage Racks Manufacturer in India | Sisco Steel Products",
   description:
-    "Pallet racks, slotted angle, boltless shelving, cantilever racks and mezzanine floors built to your floor plan.",
+    "Sisco Steel Products is a storage rack manufacturer in India. Slotted angle, supermarket and heavy-duty racks, plus mezzanine floors. Get a quote.",
+  openGraph: {
+    type: "website",
+    siteName: "Sisco Steel Products",
+    locale: "en_IN",
+    url: "https://siscosteelproducts.com/",
+    title: "Storage Racks Manufacturer in India | Sisco Steel Products",
+    description:
+      "Sisco Steel Products is a storage racks manufacturer in India. Slotted angle, supermarket and heavy-duty racks, plus mezzanine floors. Get a quote.",
+    images: [
+      {
+        url: "https://siscosteelproducts.com/hero_1400.webp",
+        alt: "Storage racks and mezzanine floors manufactured by Sisco Steel Products",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Storage Racks Manufacturer in India | Sisco Steel Products",
+    description:
+      "Sisco Steel Products is a storage racks manufacturer in India. Slotted angle, supermarket and heavy-duty racks, plus mezzanine floors. Get a quote.",
+    images: [
+      {
+        url: "https://siscosteelproducts.com/hero_1400.webp",
+        alt: "Storage racks and mezzanine floors manufactured by Sisco Steel Products",
+      },
+    ],
+  },
 
   icons: {
     icon: "/favicon_original.png",
@@ -47,14 +74,15 @@ export default function RootLayout({ children }) {
     >
       
 <head>
-  <link
+  {/* <link
     rel="preload"
     as="image"
     href="/hero_1400.webp"
     imageSrcSet="/hero_800_mob.webp 800w, /hero_1400.webp 1400w"
     imageSizes="100vw"
     fetchPriority="high"
-  />
+  /> */}
+
 
   {/* Google Tag Manager */}
   <Script

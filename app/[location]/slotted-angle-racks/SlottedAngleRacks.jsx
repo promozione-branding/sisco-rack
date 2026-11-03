@@ -20,7 +20,7 @@ export default function SlottedAngleRacks({city}) {
     <RackPricingSection city={city} />
     <IndustryApplications city={city} />
     <CityContactCTA cityName={city}
-  phone="+91 76298 27285"
+  phone="+917629827285"
   whatsapp="917629827285"
   image="/hero_800_mob.webp" />
     <CityFaq city={city} />

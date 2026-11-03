@@ -32,7 +32,7 @@ export default function OurStory() {
           <Statement text={story} />
           <Reveal>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <SplitButton href="https://walink.me/fskx3z" dark>Instant WhatsApp Inquiry</SplitButton>
+              <SplitButton href="http://wa.me/917629827285" dark>Instant WhatsApp Inquiry</SplitButton>
               <button onClick={() => setProductquote(true)} className="inline-block cursor-pointer rounded-[14px] border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink [font-family:inherit] hover:bg-ink hover:text-bg">Get a Free Quote Now</button>
             </div>
           </Reveal>
