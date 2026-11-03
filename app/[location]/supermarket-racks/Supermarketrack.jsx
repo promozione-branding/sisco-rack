@@ -1,3 +1,4 @@
+import GetQuoteSection from '@/components/GetQuoteSection'
 import CityFaq from '@/components/Supermarketracks/CityFaq'
 import StorePlanningSection from '@/components/Supermarketracks/StorePlanningSection'
 import SupermarketAbout from '@/components/Supermarketracks/SupermarketAbout'
@@ -17,6 +18,7 @@ export default function Supermarketrack({city}) {
     <SupermarketPricing city={city} />
     <WhyChooseSisco city={city} />
     <CityFaq city={city} />
+    <GetQuoteSection product="Supermarket Display Racks" />
     </>
   )
 }

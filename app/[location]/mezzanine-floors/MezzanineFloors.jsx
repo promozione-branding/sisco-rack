@@ -1,3 +1,4 @@
+import GetQuoteSection from '@/components/GetQuoteSection'
 import CityContactCTA from '@/components/MezzanineFloors/CityContactCTA'
 import CityFaq from '@/components/MezzanineFloors/CityFaq'
 import MezzanineAbout from '@/components/MezzanineFloors/MezzanineAbout'
@@ -17,6 +18,7 @@ export default function MezzanineFloors({city}) {
     <MezzanineSiteChecks />
     <CityContactCTA cityName={city}/>
     <CityFaq city={city} />
+    <GetQuoteSection product="Mezzanine Floors" />
     </>
   )
 }

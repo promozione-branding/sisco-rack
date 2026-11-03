@@ -1,3 +1,4 @@
+import GetQuoteSection from '@/components/GetQuoteSection'
 import CityContactCTA from '@/components/SlottedAngleRacks/CityContactCTA'
 import CityFaq from '@/components/SlottedAngleRacks/CityFaq'
 import HeroSlotted from '@/components/SlottedAngleRacks/HeroSlotted'
@@ -23,6 +24,7 @@ export default function SlottedAngleRacks({city}) {
   whatsapp="917629827285"
   image="/hero_800_mob.webp" />
     <CityFaq city={city} />
+    <GetQuoteSection product="Slotted Angle Racks" />
     </>
   )
 }

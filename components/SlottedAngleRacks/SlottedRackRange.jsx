@@ -291,7 +291,7 @@ export default function SlottedRackRange() {
         </motion.div>
 
         {/* PRODUCT CARD GRID */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {products.map((product, index) => (
             <ProductCard
               key={product.name}
@@ -324,7 +324,7 @@ export default function SlottedRackRange() {
             </div>
 
             {/* Specification items */}
-            <div className="grid grid-cols-2 divide-x divide-y divide-[#E2E7EF] sm:grid-cols-3 lg:grid-cols-5 lg:divide-y-0">
+            <div className="grid grid-cols-2 divide-x divide-y divide-[#E2E7EF] sm:grid-cols-3 ">
               {specifications.map((item) => {
                 const Icon = item.icon;
 
