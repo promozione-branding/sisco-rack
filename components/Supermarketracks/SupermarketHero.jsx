@@ -213,7 +213,9 @@ export default function SupermarketHero({ city }) {
 
             {/* WHATSAPP */}
             <Link
-              href="https://wa.me/917629827285?text=Hello%2C%20I%20want%20to%20plan%20my%20supermarket%20racks."
+              href={`https://wa.me/917629827285?text=${encodeURIComponent(
+                `hello i want to enquire about Supermarket Racks in ${city}`
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-[#16A34A] px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#12823C]"
