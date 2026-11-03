@@ -205,7 +205,7 @@ export default function RackPricingSection({city}) {
               </p>
 
               <div className="mt-4 rounded-lg bg-[#F5B817] px-3 py-2 text-center text-sm font-extrabold text-[#172653]">
-                6 Shelves
+                5 Shelves
               </div>
             </motion.div>
 

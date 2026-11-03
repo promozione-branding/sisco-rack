@@ -199,7 +199,7 @@ function ProductCard({ product, index }) {
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover p-2 transition-transform duration-500 group-hover:scale-110"
         />
       </div>
 

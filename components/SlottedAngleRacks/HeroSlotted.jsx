@@ -61,10 +61,8 @@ export default function HeroSlotted({city}) {
           <h1
             className="max-w-[900px] text-4xl font-extrabold leading-[1.12] tracking-tight text-white sm:text-7xl "
           >
-            Slotted Angle Racks in {city},
-            <span className="mt-2 block text-safety">
-              Made in Our Karawal Nagar Factory
-            </span>
+            Slotted Angle Racks in {city}
+            
           </h1>
 
           {/* Description */}
