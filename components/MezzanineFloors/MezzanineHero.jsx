@@ -94,9 +94,7 @@ export default function MezzanineHero({city}) {
             className="max-w-[800px] text-[38px] font-extrabold leading-[1.12] tracking-tight text-[#203070] sm:text-5xl xl:text-[62px]"
           >
             Mezzanine Floors in {city}
-           <span className="mt-2 block text-safety">
-              Made in Our Karawal Nagar Factory
-            </span>
+          
            
           </motion.h1>
 
@@ -175,7 +173,7 @@ export default function MezzanineHero({city}) {
               className="group inline-flex min-h-[54px] items-center justify-center gap-3 rounded-full bg-[#F5B817] px-6 py-3 text-sm font-extrabold text-[#172653] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E5A900] hover:shadow-lg"
             >
               <CalendarDays size={19} />
-              Get a Free Quote
+              Get a Quote
               <ArrowUpRight
                 size={18}
                 className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"

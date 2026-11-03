@@ -195,9 +195,9 @@ export default function MezzanineAbout({city}) {
                   >
                     <Icon className="mb-3 h-6 w-6 text-[#203070]" />
 
-                    <h3 className="text-xs font-extrabold leading-5 text-[#203070] sm:text-sm">
+                    <p className="text-xs font-extrabold leading-5 text-[#203070] sm:text-sm">
                       {item.title}
-                    </h3>
+                    </p>
 
                     <p className="mt-2 text-[11px] leading-5 text-gray-500">
                       {item.description}
