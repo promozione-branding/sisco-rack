@@ -12,6 +12,7 @@ import WhyChooseUs from "@/landing components/WhyChooseUs"
 import Testimonials from "@/landing components/Testimonials"
 import Faq from "@/landing components/Faq"
 import QueryForm from "@/landing components/QueryForm"
+import StickyContactBar from "@/landing components/StickyContactBar"
 
 
 export const metadata = { title: pageSeo.home.title, description: pageSeo.home.description }
@@ -31,6 +32,7 @@ export default function inquiry() {
       <Testimonials/>
       {/* <Faq /> */}
       <QueryForm/>
+      <StickyContactBar />
     </>
   )
 }
