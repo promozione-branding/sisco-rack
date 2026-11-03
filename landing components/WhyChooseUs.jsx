@@ -260,14 +260,11 @@ export default function  WhyChooseUs({
 
 {/* Mobile / tablet (≤960px) */}
 <div className="min-[961px]:hidden">
-  <HScroll
-    speed={1.1}
-    header={
-      <div className="mx-auto px-10 pb-6 max-[720px]:px-5">
-        {headingBlock}
-      </div>
-    }
-  >
+  <div className="mx-auto px-10 pb-6 max-[720px]:px-5">
+    {headingBlock}
+  </div>
+
+  <ul className="flex gap-4 overflow-x-auto px-10 pb-4 max-[720px]:px-5 scrollbar-hide">
     {items.map((r, i) => (
       <li
         key={`${i}-${r.title}`}
@@ -303,7 +300,7 @@ export default function  WhyChooseUs({
         )}
       </li>
     ))}
-  </HScroll>
+  </ul>
 </div>
       </section>
     </MotionConfig>

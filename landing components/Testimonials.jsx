@@ -134,7 +134,8 @@ export default function Testimonials() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 min-[961px]:grid-cols-2">
+        {/* Desktop (≥961px) – keep 2-column grid */}
+        <div className="hidden min-[961px]:grid min-[961px]:grid-cols-2 min-[961px]:gap-6">
           {testimonials.map((t, i) => (
             <article
               key={t.name}
@@ -143,6 +144,24 @@ export default function Testimonials() {
               <Body data={t} side={sideFor(i)} />
             </article>
           ))}
+        </div>
+
+        {/* Mobile / tablet – manual horizontal scroll */}
+        <div className="min-[961px]:hidden">
+          <ul className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            {testimonials.map((t, i) => (
+              <li
+                key={t.name}
+                className="w-[85vw] max-w-[26rem] shrink-0"
+              >
+                <article
+                  className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
+                >
+                  <Body data={t} side={sideFor(i)} />
+                </article>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

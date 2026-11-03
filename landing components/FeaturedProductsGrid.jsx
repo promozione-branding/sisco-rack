@@ -76,24 +76,26 @@ export default function FeaturedProductsGrid({ products: featured = [] }) {
               {/* Bottom bar (static) */}
               <i className="absolute -left-2.5 -right-2.5 bottom-0 h-3.5 rounded-lg border-2 border-solid border-ink bg-safety max-[540px]:hidden" />
 
-              {row.map((p) => {
+              {row.map((p, k) => {
                 const isActive = active === p.id
+                // 9th card only shows where the grid is 3 columns (md = 768px and up)
+                const hideBelowDesktop = r * 3 + k >= 8
 
                 return (
                   <article
                     key={p.id}
-                    className="group/card relative z-[1] flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white max-[540px]:rounded-xl"
+                    className={`group/card relative z-[1] flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white max-[540px]:rounded-xl ${hideBelowDesktop ? "max-[767px]:hidden" : ""} ${
+                        isActive
+                          ? "shadow-[0_18px_40px_rgba(15,40,90,0.20)] ring-2 ring-[#f5a623]"
+                          : "shadow-[0_10px_30px_rgba(15,40,90,0.10)]"
+                      }`}
                     onMouseEnter={() => setActive(p.id)}
                     onFocus={() => setActive(p.id)}
                   >
                     {/* Product Details Link */}
                     <Link
                       href={`/products/${p.slug}`}
-                      className={`flex flex-1 flex-col overflow-hidden rounded-[28px] bg-white max-[540px]:rounded-xl ${
-                        isActive
-                          ? "shadow-[0_18px_40px_rgba(15,40,90,0.20)] ring-2 ring-[#f5a623]"
-                          : "shadow-[0_10px_30px_rgba(15,40,90,0.10)]"
-                      }`}
+                      className={`flex flex-1 flex-col overflow-hidden rounded-[28px] bg-white max-[540px]:rounded-xl`}
                     >
                       {/* Product Image */}
                       <div className="relative flex-none">
@@ -176,7 +178,7 @@ export default function FeaturedProductsGrid({ products: featured = [] }) {
                       <button
                         type="button"
                         onClick={openQuote}
-                        className="flex h-[48px] flex-1 cursor-pointer items-center justify-center rounded-full border-0 bg-slate-100 px-4 text-[0.9rem] font-bold hover:bg-slate-200 max-[540px]:h-9 max-[540px]:px-1 max-[540px]:text-[0.65rem]"
+                        className="flex h-[48px] flex-1 cursor-pointer items-center justify-center rounded-full border-0 bg-slate-100 px-4 text-[0.9rem] font-bold hover:bg-slate-200 max-[540px]:h-7 max-[540px]:px-1 max-[540px]:text-[10px]"
                         style={{ color: NAVY, fontFamily: "inherit" }}
                       >
                         View more

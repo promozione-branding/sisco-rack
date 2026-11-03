@@ -38,7 +38,12 @@ function truncateWords(text = "", limit = WORD_LIMIT) {
 
 async function getFeatured() {
   const byCat = FEATURED_CATS.map((c) => featuredproducts.filter((p) => p.cat === c))
-  return [...byCat.map((l) => l[0]), ...byCat.map((l) => l[1])].filter(Boolean).slice(0, 9)
+  // Round-robin across categories (1st of each, 2nd of each, 3rd of each...) and keep 9.
+  // 9 = 3 full rows of 3 on desktop; the 9th card is hidden below 768px in FeaturedProductsGrid.
+  const rounds = Math.max(...byCat.map((l) => l.length))
+  const picked = []
+  for (let i = 0; i < rounds; i++) byCat.forEach((l) => picked.push(l[i]))
+  return picked.filter(Boolean).slice(0, 9)
 }
 
 export default async function FeaturedProducts() {
@@ -59,7 +64,7 @@ export default async function FeaturedProducts() {
 
   return (
     <section className="py-12 max-[720px]:py-10 min-[961px]:py-7">
-      <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
+      <div className="mx-auto max-w-full px-2 max-[960px]:px-2 max-[720px]:px-2">
         <div className="mb-11 text-center min-[961px]:mb-[18px]">
           <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">Featured products</span>
           <h2 className="mt-3.5 min-[961px]:mt-2 min-[961px]:text-[length:clamp(1.8rem,3.4vw,2.8rem)]">
