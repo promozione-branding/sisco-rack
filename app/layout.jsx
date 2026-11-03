@@ -9,6 +9,7 @@ import HideOnAdmin from "@/components/HideOnAdmin"
 import Script from "next/script"
 import HideOnInquiry from "@/landing components/HideonInqury"
 import StickyContactBar from "@/landing components/StickyContactBar"
+import InquiryPopup from "@/landing components/InquiryPopup"
 
 const display = Barlow_Condensed({
   subsets: ["latin"],
@@ -102,6 +103,7 @@ export default function RootLayout({ children }) {
       <FloatingContact />
     </HideOnInquiry>
     <StickyContactBar />
+    <InquiryPopup />
   </HideOnAdmin>
 </SmoothScroll>
       </body>
