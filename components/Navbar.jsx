@@ -52,7 +52,7 @@ export default function Navbar() {
             <img src="/sisco_logo_transparent.webp" alt="Logo" width={100} height={67} />
           </Link>
           {path === "/inquiry" && (
-            <span className="-mt-1 whitespace-nowrap text-[9px] font-semibold leading-none tracking-wide text-white/85 max-[480px]:text-[5px]">
+            <span className="-mt-1 whitespace-nowrap text-[9px] font-extrabold leading-none tracking-wide text-white/85 max-[480px]:text-[5px]">
               GST: {GST_NUMBER}
             </span>
           )}
@@ -168,9 +168,11 @@ export default function Navbar() {
               <span className="max-[400px]:hidden">Get a </span>Free Quote
             </button>
           )}
+          {!path === "/inquiry" && (
           <button className="hidden min-h-[44px] rounded-pill border-2 border-solid border-white/50 bg-transparent px-4 py-2 font-semibold text-white [font-family:inherit] cursor-pointer max-[1180px]:block" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation menu">
             {open ? "Close" : "Menu"}
           </button>
+            )}
         </div>
       </div>
       <InstallationServicesModal open={quote} onClose={() => setQuote(false)} />
