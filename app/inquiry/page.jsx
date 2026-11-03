@@ -10,7 +10,6 @@ import OurStory from "@/landing components/OurStory"
 import CTA from "@/landing components/Cta"
 import WhyChooseUs from "@/landing components/WhyChooseUs"
 import Testimonials from "@/landing components/Testimonials"
-import Faq from "@/landing components/Faq"
 import QueryForm from "@/landing components/QueryForm"
 import StickyContactBar from "@/landing components/StickyContactBar"
 

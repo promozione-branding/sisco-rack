@@ -64,21 +64,18 @@ export default function FeaturedProductsGrid({ products: featured = [] }) {
         <span className={`${UP} left-4 max-[540px]:left-2`} />
         <span className={`${UP} right-4 max-[540px]:right-2`} />
 
-        {/* Product Grid */}
         <div className="grid grid-cols-1 gap-0 min-[541px]:block max-[540px]:grid max-[540px]:grid-cols-2 
         max-[540px]:gap-3 max-[540px]:px-2 max-[540px]:pt-2">
 
           {rows.map((row, r) => (
             <div
               key={r}
-              className="relative mb-[30px] grid grid-cols-1 gap-[22px] pb-3.5 min-[541px]:grid-cols-2 md:grid-cols-3 md:[&>article:nth-of-type(4)]:hidden max-[540px]:contents"
+              className="relative mb-[30px] grid grid-cols-1 gap-[22px] pb-3.5 min-[541px]:grid-cols-2 md:grid-cols-3 md:[&>article:nth-of-type(4)]:hidden max-[540px]:contents px-6"
             >
-              {/* Bottom bar (static) */}
               <i className="absolute -left-2.5 -right-2.5 bottom-0 h-3.5 rounded-lg border-2 border-solid border-ink bg-safety max-[540px]:hidden" />
 
               {row.map((p, k) => {
                 const isActive = active === p.id
-                // 9th card only shows where the grid is 3 columns (md = 768px and up)
                 const hideBelowDesktop = r * 3 + k >= 8
 
                 return (

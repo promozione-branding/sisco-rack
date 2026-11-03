@@ -71,6 +71,39 @@ const cardSlide = {
   exit: (dir) => ({ y: dir > 0 ? -120 : 120, opacity: 0 }),
 }
 
+// Auto-slides the card list every few seconds. Pauses while the user hovers/touches it.
+// Usage: <ul {...useAutoSlide()}> — it returns a ref plus the pause handlers.
+function useAutoSlide(delay = 4000) {
+  const ref = useRef(null)
+  const paused = useRef(false)
+
+  useEffect(() => {
+    const list = ref.current
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (!list || reduceMotion) return
+
+    const timer = setInterval(() => {
+      if (paused.current || list.children.length < 2) return
+
+      // distance from one card to the next (card width + gap)
+      const step = list.children[1].offsetLeft - list.children[0].offsetLeft
+      const atEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 4
+
+      list.scrollTo({ left: atEnd ? 0 : list.scrollLeft + step, behavior: "smooth" })
+    }, delay)
+
+    return () => clearInterval(timer)
+  }, [delay])
+
+  return {
+    ref,
+    onMouseEnter: () => (paused.current = true),
+    onMouseLeave: () => (paused.current = false),
+    onTouchStart: () => (paused.current = true),
+    onTouchEnd: () => (paused.current = false),
+  }
+}
+
 function Icon({ icon }) {
   const content =
     typeof icon === "number" ? icons[icon] ?? checkIcon : isValidElement(icon) ? icon : checkIcon
@@ -90,7 +123,7 @@ function Icon({ icon }) {
   )
 }
 
-export default function  WhyChooseUs({
+export default function WhyChooseUs({
   heading = defaultHeading,
   intro = defaultIntro,
   tagline,
@@ -104,6 +137,9 @@ export default function  WhyChooseUs({
 
   const [view, setView] = useState({ index: 0, dir: 1 })
   const sectionRef = useRef(null)
+
+  // Mobile / tablet carousel: auto-slide + manual swipe
+  const autoSlide = useAutoSlide()
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -258,50 +294,51 @@ export default function  WhyChooseUs({
           </div>
         </div>
 
-{/* Mobile / tablet (≤960px) */}
-<div className="min-[961px]:hidden">
-  <div className="mx-auto px-10 pb-6 max-[720px]:px-5">
-    {headingBlock}
-  </div>
+        {/* Mobile / tablet (≤960px): auto-sliding + manual swipe */}
+        <div className="min-[961px]:hidden">
+          <div className="mx-auto px-10 pb-6 max-[720px]:px-5">{headingBlock}</div>
 
-  <ul className="flex gap-4 overflow-x-auto px-10 pb-4 max-[720px]:px-5 scrollbar-hide">
-    {items.map((r, i) => (
-      <li
-        key={`${i}-${r.title}`}
-        className="grid w-[85vw] max-w-[26rem] shrink-0 grid-cols-[3rem_1fr] content-start gap-x-4 gap-y-2 rounded-3xl border-l-[6px] border-[#c9d4ee] bg-[#e9eefa] px-5 py-5"
-      >
-        <span
-          className="flex h-12 w-12 items-center justify-center rounded-xl"
-          style={{ background: NAVY, color: YELLOW }}
-        >
-          <Icon icon={r.icon} />
-        </span>
-        <div>
-          <div className={`relative mb-4 h-44 w-full ${FRAME}`}>
-            <Image src={r.image} alt={r.title} fill sizes="85vw" className="object-cover" />
-          </div>
-          <h3 className="font-display text-[1.4rem] font-bold leading-tight" style={{ color: NAVY }}>
-            {r.title}
-          </h3>
-          {r.text && <p className="mt-1 text-[0.95rem] leading-[1.5] text-[#3f4a66]">{r.text}</p>}
+          <ul
+            {...autoSlide}
+            className="relative flex snap-x snap-mandatory scroll-pl-10 gap-4 overflow-x-auto px-10 pb-4 max-[720px]:scroll-pl-5 max-[720px]:px-5 scrollbar-hide"
+          >
+            {items.map((r, i) => (
+              <li
+                key={`${i}-${r.title}`}
+                className="grid w-[85vw] max-w-[26rem] shrink-0 snap-start grid-cols-[3rem_1fr] content-start gap-x-4 gap-y-2 rounded-3xl border-l-[6px] border-[#c9d4ee] bg-[#e9eefa] px-5 py-5"
+              >
+                <span
+                  className="flex h-12 w-12 items-center justify-center rounded-xl"
+                  style={{ background: NAVY, color: YELLOW }}
+                >
+                  <Icon icon={r.icon} />
+                </span>
+                <div>
+                  <div className={`relative mb-4 h-44 w-full ${FRAME}`}>
+                    <Image src={r.image} alt={r.title} fill sizes="85vw" className="object-cover" />
+                  </div>
+                  <h3 className="font-display text-[1.4rem] font-bold leading-tight" style={{ color: NAVY }}>
+                    {r.title}
+                  </h3>
+                  {r.text && <p className="mt-1 text-[0.95rem] leading-[1.5] text-[#3f4a66]">{r.text}</p>}
+                </div>
+                {r.figure && (
+                  <div className="col-start-2">
+                    <div className="font-display text-[1.7rem] font-extrabold leading-none" style={{ color: NAVY }}>
+                      {r.figure.value}
+                    </div>
+                    <div
+                      className="mt-1.5 inline-block border-t-2 pt-1 text-[0.85rem] font-medium text-[#3f4a66]"
+                      style={{ borderColor: YELLOW }}
+                    >
+                      {r.figure.label}
+                    </div>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
-        {r.figure && (
-          <div className="col-start-2">
-            <div className="font-display text-[1.7rem] font-extrabold leading-none" style={{ color: NAVY }}>
-              {r.figure.value}
-            </div>
-            <div
-              className="mt-1.5 inline-block border-t-2 pt-1 text-[0.85rem] font-medium text-[#3f4a66]"
-              style={{ borderColor: YELLOW }}
-            >
-              {r.figure.label}
-            </div>
-          </div>
-        )}
-      </li>
-    ))}
-  </ul>
-</div>
       </section>
     </MotionConfig>
   )

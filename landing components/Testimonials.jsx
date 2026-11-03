@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { testimonials } from "@/lib/testimonials"
 
 const sideFor = (i) => (i % 2 === 0 ? "left" : "right")
@@ -121,7 +122,93 @@ const articleBase =
 
 const tone = (t) => (t === "dark" ? "bg-[#253970] text-white" : "bg-white")
 
+/**
+ * Auto-advances a horizontally scrollable list while still allowing
+ * manual swipe / drag / wheel. Auto-play pauses on any user interaction
+ * and resumes after `resumeDelay` ms of inactivity. Loops back to the
+ * start after the last slide.
+ */
+function useAutoSlide(ref, { interval = 4000, resumeDelay = 6000 } = {}) {
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced) return
+
+    let paused = false
+    let resumeTimer
+
+    const pause = () => {
+      paused = true
+      clearTimeout(resumeTimer)
+    }
+    const resumeLater = () => {
+      clearTimeout(resumeTimer)
+      resumeTimer = setTimeout(() => {
+        paused = false
+      }, resumeDelay)
+    }
+    // Any interaction: pause now, resume after inactivity
+    const interact = () => {
+      pause()
+      resumeLater()
+    }
+
+    const tick = () => {
+      if (paused || document.hidden) return
+      // list is display:none on desktop
+      if (el.offsetParent === null) return
+
+      const items = Array.from(el.children)
+      if (items.length < 2) return
+
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4
+      if (atEnd) {
+        el.scrollTo({ left: 0, behavior: "smooth" })
+        return
+      }
+
+      // find the slide currently nearest the left edge, then go to the next
+      let current = 0
+      let best = Infinity
+      items.forEach((item, i) => {
+        const d = Math.abs(item.offsetLeft - el.scrollLeft)
+        if (d < best) {
+          best = d
+          current = i
+        }
+      })
+      const next = items[Math.min(current + 1, items.length - 1)]
+      el.scrollTo({ left: next.offsetLeft, behavior: "smooth" })
+    }
+
+    const id = setInterval(tick, interval)
+
+    el.addEventListener("touchstart", interact, { passive: true })
+    el.addEventListener("pointerdown", interact)
+    el.addEventListener("wheel", interact, { passive: true })
+    el.addEventListener("focusin", interact)
+    el.addEventListener("mouseenter", pause)
+    el.addEventListener("mouseleave", resumeLater)
+
+    return () => {
+      clearInterval(id)
+      clearTimeout(resumeTimer)
+      el.removeEventListener("touchstart", interact)
+      el.removeEventListener("pointerdown", interact)
+      el.removeEventListener("wheel", interact)
+      el.removeEventListener("focusin", interact)
+      el.removeEventListener("mouseenter", pause)
+      el.removeEventListener("mouseleave", resumeLater)
+    }
+  }, [ref, interval, resumeDelay])
+}
+
 export default function Testimonials() {
+  const sliderRef = useRef(null)
+  useAutoSlide(sliderRef, { interval: 4000, resumeDelay: 6000 })
+
   return (
     <section className="py-12 max-[720px]:py-10">
       <div className="mx-auto max-w-full px-14 max-[960px]:px-10 max-[720px]:px-5">
@@ -146,13 +233,16 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Mobile / tablet – manual horizontal scroll */}
+        {/* Mobile / tablet – auto-sliding + manual swipe */}
         <div className="min-[961px]:hidden">
-          <ul className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+          <ul
+            ref={sliderRef}
+            className="relative flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 scrollbar-hide list-none"
+          >  
             {testimonials.map((t, i) => (
               <li
                 key={t.name}
-                className="w-[85vw] max-w-[26rem] shrink-0"
+                className="w-[85vw] max-w-[26rem] shrink-0 snap-start"
               >
                 <article
                   className={`${articleBase} h-auto min-h-[300px] ${tone(t.tone)}`}
