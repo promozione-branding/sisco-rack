@@ -153,9 +153,9 @@ export default function WhyChooseSisco({city}) {
 
                   {/* TEXT */}
                   <div className="min-w-0 flex-1 pt-1">
-                    <h3 className="text-base font-extrabold leading-6 text-[#172653] sm:text-lg">
+                    <p className="text-base font-extrabold leading-6 text-[#172653] sm:text-lg">
                       {item.title}
-                    </h3>
+                    </p>
 
                     <p className="mt-2 text-sm leading-6 text-[#697386]">
                       {item.description}

@@ -94,7 +94,7 @@ export default function LoadSuitabilitySection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.7 }}
-            className="relative min-h-[320px] overflow-hidden rounded-[24px] border-r-[7px] border-[#F5B817] shadow-xl lg:min-h-[650px]"
+            className="relative min-h-[320px] overflow-hidden rounded-[24px] border-r-[7px] border-[#F5B817] shadow-xl md:min-h-[550px]"
           >
             <img
               src="/double_sided_racks.webp"
@@ -168,9 +168,9 @@ export default function LoadSuitabilitySection() {
                           What you store
                         </span>
 
-                        <h3 className="text-sm font-bold leading-5 text-[#172653] sm:text-[15px]">
+                        <p className="text-sm font-bold leading-5 text-[#172653] sm:text-[15px]">
                           {item.store}
-                        </h3>
+                        </p>
                       </div>
                     </div>
 

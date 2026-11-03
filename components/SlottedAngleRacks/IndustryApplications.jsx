@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import QuoteModal from "../QuoteModal";
 import { useState } from "react";
+import Link from "next/link";
 
 const industries = [
   {
@@ -187,9 +188,9 @@ export default function IndustryApplications({city}) {
                 </div>
 
                 {/* Heading */}
-                <h3 className="mt-6 text-lg font-extrabold leading-6 text-[#172653] transition-colors group-hover:text-[#B27D00]">
+                <p className="mt-6 text-lg font-extrabold leading-6 text-[#172653] transition-colors group-hover:text-[#B27D00]">
                   {industry.title}
-                </h3>
+                </p>
 
                 {/* Locations */}
               
@@ -230,13 +231,13 @@ export default function IndustryApplications({city}) {
             </p>
           </div>
 
-          <button
-            onClick={() => setProductquote(true)}
+          <Link
+            href="/contact"
             className="inline-flex shrink-0 items-center gap-3 rounded-lg bg-[#F5B817] px-6 py-4 text-sm font-extrabold text-[#172653] transition-all hover:-translate-y-1 hover:bg-[#FFD04A]"
           >
             Discuss Your Requirement
             <ArrowUpRight size={19} />
-          </button>
+          </Link>
         </motion.div>
 
         <QuoteModal open={productquote} onClose={() => setProductquote(false)} />

@@ -111,9 +111,9 @@ export default function StorePlanningSection() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-extrabold text-[#203070]">
+                  <p className="text-base font-extrabold text-[#203070]">
                     900 mm Bays
-                  </h3>
+                  </p>
                   <p className="mt-1 text-sm font-medium text-[#697386]">
                     Wall length ÷ 3
                   </p>
@@ -126,9 +126,9 @@ export default function StorePlanningSection() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-extrabold text-[#203070]">
+                  <p className="text-base font-extrabold text-[#203070]">
                     1,200 mm Bays
-                  </h3>
+                  </p>
                   <p className="mt-1 text-sm font-medium text-[#697386]">
                     Wall length ÷ 4
                   </p>
@@ -219,9 +219,9 @@ export default function StorePlanningSection() {
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-extrabold leading-5 text-[#172653] lg:text-base">
+                    <p className="text-sm font-extrabold leading-5 text-[#172653] lg:text-base">
                       {plan.size}
-                    </h3>
+                    </p>
                     <p className="mt-1 text-xs font-semibold text-[#A77A12]">
                       {plan.type}
                     </p>

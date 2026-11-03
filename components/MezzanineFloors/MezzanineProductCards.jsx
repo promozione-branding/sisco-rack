@@ -131,9 +131,9 @@ function ProductCard({ product, index }) {
         {/* PRODUCT INFORMATION */}
         <div className="flex min-w-0 flex-1 flex-col">
 
-          <h3 className="line-clamp-2 text-[16px] font-extrabold leading-[1.45] text-[#172653] sm:text-[15px]">
+          <p className="line-clamp-2 text-[16px] font-extrabold leading-[1.45] text-[#172653] sm:text-[15px]">
             {product.name}
-          </h3>
+          </p>
 
           {product.dimension && (
             <p className="mt-1 text-[12px] font-semibold text-[#D18B00]">

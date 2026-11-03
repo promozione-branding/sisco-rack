@@ -199,15 +199,15 @@ function ProductCard({ product, index }) {
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover p-2 transition-transform duration-500 group-hover:scale-110"
         />
       </div>
 
       {/* Product details */}
       <div className="flex min-w-0 flex-1 flex-col pt-3 sm:pt-0">
-        <h3 className="text-[15px] font-extrabold leading-5 text-[#172653]">
+        <p className="text-[15px] font-extrabold leading-5 text-[#172653]">
           {product.name}
-        </h3>
+        </p>
 
         {product.dimensions && (
           <p className="mt-1 text-[11px] font-semibold text-[#B17A00]">

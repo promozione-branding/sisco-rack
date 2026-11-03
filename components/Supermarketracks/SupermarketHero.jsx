@@ -130,12 +130,7 @@ export default function SupermarketHero({ city }) {
             className="max-w-[800px] text-[38px] font-extrabold leading-[1.12] tracking-tight text-[#172653] sm:text-5xl xl:text-[62px]"
           >
             Supermarket Display Racks in {city},
-            <span className="mt-2 block">
-              <span className="relative inline-block">
-                <span className="absolute inset-x-0 bottom-1 -z-10 h-[45%] rounded-md bg-[#F5B817]" />
-                Made in {city}
-              </span>
-            </span>
+            
           </motion.h1>
 
           {/* DESCRIPTION */}
@@ -208,7 +203,7 @@ export default function SupermarketHero({ city }) {
               className="group inline-flex min-h-[54px] items-center justify-center gap-3 rounded-full bg-[#F5B817] px-6 py-3 text-sm font-extrabold text-[#172653] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E5A900] hover:shadow-lg"
             >
               <Store size={19} />
-              Plan My Store
+             Get a Quote
 
               <ArrowUpRight
                 size={18}

@@ -55,7 +55,7 @@ const statistics = [
   },
   {
     icon: MapPin,
-    number: `{city} `,
+    number: `${city} `,
     label: "Local Delivery",
   },
   {

@@ -185,9 +185,9 @@ function ProductCard({ product, index }) {
 
         {/* DETAILS */}
         <div className="min-w-0 flex-1">
-          <h3 className="line-clamp-2 text-[14px] font-extrabold leading-[1.4] text-[#172653] sm:text-[15px]">
+          <p className="line-clamp-2 text-[14px] font-extrabold leading-[1.4] text-[#172653] sm:text-[15px]">
             {product.name}
-          </h3>
+          </p>
 
           <div className="mt-4 space-y-2.5">
             <ProductDetail
@@ -299,7 +299,7 @@ export default function SupermarketRackProducts() {
         </div>
 
         {/* PRODUCT CARDS */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {products.map((product, index) => (
             <ProductCard
               key={product.slug}

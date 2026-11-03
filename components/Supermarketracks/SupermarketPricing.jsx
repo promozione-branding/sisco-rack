@@ -153,9 +153,9 @@ export default function SupermarketPricing({city}) {
                     {/* CONTENT */}
                     <div className="min-w-0 flex-1">
                       <div className="mb-2 flex items-center justify-between gap-2">
-                        <h3 className="text-base font-extrabold leading-6 text-[#203070] sm:text-lg">
+                        <p className="text-base font-extrabold leading-6 text-[#203070] sm:text-lg">
                           {item.title}
-                        </h3>
+                        </p>
 
                         <span className="text-xs font-extrabold text-[#D99C00]">
                           {item.number}

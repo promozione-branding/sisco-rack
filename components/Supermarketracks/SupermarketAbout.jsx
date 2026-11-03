@@ -141,10 +141,10 @@ export default function SupermarketAbout({city}) {
                       className="mb-3 text-[#203070] transition-transform duration-300 hover:-translate-y-1"
                     />
 
-                    <h3 className="text-xs font-extrabold leading-5 text-[#203070] sm:text-sm">
+                    <p className="text-xs font-extrabold leading-5 text-[#203070] sm:text-sm">
                       {item.title}
                       <span className="block">{item.subtitle}</span>
-                    </h3>
+                    </p>
                   </div>
                 );
               })}
