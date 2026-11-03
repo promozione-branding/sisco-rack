@@ -129,7 +129,7 @@ export default function SupermarketHero({ city }) {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="max-w-[800px] text-[38px] font-extrabold leading-[1.12] tracking-tight text-[#172653] sm:text-5xl xl:text-[62px]"
           >
-            Supermarket Display Racks in {city},
+            Supermarket Display Racks in {city}
             
           </motion.h1>
 

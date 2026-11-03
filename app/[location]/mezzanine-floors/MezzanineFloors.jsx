@@ -6,6 +6,7 @@ import MezzanineHero from '@/components/MezzanineFloors/MezzanineHero'
 import MezzanineLoadRating from '@/components/MezzanineFloors/MezzanineLoadRating'
 import MezzanineProductCards from '@/components/MezzanineFloors/MezzanineProductCards'
 import MezzanineSiteChecks from '@/components/MezzanineFloors/MezzanineSiteCheck'
+import SupplyNetworkCity from '@/components/SupplyNetworkCity'
 import React from 'react'
 
 export default function MezzanineFloors({city}) {
@@ -17,6 +18,8 @@ export default function MezzanineFloors({city}) {
     <MezzanineLoadRating />
     <MezzanineSiteChecks />
     <CityContactCTA cityName={city}/>
+        <SupplyNetworkCity pagePath="/supermarket-racks" />
+    
     <CityFaq city={city} />
     <GetQuoteSection product="Mezzanine Floors" />
     </>
