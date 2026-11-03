@@ -110,7 +110,7 @@ export default function FeaturedProductsGrid({ products: featured = [] }) {
                             decoding="async"
                           />
                         </div>
-
+ 
                         {/* Product Specifications */}
                         {p.specs?.length > 0 && (
                           <div className="absolute -bottom-9 left-3.5 right-3.5 grid grid-cols-[repeat(2,minmax(0,1fr))] items-center overflow-hidden rounded-2xl bg-white px-2 py-3 shadow-[0_6px_20px_rgba(15,40,90,0.12)] max-[540px]:-bottom-6 max-[540px]:left-1.5 max-[540px]:right-1.5 max-[540px]:rounded-lg max-[540px]:px-1 max-[540px]:py-2">

@@ -52,7 +52,7 @@ export default function Navbar() {
             <img src="/sisco_logo_transparent.webp" alt="Logo" width={100} height={67} />
           </Link>
           {path === "/inquiry" && (
-            <span className="-mt-1 whitespace-nowrap text-[9px] font-extrabold leading-none tracking-wide text-white/85 max-[480px]:text-[5px]">
+            <span className="-mt-1 whitespace-nowrap text-[9px] font-extra-bold leading-none tracking-wide text-white/85 max-[480px]:text-[5px]">
               GST: {GST_NUMBER}
             </span>
           )}
