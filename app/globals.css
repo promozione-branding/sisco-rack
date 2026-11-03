@@ -73,3 +73,12 @@
   to   { transform: translateX(-50%); }
 }
 .marquee-track { animation: marquee-scroll 28s linear infinite; }
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

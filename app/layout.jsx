@@ -7,6 +7,8 @@ import FloatingContact from "@/components/FloatingContact"
 import TopBar from "@/components/TopBar"
 import HideOnAdmin from "@/components/HideOnAdmin"
 import Script from "next/script"
+import HideOnInquiry from "@/landing components/HideonInqury"
+import StickyContactBar from "@/landing components/StickyContactBar"
 
 const display = Barlow_Condensed({
   subsets: ["latin"],
@@ -96,7 +98,10 @@ export default function RootLayout({ children }) {
 
   <HideOnAdmin>
     <Footer />
-    <FloatingContact />
+    <HideOnInquiry>
+      <FloatingContact />
+    </HideOnInquiry>
+    <StickyContactBar />
   </HideOnAdmin>
 </SmoothScroll>
       </body>

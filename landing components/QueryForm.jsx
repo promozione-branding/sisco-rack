@@ -12,8 +12,11 @@ const SERVICE_LABELS = {
   other: "Other / Custom",
 }
 
+// w-full + min-w-0 stop inputs from forcing their grid column wider than the screen
 const fieldCls =
-  "rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 max-[960px]:px-3 max-[960px]:py-2 font-normal text-inherit [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white"
+  "w-full min-w-0 rounded-[14px] border-2 border-solid border-ink bg-panel px-3.5 py-2.5 max-[960px]:px-3 max-[960px]:py-2 font-normal text-inherit [font-family:inherit] [font-size:inherit] leading-[inherit] focus:[outline:none] focus:border-safety focus:bg-white"
+
+const labelCls = "grid min-w-0 gap-[5px] text-[0.85rem] font-semibold max-[960px]:gap-[3px]"
 
 const EMPTY = { name: "", email: "", phone: "", company: "", service: "", message: "" }
 
@@ -54,7 +57,7 @@ export default function QueryForm({ className = "" }) {
 
   return (
     <section className={`mx-11 my-10 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-panel max-[960px]:mx-3 max-[960px]:mb-6 max-[960px]:mt-0 max-[960px]:rounded-[28px] ${className}`}>
-      <div className="grid grid-cols-[1fr_1.15fr] max-[960px]:grid-cols-[1fr]">
+      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] max-[960px]:grid-cols-[minmax(0,1fr)]">
         {/* Info panel (compact on mobile: badge + heading only) */}
         <div className="flex flex-col justify-center bg-[linear-gradient(160deg,#c5ced5_0%,#e9edf0_100%)] px-10 py-9 max-[960px]:px-4 max-[960px]:py-4">
           <span className="inline-flex w-fit items-center gap-2.5 rounded-pill border border-solid border-safety bg-white/70 px-4 py-[7px] text-[0.72rem] font-semibold uppercase tracking-[0.16em]">
@@ -74,34 +77,33 @@ export default function QueryForm({ className = "" }) {
 
         {/* Form */}
         <form
-          className="flex flex-col gap-2.5 bg-white px-10 py-8 max-[960px]:gap-2 max-[960px]:px-4 
-          max-[960px]:pb-4 max-[960px]:pt-3"
+          className="flex min-w-0 flex-col gap-2.5 bg-white px-10 py-8 max-[960px]:gap-2 max-[960px]:px-4 max-[960px]:pb-4 max-[960px]:pt-3"
           onSubmit={handleSubmit}
         >
-          <div className="grid grid-cols-[1fr_1fr] gap-3.5 max-[960px]:gap-2">
-            <label className="grid gap-[5px] text-[0.85rem] font-semibold max-[960px]:gap-[3px]">
+          <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-3.5 max-[960px]:gap-2">
+            <label className={labelCls}>
               <span className="text-ink">Full Name *</span>
               <input className={fieldCls} name="name" type="text" required value={form.name} onChange={handleChange} placeholder="John Doe" />
             </label>
 
-            <label className="grid gap-[5px] text-[0.85rem] font-semibold max-[960px]:gap-[3px]">
+            <label className={labelCls}>
               <span className="text-ink">Phone *</span>
               <input className={fieldCls} name="phone" type="tel" required maxLength={10} value={form.phone} onChange={handleChange} placeholder="9876543210" />
             </label>
           </div>
 
-          <div className="grid grid-cols-[1fr_1fr] gap-3.5 max-[960px]:gap-2">
-            <label className="grid gap-[5px] text-[0.85rem] font-semibold max-[960px]:gap-[3px]">
+          <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-3.5 max-[960px]:gap-2">
+            <label className={labelCls}>
               <span className="text-ink">Email *</span>
               <input className={fieldCls} name="email" type="email" value={form.email} onChange={handleChange} placeholder="john@company.com" />
             </label>
-            <label className="grid gap-[5px] text-[0.85rem] font-semibold max-[960px]:gap-[3px]">
+            <label className={labelCls}>
               <span className="text-ink">Company</span>
               <input className={fieldCls} name="company" type="text" value={form.company} onChange={handleChange} placeholder="Your company name" />
             </label>
           </div>
 
-          <label className="grid gap-[5px] text-[0.85rem] font-semibold max-[960px]:gap-[3px]">
+          <label className={labelCls}>
             <span className="text-ink">Service interested in</span>
             <select className={fieldCls} name="service" value={form.service} onChange={handleChange}>
               <option value="">Select a service</option>
@@ -111,7 +113,7 @@ export default function QueryForm({ className = "" }) {
             </select>
           </label>
 
-          <label className="grid gap-[5px] text-[0.85rem] font-semibold max-[960px]:gap-[3px]">
+          <label className={labelCls}>
             <span className="text-ink">Your Query *</span>
             <textarea
               className={`${fieldCls} min-h-16 resize-y min-[961px]:min-h-[7.5rem]`}

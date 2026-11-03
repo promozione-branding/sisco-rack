@@ -242,10 +242,16 @@ export default function Categories() {
               onPointerLeave={end}
               onClickCapture={onClickCapture}
             >
-              {industries.map((s) => (
+              {industries.map((s, i) => {
+                // On mobile the grid has 2 columns, so an odd last card would sit alone
+                // with an empty gap beside it. Let it span the full row instead.
+                const lastOdd = i === industries.length - 1 && industries.length % 2 === 1
+                return (
                 <div
                   key={s.id}
-                  className="min-w-0 min-[721px]:flex-[0_0_min(320px,78%)] min-[721px]:snap-start"
+                  className={`min-w-0 min-[721px]:flex-[0_0_min(320px,78%)] min-[721px]:snap-start ${
+                    lastOdd ? "max-[720px]:col-span-2" : ""
+                  }`}
                 >
                   <div className="group/card block h-full select-none rounded-[20px] border border-solid border-line bg-[#e3e8ec] px-2 pb-[18px] pt-2 shadow-lift hover:border-safety hover:shadow-lift-hover max-[720px]:rounded-xl max-[720px]:px-1.5 max-[720px]:pb-2.5 max-[720px]:pt-1.5">
 
@@ -255,10 +261,16 @@ export default function Categories() {
                       onClick={openQuote}
                       onPointerDown={(e) => e.stopPropagation()}
                       aria-label={`Get a quote for ${s.title}`}
-                      className="block h-[260px] w-full cursor-pointer overflow-hidden rounded-[14px] border-0 border-b-[3px] border-solid border-safety bg-[linear-gradient(135deg,#c5ced5,#e9edf0)] p-0 max-[720px]:h-[125px] max-[400px]:h-[105px]"
+                      className={`block h-[260px] w-full cursor-pointer overflow-hidden rounded-[14px] border-0 border-b-[3px] border-solid border-safety bg-[linear-gradient(135deg,#c5ced5,#e9edf0)] p-0 ${
+                        lastOdd
+                          ? "max-[720px]:h-[170px] max-[400px]:h-[150px]"
+                          : "max-[720px]:h-[125px] max-[400px]:h-[105px]"
+                      }`}
                     >
                       <img
-                        className="pointer-events-none block h-full w-full object-fill"
+                        className={`pointer-events-none block h-full w-full object-fill ${
+                          lastOdd ? "max-[720px]:object-cover" : ""
+                        }`}
                         {...cardImg(s.image)}
                         width={330}
                         height={260}
@@ -277,7 +289,13 @@ export default function Categories() {
                     </span>
 
                     {/* Category Information */}
-                    <div className="flex items-end justify-between gap-3 px-3 text-left max-[720px]:flex-col max-[720px]:items-start max-[720px]:gap-2 max-[720px]:px-1.5">
+                    <div
+                      className={`flex items-end justify-between gap-3 px-3 text-left max-[720px]:px-1.5 ${
+                        lastOdd
+                          ? "max-[720px]:flex-row max-[720px]:items-center max-[720px]:gap-3"
+                          : "max-[720px]:flex-col max-[720px]:items-start max-[720px]:gap-2"
+                      }`}
+                    >
                       <div className="min-w-0 flex-1">
                         {s.action === "quote" ? (
                           <button
@@ -303,7 +321,11 @@ export default function Categories() {
                       </div>
 
                       {/* Right Side Icons */}
-                      <div className="flex shrink-0 items-center gap-2.5 max-[720px]:w-full max-[720px]:justify-end max-[720px]:gap-2">
+                      <div
+                        className={`flex shrink-0 items-center gap-2.5 max-[720px]:gap-2 ${
+                          lastOdd ? "" : "max-[720px]:w-full max-[720px]:justify-end"
+                        }`}
+                      >
                         <button
                           type="button"
                           aria-label={`Chat on WhatsApp about ${s.title}`}
@@ -338,7 +360,8 @@ export default function Categories() {
                     </div>
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 
