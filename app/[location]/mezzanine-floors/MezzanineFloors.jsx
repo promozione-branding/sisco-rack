@@ -1,3 +1,5 @@
+import CityContactCTA from '@/components/MezzanineFloors/CityContactCTA'
+import CityFaq from '@/components/MezzanineFloors/CityFaq'
 import MezzanineAbout from '@/components/MezzanineFloors/MezzanineAbout'
 import MezzanineHero from '@/components/MezzanineFloors/MezzanineHero'
 import MezzanineLoadRating from '@/components/MezzanineFloors/MezzanineLoadRating'
@@ -13,6 +15,8 @@ export default function MezzanineFloors({city}) {
     <MezzanineProductCards />
     <MezzanineLoadRating />
     <MezzanineSiteChecks />
+    <CityContactCTA cityName={city}/>
+    <CityFaq city={city} />
     </>
   )
 }
