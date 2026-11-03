@@ -238,7 +238,7 @@ export default function Testimonials() {
           <ul
             ref={sliderRef}
             className="relative flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 scrollbar-hide list-none"
-          >
+          >  
             {testimonials.map((t, i) => (
               <li
                 key={t.name}
