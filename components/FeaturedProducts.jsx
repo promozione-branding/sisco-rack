@@ -16,7 +16,7 @@ const SPEC_CANDIDATES = [
   { icon: "Info", label: "Usage", keys: ["usage application", "usage", "application", "applications", "uses", "usage area"] },
   { icon: "Palette", label: "Color", keys: ["color", "rack color", "color theme"] },
 ]
-
+ 
 function getSpecs(p) {
   const map = {}
   for (const [k, v] of Object.entries(p.specs || {})) map[norm(k)] = v
