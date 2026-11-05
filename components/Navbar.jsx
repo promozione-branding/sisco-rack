@@ -21,6 +21,9 @@ const GST_NUMBER = "07BEJPR8561K1ZR"
 
 export default function Navbar() {
   const path = usePathname()
+  if (path === "/inquiry") {
+    return null
+  }
   const [open, setOpen] = useState(false)
   const [drop, setDrop] = useState(false)
   const [productquote, setProductquote] = useState(false)

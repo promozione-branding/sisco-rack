@@ -12,6 +12,8 @@ import WhyChooseUs from "@/landing components/WhyChooseUs"
 import Testimonials from "@/landing components/Testimonials"
 import QueryForm from "@/landing components/QueryForm"
 import StickyContactBar from "@/landing components/StickyContactBar"
+import Navbar from "@/components/Navbar"
+import Navbar2 from "@/landing components/Navbar2"
 
 
 export const metadata = { title: pageSeo.home.title, description: pageSeo.home.description }
@@ -19,6 +21,7 @@ export const metadata = { title: pageSeo.home.title, description: pageSeo.home.d
 export default function inquiry() {
   return (
     <>
+    <Navbar2 />
       <Hero />
       <Marquee />
       <FeaturedProducts />

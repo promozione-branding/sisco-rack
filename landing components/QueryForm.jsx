@@ -56,7 +56,7 @@ export default function QueryForm({ className = "" }) {
   }
 
   return (
-    <section className={`mx-11 my-10 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-panel max-[960px]:mx-3 max-[960px]:mb-6 max-[960px]:mt-0 max-[960px]:rounded-[28px] ${className}`}>
+    <section id="contact" className={`mx-11 my-10 overflow-hidden rounded-[36px] border-2 border-solid border-ink bg-panel max-[960px]:mx-3 max-[960px]:mb-6 max-[960px]:mt-0 max-[960px]:rounded-[28px] ${className}`}>
       <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] max-[960px]:grid-cols-[minmax(0,1fr)]">
         {/* Info panel (compact on mobile: badge + heading only) */}
         <div className="flex flex-col justify-center bg-[linear-gradient(160deg,#c5ced5_0%,#e9edf0_100%)] px-10 py-9 max-[960px]:px-4 max-[960px]:py-4">
@@ -83,19 +83,19 @@ export default function QueryForm({ className = "" }) {
           <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-3.5 max-[960px]:gap-2">
             <label className={labelCls}>
               <span className="text-ink">Full Name *</span>
-              <input className={fieldCls} name="name" type="text" required value={form.name} onChange={handleChange} placeholder="John Doe" />
+              <input className={fieldCls} name="name" type="text" required value={form.name} onChange={handleChange} placeholder="Your Name" />
             </label>
 
             <label className={labelCls}>
               <span className="text-ink">Phone *</span>
-              <input className={fieldCls} name="phone" type="tel" required maxLength={10} value={form.phone} onChange={handleChange} placeholder="9876543210" />
+              <input className={fieldCls} name="phone" type="tel" required maxLength={10} value={form.phone} onChange={handleChange} placeholder="Your Phone Number" />
             </label>
           </div>
 
           <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-3.5 max-[960px]:gap-2">
             <label className={labelCls}>
               <span className="text-ink">Email *</span>
-              <input className={fieldCls} name="email" type="email" value={form.email} onChange={handleChange} placeholder="john@company.com" />
+              <input className={fieldCls} name="email" type="email" value={form.email} onChange={handleChange} placeholder="Your Email" />
             </label>
             <label className={labelCls}>
               <span className="text-ink">Company</span>
