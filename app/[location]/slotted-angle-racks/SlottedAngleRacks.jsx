@@ -1,3 +1,4 @@
+import GetQuoteSection from '@/components/GetQuoteSection'
 import CityContactCTA from '@/components/SlottedAngleRacks/CityContactCTA'
 import CityFaq from '@/components/SlottedAngleRacks/CityFaq'
 import HeroSlotted from '@/components/SlottedAngleRacks/HeroSlotted'
@@ -7,6 +8,7 @@ import ManufacturerSection from '@/components/SlottedAngleRacks/ManufacturerSect
 import RackPricingSection from '@/components/SlottedAngleRacks/RackPricingSection'
 import ServiceAreasSection from '@/components/SlottedAngleRacks/ServiceAreasSection'
 import SlottedRackRange from '@/components/SlottedAngleRacks/SlottedRackRange'
+import SupplyNetworkCity from '@/components/SupplyNetworkCity'
 import React from 'react'
 
 export default function SlottedAngleRacks({city}) {
@@ -19,10 +21,13 @@ export default function SlottedAngleRacks({city}) {
     <RackPricingSection city={city} />
     <IndustryApplications city={city} />
     <CityContactCTA cityName={city}
-  phone="+91 76298 27285"
+  phone="+917629827285"
   whatsapp="917629827285"
   image="/hero_800_mob.webp" />
+      <SupplyNetworkCity pagePath="/slotted-angle-racks" />
+
     <CityFaq city={city} />
+    <GetQuoteSection product="Slotted Angle Racks" />
     </>
   )
 }

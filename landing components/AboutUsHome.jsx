@@ -14,7 +14,7 @@ export default function AboutUsHome({
   reverse = false, // set true to put the image on the right
 }) {
   return (
-    <section className="bg-slate-50 py-16 max-[720px]:py-10">
+    <section id="about" className="bg-slate-50 py-16 max-[720px]:py-10">
       <div
         className={`mx-auto grid max-w-full items-center gap-16 px-14 max-[1100px]:grid-cols-1 max-[1100px]:gap-12 max-[960px]:px-10 max-[720px]:px-5 ${
           reverse ? "grid-cols-[1.1fr_0.9fr]" : "grid-cols-[0.9fr_1.1fr]"

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { categories } from "@/lib/data"
 import { submitEnquiry } from "@/lib/submitEnquiry"
 
-const PHONE = "+91 7629827285"
+const PHONE = "+917629827285"
 const PHONE_HREF = "tel:+917629827285"
 
 const fieldCls =

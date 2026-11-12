@@ -30,13 +30,8 @@ const body = Public_Sans({
 })
 
 export const metadata = {
-  title: "Sisco Steel | Industrial storage racks",
-  description:
-    "Pallet racks, slotted angle, boltless shelving, cantilever racks and mezzanine floors built to your floor plan.",
-
-  icons: {
-    icon: "/favicon_original.png",
-  },
+  title: "Storage Racks Manufacturer in India | Sisco Steel Products",
+  description:"Sisco Steel Products is a storage rack manufacturer in India. Slotted angle, supermarket and heavy-duty racks, plus mezzanine floors. Get a quote.",
 }
 
 export default function RootLayout({ children }) {
@@ -47,14 +42,15 @@ export default function RootLayout({ children }) {
     >
       
 <head>
-  <link
+  {/* <link
     rel="preload"
     as="image"
     href="/hero_1400.webp"
     imageSrcSet="/hero_800_mob.webp 800w, /hero_1400.webp 1400w"
     imageSizes="100vw"
     fetchPriority="high"
-  />
+  /> */}
+
 
   {/* Google Tag Manager */}
   <Script

@@ -95,12 +95,14 @@ export default function HeroSlotted({city}) {
               href="#contact"
             >
               <FileText size={19} />
-              Get a Fixed Quote
+              Get a Quote
               <ArrowUpRight size={18} />
             </button>
 
             <a
-              href="https://wa.me/917629827285"
+                href={`https://wa.me/917629827285?text=${encodeURIComponent(
+                `hello i want to enquire about Slotted Angle Racks in ${city}`
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 rounded-lg border-2 border-white bg-[#172653]/80 px-5 py-4 font-bold text-white hover:bg-white hover:text-[#203070]"

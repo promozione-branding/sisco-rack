@@ -175,7 +175,7 @@ export default function ProductDetail({ product: p, related }) {
   const SPEC_LIMIT = 6
   const WA_NUMBER = "917629827285"
   const waMessage = `Hi, I'm interested in ${p.name}. Can you share more details?`
-  const waHref = `https://walink.me/fskx3z`
+  const waHref = `http://wa.me/917629827285`
 
   const openQuote = (e) => {
     e.preventDefault()

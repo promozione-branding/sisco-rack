@@ -1,11 +1,11 @@
 import Link from "next/link"
-import { Mail, Phone, Clock , } from "lucide-react"
-import { FaWhatsapp } from "react-icons/fa"
+import { Mail, Phone, Clock, MapPin , } from "lucide-react"
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa"
 import { brand, categories, links } from "@/lib/data"
 
 const smallCls = "mt-7 block border-t border-solid border-[#45535f] pt-4 text-[#9fb0bd] max-[600px]:w-full max-[600px]:first:pb-1 max-[600px]:last:mt-0 max-[600px]:last:border-t-0 max-[600px]:last:pt-0"
 const itemCls = "mb-2 flex items-center gap-2.5"
-const iconCls = "h-4 w-4 shrink-0 text-safety"
+const iconCls = "h-4 w-4 shrink-0 text-safety "
 
 export default function Footer() {
   return (
@@ -21,9 +21,38 @@ export default function Footer() {
               />
             </Link>
             <p className="max-w-[38ch]">Industrial racking and shelving, made to your floor plan and installed by our own crews.</p>
+            <div className="mt-4 flex items-center gap-4">
+              <a
+                href="https://youtube.com/@siscosteelproducts?si=USX3WgYaATgpcJEs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Sisco Steel Products on YouTube"
+                className="text-bg transition-colors hover:text-safety"
+              >
+                <FaYoutube className="h-5 w-5" aria-hidden="true" />
+              </a>
+              <a
+                href="https://www.instagram.com/siscosteelproducts?dlrf=MXg5OW8zY2MwN2l2ZQ=="
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Sisco Steel Products on Instagram"
+                className="text-bg transition-colors hover:text-safety"
+              >
+                <FaInstagram className="h-5 w-5" aria-hidden="true" />
+              </a>
+              <a
+                href="https://www.facebook.com/share/1MSMWsYpor/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Sisco Steel Products on Facebook"
+                className="text-bg transition-colors hover:text-safety"
+              >
+                <FaFacebookF className="h-5 w-5" aria-hidden="true" />
+              </a>
+            </div>
           </div>
           <div>
-            <h3 className="mb-3.5 text-[1.4rem] text-safety">Pages</h3>
+            <p className="mb-3.5 text-[1.4rem] text-safety">Pages</p>
             <ul className="list-none">
               {links.map((l) => (
                 <li key={l.href} className="mb-2"><Link href={l.href} className="hover:text-safety">{l.label}</Link></li>
@@ -31,7 +60,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="mb-3.5 text-[1.4rem] text-safety">Categories</h3>
+            <p className="mb-3.5 text-[1.4rem] text-safety">Categories</p>
             <ul className="list-none">
             {categories.map((l) => (
   <li key={l.id} className="mb-2">
@@ -46,8 +75,19 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="mb-3.5 text-[1.4rem] text-safety">Reach us</h3>
+            <p className="mb-3.5 text-[1.4rem] text-safety">Reach us</p>
             <ul className="list-none">
+              <li className={itemCls}>
+          <MapPin className={iconCls} aria-hidden="true" />
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=GALI%20NO-1%2C%2041-B%2C%20BHAGAT%20VIHAR%2C%20KARAWAL%20NAGAR%2C%20New%20Delhi%2C%20Delhi%2C%20110094"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-safety"
+          >
+            Gali NO-1, 41-B, Bhagat Vihar, karawal Nagar, New Delhi, Delhi, 110094
+          </a>
+        </li>
               <li className={itemCls}>
                 <Mail className={iconCls} aria-hidden="true" />
                 <a href="mailto:info.siscosteel@gmail.com" className="break-all hover:text-safety">

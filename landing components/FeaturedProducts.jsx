@@ -63,7 +63,7 @@ export default async function FeaturedProducts() {
   })
 
   return (
-    <section className="py-12 max-[720px]:py-10 min-[961px]:py-7">
+    <section id="products" className="py-12 max-[720px]:py-10 min-[961px]:py-7">
       <div className="mx-auto max-w-full px-2 max-[960px]:px-2 max-[720px]:px-2">
         <div className="mb-11 text-center min-[961px]:mb-[18px]">
           <span className="inline-flex items-center gap-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted-3 after:h-px after:w-12 after:bg-steel-deep after:content-['']">Featured products</span>

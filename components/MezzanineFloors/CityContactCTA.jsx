@@ -8,7 +8,7 @@ import {
 
 export default function CityContactCTA({
   cityName = "Delhi",
-  phone = "+91 76298 27285",
+  phone = "+917629827285",
   whatsapp = "917629827285",
   image = "/mezzanine_blue_cold.webp",
 }) {
