@@ -32,37 +32,6 @@ const body = Public_Sans({
 export const metadata = {
   title: "Storage Racks Manufacturer in India | Sisco Steel Products",
   description:"Sisco Steel Products is a storage rack manufacturer in India. Slotted angle, supermarket and heavy-duty racks, plus mezzanine floors. Get a quote.",
-  openGraph: {
-    type: "website",
-    siteName: "Sisco Steel Products",
-    locale: "en_IN",
-    url: "https://siscosteelproducts.com/",
-    title: "Storage Racks Manufacturer in India | Sisco Steel Products",
-    description:
-      "Sisco Steel Products is a storage racks manufacturer in India. Slotted angle, supermarket and heavy-duty racks, plus mezzanine floors. Get a quote.",
-    images: [
-      {
-        url: "https://siscosteelproducts.com/hero_1400.webp",
-        alt: "Storage racks and mezzanine floors manufactured by Sisco Steel Products",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Storage Racks Manufacturer in India | Sisco Steel Products",
-    description:
-      "Sisco Steel Products is a storage racks manufacturer in India. Slotted angle, supermarket and heavy-duty racks, plus mezzanine floors. Get a quote.",
-    images: [
-      {
-        url: "https://siscosteelproducts.com/hero_1400.webp",
-        alt: "Storage racks and mezzanine floors manufactured by Sisco Steel Products",
-      },
-    ],
-  },
-
-  icons: {
-    icon: "/favicon_original.png",
-  },
 }
 
 export default function RootLayout({ children }) {
