@@ -20,7 +20,6 @@ import { handleCallClick, handleWhatsappClick } from "@/lib/tracking"
 const UP = "absolute bottom-0 top-0 w-4 bg-blue bg-[radial-gradient(circle,var(--panel)_2.5px,transparent_3.5px)] bg-[length:16px_24px] bg-[position:center_6px]"
 const THUMB = "relative h-[84px] w-[84px] cursor-pointer rounded-[14px] border-2 border-solid bg-white p-1 transition-[transform,box-shadow,border-color] duration-[180ms] ease-out hover:-translate-y-[5px] max-[720px]:h-16 max-[720px]:w-16"
 const ARROW = "absolute top-1/2 z-[2] -mt-[21px] grid h-[42px] w-[42px] cursor-pointer place-items-center rounded-circle border-2 border-solid border-ink bg-white text-ink transition-[background,color] duration-[180ms] hover:bg-ink hover:text-white"
-const webisteUrl = window.location.hostname + window.location.pathname;
 const CARD = "rounded-[24px] border border-solid border-line bg-white shadow-[0_6px_24px_rgba(38,58,75,0.06)]"
 const BTN = "inline-flex items-center justify-center gap-2.5 rounded-[12px] border-2 border-solid border-blue bg-white px-7 py-3.5 text-[1rem] font-bold text-ink transition-[background,color] duration-[200ms] [font-family:inherit] hover:bg-blue hover:text-white"
 const TILE_LABEL = "block text-[0.72rem] font-semibold uppercase tracking-[0.04em]"
@@ -263,7 +262,7 @@ export default function ProductDetail({ product: p, related }) {
     href={waHref}
     target="_blank"
     rel="noreferrer"
-    onClick={() => handleWhatsappClick({ obj: p, source: webisteUrl || source })}
+    onClick={() => handleWhatsappClick({ obj: p })}
   >
     <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
   </a>
@@ -272,7 +271,7 @@ export default function ProductDetail({ product: p, related }) {
   <a
     className={BTN}
     href={`tel:${c.phone}`}
-    onClick={() => handleCallClick({ obj: p, source: webisteUrl || source })}
+    onClick={() => handleCallClick({ obj: p })}
   >
     <Phone size={22} strokeWidth={2.2} /> Call now
   </a>
@@ -461,7 +460,7 @@ export default function ProductDetail({ product: p, related }) {
               {c.phone && (
                 <div className="flex items-center gap-2.5">
                   <Phone className={iconCls} aria-hidden="true" />
-                  <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`} onClick={() => handleCallClick({ obj: p, source: webisteUrl || source })}>
+                  <a className="font-semibold text-white hover:text-safety" href={`tel:${c.phone}`} onClick={() => handleCallClick({ obj: p })}>
                     {c.phone}
                   </a>
                 </div>

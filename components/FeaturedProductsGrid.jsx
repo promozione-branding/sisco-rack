@@ -12,12 +12,11 @@ const AMBER = "#f5a623"
 const WA_NUMBER = "+917629827285"
 
 const ICONS = { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette }
-const webisteUrl = window.location.hostname + window.location.pathname;
 const openWhatsApp = (e, message, product) => {
   e.preventDefault()
   e.stopPropagation()
   // Track with the product so the API receives productId = product.name
-  handleWhatsappClick({ obj: product, source: webisteUrl || source })
+  handleWhatsappClick({ obj: product })
   window.open(
     `https://wa.me/${WA_NUMBER.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`,
     "_blank",

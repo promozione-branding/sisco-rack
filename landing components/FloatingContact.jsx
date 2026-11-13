@@ -21,7 +21,6 @@ const labelCls = "pointer-events-none translate-x-3.5 whitespace-nowrap rounded-
 const btnCls = "relative grid h-[58px] w-[58px] place-items-center rounded-circle border-2 border-solid border-ink shadow-[0_10px_22px_rgba(31,42,51,0.28)] transition-[transform,box-shadow] duration-[180ms] ease-out group-hover/fc:-translate-y-1 group-hover/fc:scale-[1.06] group-hover/fc:shadow-[0_16px_28px_rgba(31,42,51,0.34)] max-[720px]:h-[52px] max-[720px]:w-[52px]"
 
 const wa = "http://wa.me/917629827285"
-const webisteUrl = window.location.hostname + window.location.pathname;
 export default function FloatingContact() {
   return (
     <MotionConfig reducedMotion="user">
@@ -54,7 +53,7 @@ export default function FloatingContact() {
             className={linkCls}
             href={`tel:${contact.phoneHref}`}
             aria-label="Call us"
-            onClick={() => handleCallClick({ source: webisteUrl || source })}
+            onClick={() => handleCallClick()}
           >
             <span className={labelCls}>Call us</span>
             <span className={`${btnCls} bg-[#e82f17] text-white`}>
