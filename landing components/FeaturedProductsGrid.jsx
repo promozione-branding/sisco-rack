@@ -24,12 +24,12 @@ const AMBER = "#f5a623"
 const WHATSAPP_LINK = "http://wa.me/917629827285"
 
 const ICONS = { Tag, Weight, Ruler, Layers, Paintbrush, List, Info, Palette }
-
+const webisteUrl = window.location.hostname + window.location.pathname;
 const openWhatsApp = (e, product) => {
   e.preventDefault()
   e.stopPropagation()
 
-  handleWhatsappClick({ obj: product, source: "Website" })
+  handleWhatsappClick({ obj: product, source: webisteUrl || source })
 
   window.open(WHATSAPP_LINK, "_blank", "noopener,noreferrer")
 }
