@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Mail, Phone, Clock, MapPin , } from "lucide-react"
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa"
-import { brand, categories, links } from "@/lib/data"
+import { brand, categories, links, footerlinks } from "@/lib/data"
 
 const smallCls = "mt-7 block border-t border-solid border-[#45535f] pt-4 text-[#9fb0bd] max-[600px]:w-full max-[600px]:first:pb-1 max-[600px]:last:mt-0 max-[600px]:last:border-t-0 max-[600px]:last:pt-0"
 const itemCls = "mb-2 flex items-center gap-2.5"
@@ -54,7 +54,7 @@ export default function Footer() {
           <div>
             <p className="mb-3.5 text-[1.4rem] text-safety">Pages</p>
             <ul className="list-none">
-              {links.map((l) => (
+              {footerlinks.map((l) => (
                 <li key={l.href} className="mb-2"><Link href={l.href} className="hover:text-safety">{l.label}</Link></li>
               ))}
             </ul>
