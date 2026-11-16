@@ -67,6 +67,10 @@ const hlTints = ["bg-[#e3effd] text-blue", "bg-[#e3effd] text-blue", "bg-[#fdf1d
 
 const appIcons = [Warehouse, Boxes, Factory, Store]
 const iconCls = "h-4 w-4 shrink-0 text-safety"
+const imageSrc = (src) =>
+  typeof src === "string" && !src.startsWith("/") && !/^[a-z][a-z\d+.-]*:/i.test(src)
+    ? `/${src}`
+    : src
 const rise = {
   hidden: { opacity: 0, y: 36 },
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] } })
@@ -167,7 +171,7 @@ export default function ProductDetail({ product: p, related }) {
   const specs = Object.entries(p.specs || {})
   const s = p.specs || {}
   const c = p.contact || {}
-  const images = p.images?.length ? p.images : [p.image]
+  const images = (p.images?.length ? p.images : [p.image]).map(imageSrc)
   const [quote, setQuote] = useState(false)
   const [wish, setWish] = useState(false)
   const [showAllSpecs, setShowAllSpecs] = useState(false)
@@ -426,7 +430,7 @@ export default function ProductDetail({ product: p, related }) {
                     <div className="aspect-[4/3] w-full shrink-0 overflow-hidden border-b-[3px] border-solid border-safety bg-white">
                       <img
                         className="h-full w-full object-cover transition-transform duration-[250ms] ease-out group-hover/r:scale-[1.06]"
-                        src={r.image}
+                        src={imageSrc(r.image)}
                         alt={r.name}
                         loading="lazy"
                       />
