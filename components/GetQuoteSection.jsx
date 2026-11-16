@@ -34,57 +34,57 @@ async function postJson(url, data) {
   return result;
 }
 
-export default function GetQuoteSection({product}) {
+export default function GetQuoteSection({ product }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
   // FORM SUBMIT FUNCTION
-  
 
 
-const submit = async (e) => {
-  e.preventDefault();
-  setError("");
-  setLoading(true);
-  setSent(false);
 
-  const form = e.currentTarget;
-  const formDataRaw = new FormData(form);
+  const submit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    setSent(false);
 
-  const name = formDataRaw.get("name")?.trim();
-  const phone = formDataRaw.get("mobile")?.trim();
-  const location = formDataRaw.get("location")?.trim();
-  const racks = formDataRaw.get("racks")?.trim();
-  const message = formDataRaw.get("message")?.trim();
+    const form = e.currentTarget;
+    const formDataRaw = new FormData(form);
 
-  const formData = {
-    platform: "Sisco steel Products",
-    supplierToken: "6adc42d8755e2e90adbbad2b",
-    platformEmail: "info.siscosteel@gmail.com",
-    name: name || "N/A",
-    phone: phone || "N/A",
-    email: "N/A",
-    product: product || "N/A",
-    message: `Number of Racks: ${racks || "N/A"}\n\nRequirements: ${message || "N/A"}`,
-    place: location || "N/A",
-  };
+    const name = formDataRaw.get("name")?.trim();
+    const phone = formDataRaw.get("mobile")?.trim();
+    const location = formDataRaw.get("location")?.trim();
+    const racks = formDataRaw.get("racks")?.trim();
+    const message = formDataRaw.get("message")?.trim();
+    const webisteUrl = window.location.hostname + window.location.pathname;
+    const formData = {
+      platform: webisteUrl || "Sisco steel Products",
+      supplierToken: "6adc42d8755e2e90adbbad2b",
+      platformEmail: "info.siscosteel@gmail.com",
+      name: name || "N/A",
+      phone: phone || "N/A",
+      email: "N/A",
+      product: product || "N/A",
+      message: `Number of Racks: ${racks || "N/A"}\n\nRequirements: ${message || "N/A"}`,
+      place: location || "N/A",
+    };
 
-  if (!/^\d{10}$/.test(phone || "")) {
-    setError("Enter a valid 10-digit phone number");
-    setLoading(false);
-    return;
-  }
+    if (!/^\d{10}$/.test(phone || "")) {
+      setError("Enter a valid 10-digit phone number");
+      setLoading(false);
+      return;
+    }
 
-  try {
-    // Submit enquiry to BrandBnalo API
-    await postJson(
-      "https://brandbnalo.com/api/form/add",
-      formData
-    );
+    try {
+      // Submit enquiry to BrandBnalo API
+      await postJson(
+        "https://brandbnalo.com/api/form/add",
+        formData
+      );
 
-    // Prepare WhatsApp message
-    const whatsappMessage = `
+      // Prepare WhatsApp message
+      const whatsappMessage = `
 Hello Sisco Steel Products,
 
 A new ${product} enquiry has been submitted.
@@ -100,29 +100,29 @@ ${message || "N/A"}
 Website: https://siscosteelproducts.com
     `.trim();
 
-    const whatsappURL = `https://wa.me/917629827285?text=${encodeURIComponent(
-      whatsappMessage
-    )}`;
+      const whatsappURL = `https://wa.me/917629827285?text=${encodeURIComponent(
+        whatsappMessage
+      )}`;
 
-    // Show success message
-    setSent(true);
-    form.reset();
+      // Show success message
+      setSent(true);
+      form.reset();
 
-    // Open WhatsApp after 1 second
-    setTimeout(() => {
-      window.location.href = whatsappURL;
-    }, 1000);
+      // Open WhatsApp after 1 second
+      setTimeout(() => {
+        window.location.href = whatsappURL;
+      }, 1000);
 
-    // Hide success message after 5 seconds
-    setTimeout(() => setSent(false), 5000);
+      // Hide success message after 5 seconds
+      setTimeout(() => setSent(false), 5000);
 
-  } catch (err) {
-    console.error("Form submission error:", err);
-    setError("Something went wrong. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+    } catch (err) {
+      console.error("Form submission error:", err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
 

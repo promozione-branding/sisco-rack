@@ -67,9 +67,9 @@ export default function ContactForm() {
     const email = formDataRaw.get("email")?.trim()
     const product = formDataRaw.get("product")?.trim()
     const message = formDataRaw.get("message")?.trim()
-
+    const webisteUrl = window.location.hostname + window.location.pathname;
     const formData = {
-      platform: "Sisco steel Products",
+      platform: webisteUrl || "Sisco steel Products",
       supplierToken: "6adc42d8755e2e90adbbad2b",
       platformEmail: "info.siscosteel@gmail.com",
       name,
@@ -230,7 +230,7 @@ export default function ContactForm() {
             <div className="mt-5 flex items-center gap-4 text-[0.8rem]">
               <MapPin className="h-7 w-7 fill-amber-400 text-amber-400" />
               <span className="font-bold backdrop-blur-md">GALI NO-1, 41-B, BHAGAT VIHAR, KARAWAL NAGAR,
-DELHI, New Delhi, Delhi, 110094</span>
+                DELHI, New Delhi, Delhi, 110094</span>
             </div>
 
             <div className="mt-8 grid gap-7">
