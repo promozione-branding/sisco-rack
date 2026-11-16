@@ -14,14 +14,28 @@ export default function RootLayout({ children }) {
 
             <head>
 
+{/* Google Tag Manager */}
+<Script
+  id="google-tag-manager"
+  src="https://www.googletagmanager.com/gtm.js?id=GTM-5K9LF3KN"
+  strategy="afterInteractive"
+/>
+
+<Script
+  id="google-analytics-init"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    `,
+  }}
+/>
+
+
                 {/* Google Analytics*/}
 
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-5K9LF3KN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)}
-  gtag('js', new Date());
-   </script>
                 <Script
                     id="clarity-script"
                     strategy="afterInteractive"
