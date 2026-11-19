@@ -4,6 +4,7 @@ export default function PrivacyPolicyPage() {
   const sections = [
     {
       title: "1. Information We Collect",
+      
       intro:
         "When you visit our website, contact us, or make an enquiry, we may collect the following information:",
       points: [
