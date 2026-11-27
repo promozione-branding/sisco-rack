@@ -173,11 +173,8 @@ export default function ProductDetail({ product: p, related }) {
   const c = p.contact || {}
   const images = (p.images?.length ? p.images : [p.image]).map(imageSrc)
   const [quote, setQuote] = useState(false)
-  const [wish, setWish] = useState(false)
   const [showAllSpecs, setShowAllSpecs] = useState(false)
   const SPEC_LIMIT = 6
-  const WA_NUMBER = "917629827285"
-  const waMessage = `Hi, I'm interested in ${p.name}. Can you share more details?`
   const waHref = `http://wa.me/917629827285`
 
   const openQuote = (e) => {
