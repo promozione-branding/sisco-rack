@@ -123,7 +123,7 @@ function Gallery({ images, name }) {
   const go = (n) => setI((n + images.length) % images.length)
 
   return (
-    <div className="sticky top-[110px] flex min-w-0 flex-col gap-4 max-[960px]:static">
+    <div className="sticky top-[110px] flex min-w-0 flex-col gap-4 max-[960px]:static max-[720px]:order-1 max-[720px]:px-5">
       <div className="relative grid place-items-center overflow-hidden rounded-[28px] border-2 border-solid border-ink bg-white">
         <span className={`${UP} left-3.5`} />
         <span className={`${UP} right-3.5`} />
@@ -219,20 +219,21 @@ export default function ProductDetail({ product: p, related }) {
         </div>
       </section>
 
-      <div className="bg-[#f6f8fb] pb-2 pt-11">
-        <div className="mx-auto grid max-w-full grid-cols-[minmax(0,0.8fr)_minmax(0,0.85fr)] items-start gap-12 px-14 max-[960px]:grid-cols-[1fr] max-[960px]:gap-7 max-[960px]:px-10 max-[720px]:px-5">
+      {/* Below 720px this is a flex column, and the order-* classes set the section sequence */}
+      <div className="bg-[#f6f8fb] pb-2 pt-11 max-[720px]:flex max-[720px]:flex-col">
+        <div className="mx-auto grid max-w-full grid-cols-[minmax(0,0.8fr)_minmax(0,0.85fr)] items-start gap-12 px-14 max-[960px]:grid-cols-[1fr] max-[960px]:gap-7 max-[960px]:px-10 max-[720px]:contents">
           <Gallery images={images} name={p.name} />
 
-          <div>
-            <motion.div className="flex flex-wrap items-center justify-between gap-3" variants={rise} custom={0} initial="hidden" animate="show">
+          <div className="max-[720px]:contents">
+            <motion.div className="flex flex-wrap items-center justify-between gap-3 max-[720px]:order-5 max-[720px]:mx-5 max-[720px]:mt-10" variants={rise} custom={0} initial="hidden" animate="show">
               <span className="rounded-pill bg-[#dbeafe] px-3.5 py-1.5 text-[0.75rem] font-bold uppercase tracking-[0.03em] text-blue">{p.category}</span>
             </motion.div>
 
-            <motion.p className="mt-5 max-w-[62ch] text-[1.05rem] leading-[1.6] text-muted" variants={rise} custom={2} initial="hidden" animate="show">
+            <motion.p className="mt-5 max-w-[62ch] text-[1.05rem] leading-[1.6] text-muted max-[720px]:order-6 max-[720px]:mx-5" variants={rise} custom={2} initial="hidden" animate="show">
               {p.description}
             </motion.p>
 
-            <motion.div className="mt-6 grid grid-cols-[repeat(3,1fr)] gap-3 max-[1280px]:grid-cols-[1fr] min-[721px]:max-[960px]:grid-cols-[repeat(3,1fr)] max-[720px]:grid-cols-[1fr]" variants={rise} custom={3} initial="hidden" animate="show">
+            <motion.div className="mt-6 grid grid-cols-[repeat(3,1fr)] gap-3 max-[1280px]:grid-cols-[1fr] min-[721px]:max-[960px]:grid-cols-[repeat(3,1fr)] max-[720px]:order-2 max-[720px]:mx-5 max-[720px]:grid-cols-[1fr]" variants={rise} custom={3} initial="hidden" animate="show">
               <div className="flex items-center gap-4 rounded-[18px] bg-[#fdf3dc] px-5 py-4">
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-circle bg-[#fbe5b0] text-[#d98c00]"><IndianRupee size={26} strokeWidth={2.5} /></span>
                 <div>
@@ -256,33 +257,33 @@ export default function ProductDetail({ product: p, related }) {
               </div>
             </motion.div>
 
-            <motion.div className="mt-5 flex flex-wrap items-center gap-3" variants={rise} custom={4} initial="hidden" animate="show">
+            <motion.div className="mt-5 flex flex-wrap items-center gap-3 max-[720px]:order-2 max-[720px]:mx-5" variants={rise} custom={4} initial="hidden" animate="show">
               <div onClickCapture={openQuote}>
                 <SplitButton dark>Request a quote</SplitButton>
               </div>
-             {c.whatsapp && (
-  <a
-    className={BTN}
-    href={waHref}
-    target="_blank"
-    rel="noreferrer"
-    onClick={() => handleWhatsappClick({ obj: p })}
-  >
-    <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
-  </a>
-)}
-{c.phone && (
-  <a
-    className={BTN}
-    href={`tel:${c.phone}`}
-    onClick={() => handleCallClick({ obj: p })}
-  >
-    <Phone size={22} strokeWidth={2.2} /> Call now
-  </a>
-)}
+              {c.whatsapp && (
+                <a
+                  className={BTN}
+                  href={waHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => handleWhatsappClick({ obj: p })}
+                >
+                  <MessageCircle size={22} strokeWidth={2.2} /> WhatsApp
+                </a>
+              )}
+              {c.phone && (
+                <a
+                  className={BTN}
+                  href={`tel:${c.phone}`}
+                  onClick={() => handleCallClick({ obj: p })}
+                >
+                  <Phone size={22} strokeWidth={2.2} /> Call now
+                </a>
+              )}
             </motion.div>
 
-            <motion.div className={`${CARD} mt-6 grid grid-cols-[repeat(4,1fr)] max-[1280px]:grid-cols-[1fr_1fr] max-[480px]:grid-cols-[1fr]`} variants={rise} custom={5} initial="hidden" animate="show">
+            <motion.div className={`${CARD} mt-6 grid grid-cols-[repeat(4,1fr)] max-[1280px]:grid-cols-[1fr_1fr] max-[720px]:order-8 max-[720px]:mx-5 max-[480px]:grid-cols-[1fr]`} variants={rise} custom={5} initial="hidden" animate="show">
               {trust.map(({ Icon, title, text }, k) => (
                 <div key={title} className={`flex items-center gap-3 px-4 py-4 ${k > 0 ? "border-l border-solid border-line max-[1280px]:odd:border-l-0 max-[480px]:border-l-0" : ""}`}>
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-circle bg-[#fdf1d3] text-[#e8a317]" aria-hidden="true"><Icon size={20} strokeWidth={2.2} /></span>
@@ -296,7 +297,8 @@ export default function ProductDetail({ product: p, related }) {
           </div>
         </div>
 
-        <section className="mx-auto max-w-full px-14 pt-8 max-[960px]:px-10 max-[720px]:px-5">
+        {/* Specifications */}
+        <section className="mx-auto max-w-full px-14 pt-8 max-[960px]:px-10 max-[720px]:order-3 max-[720px]:w-full max-[720px]:px-5">
           <Reveal>
             <div className={`${CARD} grid grid-cols-[1fr_1.05fr_0.85fr] gap-6 p-6 max-[1180px]:grid-cols-[1fr_1fr] max-[960px]:grid-cols-[1fr]`}>
               {/* Left: specs list flows with the page scroll */}
@@ -351,8 +353,9 @@ export default function ProductDetail({ product: p, related }) {
           </Reveal>
         </section>
 
+        {/* Key features / Where it works */}
         {(p.keyFeatures?.length > 0 || p.applications?.length > 0) && (
-          <section className="mx-auto max-w-full px-14 pt-6 max-[960px]:px-10 max-[720px]:px-5">
+          <section className="mx-auto max-w-full px-14 pt-6 max-[960px]:px-10 max-[720px]:order-9 max-[720px]:w-full max-[720px]:px-5">
             <div className="grid grid-cols-[1.45fr_1fr] items-stretch gap-6 max-[1180px]:grid-cols-[1fr]">
               {p.keyFeatures?.length > 0 && (
                 <Reveal className="flex">
@@ -414,8 +417,9 @@ export default function ProductDetail({ product: p, related }) {
           </section>
         )}
 
+        {/* Related products */}
         {related.length > 0 && (
-          <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:px-5">
+          <section className="mx-auto max-w-full px-14 pt-16 max-[960px]:px-10 max-[720px]:order-4 max-[720px]:w-full max-[720px]:px-5 max-[720px]:pt-10">
             <Reveal className="mb-[26px] flex items-end justify-between gap-6">
               <h2 className="text-[length:clamp(1.9rem,3.6vw,3rem)]">More like this</h2>
               <Link href="/products" className="inline-block cursor-pointer border-2 border-solid border-ink bg-transparent px-7 py-3.5 text-[1rem] font-semibold text-ink transition-[background,color] duration-[250ms] [font-family:inherit] hover:bg-ink hover:text-bg rounded-pill">All products</Link>
@@ -451,7 +455,8 @@ export default function ProductDetail({ product: p, related }) {
           </section>
         )}
 
-        <Reveal>
+        {/* Bulk quote banner */}
+        <Reveal className="max-[720px]:order-10">
           <section className="mx-14 my-16 flex flex-wrap items-center justify-between gap-8 rounded-[36px] border-2 border-solid border-ink bg-ink px-12 py-11 text-white max-[960px]:mx-3 max-[960px]:my-12 max-[960px]:rounded-[28px] max-[960px]:px-6 max-[960px]:py-8">
             <div>
               <h2 className="max-w-[20ch] text-[length:clamp(1.7rem,3.2vw,2.7rem)] text-white">Need the {p.name} in bulk?</h2>
